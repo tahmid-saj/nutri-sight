@@ -1,0 +1,9 @@
+pandas
+numpy
+confuse
+scikit-learn
+matplotlib
+tensorflow
+tensorflow_hub
+boto3
+s3

@@ -1,0 +1,11 @@
+# Configuration
+pandas
+numpy
+confuse
+scikit-learn
+matplotlib
+tensorflow
+tensorflow_hub
+tensorflow_datasets
+boto3
+s3
