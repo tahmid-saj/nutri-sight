@@ -1,0 +1,27 @@
+.navigation {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  background-color: #22ab76;
+  padding: 0px 20px 0px 40px;
+
+  h1 {
+    color: white;
+  }
+
+  .nav-links-container {
+    width: 50px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .nav-link {
+      padding: 10px 15px 30px;
+      cursor: pointer;
+      color: white;
+    }
+  }
+}
