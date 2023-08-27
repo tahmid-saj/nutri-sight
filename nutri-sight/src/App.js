@@ -1,7 +1,10 @@
 
 function App() {
   return (
-    <h1>App</h1>
+    <div>
+      <h1>nutri-sight</h1>
+      <h1>Login</h1>
+    </div>
   );
 }
 
