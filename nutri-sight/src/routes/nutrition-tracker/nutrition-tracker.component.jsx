@@ -1,9 +1,10 @@
+import NutritionTracker from "../../components/nutrition-tracker/nutrition-tracker.component";
 import "./nutrition-tracker.styles.scss";
 
-const NutritionTracker = () => {
+const NutritionTrackerRoute = () => {
   return (
-    <h1>Nutrition Tracker</h1>
+    <NutritionTracker></NutritionTracker>
   );
 };
 
-export default NutritionTracker;
+export default NutritionTrackerRoute;
