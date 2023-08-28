@@ -1,0 +1,29 @@
+.add-micronutrients-button-container {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 1%;
+  
+  .add-micronutrients-button:hover {
+    background-color: #ffea97;
+    border-radius: 2rem;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.micronutrient-container {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 5%;
+}
+
+.remove-micronutrients-button {
+  margin-top: 10%;
+}
+
+.remove-micronutrients-button:hover {
+  background-color: #ff9c9c;
+  border-radius: 5rem;
+  border: none;
+  cursor: pointer;
+}
