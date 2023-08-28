@@ -22,19 +22,20 @@
     border: 1px solid black;
   }
 
-  &.google-sign-in {
-    background-color: #4285f4;
-    color: white;
+  &.google-sign-in,
+  &.regular-button {
+    background-color: #fdca00e3;
+    color: black;
 
     &:hover {
-      background-color: #357ae8;
+      background-color: #b08d00;
       border: none;
     }
   }
 
   &.inverted {
     background-color: white;
-    color: black;
+    color: #fdca00e3;
     border: 1px solid black;
 
     &:hover {
@@ -42,5 +43,9 @@
       color: white;
       border: none;
     }
+  }
+
+  &.button-rounded {
+    border-radius: 1.5rem;
   }
 }
