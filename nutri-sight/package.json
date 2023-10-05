@@ -11,6 +11,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
+    "react-slideshow-image": "^4.2.1",
+    "react-smart-slider": "^0.1.2",
     "sass": "^1.66.1",
     "web-vitals": "^2.1.4"
   },
