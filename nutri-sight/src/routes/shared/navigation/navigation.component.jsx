@@ -17,7 +17,7 @@ const Navigation = () => {
     <Fragment>
       <div className="navigation">
         <Link className="logo" to="/"
-          onClick={ () => changeColor("black") }>
+          onClick={ () => changeColor("#00150d") }>
           <h1>nutri-sight</h1>
         </Link>
 
@@ -27,24 +27,19 @@ const Navigation = () => {
             Nutrient Predictor
           </Link>
 
-          {/* {
-            currentUser === null ? (
-              <Fragment>
-                <Link className="nav-link" to="/nutrition-tracker-signed-in"
-                  onClick={ () => changeColor("white") }>
-                  Nutrition Tracker
-                </Link>
-              </Fragment>
-
-            ) : ( */}
-              {/* <Fragment> */}
-                <Link className="nav-link" to="/nutrition-tracker"
-                  onClick={ () => changeColor("white") }>
-                  Nutrition Tracker
-                </Link>
-              {/* </Fragment> */}
-            {/* )
-          } */}
+          {
+            currentUser ? (
+              <Link className="nav-link" to="/nutrition-tracker-signed-in"
+                onClick={ () => changeColor("white") }>
+                Nutrition Tracker
+              </Link>
+            ) : (
+              <Link className="nav-link" to="/nutrition-tracker"
+                onClick={ () => changeColor("white") }>
+                Nutrition Tracker
+              </Link>
+            )
+          }
 
           <Link className="nav-link" to="/recipes"
             onClick={ () => changeColor("white") }>
@@ -55,16 +50,55 @@ const Navigation = () => {
             onClick={ () => changeColor("white") }>
             Store
           </Link>
+            
+          {
+            currentUser ? (
+              <span className="nav-link" onClick={ signOutUser }>Sign Out</span>
+            ) : (
+            <Link className="nav-link" to="/auth"
+              onClick={ () => changeColor("white") }>
+              Login
+            </Link>
+            )
+          }
 
-          <Link className="nav-link" to="/auth"
-            onClick={ () => changeColor("white") }>
-            Login
-          </Link>
         </div>
       </div>
 
       <Outlet/>
     </Fragment>
+
+  //   <Fragment>
+  //   <div className="navigation">
+  //     <Link className="logo" to="/">
+  //       <h1>nutri-sight</h1>
+  //     </Link>
+
+  //     <div className="nav-links-container">
+  //       <Link className="nav-link" to="/nutrient-predictor">
+  //         Nutrient Predictor
+  //       </Link>
+
+  //       <Link className="nav-link" to="/nutrition-tracker">
+  //         Nutrition Tracker
+  //       </Link>
+
+  //       <Link className="nav-link" to="/recipes">
+  //         Recipes
+  //       </Link>
+
+  //       <Link className="nav-link" to="/store">
+  //         Store
+  //       </Link>
+
+  //       <Link className="nav-link" to="/auth">
+  //         Login
+  //       </Link>
+  //     </div>
+  //   </div>
+
+  //   <Outlet/>
+  // </Fragment>
   );
 };
 

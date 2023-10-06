@@ -1,6 +1,6 @@
 import "./nutrition-tracker.styles.scss";
 
-import NutritionTracker from "../../signed-out/nutrition-tracker/nutrition-tracker.component";
+import NutritionTracker from "../../../components/signed-out/nutrition-tracker/nutrition-tracker.component";
 
 const NutritionTrackerRoute = () => {
   return (
