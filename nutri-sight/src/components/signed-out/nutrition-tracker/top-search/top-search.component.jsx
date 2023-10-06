@@ -8,10 +8,12 @@ import Summary from "../summary/summary.component";
 
 const TopSearch = () => {
   return (
-    <div className="search-days-nutrition-tracker-container">
-      <SearchDays></SearchDays>
-      <ConsumptionInfo></ConsumptionInfo>
+    <div className="search-days-summary-container">
       <Summary></Summary>
+      <div className="search-days-nutrition-tracker-container">
+        <SearchDays></SearchDays>
+        {/* <ConsumptionInfo></ConsumptionInfo> */}
+      </div>
     </div>
   );
 };
