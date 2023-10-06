@@ -1,9 +1,9 @@
 import React, { Component, useContext, useState } from "react";
 
-import { ReactComponent as AddMicronutrientsButton } from "../../../assets/add-micronutrients.svg";
-import { ReactComponent as RemoveMicronutrientsButton } from "../../../assets/close-button.svg";
+import { ReactComponent as AddMicronutrientsButton } from "../../../../assets/add-micronutrients.svg";
+import { ReactComponent as RemoveMicronutrientsButton } from "../../../../assets/close-button.svg";
 
-import FormInput from "../../form-input/form-input.component";
+import FormInput from "../../../shared/form-input/form-input.component";
 
 import "./add-micronutrients.styles.scss";
 

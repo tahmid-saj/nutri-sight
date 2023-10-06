@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import "./search-days.styles.scss";
 
-import FormInput from "../../form-input/form-input.component";
-import Button from "../../button/button.component";
+import FormInput from "../../../shared/form-input/form-input.component";
+import Button from "../../../shared/button/button.component";
 
 const defaultFormFields = {
   dateTracked: ""
