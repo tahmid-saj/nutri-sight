@@ -1,16 +1,18 @@
 .update-consumption-form-container {
-  padding: 15px 5% 15px 5%;
+  padding: 10px 5% 15px 5%;
   box-shadow: 4px 4px lightgreen;
   border-radius: 1.5rem;
   margin-top: 5%;
-  margin-left: 1%;
   margin-bottom: 5%;
   margin-right: 0%;
+  width: 80%;
 
   .buttons-container {
     display: flex;
     justify-content: space-between;
     margin-top: 6%;
     margin-bottom: 5%;
+    width: 30px;
+    padding-left: 30%;
   }
 }

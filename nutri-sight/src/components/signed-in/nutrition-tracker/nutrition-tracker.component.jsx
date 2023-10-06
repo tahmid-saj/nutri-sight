@@ -7,18 +7,20 @@ import SearchDays from "./search-days/search-days.component";
 import UpdateConsumptionForm from "./update-consumption-form/update-consumption-form.component";
 import ConsumptionInfo from "./consumption-info/consumption-info.component";
 
+import TopSearch from "./top-search/top-search.component";
+
 class NutritionTracker extends Component {
   render() {
     return (
       <div className="nutrition-tracker-container">
-        <div className="search-days-nutrition-tracker-container">
-          <SearchDays></SearchDays>
-          <Summary></Summary>
+        <TopSearch></TopSearch>
+
+        <div className="form-view-separator-container">
+          <hr class="rounded"/>
         </div>
 
         <div className="update-consumption-container">
           <UpdateConsumptionForm></UpdateConsumptionForm>
-          <ConsumptionInfo></ConsumptionInfo>
         </div>
 
       </div>
