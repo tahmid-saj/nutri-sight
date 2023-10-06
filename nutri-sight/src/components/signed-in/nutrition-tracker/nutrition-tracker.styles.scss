@@ -1,13 +1,14 @@
-.search-days-nutrition-tracker-container {
-  display: flex;
-  justify-content: space-between;
-  width: 900px;
-  margin: 5px auto;
-}
-
 .update-consumption-container {
   display: flex;
   justify-content: space-around;
-  width: 1100px;
-  margin: 5px auto;
+  width: 100%;
+  // margin: 5px auto;
+}
+
+.form-view-separator-container {
+  hr.rounded {
+    border-top: 5px solid #bbb;
+    border-radius: 5px;
+    max-width: 80%;
+  }
 }

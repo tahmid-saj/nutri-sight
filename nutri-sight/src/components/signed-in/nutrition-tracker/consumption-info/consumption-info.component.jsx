@@ -1,9 +1,9 @@
 import "./consumption-info.styles.scss";
 
-const ConsumptionInfo = () => {
+const ConsumptionInfo = ({ searchedDay }) => {
   return (
     <div className="consumption-info">
-      <h5>{`On ${"2023-08-27"}`}</h5>
+      <h5>{`On ${searchedDay}`}</h5>
 
       <h4>{`Total calories consumption   `}<h3><strong>{`${2300}`}</strong></h3></h4>
       <h4>{`Total carbohydrate consumption   `}<h3><strong>{`${900}`}</strong></h3></h4>
