@@ -15,6 +15,10 @@ class NutritionTracker extends Component {
       <div className="nutrition-tracker-container">
         <TopSearch></TopSearch>
 
+        <div className="form-view-separator-container">
+          <hr class="rounded"/>
+        </div>
+
         <div className="update-consumption-container">
           <UpdateConsumptionForm></UpdateConsumptionForm>
         </div>
