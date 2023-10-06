@@ -3,20 +3,20 @@ h2 {
 }
 
 .buttons-container {
-  // display: flex;
-  // justify-content: space-evenly;
-  width: 200px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 300px;
 }
 
 .search-days-container {
-  padding: 5% 5% 5% 5%;
-  // width: 1100px;
+  padding: 5% 0% 5% 0%;
+  width: 800px;
 }
 
 .search-days-nutrition-tracker-container {
   display: flex;
   justify-content: space-evenly;
-  width: 100%;
+  width: 30%;
   // margin: 5px auto;
   // height: 100%;
   padding-left: 0px;
