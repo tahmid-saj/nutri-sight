@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import { signInWithGooglePopup,
-        signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
+        signInAuthUserWithEmailAndPassword } from "../../../utils/firebase/firebase.utils";
 
-import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import FormInput from "../../shared/form-input/form-input.component";
+import Button from "../../shared/button/button.component";
 
 import "./sign-in-form.styles.scss";
 
@@ -29,20 +29,10 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(email, password);
-
+      return await signInAuthUserWithEmailAndPassword(email, password);
       resetFormFields();
     } catch (error) {
-      switch (error.code) {
-        case "auth/wrong-password":
-          alert("incorrect password for email");
-          break;
-        case "auth/user-not-found":
-          alert("no user associated with this email");
-          break;
-        default:
-          console.log(error);
-      }
+      console.log('user sign in failed', error);
     }
   };
 
