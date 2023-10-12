@@ -144,4 +144,4 @@ class RecipeView extends View {
   };
 };
 
-export default new RecipeView;
+export default new RecipeView();
