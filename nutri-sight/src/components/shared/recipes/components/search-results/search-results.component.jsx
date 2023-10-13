@@ -8,19 +8,14 @@ import SearchResult from "../search-result/search-result.component";
 const RECIPES_PER_PAGE = 8;
 
 class SearchResults extends Component {
-  formatRecipesSearched = () => {
-
-  };
-
   constructor({ recipesSearched }) {
     super();
 
     this.state = {
-      currentPage: 1,
-      recipeResults: recipesSearched
+      recipeResults: recipesSearched,
+      recipeResultsLength: recipesSearched.length,
+      lastPage: Math.ceil(recipesSearched.length / RECIPES_PER_PAGE),
     }
-
-    this.formatRecipesSearched();
   };
 
 
@@ -39,7 +34,12 @@ class SearchResults extends Component {
 
         </div>
   
-        <Pagination></Pagination>
+        {
+          this.state.recipeResultsLength > RECIPES_PER_PAGE &&
+            <Pagination recipeResultsLength={ this.state.recipeResultsLength }
+                        lastPage={ this.state.lastPage }
+                        recipesPerPage={ RECIPES_PER_PAGE }></Pagination>
+        }
       </div>
     )
   };

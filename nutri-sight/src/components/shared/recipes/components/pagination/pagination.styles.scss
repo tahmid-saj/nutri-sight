@@ -1,9 +1,36 @@
 .pagination-container {
   margin-top: 8%;
+  margin-bottom: 10%;
 }
 
 .pagination-buttons-container {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.previous-page-button,
+.next-page-button {
+  min-width: 165px;
+  width: auto;
+  height: 50px;
+  letter-spacing: 0.5px;
+  line-height: 50px;
+  padding: 0 35px 0 35px;
+  font-size: 15px;
+  background-color: #fdca00e3;
+  color: black;
+  text-transform: uppercase;
+  font-family: 'Open Sans Condensed';
+  font-weight: bolder;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  border-radius: 1.5rem;
+
+  &:hover {
+    background-color: #b08d00;
+    border: none;
+  }
 }
