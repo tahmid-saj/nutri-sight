@@ -66,6 +66,27 @@ class Recipes extends Component {
     }
   };
 
+  updateCurrentRecipe = async (recipe) => {
+    try {
+      const fetchPromiseRecipe = fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${recipe.id}`)
+      const resRecipe = await Promise.race([fetchPromiseRecipe, this.timeout(TIMEOUT_SEC)]);
+      const dataRecipe = await resRecipe.json();
+
+      if (!resRecipe.ok) {
+        throw new Error(`${dataRecipe.message} (${dataRecipe.status})`);
+      }
+
+      await (this.state.currentDisplayedRecipe = dataRecipe.data.recipe);
+      await (this.state.currentDisplayedRecipeName = recipe.title);
+
+      console.log(dataRecipe);
+
+      this.setState({ displayRecipeView: true });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
     return (
       <Fragment>
@@ -77,7 +98,8 @@ class Recipes extends Component {
             this.state.currentDisplayedRecipe!== undefined && this.state.displayRecipeView === true &&       
           
           <Fragment>
-              <SearchResults recipesSearched={ this.state.recipesSearched }></SearchResults>
+              <SearchResults recipesSearched={ this.state.recipesSearched }
+                              updateCurrentRecipe={ this.updateCurrentRecipe }></SearchResults>
               <RecipesView currentDisplayedRecipe={ this.state.currentDisplayedRecipe }
                             currentDisplayedRecipeName={ this.state.currentDisplayedRecipeName }></RecipesView> 
           </Fragment>
