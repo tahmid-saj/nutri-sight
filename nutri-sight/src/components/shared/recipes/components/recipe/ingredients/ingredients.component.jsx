@@ -2,7 +2,7 @@ import "./ingredients.styles.scss";
 
 const Ingredients = () => {
   return (
-    <div>
+    <div className="">
 
     </div>
   )

@@ -3,6 +3,18 @@ import "./servings.styles.scss";
 import { ReactComponent as IncreaseServingsButton } from "../../../../../../assets/icons8-plus.svg";
 
 const Servings = () => {
+  const handleDecreaseServings = (event) => {
+    event.preventDefault();
+
+    console.log("decrease servings");
+  };
+
+  const handleIncreaseServings = (event) => {
+    event.preventDefault();
+
+    console.log("increase servings");
+  };
+
   return (
     <div className="servings-container">
       <div className="time-container">
@@ -12,8 +24,9 @@ const Servings = () => {
 
       <div className="servings-quantity-container">
         <div className="servings-buttons-container">
-          <img className="decrease-servings" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nNWXu05CQRCGvwIEO7HATkWfwxvaeH0X9SkQOL2Vl3hJNDQqSoyJSvAdRINvoBRSaGc2+TEnZD3czob4JZtsZncZZpmZf4F/wDCwDuSAY+BRw8yzwBoQD9PhFHAINIB34AzIA5saZn4OfGjPPpDqx2EM8IBv4AJYACIB+81aGrjSmZw+oyvGgCfgGZjp4UvPAS9ABUh24/QNKAEj9E4CuAVqnTiPKdJSm2vtlIicV4ChoI2errefSG2RV5X5VkwmfimJwmZWCTdtWzQlc4k7isCBrTk0HEXbZBH4bG0yG2oOYSTUX0TVZFb9xqy6j2sKwI7fcBqUdSGSV2//5R7YsmwcB3Z7HOZsK9vyNXjHJ2rqrvGAo0ElV8ZvMCJeV8q7Iiofy35jXMVt9NQVS7YGgtqZEXFXXAN7toVJiYSLqOclEuYZZSUnCTNSFhajwGtrUtkeAhWJdySkhLoDyu0eAuiZUpPzRJ+R3nX69GmSVORV/T7dktb1lrtx6r/2rBKuKD0NqvOoSuZGZzKdXG8QKZVaQ3paUOtrPug92eqqU1MyE4RIXCJu9NT02wcNMze2lbD/wjjhB7Mpc2ceMJ5sAAAAAElFTkSuQmCC"/>
-          <IncreaseServingsButton className="increase-servings"></IncreaseServingsButton>
+          <img onClick={ handleDecreaseServings } className="decrease-servings" 
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nNWXu05CQRCGvwIEO7HATkWfwxvaeH0X9SkQOL2Vl3hJNDQqSoyJSvAdRINvoBRSaGc2+TEnZD3czob4JZtsZncZZpmZf4F/wDCwDuSAY+BRw8yzwBoQD9PhFHAINIB34AzIA5saZn4OfGjPPpDqx2EM8IBv4AJYACIB+81aGrjSmZw+oyvGgCfgGZjp4UvPAS9ABUh24/QNKAEj9E4CuAVqnTiPKdJSm2vtlIicV4ChoI2errefSG2RV5X5VkwmfimJwmZWCTdtWzQlc4k7isCBrTk0HEXbZBH4bG0yG2oOYSTUX0TVZFb9xqy6j2sKwI7fcBqUdSGSV2//5R7YsmwcB3Z7HOZsK9vyNXjHJ2rqrvGAo0ElV8ZvMCJeV8q7Iiofy35jXMVt9NQVS7YGgtqZEXFXXAN7toVJiYSLqOclEuYZZSUnCTNSFhajwGtrUtkeAhWJdySkhLoDyu0eAuiZUpPzRJ+R3nX69GmSVORV/T7dktb1lrtx6r/2rBKuKD0NqvOoSuZGZzKdXG8QKZVaQ3paUOtrPug92eqqU1MyE4RIXCJu9NT02wcNMze2lbD/wjjhB7Mpc2ceMJ5sAAAAAElFTkSuQmCC"/>
+          <IncreaseServingsButton onClick={ handleIncreaseServings } className="increase-servings"></IncreaseServingsButton>
         </div>
           <h4>{` ${4} servings`}</h4>
       </div>
