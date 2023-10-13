@@ -3,13 +3,13 @@ import "./recipe.styles.scss";
 import Servings from "./servings/servings.component";
 import Ingredients from "./ingredients/ingredients.component";
 
-const Recipe = () => {
+const Recipe = ({ currentDisplayedRecipe }) => {
   return (
     <div className="recipe-container">
-      <Servings></Servings>
+      <Servings currentDisplayedRecipe={ currentDisplayedRecipe }></Servings>
 
       <div className="recipe-ingredients-container">
-        <Ingredients></Ingredients>
+        <Ingredients currentDisplayedRecipe={ currentDisplayedRecipe }></Ingredients>
       </div>
     </div>
   )
