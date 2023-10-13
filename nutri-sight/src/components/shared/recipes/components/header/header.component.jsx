@@ -8,7 +8,7 @@ import Navigation from "../navigation/navigation.component";
 
 const Header = () => {
   return (
-    <header className="header">
+    <header className="header-container">
       <Search></Search>
 
       <Navigation></Navigation>

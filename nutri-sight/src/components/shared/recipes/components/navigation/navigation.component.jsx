@@ -8,7 +8,7 @@ const Navigation = () => {
   return (
     <nav className="navigation-container">
       <ul className="nav-list-container">
-        <Bookmarks></Bookmarks>
+        {/* <Bookmarks></Bookmarks> */}
 
       </ul>
     </nav>
