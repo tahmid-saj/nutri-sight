@@ -21,6 +21,7 @@ const Search = ({ displayRecipeViewHandler }) => {
     event.preventDefault();
 
     console.log(formFields.searchedRecipe);
+    setFormFields(defaultFormFields);
 
     displayRecipeViewHandler(formFields.searchedRecipe);
   };

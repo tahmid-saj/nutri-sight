@@ -25,7 +25,19 @@
     justify-content: space-between;
     align-items: center;
     // width: 300px;
-    cursor: pointer;
+  }
 
+  .decrease-servings:hover {
+    background-color: #ff9c9c;
+    border-radius: 5rem;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .increase-servings:hover {
+    background-color: lightgreen;
+    border-radius: 5rem;
+    border: none;
+    cursor: pointer;
   }
 }
