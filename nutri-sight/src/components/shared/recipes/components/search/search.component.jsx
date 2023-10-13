@@ -24,6 +24,7 @@ const Search = () => {
   };
 
   const handleChange = (event) => {
+    event.preventDefault();
     const { name, value } = event.target;
 
     setFormFields({ [name]: value })
