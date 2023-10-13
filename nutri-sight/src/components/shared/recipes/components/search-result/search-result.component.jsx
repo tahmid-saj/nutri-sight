@@ -1,10 +1,10 @@
 import "./search-result.styles.scss";
 
-const SearchResult = ({ recipe }) => {
-  const handleClick = (event) => {
+const SearchResult = ({ recipe, updateCurrentRecipe }) => {
+  const handleClick = async (event) => {
     event.preventDefault();
 
-    console.log("clicked");
+    await updateCurrentRecipe(recipe);
   }
 
   return (

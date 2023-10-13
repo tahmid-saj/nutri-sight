@@ -8,7 +8,7 @@ import SearchResult from "../search-result/search-result.component";
 const RECIPES_PER_PAGE = 8;
 
 class SearchResults extends Component {
-  constructor({ recipesSearched }) {
+  constructor({ recipesSearched, updateCurrentRecipe }) {
     super();
 
     this.state = {
@@ -16,6 +16,7 @@ class SearchResults extends Component {
       recipeResults: recipesSearched,
       recipeResultsLength: recipesSearched.length,
       lastPage: Math.ceil(recipesSearched.length / RECIPES_PER_PAGE),
+      updateCurrentRecipe: updateCurrentRecipe
     }
   };
 
@@ -32,7 +33,8 @@ class SearchResults extends Component {
             this.state.recipeResults.slice((this.state.currentPage - 1) * RECIPES_PER_PAGE, (this.state.currentPage) * RECIPES_PER_PAGE)
                 .map((recipe) => {
               return (
-                <SearchResult key={ recipe.id } recipe={ recipe }/>
+                <SearchResult key={ recipe.id } recipe={ recipe } 
+                              updateCurrentRecipe={ this.state.updateCurrentRecipe }/>
               )
             })
           }
