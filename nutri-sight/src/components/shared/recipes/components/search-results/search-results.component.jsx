@@ -12,19 +12,24 @@ class SearchResults extends Component {
     super();
 
     this.state = {
+      currentPage: 1,
       recipeResults: recipesSearched,
       recipeResultsLength: recipesSearched.length,
       lastPage: Math.ceil(recipesSearched.length / RECIPES_PER_PAGE),
     }
   };
 
+  updateSearchResultsPage = (currentPage) => {
+    this.setState({ currentPage: currentPage });
+    console.log(currentPage);
+  };
 
   render() {
     return (
       <div className="search-results-pagination-container">
         <div className="search-results-container">
           {
-            this.state.recipeResults.slice((this.state.currentPage - 1) * RECIPES_PER_PAGE, RECIPES_PER_PAGE)
+            this.state.recipeResults.slice((this.state.currentPage - 1) * RECIPES_PER_PAGE, (this.state.currentPage) * RECIPES_PER_PAGE)
                 .map((recipe) => {
               return (
                 <SearchResult key={ recipe.id } recipe={ recipe }/>
@@ -38,7 +43,8 @@ class SearchResults extends Component {
           this.state.recipeResultsLength > RECIPES_PER_PAGE &&
             <Pagination recipeResultsLength={ this.state.recipeResultsLength }
                         lastPage={ this.state.lastPage }
-                        recipesPerPage={ RECIPES_PER_PAGE }></Pagination>
+                        recipesPerPage={ RECIPES_PER_PAGE }
+                        updateSearchResultsPage={ this.updateSearchResultsPage }></Pagination>
         }
       </div>
     )

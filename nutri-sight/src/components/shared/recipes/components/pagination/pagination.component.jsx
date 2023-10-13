@@ -13,30 +13,16 @@ class Pagination extends Component {
 
     if (this.state.currentPage === 1 && this.state.recipeResultsLength < this.state.recipesPerPage) {
       this.setState({ showPreviousPageButton: false, showNextPageButton: false });
-      console.log("case 1")
-      return;
-    } 
-    
-    if (this.state.currentPage === 1 && this.state.recipeResultsLength > this.state.recipesPerPage) {
+    } else if (this.state.currentPage === 1 && this.state.recipeResultsLength > this.state.recipesPerPage) {
       this.setState({ showPreviousPageButton: false, showNextPageButton: true });
-      console.log("case 2")
-      return;
-    } 
-    
-    if (this.state.currentPage !== 1 && this.state.currentPage < this.state.lastPage && this.state.recipeResultsLength > this.state.recipesPerPage) {
+    } else if (this.state.currentPage !== 1 && this.state.currentPage < this.state.lastPage && this.state.recipeResultsLength > this.state.recipesPerPage) {
       this.setState({ showPreviousPageButton: true, showNextPageButton: true });
-      console.log("case 3")
-      return;
-    } 
-    
-    if (this.state.currentPage !== 1 && this.state.currentPage === this.state.lastPage && this.state.recipeResultsLength > this.state.recipesPerPage) {
+    } else if (this.state.currentPage !== 1 && this.state.currentPage === this.state.lastPage && this.state.recipeResultsLength > this.state.recipesPerPage) {
       this.setState({ showPreviousPageButton: true, showNextPageButton: false });
-      console.log("case 4")
-      return;
     }
   };
 
-  constructor ({ recipeResultsLength, lastPage, recipesPerPage }) {
+  constructor ({ recipeResultsLength, lastPage, recipesPerPage, updateSearchResultsPage }) {
     super();
 
     this.state = {
@@ -48,6 +34,7 @@ class Pagination extends Component {
       recipeResultsLength: recipeResultsLength,
       lastPage: lastPage,
       recipesPerPage: recipesPerPage,
+      updateSearchResultsPage: updateSearchResultsPage
     };
   };
 
@@ -59,6 +46,7 @@ class Pagination extends Component {
     this.setState({ currentPage: --this.state.currentPage });
     this.setState({ nextPage: --this.state.nextPage });
     this.handleButtonsDisplay();
+    this.state.updateSearchResultsPage(this.state.currentPage);
 
     // if (this.state.currentPage === 0) {
     //   this.setState({ showPreviousPageButton: false });
@@ -77,8 +65,9 @@ class Pagination extends Component {
     this.setState({ currentPage: ++this.state.currentPage });
     this.setState({ nextPage: ++this.state.nextPage });
     this.handleButtonsDisplay();
+    console.log("currentPage: " + this.state.currentPage);
+    this.state.updateSearchResultsPage(this.state.currentPage);
 
-    console.log(this.state.currentPage);
     
     // this.setState({ showPreviousPageButton: true });
 
