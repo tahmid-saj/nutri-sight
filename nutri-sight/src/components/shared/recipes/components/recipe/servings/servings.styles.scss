@@ -1,0 +1,31 @@
+.servings-container {
+  background-color: rgba(225, 255, 216, 0.726);
+  border-radius: 1.5rem;
+  padding: 4% 4% 4% 4%;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 4px 4px rgba(0, 230, 103, 0.5);
+}
+
+.time-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 200px;
+}
+
+.servings-quantity-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 200px;
+
+  .servings-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // width: 300px;
+    cursor: pointer;
+
+  }
+}
