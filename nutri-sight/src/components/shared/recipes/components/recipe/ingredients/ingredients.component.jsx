@@ -1,6 +1,6 @@
 import "./ingredients.styles.scss";
 
-const Ingredients = () => {
+const Ingredients = ({ currentDisplayedRecipe }) => {
   return (
     <div className="ingredients-container">
       <h2>Recipe Ingredients</h2>

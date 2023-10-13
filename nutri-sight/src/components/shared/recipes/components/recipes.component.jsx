@@ -13,7 +13,8 @@ class Recipes extends Component {
 
     this.state = {
       displayRecipeView: false,
-      recipesSearched: undefined
+      recipesSearched: undefined,
+      currentDisplayedRecipe: undefined
     }
   }
 
@@ -36,17 +37,28 @@ class Recipes extends Component {
 
   updateSearchResults = async (recipeSearched) => {
     try {
-      const fetchPromise = fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${recipeSearched}`);
-      const res = await Promise.race([fetchPromise, this.timeout(TIMEOUT_SEC)]);
-      const data = await res.json();
+      const fetchPromiseRecipes = fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${recipeSearched}`);
+      const resRecipes = await Promise.race([fetchPromiseRecipes, this.timeout(TIMEOUT_SEC)]);
+      const dataRecipes = await resRecipes.json();
 
-      if (!res.ok) {
-        throw new Error(`${data.message} (${data.status})`);
+      if (!resRecipes.ok) {
+        throw new Error(`${dataRecipes.message} (${dataRecipes.status})`);
       }
       
       console.log(this.state.recipesSearched);
 
-      return data.data.recipes;
+      const fetchPromiseRecipe = fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${dataRecipes.data.recipes[0].id}`)
+      const resRecipe = await Promise.race([fetchPromiseRecipe, this.timeout(TIMEOUT_SEC)]);
+      const dataRecipe = await resRecipe.json();
+
+      if (!resRecipe.ok) {
+        throw new Error(`${dataRecipe.message} (${dataRecipe.status})`);
+      }
+
+      await (this.state.currentDisplayedRecipe = dataRecipe.data.recipe);
+      console.log(this.state.currentDisplayedRecipe);
+
+      return dataRecipes.data.recipes;
     } catch (error) {
       console.log(error);
     }
@@ -59,12 +71,12 @@ class Recipes extends Component {
                 updateSearchResults={ this.updateSearchResults }></Header>
   
         <div className="search-results-recipe-container">
-          { this.state.displayRecipeView && this.state.recipesSearched !== undefined &&
-            this.state.displayRecipeView === true &&       
+          { this.state.displayRecipeView && this.state.recipesSearched !== undefined && 
+            this.state.currentDisplayedRecipe!== undefined && this.state.displayRecipeView === true &&       
           
           <Fragment>
               <SearchResults recipesSearched={ this.state.recipesSearched }></SearchResults>
-              <RecipesView></RecipesView> 
+              <RecipesView currentDisplayedRecipe={ this.state.currentDisplayedRecipe }></RecipesView> 
           </Fragment>
           }
         </div>

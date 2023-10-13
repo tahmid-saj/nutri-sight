@@ -3,10 +3,10 @@ import React, { Fragment } from "react";
 import SearchResults from "../search-results/search-results.component";
 import Recipe from "../recipe/recipe.component";
 
-const RecipesView = () => {
+const RecipesView = ({ currentDisplayedRecipe }) => {
   return (
     <Fragment>
-      <Recipe></Recipe>
+      <Recipe currentDisplayedRecipe={ currentDisplayedRecipe }></Recipe>
     </Fragment>
   )
 };
