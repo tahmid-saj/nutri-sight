@@ -6,10 +6,11 @@ import "../recipes.styles.scss";
 import Search from "../search/search.component";
 import Navigation from "../navigation/navigation.component";
 
-const Header = ({ displayRecipeViewHandler }) => {
+const Header = ({ displayRecipeViewHandler, updateSearchResults }) => {
   return (
     <header className="header-container">
-      <Search displayRecipeViewHandler={ displayRecipeViewHandler }></Search>
+      <Search displayRecipeViewHandler={ displayRecipeViewHandler } 
+              updateSearchResults={ updateSearchResults }></Search>
 
       <Navigation></Navigation>
     </header>
