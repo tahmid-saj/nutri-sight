@@ -6,7 +6,6 @@ import Recipe from "../recipe/recipe.component";
 const RecipesView = () => {
   return (
     <Fragment>
-      <SearchResults></SearchResults>
       <Recipe></Recipe>
     </Fragment>
   )
