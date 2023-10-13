@@ -14,7 +14,8 @@ class Recipes extends Component {
     this.state = {
       displayRecipeView: false,
       recipesSearched: undefined,
-      currentDisplayedRecipe: undefined
+      currentDisplayedRecipe: undefined,
+      currentDisplayedRecipeName: ""
     }
   }
 
@@ -56,6 +57,7 @@ class Recipes extends Component {
       }
 
       await (this.state.currentDisplayedRecipe = dataRecipe.data.recipe);
+      await (this.state.currentDisplayedRecipeName = dataRecipes.data.recipes[0].title);
       console.log(this.state.currentDisplayedRecipe);
 
       return dataRecipes.data.recipes;
@@ -76,7 +78,8 @@ class Recipes extends Component {
           
           <Fragment>
               <SearchResults recipesSearched={ this.state.recipesSearched }></SearchResults>
-              <RecipesView currentDisplayedRecipe={ this.state.currentDisplayedRecipe }></RecipesView> 
+              <RecipesView currentDisplayedRecipe={ this.state.currentDisplayedRecipe }
+                            currentDisplayedRecipeName={ this.state.currentDisplayedRecipeName }></RecipesView> 
           </Fragment>
           }
         </div>
