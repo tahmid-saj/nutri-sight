@@ -1,16 +1,111 @@
+import React, { Component } from "react";
+
 import "./pagination.styles.scss";
 
 import Button from "../../../button/button.component";
 
-const Pagination = () => {
-  return (
-    <div className="pagination-container">
-      <div className="pagination-buttons-container">
-        <Button buttonType="regularButton" type="submit">{`< Page 1`}</Button>
-        <Button buttonType="regularButton" type="submit">{`Page 3 >`}</Button>
+class Pagination extends Component {
+  handleButtonsDisplay = () => {
+    // (page 1 and there are no pages) recipeResultsLength < 8: both buttons are hidden
+    // (page 1 and there are other pages) recipeResultsLength > 8 and currentPage === 1: previous button is hidden, next button is visible
+    // (on page before than last page) recipeResultsLength > 8 and currentPage < lastPage: previous button is visible, next button is visible
+    // (last page) recipeResultsLength > 8 and currentPage === lastPage: previous button is visible, next button is hidden
+
+    if (this.state.currentPage === 1 && this.state.recipeResultsLength < this.state.recipesPerPage) {
+      this.setState({ showPreviousPageButton: false, showNextPageButton: false });
+      console.log("case 1")
+      return;
+    } 
+    
+    if (this.state.currentPage === 1 && this.state.recipeResultsLength > this.state.recipesPerPage) {
+      this.setState({ showPreviousPageButton: false, showNextPageButton: true });
+      console.log("case 2")
+      return;
+    } 
+    
+    if (this.state.currentPage !== 1 && this.state.currentPage < this.state.lastPage && this.state.recipeResultsLength > this.state.recipesPerPage) {
+      this.setState({ showPreviousPageButton: true, showNextPageButton: true });
+      console.log("case 3")
+      return;
+    } 
+    
+    if (this.state.currentPage !== 1 && this.state.currentPage === this.state.lastPage && this.state.recipeResultsLength > this.state.recipesPerPage) {
+      this.setState({ showPreviousPageButton: true, showNextPageButton: false });
+      console.log("case 4")
+      return;
+    }
+  };
+
+  constructor ({ recipeResultsLength, lastPage, recipesPerPage }) {
+    super();
+
+    this.state = {
+      showPreviousPageButton: false,
+      showNextPageButton: true,
+      previousPage: 0,
+      currentPage: 1,
+      nextPage: 2,
+      recipeResultsLength: recipeResultsLength,
+      lastPage: lastPage,
+      recipesPerPage: recipesPerPage,
+    };
+  };
+
+  handlePreviousPage = (event) => {
+    event.preventDefault();
+    
+    // this.handleButtonsDisplay();
+    this.setState({ previousPage: --this.state.previousPage });
+    this.setState({ currentPage: --this.state.currentPage });
+    this.setState({ nextPage: --this.state.nextPage });
+    this.handleButtonsDisplay();
+
+    // if (this.state.currentPage === 0) {
+    //   this.setState({ showPreviousPageButton: false });
+    // }
+
+    // if (this.state.currentPage === 1) {
+    //   this.setState({ showPreviousPageButton: false });
+    // }
+  };
+
+  handleNextPage = (event) => {
+    event.preventDefault();
+
+    // this.handleButtonsDisplay();
+    this.setState({ previousPage: ++this.state.previousPage });
+    this.setState({ currentPage: ++this.state.currentPage });
+    this.setState({ nextPage: ++this.state.nextPage });
+    this.handleButtonsDisplay();
+
+    console.log(this.state.currentPage);
+    
+    // this.setState({ showPreviousPageButton: true });
+
+    // if (this.state.currentPage === this.state.lastPage) {
+    //   this.setState({ showNextPageButton: false });
+    // }
+  };
+    
+  render () {
+    return (
+      <div className="pagination-container">
+        <div className="pagination-buttons-container">
+          <button className="previous-page-button" type="button" onClick={ this.handlePreviousPage }
+            style={{ visibility: `${this.state.showPreviousPageButton === false ? "hidden" : ""}` }}>
+            {`< Page ${this.state.previousPage}`}
+          </button>
+          
+          <button className="next-page-button" type="button" onClick={ this.handleNextPage }
+            style={{ visibility: `${this.state.showNextPageButton === false ? "hidden" : ""}` }}>
+            {`Page ${this.state.nextPage} >`}
+          </button>
+
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
 };
 
 export default Pagination;
