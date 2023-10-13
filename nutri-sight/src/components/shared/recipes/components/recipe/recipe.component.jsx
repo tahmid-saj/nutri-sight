@@ -7,7 +7,10 @@ const Recipe = () => {
   return (
     <div className="recipe-container">
       <Servings></Servings>
-      <Ingredients></Ingredients>
+
+      <div className="recipe-ingredients-container">
+        <Ingredients></Ingredients>
+      </div>
     </div>
   )
 };

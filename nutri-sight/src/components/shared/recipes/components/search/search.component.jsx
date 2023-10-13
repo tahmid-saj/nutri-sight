@@ -9,7 +9,7 @@ const defaultFormFields = {
   searchedRecipe: ""
 };
 
-const Search = () => {
+const Search = ({ displayRecipeViewHandler }) => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { searchedRecipe } = formFields;
 
@@ -20,7 +20,9 @@ const Search = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(event.target.value);
+    console.log(formFields.searchedRecipe);
+
+    displayRecipeViewHandler(formFields.searchedRecipe);
   };
 
   const handleChange = (event) => {
@@ -28,11 +30,13 @@ const Search = () => {
     const { name, value } = event.target;
 
     setFormFields({ [name]: value })
+
+    console.log(formFields.searchedRecipe);
   };
 
   return (
-    <form className="search-recipe-container">
-      <FormInput label="Search recipes" type="text" required name="search"
+    <form onSubmit={ handleSubmit } className="search-recipe-container">
+      <FormInput label="Search recipes" type="text" required name="searchedRecipe"
                 onChange={ handleChange } value={ searchedRecipe }></FormInput>
 
       <div className="search-button-container">
