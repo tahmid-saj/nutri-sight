@@ -29,9 +29,9 @@ const Recipe = ({ currentDisplayedRecipe, currentDisplayedRecipeName,
                       servingsRatio={ servingsRatio }></Ingredients>
 
       </div>
-    )
-  }
-};
+    </div>
+  )
+}
 
 class RecipeClass extends Component {
   constructor ({ currentDisplayedRecipe, currentDisplayedRecipeName }) {

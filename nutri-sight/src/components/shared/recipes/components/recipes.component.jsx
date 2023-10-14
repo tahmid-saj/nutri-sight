@@ -118,11 +118,13 @@ class Recipes extends Component {
             this.state.currentDisplayedRecipe !== undefined && this.state.displayRecipeView === true && 
           
           <Fragment>
-            {
-              this.state.recipesSearched && this.state.newSearchedRecipe === true &&
-              <SearchResults recipesSearched={ this.state.recipesSearched }
-                              updateCurrentRecipe={ this.updateCurrentRecipe }></SearchResults>
-            }
+            <div className={`${this.state.newSearchedRecipe === true ? "search-results-main-container" : ""}`}>
+              {
+                  this.state.recipesSearched && this.state.newSearchedRecipe === true &&
+                  <SearchResults recipesSearched={ this.state.recipesSearched }
+                                  updateCurrentRecipe={ this.updateCurrentRecipe }></SearchResults>
+              }
+            </div>
               <RecipesView currentDisplayedRecipe={ this.state.currentDisplayedRecipe }
                             currentDisplayedRecipeName={ this.state.currentDisplayedRecipeName }></RecipesView> 
           </Fragment>

@@ -12,7 +12,7 @@ const Servings = ({ currentDisplayedRecipe, updateIngredients }) => {
   const [displayNewRecipeServings, setDisplayNewRecipeServings] = useState(true);
 
 
-  handleDecreaseServings = (event) => {
+  const handleDecreaseServings = (event) => {
     event.preventDefault();
 
     setDisplayNewRecipeServings(false);
@@ -27,7 +27,7 @@ const Servings = ({ currentDisplayedRecipe, updateIngredients }) => {
 
   };
 
-  handleIncreaseServings = (event) => {
+  const handleIncreaseServings = (event) => {
     event.preventDefault();
 
     setDisplayNewRecipeServings(false);
@@ -65,9 +65,9 @@ const Servings = ({ currentDisplayedRecipe, updateIngredients }) => {
         }
 
       </div>
-    )
-  }
-};
+    </div>
+  )
+}
 
 class ServingsClass extends Component {
   constructor ({ currentDisplayedRecipe, 
