@@ -1,6 +1,6 @@
 import "./ingredients.styles.scss";
 
-const Ingredients = ({ currentDisplayedRecipe, currentDisplayedRecipeName }) => {
+const Ingredients = ({ currentDisplayedRecipe, currentDisplayedRecipeName, servingsRatio }) => {
   const { ingredients } = currentDisplayedRecipe;
 
   return (
@@ -12,7 +12,7 @@ const Ingredients = ({ currentDisplayedRecipe, currentDisplayedRecipeName }) => 
         {
           ingredients.map((ingredient, index) => {
             return (
-              <h4 key={ index }>{`${ingredient.quantity !== null ? ingredient.quantity : ""} ${ingredient.unit} ${ingredient.description}`}</h4>
+              <h4 key={ index }>{`${ingredient.quantity !== null ? (servingsRatio * ingredient.quantity) : ""} ${ingredient.unit} ${ingredient.description}`}</h4>
             )
           })
         }
