@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from "react";
+import React, { Fragment, Component, useEffect } from "react";
 
 import Header from "./header/header.component";
 import SearchResults from "./search-results/search-results.component";
@@ -8,6 +8,7 @@ import RecipesView from "./recipes-view/recipes-view.component";
 const TIMEOUT_SEC = 10;
 
 class Recipes extends Component {
+
   constructor() {
     super();
 
@@ -15,17 +16,27 @@ class Recipes extends Component {
       displayRecipeView: false,
       recipesSearched: undefined,
       currentDisplayedRecipe: undefined,
-      currentDisplayedRecipeName: ""
+      currentDisplayedRecipeName: "",
+      newSearchedRecipe: true
     }
-  }
+  };
+
+  handleSearchChange = (changeTo) => {
+    this.setState({ newSearchedRecipe: changeTo });
+  };
 
   displayRecipeViewHandler = async (recipeName, recipesSearched) => {
     console.log(recipeName);
 
     await (this.state.recipesSearched = recipesSearched);
+    this.setState({ recipesSearched: recipesSearched });
     console.log(this.state.recipesSearched);
 
     this.setState({ displayRecipeView: true });
+  };
+
+  shouldComponentUpdate = () => {
+    return true;
   };
 
   timeout = (seconds) => {
@@ -48,6 +59,10 @@ class Recipes extends Component {
       
       console.log(this.state.recipesSearched);
 
+      console.log(dataRecipes.data.recipes);
+
+      await (this.state.recipesSearched = dataRecipes.data.recipes);
+
       const fetchPromiseRecipe = fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${dataRecipes.data.recipes[0].id}?key=6d894e60-5ddc-4e1a-9510-084ab089a4b7`)
       const resRecipe = await Promise.race([fetchPromiseRecipe, this.timeout(TIMEOUT_SEC)]);
       const dataRecipe = await resRecipe.json();
@@ -58,6 +73,8 @@ class Recipes extends Component {
 
       await (this.state.currentDisplayedRecipe = dataRecipe.data.recipe);
       await (this.state.currentDisplayedRecipeName = dataRecipes.data.recipes[0].title);
+      this.setState({ displayRecipeView: false });
+      this.forceUpdate();
       console.log(this.state.currentDisplayedRecipe);
 
       return dataRecipes.data.recipes;
@@ -87,19 +104,25 @@ class Recipes extends Component {
     }
   };
 
-  render() {
+  render = () => {
+    console.log(this.state.recipesSearched);
+
     return (
       <Fragment>
         <Header displayRecipeViewHandler={ this.displayRecipeViewHandler } 
-                updateSearchResults={ this.updateSearchResults }></Header>
+                updateSearchResults={ this.updateSearchResults }
+                handleSearchChange={ this.handleSearchChange }></Header>
   
         <div className="search-results-recipe-container">
           { this.state.displayRecipeView && this.state.recipesSearched !== undefined && 
-            this.state.currentDisplayedRecipe!== undefined && this.state.displayRecipeView === true &&       
+            this.state.currentDisplayedRecipe !== undefined && this.state.displayRecipeView === true && 
           
           <Fragment>
+            {
+              this.state.recipesSearched && this.state.newSearchedRecipe === true &&
               <SearchResults recipesSearched={ this.state.recipesSearched }
                               updateCurrentRecipe={ this.updateCurrentRecipe }></SearchResults>
+            }
               <RecipesView currentDisplayedRecipe={ this.state.currentDisplayedRecipe }
                             currentDisplayedRecipeName={ this.state.currentDisplayedRecipeName }></RecipesView> 
           </Fragment>
