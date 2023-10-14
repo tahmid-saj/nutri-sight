@@ -38,7 +38,7 @@ class Recipes extends Component {
 
   updateSearchResults = async (recipeSearched) => {
     try {
-      const fetchPromiseRecipes = fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${recipeSearched}`);
+      const fetchPromiseRecipes = fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${recipeSearched}?key=6d894e60-5ddc-4e1a-9510-084ab089a4b7`);
       const resRecipes = await Promise.race([fetchPromiseRecipes, this.timeout(TIMEOUT_SEC)]);
       const dataRecipes = await resRecipes.json();
 
@@ -48,7 +48,7 @@ class Recipes extends Component {
       
       console.log(this.state.recipesSearched);
 
-      const fetchPromiseRecipe = fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${dataRecipes.data.recipes[0].id}`)
+      const fetchPromiseRecipe = fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${dataRecipes.data.recipes[0].id}?key=6d894e60-5ddc-4e1a-9510-084ab089a4b7`)
       const resRecipe = await Promise.race([fetchPromiseRecipe, this.timeout(TIMEOUT_SEC)]);
       const dataRecipe = await resRecipe.json();
 
