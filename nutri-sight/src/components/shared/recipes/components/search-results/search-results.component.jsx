@@ -18,6 +18,8 @@ class SearchResults extends Component {
       lastPage: Math.ceil(recipesSearched.length / RECIPES_PER_PAGE),
       updateCurrentRecipe: updateCurrentRecipe
     }
+
+    console.log(this.state.recipeResults);
   };
 
   updateSearchResultsPage = (currentPage) => {
