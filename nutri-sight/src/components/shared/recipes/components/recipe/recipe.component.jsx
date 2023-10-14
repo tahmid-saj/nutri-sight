@@ -1,9 +1,12 @@
+
 import { Component, useState } from "react";
+
 
 import "./recipe.styles.scss";
 
 import Servings from "./servings/servings.component";
 import Ingredients from "./ingredients/ingredients.component";
+
 
 const Recipe = ({ currentDisplayedRecipe, currentDisplayedRecipeName, 
                   handleServingsUpdate }) => {
@@ -24,9 +27,10 @@ const Recipe = ({ currentDisplayedRecipe, currentDisplayedRecipeName,
                       currentDisplayedRecipeName={ currentDisplayedRecipeName }
                       handleServingsUpdate={ handleServingsUpdate }
                       servingsRatio={ servingsRatio }></Ingredients>
+
       </div>
-    </div>
-  )
+    )
+  }
 };
 
 class RecipeClass extends Component {
