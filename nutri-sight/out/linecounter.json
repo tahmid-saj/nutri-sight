@@ -1,0 +1,825 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "d:\\2019-old-laptop\\nutri-sight\\nutri-sight",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2023-10-13 20:00:25",
+            "filesum": 126,
+            "codesum": 25231,
+            "commentsum": 440,
+            "blanksum": 861,
+            "statistics": {
+                ".json": {
+                    "code": 21949,
+                    "comment": 0,
+                    "blank": 91
+                },
+                "": {
+                    "code": 23,
+                    "comment": 1,
+                    "blank": 6
+                },
+                ".txt": {
+                    "code": 3,
+                    "comment": 1,
+                    "blank": 0
+                },
+                ".md": {
+                    "code": 21,
+                    "comment": 4,
+                    "blank": 15
+                },
+                ".html": {
+                    "code": 112,
+                    "comment": 252,
+                    "blank": 18
+                },
+                ".js": {
+                    "code": 669,
+                    "comment": 69,
+                    "blank": 176
+                },
+                ".jsx": {
+                    "code": 1181,
+                    "comment": 54,
+                    "blank": 368
+                },
+                ".scss": {
+                    "code": 1205,
+                    "comment": 59,
+                    "blank": 185
+                },
+                ".svg": {
+                    "code": 68,
+                    "comment": 0,
+                    "blank": 2
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 6,
+                    "code": 23,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 88,
+                    "code": 21882,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public\\favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 28,
+                    "comment": 24,
+                    "filename": "public\\index.html"
+                },
+                {
+                    "filename": "public\\logo192.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\logo512.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "public\\manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "public\\robots.txt"
+                },
+                {
+                    "blank": 15,
+                    "code": 21,
+                    "comment": 4,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 5,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "src\\App.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\App.test.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\assets\\add-micronutrients.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\assets\\close-button.svg"
+                },
+                {
+                    "filename": "src\\assets\\icons8-minus-30.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\assets\\icons8-plus.svg"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\button\\button.component.jsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 45,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\button\\button.styles.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\form-input\\form-input.component.jsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 46,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\form-input\\form-input.styles.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\home\\about-links\\about-links.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\home\\about-links\\about-links.styles.scss"
+                },
+                {
+                    "blank": 8,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\home\\home.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\home\\home.styles.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\bookmark-icon\\bookmark-icon.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\bookmark-icon\\bookmark-icon.styles.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\bookmarks\\bookmarks.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\bookmarks\\bookmarks.styles.scss"
+                },
+                {
+                    "blank": 6,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\header\\header.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\header\\header.styles.scss"
+                },
+                {
+                    "blank": 6,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\navigation\\navigation.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\navigation\\navigation.styles.scss"
+                },
+                {
+                    "blank": 20,
+                    "code": 64,
+                    "comment": 16,
+                    "filename": "src\\components\\shared\\recipes\\components\\pagination\\pagination.component.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\pagination\\pagination.styles.scss"
+                },
+                {
+                    "blank": 6,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\recipe\\ingredients\\ingredients.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 16,
+                    "comment": 1,
+                    "filename": "src\\components\\shared\\recipes\\components\\recipe\\ingredients\\ingredients.styles.scss"
+                },
+                {
+                    "blank": 9,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\recipe\\recipe.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 1,
+                    "filename": "src\\components\\shared\\recipes\\components\\recipe\\recipe.styles.scss"
+                },
+                {
+                    "blank": 12,
+                    "code": 46,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\recipe\\servings\\servings.component.jsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 35,
+                    "comment": 3,
+                    "filename": "src\\components\\shared\\recipes\\components\\recipe\\servings\\servings.styles.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\recipes-view\\recipes-view.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\recipes-view\\recipes-view.styles.scss"
+                },
+                {
+                    "blank": 25,
+                    "code": 89,
+                    "comment": 3,
+                    "filename": "src\\components\\shared\\recipes\\components\\recipes.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\recipes.styles.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\search-result\\search-result.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 13,
+                    "comment": 1,
+                    "filename": "src\\components\\shared\\recipes\\components\\search-result\\search-result.styles.scss"
+                },
+                {
+                    "blank": 10,
+                    "code": 46,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\search-results\\search-results.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\search-results\\search-results.styles.scss"
+                },
+                {
+                    "blank": 14,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\search\\search.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\components\\search\\search.styles.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\recipes.component.jsx"
+                },
+                {
+                    "filename": "src\\components\\shared\\recipes\\static\\img\\favicon.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 2,
+                    "code": 58,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\static\\img\\icons.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\static\\js\\config\\config.js"
+                },
+                {
+                    "blank": 23,
+                    "code": 62,
+                    "comment": 15,
+                    "filename": "src\\components\\shared\\recipes\\static\\js\\controllers\\controller.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\static\\js\\helpers\\helpers.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 91,
+                    "comment": 5,
+                    "filename": "src\\components\\shared\\recipes\\static\\js\\models\\model.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\static\\js\\views\\bookmarks-view.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 57,
+                    "comment": 4,
+                    "filename": "src\\components\\shared\\recipes\\static\\js\\views\\pagination-view.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\static\\js\\views\\preview-view.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 120,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\static\\js\\views\\recipe-view.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\static\\js\\views\\results-view.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\static\\js\\views\\search-view.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 73,
+                    "comment": 2,
+                    "filename": "src\\components\\shared\\recipes\\static\\js\\views\\view.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 58,
+                    "comment": 10,
+                    "filename": "src\\components\\shared\\recipes\\static\\sass\\_base.scss"
+                },
+                {
+                    "blank": 36,
+                    "code": 175,
+                    "comment": 2,
+                    "filename": "src\\components\\shared\\recipes\\static\\sass\\_components.scss"
+                },
+                {
+                    "blank": 24,
+                    "code": 119,
+                    "comment": 1,
+                    "filename": "src\\components\\shared\\recipes\\static\\sass\\_header.scss"
+                },
+                {
+                    "blank": 13,
+                    "code": 91,
+                    "comment": 1,
+                    "filename": "src\\components\\shared\\recipes\\static\\sass\\_preview.scss"
+                },
+                {
+                    "blank": 24,
+                    "code": 146,
+                    "comment": 9,
+                    "filename": "src\\components\\shared\\recipes\\static\\sass\\_recipe.scss"
+                },
+                {
+                    "blank": 6,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\static\\sass\\_searchResults.scss"
+                },
+                {
+                    "blank": 13,
+                    "code": 86,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\static\\sass\\_upload.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\components\\shared\\recipes\\static\\sass\\main.scss"
+                },
+                {
+                    "blank": 15,
+                    "code": 84,
+                    "comment": 228,
+                    "filename": "src\\components\\shared\\recipes\\static\\templates\\template.html"
+                },
+                {
+                    "blank": 16,
+                    "code": 49,
+                    "comment": 4,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\add-micronutrients\\add-micronutrients.component.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\add-micronutrients\\add-micronutrients.styles.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\consumption-info\\consumption-info.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 3,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\consumption-info\\consumption-info.styles.scss"
+                },
+                {
+                    "blank": 8,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\nutrition-tracker.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\nutrition-tracker.styles.scss"
+                },
+                {
+                    "blank": 16,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\search-days\\search-days.component.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 18,
+                    "comment": 2,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\search-days\\search-days.styles.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\summary\\summary.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 3,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\summary\\summary.styles.scss"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\top-search\\top-search.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 5,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\top-search\\top-search.styles.scss"
+                },
+                {
+                    "blank": 21,
+                    "code": 50,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\update-consumption-form\\update-consumption-form.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-in\\nutrition-tracker\\update-consumption-form\\update-consumption-form.styles.scss"
+                },
+                {
+                    "blank": 16,
+                    "code": 49,
+                    "comment": 4,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\add-micronutrients\\add-micronutrients.component.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\add-micronutrients\\add-micronutrients.styles.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\consumption-info\\consumption-info.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 3,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\consumption-info\\consumption-info.styles.scss"
+                },
+                {
+                    "blank": 8,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\nutrition-tracker.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\nutrition-tracker.styles.scss"
+                },
+                {
+                    "blank": 16,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\search-days\\search-days.component.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 18,
+                    "comment": 2,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\search-days\\search-days.styles.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\summary\\summary.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 3,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\summary\\summary.styles.scss"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\top-search\\top-search.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 5,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\top-search\\top-search.styles.scss"
+                },
+                {
+                    "blank": 21,
+                    "code": 50,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\update-consumption-form\\update-consumption-form.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\nutrition-tracker\\update-consumption-form\\update-consumption-form.styles.scss"
+                },
+                {
+                    "blank": 17,
+                    "code": 50,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\sign-in-form\\sign-in-form.component.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\sign-in-form\\sign-in-form.styles.scss"
+                },
+                {
+                    "blank": 19,
+                    "code": 58,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\sign-up-form\\sign-up-form.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src\\components\\signed-out\\sign-up-form\\sign-up-form.styles.scss"
+                },
+                {
+                    "blank": 8,
+                    "code": 26,
+                    "comment": 2,
+                    "filename": "src\\context\\user.context.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 18,
+                    "comment": 3,
+                    "filename": "src\\index.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 17,
+                    "comment": 1,
+                    "filename": "src\\index.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\logo.svg"
+                },
+                {
+                    "blank": 1,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src\\reportWebVitals.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src\\routes\\shared\\home\\home.component.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src\\routes\\shared\\home\\home.styles.scss"
+                },
+                {
+                    "blank": 21,
+                    "code": 59,
+                    "comment": 25,
+                    "filename": "src\\routes\\shared\\navigation\\navigation.component.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 24,
+                    "comment": 1,
+                    "filename": "src\\routes\\shared\\navigation\\navigation.styles.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src\\routes\\shared\\recipes\\recipes.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\routes\\shared\\recipes\\recipes.styles.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\routes\\shared\\store\\store.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\routes\\shared\\store\\store.styles.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src\\routes\\signed-in\\nutrition-tracker\\nutrition-tracker.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\routes\\signed-in\\nutrition-tracker\\nutrition-tracker.styles.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src\\routes\\signed-out\\authentication\\authentication.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src\\routes\\signed-out\\authentication\\authentication.styles.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src\\routes\\signed-out\\nutrition-tracker\\nutrition-tracker.component.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\routes\\signed-out\\nutrition-tracker\\nutrition-tracker.styles.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 4,
+                    "filename": "src\\setupTests.js"
+                },
+                {
+                    "blank": 41,
+                    "code": 99,
+                    "comment": 36,
+                    "filename": "src\\utils\\firebase\\firebase.utils.js"
+                }
+            ]
+        }
+    ]
+}

@@ -1,33 +1,39 @@
 import { Component, useState } from "react";
 
+
 import "./servings.styles.scss";
 
 import { ReactComponent as IncreaseServingsButton } from "../../../../../../assets/icons8-plus.svg";
+
 
 const Servings = ({ currentDisplayedRecipe, updateIngredients }) => {
   const { servings: originalServings, cooking_time: cookingTime } = currentDisplayedRecipe;
   const [updatedServings, setUpdatedServings] = useState(originalServings);
   const [displayNewRecipeServings, setDisplayNewRecipeServings] = useState(true);
 
-  const handleDecreaseServings = (event) => {
+
+  handleDecreaseServings = (event) => {
     event.preventDefault();
 
     setDisplayNewRecipeServings(false);
 
     console.log("decrease servings");
+
     if (updatedServings > 0) {
       setUpdatedServings(updatedServings - 1);
     }
 
     updateIngredients(originalServings, updatedServings);
+
   };
 
-  const handleIncreaseServings = (event) => {
+  handleIncreaseServings = (event) => {
     event.preventDefault();
 
     setDisplayNewRecipeServings(false);
 
     console.log("increase servings");
+
     setUpdatedServings(updatedServings + 1);
 
     updateIngredients(originalServings, updatedServings);
@@ -57,10 +63,10 @@ const Servings = ({ currentDisplayedRecipe, updateIngredients }) => {
           !displayNewRecipeServings &&
           <h4>{` ${updatedServings} servings`}</h4>
         }
+
       </div>
-      
-    </div>
-  )
+    )
+  }
 };
 
 class ServingsClass extends Component {
