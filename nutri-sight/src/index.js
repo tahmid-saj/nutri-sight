@@ -6,15 +6,19 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { UserProvider } from './context/user.context';
+
+import { UserProvider } from './context/shared/user/user.context';
+import { NutrientPredictorProvider } from './context/shared/nutrient-predictor/nutrient-predictor.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider>
-        <App />
-      </UserProvider>
+      <NutrientPredictorProvider>
+        <UserProvider>
+          <App />
+        </UserProvider>
+      </NutrientPredictorProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
