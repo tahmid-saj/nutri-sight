@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 import { onAuthStateChangedListener,
         signOutUser,
-        createUserDocumentFromAuth } from "../utils/firebase/firebase.utils";
+        createUserDocumentFromAuth } from "../../../utils/firebase/firebase.utils";
 
 // actual value to be accessed
 export const UserContext = createContext({
