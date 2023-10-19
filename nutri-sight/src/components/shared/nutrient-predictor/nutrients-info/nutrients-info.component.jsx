@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "./nutrients-info.styles.scss";
 
+import { NutrientPredictorContext } from "../../../../context/shared/nutrient-predictor/nutrient-predictor.context";
+
 const NutrientsInfo = () => {
+  const { prediction } = useContext(NutrientPredictorContext).imageAndPrediction;
+
   return (
     <div className="nutrients-info-container">
-      <strong><h2>Macronutrients</h2></strong>
+      <strong><h1>{`${prediction.food}`}</h1></strong>
 
-      <h4>{`Calories - ${2000}`}</h4>
-      <h4>{`Carb - ${1000}`}</h4>
-      <h4>{`Protein - ${500}`}</h4>
-      <h4>{`Fat - ${600}`}</h4>
+      <strong><h2>Macronutrients</h2></strong>
+      <h4>{`Calories - ${prediction.calories}`}</h4>
+      <h4>{`Carb - ${prediction.macronutrients.carbohydrates.amount}`}</h4>
+      <h4>{`Protein - ${prediction.macronutrients.protein.amount}`}</h4>
+      <h4>{`Fat - ${prediction.macronutrients.fat.amount}`}</h4>
 
       <strong><h2>Micronutrients</h2></strong>
 
-      <h4>{`Vitamin C - ${600}`}</h4>
+      {
+        prediction.micronutrients.map((micronutrient, index) => {
+          return <h4 key={index}>{`${micronutrient.name} - ${micronutrient.amount} ${micronutrient.unit}`}</h4>
+        })
+      }
+
     </div>
   )
 };
