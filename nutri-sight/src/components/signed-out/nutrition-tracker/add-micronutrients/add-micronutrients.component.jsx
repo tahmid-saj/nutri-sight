@@ -49,7 +49,7 @@ const AddMicronutrients = () => {
                   <FormInput label="Micronutrient" type="text" required onChange={ event => handleChange(event, i) }
                             name="micronutrient" value={ data }></FormInput>
                   
-                  <FormInput label="Amount" type="text" required onChange={ event => handleChange(event, i) }
+                  <FormInput label="Amount (g)" type="text" required onChange={ event => handleChange(event, i) }
                             name="amount" value={ data }></FormInput>
 
                   <RemoveMicronutrientsButton onClick={ () => handleDelete() }

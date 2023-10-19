@@ -9,15 +9,18 @@ import reportWebVitals from './reportWebVitals';
 
 import { UserProvider } from './context/shared/user/user.context';
 import { NutrientPredictorProvider } from './context/shared/nutrient-predictor/nutrient-predictor.context';
+import { NutritionTrackerProvider as NutritionTrackerProviderSignedOut } from './context/signed-out/nutrition-tracker/nutrition-tracker.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <NutrientPredictorProvider>
-        <UserProvider>
-          <App />
-        </UserProvider>
+        <NutritionTrackerProviderSignedOut>
+          <UserProvider>
+            <App />
+          </UserProvider>
+        </NutritionTrackerProviderSignedOut>
       </NutrientPredictorProvider>
     </BrowserRouter>
   </React.StrictMode>

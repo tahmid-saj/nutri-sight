@@ -45,13 +45,13 @@ const UpdateConsumptionForm = () => {
         <FormInput label="Total calories" type="text" required onChange={ handleChange }
                             name="calories" value={ calories }></FormInput>
         
-        <FormInput label="Total carbohydrates" type="text" required onChange={ handleChange }
+        <FormInput label="Total carbohydrates (g)" type="text" required onChange={ handleChange }
                             name="carbohydrates" value={ carbohydrates }></FormInput>
         
-        <FormInput label="Total protein" type="text" required onChange={ handleChange }
+        <FormInput label="Total protein (g)" type="text" required onChange={ handleChange }
                             name="protein" value={ protein }></FormInput>
         
-        <FormInput label="Total fat" type="text" required onChange={ handleChange }
+        <FormInput label="Total fat (g)" type="text" required onChange={ handleChange }
                             name="fat" value={ fat }></FormInput>
                             
         <AddMicronutrients></AddMicronutrients>
