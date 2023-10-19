@@ -6,18 +6,18 @@ import Button from "../../../button/button.component";
 
 import { NutrientPredictorContext } from "../../../../../context/shared/nutrient-predictor/nutrient-predictor.context";
 
-const UploadImage = ({ displayNutrients }) => {
+const UploadImage = () => {
   const [uploadedImage, setUploadedImage] = useState();
 
-  const { imageAndPrediction, updateImage, updateImageAndPrediction } = useContext(NutrientPredictorContext);
+  const { updateImage, updateImageAndPrediction } = useContext(NutrientPredictorContext);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     console.log(uploadedImage);
 
     updateImageAndPrediction(uploadedImage, "image");
-    displayNutrients(true);
+    // displayNutrients(true);
   };
 
   const handleChange = (event) => {
