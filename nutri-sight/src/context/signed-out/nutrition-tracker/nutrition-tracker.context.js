@@ -2,6 +2,12 @@ import { createContext, useState, useEffect } from "react";
 
 import { validateAddDayTracked, validateUpdateDayTracked } from "../../../utils/validations/nutrition-tracker.validations";
 
+const DEFAULT_MICRONUTRIENT = {
+  name: "",
+  amount: 0,
+  unit: "",
+};
+
 // helper functions
 
 const addDayTrackedHelper = (nutritionTrackedDays, trackedDayInfo) => {
@@ -57,19 +63,32 @@ const getDayTrackedHelper = (nutritionTrackedDays, trackedDay) => {
 };
 
 const addFormInputMicronutrientsHelper = (formInputMicronutrients) => {
-  // add {} (empty micronutrient object) to formInputMicronutrients
+  // add default micronutrient to formInputMicronutrients
 
-
+  return [ ...formInputMicronutrients, DEFAULT_MICRONUTRIENT ];
 };
 
 const updateFormInputMicronutrientsHelper = (formInputMicronutrients, micronutrient, micronutrientIndex) => {
   // update formInputMicronutrients on micronutrientIndex with micronutrient
 
+  const updatedFormInputMicronutrients = formInputMicronutrients.map((micront, index) => {
+    if (index === micronutrientIndex) {
+      return micronutrient;
+    }
+
+    return micront;
+  });
+
+  return updatedFormInputMicronutrients;;
 };
 
 const deleteFormInputMicronutrientsHelper = (formInputMicronutrients, micronutrientIndex) => {
   // remove micronutrient from formInputMicronutrients on index with micronutrientIndex
 
+  const deleteMicronutrients = [ ...formInputMicronutrients ];
+  deleteMicronutrients.splice(micronutrientIndex, 1);
+
+  return deleteMicronutrients;
 };
 
 export const NutritionTrackerContext = createContext({
@@ -155,6 +174,11 @@ export const NutritionTrackerProvider = ({ children }) => {
     });
   }, [nutritionTrackedDays]);
 
+  // Testing micronutrients
+  useEffect(() => {
+    console.log(formInputMicronutrients);
+  }, [formInputMicronutrients]);
+
   const addDayTracked = (trackedDayInfo) => {
     setNutritionTrackedDays(addDayTrackedHelper(nutritionTrackedDays, trackedDayInfo));
   };
@@ -179,7 +203,8 @@ export const NutritionTrackerProvider = ({ children }) => {
     setFormInputMicronutrients(deleteFormInputMicronutrientsHelper(formInputMicronutrients, micronutrientIndex));
   };
 
-  const value = { nutritionTrackedDays, addDayTracked, updateDayTracked, getDayTracked, 
+  const value = { nutritionTrackedDays, formInputMicronutrients, 
+                  addDayTracked, updateDayTracked, getDayTracked, 
                   addFormInputMicronutrients, updateFormInputMicronutrients, deleteFormInputMicronutrients, 
                   nutritionTrackedDaysSummary }
 
