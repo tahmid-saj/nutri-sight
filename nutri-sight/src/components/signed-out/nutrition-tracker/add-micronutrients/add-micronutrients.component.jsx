@@ -19,6 +19,7 @@ const AddMicronutrients = () => {
     const inputData = [...micronutrients];
     inputData[i] = onChangeValue.target.value;
     setMicronutrients(inputData);
+    console.log(micronutrients);
   };
 
   const handleDelete = (i) => {

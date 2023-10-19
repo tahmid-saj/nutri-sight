@@ -45,7 +45,7 @@ const getDayTrackedHelper = (nutritionTrackedDays, trackedDay) => {
   // return trackedDay info where nutritionTrackedDays's dateTracked is equal to trackedDay.dateTracked
 
   const trackedDayInfo = nutritionTrackedDays.find((nutritionTrackedDay) => {
-    return nutritionTrackedDay.dateTracked === trackedDay.dateTracked;
+    return String(nutritionTrackedDay.dateTracked) === String(trackedDay);
   });
 
   if (!trackedDayInfo) {
@@ -54,6 +54,22 @@ const getDayTrackedHelper = (nutritionTrackedDays, trackedDay) => {
   }
   
   return trackedDayInfo;
+};
+
+const addFormInputMicronutrientsHelper = (formInputMicronutrients) => {
+  // add {} (empty micronutrient object) to formInputMicronutrients
+
+
+};
+
+const updateFormInputMicronutrientsHelper = (formInputMicronutrients, micronutrient, micronutrientIndex) => {
+  // update formInputMicronutrients on micronutrientIndex with micronutrient
+
+};
+
+const deleteFormInputMicronutrientsHelper = (formInputMicronutrients, micronutrientIndex) => {
+  // remove micronutrient from formInputMicronutrients on index with micronutrientIndex
+
 };
 
 export const NutritionTrackerContext = createContext({
@@ -77,15 +93,29 @@ export const NutritionTrackerContext = createContext({
   //   }
   // ]
 
+  formInputMicronutrients: [],
+  // formInputMicronutrients structure:
+  // [
+  //   {
+  //     name: "Vitamin C",
+  //     amount: 60,
+  //     unit: "mg"
+  //   }
+  // ]
+
   addDayTracked: () => {},
   updateDayTracked: () => {},
   getDayTracked: () => {},
+
+  addFormInputMicronutrients: () => {},
+  updateFormInputMicronutrients: () => {},
+  deleteFormInputMicronutrients: () => {},
 
   nutritionTrackedDaysSummary: {}
   // nutritionTrackedDaysSummary structure:
   // {
   //   averageDailyCaloriesConsumption: 2222,
-  //   averageDailyCarbohydrateConsumption: 1111,
+  //   averageDailyCarbohydratesConsumption: 1111,
   //   averageDailyProteinConsumption: 777,
   //   averageDailyFatConsumption: 555,,
   // }
@@ -93,17 +123,19 @@ export const NutritionTrackerContext = createContext({
 
 export const NutritionTrackerProvider = ({ children }) => {
   const [nutritionTrackedDays, setNutritionTrackedDays] = useState([]);
+  const [formInputMicronutrients, setFormInputMicronutrients] = useState([]);
   const [nutritionTrackedDaysSummary, setNutritionTrackedDaysSummary] = useState({});
 
   useEffect(() => {
     // update nutritionTrackedDaysSummary with average consumptions
     const trackedDays = nutritionTrackedDays.length;
 
+    // TODO: move this to calculations folder
     const averageDailyCalories = (nutritionTrackedDays.reduce((totalCalories, { calories }) => {
       return totalCalories + calories;
     }, 0)) / trackedDays;
 
-    const averageDailyCarbohydrate = (nutritionTrackedDays.reduce((totalCarbohydrates, { carbohydrates }) => {
+    const averageDailyCarbohydrates = (nutritionTrackedDays.reduce((totalCarbohydrates, { carbohydrates }) => {
       return totalCarbohydrates + carbohydrates;
     }, 0)) / trackedDays;
 
@@ -117,7 +149,7 @@ export const NutritionTrackerProvider = ({ children }) => {
 
     setNutritionTrackedDaysSummary({
       averageDailyCaloriesConsumption: averageDailyCalories,
-      averageDailyCarbohydrateConsumption: averageDailyCarbohydrate,
+      averageDailyCarbohydratesConsumption: averageDailyCarbohydrates,
       averageDailyProteinConsumption: averageDailyProtein,
       averageDailyFatConsumption: averageDailyFat,
     });
@@ -135,8 +167,21 @@ export const NutritionTrackerProvider = ({ children }) => {
     return getDayTrackedHelper(nutritionTrackedDays, trackedDay);
   };
 
-  const value = { nutritionTrackedDays, addDayTracked, updateDayTracked, 
-                  getDayTracked, nutritionTrackedDaysSummary }
+  const addFormInputMicronutrients = () => {
+    setFormInputMicronutrients(addFormInputMicronutrientsHelper(formInputMicronutrients));
+  };
+
+  const updateFormInputMicronutrients = (micronutrient, micronutrientIndex) => {
+    setFormInputMicronutrients(updateFormInputMicronutrientsHelper(formInputMicronutrients, micronutrient, micronutrientIndex));
+  };
+
+  const deleteFormInputMicronutrients = (micronutrientIndex) => {
+    setFormInputMicronutrients(deleteFormInputMicronutrientsHelper(formInputMicronutrients, micronutrientIndex));
+  };
+
+  const value = { nutritionTrackedDays, addDayTracked, updateDayTracked, getDayTracked, 
+                  addFormInputMicronutrients, updateFormInputMicronutrients, deleteFormInputMicronutrients, 
+                  nutritionTrackedDaysSummary }
 
   return (
     <NutritionTrackerContext.Provider

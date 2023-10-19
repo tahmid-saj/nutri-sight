@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useContext, Fragment } from "react";
 
 import Summary from "./summary/summary.component";
 
@@ -9,23 +9,32 @@ import ConsumptionInfo from "./consumption-info/consumption-info.component";
 
 import TopSearch from "./top-search/top-search.component";
 
-class NutritionTracker extends Component {
-  render() {
-    return (
-      <div className="nutrition-tracker-container">
-        <TopSearch></TopSearch>
+import { NutritionTrackerContext } from "../../../context/signed-out/nutrition-tracker/nutrition-tracker.context";
 
-        <div className="form-view-separator-container">
-          <hr class="rounded"/>
-        </div>
+const NutritionTracker = () => {
+  const { nutritionTrackedDays } = useContext(NutritionTrackerContext);
 
-        <div className="update-consumption-container">
-          <UpdateConsumptionForm></UpdateConsumptionForm>
-        </div>
+  // render() {
+  return (
+    <div className="nutrition-tracker-container">
+      {
+        nutritionTrackedDays.length !== 0 &&
+        <Fragment>
+          <TopSearch></TopSearch>
 
+          <div className="form-view-separator-container">
+            <hr class="rounded"/>
+          </div>
+        </Fragment>
+      }
+
+      <div className="update-consumption-container">
+        <UpdateConsumptionForm></UpdateConsumptionForm>
       </div>
-    );
-  };
+
+    </div>
+  );
+  // };
 };
 
 export default NutritionTracker;
