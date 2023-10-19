@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import "./update-consumption-form.styles.scss";
 
 import FormInput from "../../../shared/form-input/form-input.component";
 import Button from "../../../shared/button/button.component";
 import AddMicronutrients from "../add-micronutrients/add-micronutrients.component";
+
+import { NutritionTrackerContext } from "../../../../context/signed-out/nutrition-tracker/nutrition-tracker.context";
 
 const defaultFormFields = {
   dateTracked: "",
@@ -15,8 +17,10 @@ const defaultFormFields = {
 };
 
 const UpdateConsumptionForm = () => {
+  const { nutritionTrackedDays, addDayTracked, updateDayTracked } = useContext(NutritionTrackerContext);
+
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { dateTracked, calories, carbohydrates, protein, fat } = formFields;
+  // const { dateTracked, calories, carbohydrates, protein, fat } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -26,6 +30,9 @@ const UpdateConsumptionForm = () => {
     event.preventDefault();
 
     console.log(event.target.value);
+
+
+    resetFormFields(); 
   };
 
   const handleChange = (event) => {
@@ -40,25 +47,28 @@ const UpdateConsumptionForm = () => {
 
       <form onSubmit={ handleSubmit }>
         <h4>Date tracked</h4>
-        <FormInput type="date" required name="dateTracked" value={ dateTracked }></FormInput>
+        <FormInput type="date" required name="dateTracked" value={ formFields.dateTracked }></FormInput>
 
         <FormInput label="Total calories" type="text" required onChange={ handleChange }
-                            name="calories" value={ calories }></FormInput>
+                            name="calories" value={ formFields.calories }></FormInput>
         
-        <FormInput label="Total carbohydrates" type="text" required onChange={ handleChange }
-                            name="carbohydrates" value={ carbohydrates }></FormInput>
+        <FormInput label="Total carbohydrates (g)" type="text" required onChange={ handleChange }
+                            name="carbohydrates" value={ formFields.carbohydrates }></FormInput>
         
-        <FormInput label="Total protein" type="text" required onChange={ handleChange }
-                            name="protein" value={ protein }></FormInput>
+        <FormInput label="Total protein (g)" type="text" required onChange={ handleChange }
+                            name="protein" value={ formFields.protein }></FormInput>
         
-        <FormInput label="Total fat" type="text" required onChange={ handleChange }
-                            name="fat" value={ fat }></FormInput>
+        <FormInput label="Total fat (g)" type="text" required onChange={ handleChange }
+                            name="fat" value={ formFields.fat }></FormInput>
                             
         <AddMicronutrients></AddMicronutrients>
 
         <div className="buttons-container">
           <Button buttonType="regularButton" type="submit">Add Day</Button>
-          <Button buttonType="regularButton" type="submit">Update</Button>
+          {
+            nutritionTrackedDays.length !== 0 &&
+            <Button buttonType="regularButton" type="submit">Update</Button>
+          }
         </div>
 
       </form>
