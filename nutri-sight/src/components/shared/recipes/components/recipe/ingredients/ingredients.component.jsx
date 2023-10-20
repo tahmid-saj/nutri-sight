@@ -18,8 +18,10 @@ const Ingredients = ({
 
       <div className="ingredient-quantities-container">
         {
-          displayedRecipe !== undefined && displayedRecipe.ingredients !== undefined && displayedRecipe.ingredients.length !== 0 &&
-          displayedRecipe.ingredients.map((ingredient, index) => {
+          displayedRecipe !== undefined && 
+          displayedRecipe.ingredients !== undefined && displayedRecipe.ingredients.length !== 0 &&
+          displayedRecipe.updatedIngredients !== undefined && displayedRecipe.updatedIngredients.length !== 0 &&
+          displayedRecipe.updatedIngredients.map((ingredient, index) => {
             return (
               // <h4 key={ index }>{`${ingredient.quantity !== null ? (servingsRatio * ingredient.quantity) : ""} ${ingredient.unit} ${ingredient.description}`}</h4>
               <h4 key={ index }>{`${ingredient.quantity !== null ? (ingredient.quantity) : ""} ${ingredient.unit} ${ingredient.description}`}</h4>
