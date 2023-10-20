@@ -1,17 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import "./search.styles.scss";
 
 import FormInput from "../../../form-input/form-input.component";
 import Button from "../../../button/button.component";
 
+import { RecipesContext } from "../../../../../context/shared/recipes/recipes.context";
+
 const defaultFormFields = {
   searchedRecipe: ""
 };
 
-const Search = ({ displayRecipeViewHandler, updateSearchResults, handleSearchChange }) => {
+const Search = () => {
+  const { displaySearchedRecipes } = useContext(RecipesContext);
+
+  // { displayRecipeViewHandler, updateSearchResults, handleSearchChange }
+  // ) => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { searchedRecipe } = formFields;
+  // const { searchedRecipe } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -21,12 +27,15 @@ const Search = ({ displayRecipeViewHandler, updateSearchResults, handleSearchCha
     event.preventDefault();
 
     console.log(formFields.searchedRecipe);
-    setFormFields(defaultFormFields);
 
-    const recipesSearched = await updateSearchResults(formFields.searchedRecipe);
-    console.log(formFields.searchedRecipe, recipesSearched);
-    await displayRecipeViewHandler(formFields.searchedRecipe, recipesSearched);
-    handleSearchChange(true);
+    displaySearchedRecipes(formFields.searchedRecipe);
+
+    resetFormFields();
+
+    // const recipesSearched = await updateSearchResults(formFields.searchedRecipe);
+    // console.log(formFields.searchedRecipe, recipesSearched);
+    // await displayRecipeViewHandler(formFields.searchedRecipe, recipesSearched);
+    // handleSearchChange(true);
   };
 
   const handleChange = (event) => {
@@ -34,7 +43,7 @@ const Search = ({ displayRecipeViewHandler, updateSearchResults, handleSearchCha
     const { name, value } = event.target;
 
     setFormFields({ [name]: value })
-    handleSearchChange(false);
+    // handleSearchChange(false);
 
     console.log(formFields.searchedRecipe);
   };
@@ -42,7 +51,7 @@ const Search = ({ displayRecipeViewHandler, updateSearchResults, handleSearchCha
   return (
     <form onSubmit={ handleSubmit } className="search-recipe-container">
       <FormInput label="Search recipes" type="text" required name="searchedRecipe"
-                onChange={ handleChange } value={ searchedRecipe }></FormInput>
+                onChange={ handleChange } value={ formFields.searchedRecipe }></FormInput>
 
       <div className="search-button-container">
         <Button buttonType="regularButton" type="submit">Search</Button>

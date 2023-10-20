@@ -3,7 +3,23 @@ import React, { Fragment, Component } from "react";
 import SearchResults from "../search-results/search-results.component";
 import Recipe from "../recipe/recipe.component";
 
-const RecipesView = ({ currentDisplayedRecipe, currentDisplayedRecipeName,
+const RecipesView = ({ 
+                      // currentDisplayedRecipe, currentDisplayedRecipeName,
+                      // handleServingsUpdate, servingsRatio 
+                    }) => {
+  return (
+    <Fragment>
+      <Recipe 
+              // currentDisplayedRecipe={ currentDisplayedRecipe }
+              // currentDisplayedRecipeName={ currentDisplayedRecipeName }
+              // handleServingsUpdate={ handleServingsUpdate }
+              // servingsRatio={ servingsRatio }
+              ></Recipe>
+    </Fragment>
+  )
+};
+
+const RecipesView2 = ({ currentDisplayedRecipe, currentDisplayedRecipeName,
                       handleServingsUpdate, servingsRatio }) => {
   return (
     <Fragment>

@@ -1,18 +1,28 @@
+import { useContext } from "react";
+
 import "./ingredients.styles.scss";
 
-const Ingredients = ({ currentDisplayedRecipe, currentDisplayedRecipeName, servingsRatio }) => {
-  const { ingredients } = currentDisplayedRecipe;
+import { RecipesContext } from "../../../../../../context/shared/recipes/recipes.context";
+
+const Ingredients = ({ 
+                    // currentDisplayedRecipe, currentDisplayedRecipeName, servingsRatio 
+                  }) => {
+  // const { ingredients } = currentDisplayedRecipe;
+
+  const { displayedRecipe } = useContext(RecipesContext);
 
   return (
     <div className="ingredients-container">
       <h2>Recipe Ingredients</h2>
-      <h3>{`${currentDisplayedRecipeName}`}</h3>
+      <h3>{`${displayedRecipe.title}`}</h3>
 
       <div className="ingredient-quantities-container">
         {
-          ingredients.map((ingredient, index) => {
+          displayedRecipe !== undefined && displayedRecipe.ingredients !== undefined && displayedRecipe.ingredients.length !== 0 &&
+          displayedRecipe.ingredients.map((ingredient, index) => {
             return (
-              <h4 key={ index }>{`${ingredient.quantity !== null ? (servingsRatio * ingredient.quantity) : ""} ${ingredient.unit} ${ingredient.description}`}</h4>
+              // <h4 key={ index }>{`${ingredient.quantity !== null ? (servingsRatio * ingredient.quantity) : ""} ${ingredient.unit} ${ingredient.description}`}</h4>
+              <h4 key={ index }>{`${ingredient.quantity !== null ? (ingredient.quantity) : ""} ${ingredient.unit} ${ingredient.description}`}</h4>
             )
           })
         }

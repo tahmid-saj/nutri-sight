@@ -4,6 +4,8 @@ import "./pagination.styles.scss";
 
 import Button from "../../../button/button.component";
 
+const RECIPES_PER_PAGE = 8;
+
 class Pagination extends Component {
   handleButtonsDisplay = () => {
     // (page 1 and there are no pages) recipeResultsLength < 8: both buttons are hidden

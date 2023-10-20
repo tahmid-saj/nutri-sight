@@ -8,7 +8,38 @@ import Servings from "./servings/servings.component";
 import Ingredients from "./ingredients/ingredients.component";
 
 
-const Recipe = ({ currentDisplayedRecipe, currentDisplayedRecipeName, 
+const Recipe = ({ 
+                  // currentDisplayedRecipe, currentDisplayedRecipeName, 
+                  // handleServingsUpdate 
+                }) => {
+
+  // const [servingsRatio, setServingsRatio] = useState(1);
+
+  // const updateIngredients = (originalServings, updatedServings) => {
+  //   setServingsRatio(updatedServings / originalServings);
+  // };
+
+  return (
+    <div className="recipe-container">
+      <Servings 
+                // currentDisplayedRecipe={ currentDisplayedRecipe }
+                // updateIngredients={ updateIngredients }
+                ></Servings>
+
+      <div className="recipe-ingredients-container">
+        <Ingredients 
+                      // currentDisplayedRecipe={ currentDisplayedRecipe }
+                      // currentDisplayedRecipeName={ currentDisplayedRecipeName }
+                      // handleServingsUpdate={ handleServingsUpdate }
+                      // servingsRatio={ servingsRatio }
+                      ></Ingredients>
+
+      </div>
+    </div>
+  )
+}
+
+const Recipe2 = ({ currentDisplayedRecipe, currentDisplayedRecipeName, 
                   handleServingsUpdate }) => {
 
   const [servingsRatio, setServingsRatio] = useState(1);

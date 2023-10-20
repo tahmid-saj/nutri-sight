@@ -77,9 +77,18 @@ export const RecipesProvider = ({ children }) => {
   const [displayedRecipe, setDisplayedRecipe] = useState({});
 
   const displaySearchedRecipes = async (recipeNameSearched) => {
-    const searchedRecipes = await displaySearchedRecipesHelper(searchedRecipes, recipeNameSearched);
+    const returnedRecipes = await displaySearchedRecipesHelper(searchedRecipes, recipeNameSearched);
 
-    setSearchedRecipes(searchedRecipes);
+    setSearchedRecipes(returnedRecipes);
+
+    const displayRecipe = {
+      id: returnedRecipes[0].id,
+      title: returnedRecipes[0].title
+    };
+
+    const firstDisplayedRecipe = await displayRecipeHelper(searchedRecipes, displayRecipe);
+
+    setDisplayedRecipe(firstDisplayedRecipe);
   };
 
   const displayRecipe = async (clickedRecipe) => {
