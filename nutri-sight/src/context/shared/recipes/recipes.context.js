@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from "react";
 import { getRecipes, getRecipe } from "../../../utils/api-requests/recipes.requests";
 
 import { calculateIngredientsAfterServingsUpdate } from "../../../utils/calculations/recipes.calculations";
+import { validateRecipeNameSearched } from "../../../utils/validations/recipes.validations";
 
 const RECIPES_PER_PAGE = 8;
 const PAGINATION_BUTTONS = {
@@ -13,6 +14,8 @@ const PAGINATION_BUTTONS = {
 // helper functions
 
 const displaySearchedRecipesHelper = async (searchedRecipes, recipeNameSearched) => {
+  if (validateRecipeNameSearched(recipeNameSearched) === true) return searchedRecipes;
+
   const recipes = await getRecipes(recipeNameSearched);
 
   // placing page numbers in recipes
