@@ -23,7 +23,7 @@ const NutritionTracker = () => {
           <TopSearch></TopSearch>
 
           <div className="form-view-separator-container">
-            <hr class="rounded"/>
+            <hr className="rounded"/>
           </div>
         </Fragment>
       }

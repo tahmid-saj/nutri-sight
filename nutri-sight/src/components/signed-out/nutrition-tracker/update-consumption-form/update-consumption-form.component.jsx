@@ -26,11 +26,38 @@ const UpdateConsumptionForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = (event) => {
+  const handleAddTrackedDay = (event) => {
     event.preventDefault();
 
-    console.log(event.target.value);
+    console.log(formFields);
 
+    addDayTracked({
+      dateTracked: formFields.dateTracked,
+      calories: formFields.calories,
+      macronutrients: {
+        carbohydrates: formFields.carbohydrates,
+        protein: formFields.protein,
+        fat: formFields.fat,
+      }
+    });
+
+    resetFormFields(); 
+  };
+
+  const handleUpdateTrackedDay = (event) => {
+    event.preventDefault();
+
+    console.log(formFields);
+
+    updateDayTracked({
+      dateTracked: formFields.dateTracked,
+      calories: formFields.calories,
+      macronutrients: {
+        carbohydrates: formFields.carbohydrates,
+        protein: formFields.protein,
+        fat: formFields.fat,
+      }
+    });
 
     resetFormFields(); 
   };
@@ -38,16 +65,17 @@ const UpdateConsumptionForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setFormFields({ [name]: value })
+    setFormFields({ ...formFields, [name]: value })
   };
 
   return (
     <div className="update-consumption-form-container">
       <h2>Update Consumption</h2>
 
-      <form onSubmit={ handleSubmit }>
+      <form>
         <h4>Date tracked</h4>
-        <FormInput type="date" required name="dateTracked" value={ formFields.dateTracked }></FormInput>
+        <FormInput type="date" required onChange={ handleChange }
+                    name="dateTracked" value={ formFields.dateTracked }></FormInput>
 
         <FormInput label="Total calories" type="text" required onChange={ handleChange }
                             name="calories" value={ formFields.calories }></FormInput>
@@ -63,11 +91,13 @@ const UpdateConsumptionForm = () => {
                             
         <AddMicronutrients></AddMicronutrients>
 
-        <div className="buttons-container">
-          <Button buttonType="regularButton" type="submit">Add Day</Button>
+        <div className="tracked-day-buttons-container">
+          <button className="tracked-day-button" type="button"
+                  onClick={ handleAddTrackedDay }>Add Day</button>
           {
             nutritionTrackedDays.length !== 0 &&
-            <Button buttonType="regularButton" type="submit">Update</Button>
+            <button className="tracked-day-button" type="submit"
+                    onClick={ handleUpdateTrackedDay }>Update</button>
           }
         </div>
 

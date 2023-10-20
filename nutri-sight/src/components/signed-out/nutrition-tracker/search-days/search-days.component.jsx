@@ -15,7 +15,7 @@ const defaultFormFields = {
 
 const SearchDays = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  // const [searchedDay, setSearchedDay] = useState(false);
+  const [searchedDay, setSearchedDay] = useState(false);
   // const { dateTracked } = formFields;
 
   const resetFormFields = () => {
@@ -24,7 +24,7 @@ const SearchDays = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setSearchedDay(true);
+    setSearchedDay(true);
 
     console.log(event.target.value);
   };
@@ -35,7 +35,7 @@ const SearchDays = () => {
     console.log(name, value);
 
     setFormFields({ [name]: value })
-    // setSearchedDay(false);
+    setSearchedDay(false);
   };
 
   return (
@@ -44,7 +44,8 @@ const SearchDays = () => {
         <h2>Search Days Tracked</h2>
 
         <form onSubmit={ handleSubmit }>
-          <FormInput type="date" required name="dateTracked" value={ formFields.dateTracked } onChange={ handleChange }></FormInput>
+          <FormInput type="date" required name="dateTracked" value={ formFields.dateTracked } 
+                      onChange={ handleChange }></FormInput>
 
           <div className="buttons-container">
             <Button buttonType="regularButton" type="submit">Search Date</Button>
@@ -52,7 +53,9 @@ const SearchDays = () => {
         </form>
       </div>
 
-      { formFields !== defaultFormFields && <ConsumptionInfo searchedDay={ formFields.dateTracked }></ConsumptionInfo> }
+      { formFields !== defaultFormFields && searchedDay && 
+        <ConsumptionInfo searchedDay={ formFields.dateTracked }></ConsumptionInfo> 
+      }
     </div>
   );
 };
