@@ -20,8 +20,10 @@ const displayRecipeHelper = async (searchedRecipes, clickedRecipe) => {
     publisher: recipe.publisher,
     id: recipe.id,
     servings: recipe.servings,
+    updatedServings: recipe.servings,
     cookingTime: recipe.cooking_time,
-    ingredients: recipe.ingredients
+    ingredients: recipe.ingredients,
+    updatedIngredients: recipe.ingredients,
   };
 };
 
@@ -32,9 +34,41 @@ const updateServingsHelper = (recipeToUpdate, updatedServings) => {
     title: recipeToUpdate.title,
     publisher: recipeToUpdate.publisher,
     id: recipeToUpdate.id,
-    servings: updatedServings,
+    servings: recipeToUpdate.servings,
+    updatedServings: updatedServings,
     cookingTime: recipeToUpdate.cookingTime,
-    ingredients: updatedIngredients
+    ingredients: recipeToUpdate.ingredients,
+    updatedIngredients: updatedIngredients,
+  };
+};
+
+const decreaseServingsHelper = (recipeToDecreaseServings) => {
+  const updatedIngredients = calculateIngredientsAfterServingsUpdate(recipeToDecreaseServings, recipeToDecreaseServings.updatedServings - 1);
+
+  return {
+    title: recipeToDecreaseServings.title,
+    publisher: recipeToDecreaseServings.publisher,
+    id: recipeToDecreaseServings.id,
+    servings: recipeToDecreaseServings.servings,
+    updatedServings: recipeToDecreaseServings.updatedServings - 1,
+    cookingTime: recipeToDecreaseServings.cookingTime,
+    ingredients: recipeToDecreaseServings.ingredients,
+    updatedIngredients: updatedIngredients,
+  };
+};
+
+const increaseServingsHelper = (recipeToIncreaseServings) => {
+  const updatedIngredients = calculateIngredientsAfterServingsUpdate(recipeToIncreaseServings, recipeToIncreaseServings.updatedServings + 1);
+  
+  return {
+    title: recipeToIncreaseServings.title,
+    publisher: recipeToIncreaseServings.publisher,
+    id: recipeToIncreaseServings.id,
+    servings: recipeToIncreaseServings.servings,
+    updatedServings: recipeToIncreaseServings.updatedServings + 1,
+    cookingTime: recipeToIncreaseServings.cookingTime,
+    ingredients: recipeToIncreaseServings.ingredients,
+    updatedIngredients: updatedIngredients,
   };
 };
 
@@ -70,6 +104,8 @@ export const RecipesContext = createContext({
   displaySearchedRecipes: () => {},
   displayRecipe: () => {},
   updateServings: () => {},
+  decreaseServings: () => {},
+  increaseServings: () => {},
 });
 
 export const RecipesProvider = ({ children }) => {
@@ -101,7 +137,17 @@ export const RecipesProvider = ({ children }) => {
     setDisplayedRecipe(updateServingsHelper(recipeToUpdate, updatedServings));
   };
 
-  const value = { searchedRecipes, displaySearchedRecipes, updateServings,
+  const decreaseServings = (recipeToDecreaseServings) => {
+    setDisplayedRecipe(decreaseServingsHelper(recipeToDecreaseServings));
+  };
+
+  const increaseServings = (recipeToIncreaseServings) => {
+    setDisplayedRecipe(increaseServingsHelper(recipeToIncreaseServings));
+  };
+
+  const value = { searchedRecipes, displaySearchedRecipes, 
+                  updateServings, 
+                  decreaseServings, increaseServings,
                   displayedRecipe, displayRecipe };
 
   return (

@@ -11,10 +11,10 @@ const Servings = ({
                   // currentDisplayedRecipe, updateIngredients 
                 }) => {
   // const { servings: originalServings, cooking_time: cookingTime } = currentDisplayedRecipe;
-  // const [updatedServings, setUpdatedServings] = useState(originalServings);
   // const [displayNewRecipeServings, setDisplayNewRecipeServings] = useState(true);
-
-  const { displayedRecipe, updateServings } = useContext(RecipesContext);
+  
+  const { displayedRecipe, decreaseServings, increaseServings } = useContext(RecipesContext);
+  // const [updatedServings, setUpdatedServings] = useState(displayedRecipe.servings);
 
   const handleDecreaseServings = (event) => {
     event.preventDefault();
@@ -23,12 +23,11 @@ const Servings = ({
 
     console.log("decrease servings");
 
-    // if (updatedServings > 0) {
-    //   setUpdatedServings(updatedServings - 1);
-    // }
+    if (displayedRecipe.updatedServings > 0) {
+      decreaseServings(displayedRecipe);
+    }
 
     // updateIngredients(originalServings, updatedServings);
-
   };
 
   const handleIncreaseServings = (event) => {
@@ -37,6 +36,7 @@ const Servings = ({
     // setDisplayNewRecipeServings(false);
 
     console.log("increase servings");
+    increaseServings(displayedRecipe);
 
     // setUpdatedServings(updatedServings + 1);
 
@@ -67,6 +67,10 @@ const Servings = ({
           !displayNewRecipeServings &&
           <h4>{` ${updatedServings} servings`}</h4>
         } */}
+
+        {
+          <h4>{`${displayedRecipe.updatedServings} servings`}</h4>
+        }
 
       </div>
     </div>
