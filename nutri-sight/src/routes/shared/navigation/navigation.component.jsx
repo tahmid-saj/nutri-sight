@@ -14,46 +14,54 @@ const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  const linearGradient = `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)), url("https://cdn.osxdaily.com/wp-content/uploads/2015/05/Green-Grass-Fields-Wallpaper-1931.jpg")`;
+
   const handleSignOut = () => {
     signOutUser();
     navigate("/auth");
+  };
+
+  const changeStyle = (backgroundImage, color) => {
+    changeColor(color);
+    document.body.style.backgroundImage = backgroundImage;
   };
 
   return (
     <Fragment>
       <div className="navigation">
         <Link className="logo" to="/"
-          onClick={ () => changeColor("#00150d") }>
+          // onClick={ () => changeColor("#00150d") }
+          >
           <h1>nutri-sight</h1>
         </Link>
 
         <div className="nav-links-container">
           <Link className="nav-link" to="/nutrient-predictor"
-            onClick={ () => changeColor("white") }>
+            onClick={ () => changeStyle("none", "white") }>
             Nutrient Predictor
           </Link>
 
           {
             currentUser ? (
               <Link className="nav-link" to="/nutrition-tracker-signed-in"
-                onClick={ () => changeColor("white") }>
+                onClick={ () => changeStyle("none", "white") }>
                 Nutrition Tracker
               </Link>
             ) : (
               <Link className="nav-link" to="/nutrition-tracker"
-                onClick={ () => changeColor("white") }>
+                onClick={ () => changeStyle("none", "white") }>
                 Nutrition Tracker
               </Link>
             )
           }
 
           <Link className="nav-link" to="/recipes"
-            onClick={ () => changeColor("white") }>
+            onClick={ () => changeStyle("none", "white") }>
             Recipes
           </Link>
 
           <Link className="nav-link" to="/store"
-            onClick={ () => changeColor("white") }>
+            onClick={ () => changeStyle("none", "white") }>
             Store
           </Link>
             
@@ -62,7 +70,7 @@ const Navigation = () => {
               <span className="nav-link" onClick={ handleSignOut }>Sign Out</span>
             ) : (
             <Link className="nav-link" to="/auth"
-              onClick={ () => changeColor("white") }>
+              onClick={ () => changeStyle("none", "white") }>
               Login
             </Link>
             )

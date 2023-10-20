@@ -17,7 +17,7 @@ const divStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundSize: 'cover',
-  height: '400px'
+  height: '650px'
 }
 
 const slideImages = [
@@ -46,7 +46,7 @@ const Home = () => {
       {slideImages.map((slideImage, index)=> (
           <div key={index}>
             <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
-              <span style={spanStyle}>{slideImage.caption}</span>
+              <span style={ spanStyle }>{slideImage.caption}</span>
             </div>
           </div>
         ))} 
