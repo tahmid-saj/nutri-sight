@@ -11,7 +11,7 @@ const TIMEOUT_SEC = 10;
 
 const Recipes = () => {
 
-  const { searchedRecipes, displayedRecipe } = useContext(RecipesContext);
+  const { displayedRecipe, displayedRecipesOnPage } = useContext(RecipesContext);
 
   // constructor() {
   //   super();
@@ -123,7 +123,7 @@ const Recipes = () => {
         { 
           // this.state.displayRecipeView && this.state.recipesSearched !== undefined && 
           // this.state.currentDisplayedRecipe !== undefined && this.state.displayRecipeView === true && 
-          searchedRecipes.length !== 0 &&
+          displayedRecipesOnPage.length !== 0 &&
           <Fragment>
             <div 
               // className={`${this.state.newSearchedRecipe === true ? "search-results-main-container" : ""}`}
@@ -136,6 +136,7 @@ const Recipes = () => {
                                   ></SearchResults>
               }
             </div>
+
               {
                 displayedRecipe !== undefined && displayedRecipe !== null &&
                 <RecipesView ></RecipesView>

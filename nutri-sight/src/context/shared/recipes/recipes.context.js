@@ -4,12 +4,34 @@ import { getRecipes, getRecipe } from "../../../utils/api-requests/recipes.reque
 
 import { calculateIngredientsAfterServingsUpdate } from "../../../utils/calculations/recipes.calculations";
 
+const RECIPES_PER_PAGE = 8;
+
 // helper functions
 
 const displaySearchedRecipesHelper = async (searchedRecipes, recipeNameSearched) => {
   const recipes = await getRecipes(recipeNameSearched);
 
-  return recipes;
+  // placing page numbers in recipes
+  let recipeNumber = 0;
+
+  const updatedRecipes = recipes.map(recipe => {
+    const pageNumber = Math.floor(recipeNumber / RECIPES_PER_PAGE);
+    recipeNumber += 1;
+
+    return {
+      ...recipe,
+
+      pageNumber: pageNumber + 1,
+    }
+  });
+
+  return updatedRecipes;
+};
+
+const displaySearchedRecipesOnPageHelper = (searchedRecipes, currentPageNumber) => {
+  const recipesOnPage = searchedRecipes.filter(recipe => recipe.pageNumber === currentPageNumber);
+
+  return recipesOnPage;
 };
 
 const displayRecipeHelper = async (searchedRecipes, clickedRecipe) => {
@@ -77,8 +99,11 @@ export const RecipesContext = createContext({
   // TODO: may need to place page numbers here
   // searchedRecipes will contain results returned from https://forkify-api.herokuapp.com/api/v2/recipes?search=${recipeSearched}?key=
 
+  currentPageNumber: 1,
+  displayedRecipesOnPage: [],
+  // takes portion of recipeSearched for specific page number
+
   displayedRecipe: {},
-  // TODO: may need to place updated servings here
   // displayedRecipe will contain result returned from https://forkify-api.herokuapp.com/api/v2/recipes/${recipe.id}
   // displayedRecipe structure:
   // {
@@ -102,6 +127,7 @@ export const RecipesContext = createContext({
   // }
 
   displaySearchedRecipes: () => {},
+  displaySearchedRecipesOnPage: () => {},
   displayRecipe: () => {},
   updateServings: () => {},
   decreaseServings: () => {},
@@ -110,21 +136,35 @@ export const RecipesContext = createContext({
 
 export const RecipesProvider = ({ children }) => {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const [displayedRecipesOnPage, setDisplayedRecipesOnPage] = useState([]);
   const [displayedRecipe, setDisplayedRecipe] = useState({});
 
-  const displaySearchedRecipes = async (recipeNameSearched) => {
-    const returnedRecipes = await displaySearchedRecipesHelper(searchedRecipes, recipeNameSearched);
+  useEffect(() => {
+    setDisplayedRecipesOnPage(displaySearchedRecipesOnPageHelper(searchedRecipes, currentPageNumber));
 
+    console.log(searchedRecipes);
+  }, [currentPageNumber, searchedRecipes]);
+
+  const displaySearchedRecipes = async (recipeNameSearched) => {
+    // full recipes list
+    const returnedRecipes = await displaySearchedRecipesHelper(searchedRecipes, recipeNameSearched);
     setSearchedRecipes(returnedRecipes);
 
+    // first displayed recipe
     const displayRecipe = {
       id: returnedRecipes[0].id,
       title: returnedRecipes[0].title
     };
 
     const firstDisplayedRecipe = await displayRecipeHelper(searchedRecipes, displayRecipe);
-
     setDisplayedRecipe(firstDisplayedRecipe);
+  };
+
+  const displaySearchedRecipesOnPage = (pageNumber) => {
+    // display recipe for page number 1
+    setCurrentPageNumber(1);
+    setDisplayedRecipesOnPage(displaySearchedRecipesOnPageHelper(searchedRecipes, pageNumber));
   };
 
   const displayRecipe = async (clickedRecipe) => {
@@ -146,8 +186,8 @@ export const RecipesProvider = ({ children }) => {
   };
 
   const value = { searchedRecipes, displaySearchedRecipes, 
-                  updateServings, 
-                  decreaseServings, increaseServings,
+                  currentPageNumber, setCurrentPageNumber, displayedRecipesOnPage, displaySearchedRecipesOnPage,
+                  updateServings, decreaseServings, increaseServings,
                   displayedRecipe, displayRecipe };
 
   return (
