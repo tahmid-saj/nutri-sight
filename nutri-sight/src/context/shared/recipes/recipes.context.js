@@ -19,13 +19,13 @@ const displaySearchedRecipesHelper = async (searchedRecipes, recipeNameSearched)
   let recipeNumber = 0;
 
   const updatedRecipes = recipes.map(recipe => {
-    const pageNumber = Math.floor(recipeNumber / RECIPES_PER_PAGE);
+    const pageNumber = Math.floor(recipeNumber / RECIPES_PER_PAGE) + 1;
     recipeNumber += 1;
 
     return {
       ...recipe,
 
-      pageNumber: pageNumber + 1,
+      pageNumber: pageNumber,
     }
   });
 
@@ -166,6 +166,7 @@ export const RecipesProvider = ({ children }) => {
     // (page 1 and there are other pages) recipeResultsLength > 8 and currentPage === 1: previous button is hidden, next button is visible
     // (on page before than last page) recipeResultsLength > 8 and currentPage < lastPage: previous button is visible, next button is visible
     // (last page) recipeResultsLength > 8 and currentPage === lastPage: previous button is visible, next button is hidden
+    const lastPageNum = Math.floor(searchedRecipes.length / RECIPES_PER_PAGE) + 1;
 
     if (currentPageNumber === 1 && searchedRecipes.length < RECIPES_PER_PAGE) {
       setDisplayPreviousPage(false);
@@ -173,18 +174,18 @@ export const RecipesProvider = ({ children }) => {
     } else if (currentPageNumber === 1 && searchedRecipes.length > RECIPES_PER_PAGE) {
       setDisplayPreviousPage(false);
       setDisplayNextPage(true);
-    } else if (currentPageNumber !== 1 && currentPageNumber < lastPageNumber && searchedRecipes.length > RECIPES_PER_PAGE) {
+    } else if (currentPageNumber !== 1 && currentPageNumber < lastPageNum && searchedRecipes.length > RECIPES_PER_PAGE) {
       setDisplayPreviousPage(true);
       setDisplayNextPage(true);
-    } else if (currentPageNumber !== 1 && currentPageNumber === lastPageNumber && searchedRecipes.length > RECIPES_PER_PAGE) {
-      setPreviousPageNumber(true);
-      setNextPageNumber(false);
+    } else if (currentPageNumber !== 1 && currentPageNumber === lastPageNum && searchedRecipes.length > RECIPES_PER_PAGE) {
+      setDisplayPreviousPage(true);
+      setDisplayNextPage(false);
     }
   };
 
   useEffect(() => {
     setDisplayedRecipesOnPage(displaySearchedRecipesOnPageHelper(searchedRecipes, currentPageNumber));
-    setLastPageNumber(Math.floor(searchedRecipes.length / RECIPES_PER_PAGE));
+    setLastPageNumber(Math.floor(searchedRecipes.length / RECIPES_PER_PAGE) + 1);
 
     // pagination logic
     console.log(searchedRecipes);

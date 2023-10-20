@@ -18,7 +18,6 @@ const Pagination = () => {
 
   const handlePreviousPage = (event) => {
     event.preventDefault();
-
     
     displayPaginationButtons(PAGINATION_BUTTONS.previous);
   };
