@@ -7,7 +7,7 @@ import SearchResult from "../search-result/search-result.component";
 
 import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
 
-const RECIPES_PER_PAGE = 8;
+import { RECIPES_PER_PAGE } from "../../../../../utils/constants/recipes.constants";
 
 const SearchResults = () => {
   const { displayedRecipesOnPage } = useContext(RecipesContext)

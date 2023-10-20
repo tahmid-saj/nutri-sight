@@ -5,11 +5,7 @@ import { getRecipes, getRecipe } from "../../../utils/api-requests/recipes.reque
 import { calculateIngredientsAfterServingsUpdate } from "../../../utils/calculations/recipes.calculations";
 import { validateRecipeNameSearched } from "../../../utils/validations/recipes.validations";
 
-const RECIPES_PER_PAGE = 8;
-const PAGINATION_BUTTONS = {
-  next: "NEXT_PAGE",
-  previous: "PREVIOUS_PAGE",
-};
+import { RECIPES_PER_PAGE, PAGINATION_BUTTONS } from "../../../utils/constants/recipes.constants";
 
 // helper functions
 

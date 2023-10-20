@@ -3,11 +3,7 @@ import { createContext, useState, useEffect } from "react";
 import { validateAddDayTracked, validateUpdateDayTracked } from "../../../utils/validations/nutrition-tracker.validations";
 import { calculateSummary } from "../../../utils/calculations/nutrition-tracker.calculations";
 
-const DEFAULT_MICRONUTRIENT = {
-  name: "",
-  amount: "",
-  unit: "",
-};
+import { DEFAULT_MICRONUTRIENT } from "../../../utils/constants/nutrition-tracker.constants";
 
 // helper functions
 

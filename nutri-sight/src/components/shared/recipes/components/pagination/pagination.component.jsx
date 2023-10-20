@@ -6,11 +6,7 @@ import Button from "../../../button/button.component";
 
 import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
 
-const RECIPES_PER_PAGE = 8;
-const PAGINATION_BUTTONS = {
-  next: "NEXT_PAGE",
-  previous: "PREVIOUS_PAGE",
-};
+import { PAGINATION_BUTTONS } from "../../../../../utils/constants/recipes.constants";
 
 const Pagination = () => {
   const { previousPageNumber, nextPageNumber, 
