@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import "./ingredients.styles.scss";
 
-import { RecipesContext } from "../../../../../../context/shared/recipes/recipes.context";
+import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context";
 
 const Ingredients = ({ 
                     // currentDisplayedRecipe, currentDisplayedRecipeName, servingsRatio 

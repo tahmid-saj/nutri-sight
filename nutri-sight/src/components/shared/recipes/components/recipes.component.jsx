@@ -5,7 +5,7 @@ import SearchResults from "./search-results/search-results.component";
 import Recipe from "./recipe/recipe.component";
 import RecipesView from "./recipes-view/recipes-view.component";
 
-import { RecipesContext } from "../../../../context/shared/recipes/recipes.context";
+import { RecipesContext } from "../../../../contexts/shared/recipes/recipes.context";
 
 const TIMEOUT_SEC = 10;
 

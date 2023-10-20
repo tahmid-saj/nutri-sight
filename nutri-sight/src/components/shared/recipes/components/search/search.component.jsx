@@ -5,7 +5,7 @@ import "./search.styles.scss";
 import FormInput from "../../../form-input/form-input.component";
 import Button from "../../../button/button.component";
 
-import { RecipesContext } from "../../../../../context/shared/recipes/recipes.context";
+import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
 
 const defaultFormFields = {
   searchedRecipe: ""

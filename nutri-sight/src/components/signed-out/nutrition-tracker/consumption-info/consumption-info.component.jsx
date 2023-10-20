@@ -2,7 +2,7 @@ import { useContext, Fragment } from "react";
 
 import "./consumption-info.styles.scss";
 
-import { NutritionTrackerContext } from "../../../../context/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 
 const ConsumptionInfo = ({ searchedDay }) => {
   const { getDayTracked } = useContext(NutritionTrackerContext);

@@ -7,12 +7,39 @@
   margin-right: 0%;
   width: 80%;
 
-  .buttons-container {
+  .tracked-day-buttons-container {
     display: flex;
-    justify-content: space-between;
-    margin-top: 6%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
     margin-bottom: 5%;
-    width: 30px;
-    padding-left: 30%;
+  }
+
+  .tracked-day-button {
+    min-width: 200px;
+    width: auto;
+    height: 50px;
+    letter-spacing: 0.5px;
+    line-height: 50px;
+    padding: 0 35px 0 35px;
+    font-size: 15px;
+    background-color: rgb(234, 210, 210);
+    // background-color: black;
+    color: black;
+    text-transform: uppercase;
+    font-family: 'Open Sans Condensed';
+    font-weight: bolder;
+    border: none;
+    display: flex;
+    justify-content: center;
+    background-color: #fdca00e3;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: #b08d00;
+      border: none;
+    }
   }
 }
+

@@ -4,7 +4,7 @@ import "./nutrient-predictor.styles.scss";
 import UploadFoodImage from "./upload-food-image/upload-food-image.component";
 import NutrientsInfo from "./nutrients-info/nutrients-info.component";
 
-import { NutrientPredictorContext } from "../../../context/shared/nutrient-predictor/nutrient-predictor.context";
+import { NutrientPredictorContext } from "../../../contexts/shared/nutrient-predictor/nutrient-predictor.context";
 
 const NutrientPredictor = () => {
   const { imageAndPrediction } = useContext(NutrientPredictorContext);

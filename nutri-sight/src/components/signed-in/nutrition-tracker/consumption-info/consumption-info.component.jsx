@@ -1,17 +1,40 @@
+import { useContext, Fragment } from "react";
+
 import "./consumption-info.styles.scss";
 
+import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
+
 const ConsumptionInfo = ({ searchedDay }) => {
+  const { getDayTracked } = useContext(NutritionTrackerContext);
+  const dayTrackedInfo = getDayTracked(searchedDay);
+
   return (
     <div className="consumption-info">
-      <h5>{`On ${searchedDay}`}</h5>
+      {
+        dayTrackedInfo === undefined || dayTrackedInfo === null ? <h4><strong>Date is not tracked</strong></h4> :
+        (
+          <Fragment>
+            <h5>{`On ${searchedDay}`}</h5>
 
-      <h4>{`Total calories consumption   `}<h3><strong>{`${2300}`}</strong></h3></h4>
-      <h4>{`Total carbohydrate consumption   `}<h3><strong>{`${900}`}</strong></h3></h4>
-      <h4>{`Total protein consumption   `}<h3><strong>{`${700}`}</strong></h3></h4>
-      <h4>{`Total fat consumption   `}<h3><strong>{`${600}`}</strong></h3></h4>
+            <h4>{`Total calories consumption : ${dayTrackedInfo.calories}`}</h4>
+            <h4>{`Total carbohydrates consumption : ${dayTrackedInfo.macronutrients.carbohydrates} g`}</h4>
+            <h4>{`Total protein consumption : ${dayTrackedInfo.macronutrients.protein} g`}</h4>
+            <h4>{`Total fat consumption : ${dayTrackedInfo.macronutrients.fat} g`}</h4>
 
-      <h3>Micronutrients</h3>
-      <h4>{`Total iron consumption   `}<h3><strong>{`${60}`}</strong></h3></h4>
+            {
+              dayTrackedInfo.micronutrients && dayTrackedInfo.micronutrients.length !== 0 &&
+              <h3>Micronutrients</h3>
+            }
+            {
+              dayTrackedInfo.micronutrients.map((micronutrient, index) => {
+                return (
+                    <h4 key={ index }>{`${micronutrient.name} : ${micronutrient.amount} ${micronutrient.unit}`}</h4>
+                )
+              })
+            }
+          </Fragment>
+        )
+      }
     </div>
   );
 };

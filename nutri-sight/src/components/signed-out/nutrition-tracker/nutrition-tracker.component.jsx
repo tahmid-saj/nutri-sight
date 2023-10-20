@@ -9,7 +9,7 @@ import ConsumptionInfo from "./consumption-info/consumption-info.component";
 
 import TopSearch from "./top-search/top-search.component";
 
-import { NutritionTrackerContext } from "../../../context/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { NutritionTrackerContext } from "../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 
 const NutritionTracker = () => {
   const { nutritionTrackedDays } = useContext(NutritionTrackerContext);

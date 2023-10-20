@@ -4,7 +4,7 @@ import "./pagination.styles.scss";
 
 import Button from "../../../button/button.component";
 
-import { RecipesContext } from "../../../../../context/shared/recipes/recipes.context";
+import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
 
 const RECIPES_PER_PAGE = 8;
 const PAGINATION_BUTTONS = {

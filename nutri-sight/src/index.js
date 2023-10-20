@@ -7,12 +7,12 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { UserProvider } from './context/shared/user/user.context';
-import { NutrientPredictorProvider } from './context/shared/nutrient-predictor/nutrient-predictor.context';
-import { NutritionTrackerProvider as NutritionTrackerProviderSignedOut } from './context/signed-out/nutrition-tracker/nutrition-tracker.context';
-import { RecipesProvider } from './context/shared/recipes/recipes.context';
+import { UserProvider } from './contexts/shared/user/user.context';
+import { NutrientPredictorProvider } from './contexts/shared/nutrient-predictor/nutrient-predictor.context';
+import { NutritionTrackerProvider as NutritionTrackerProviderSignedOut } from './contexts/signed-out/nutrition-tracker/nutrition-tracker.context';
+import { RecipesProvider } from './contexts/shared/recipes/recipes.context';
 
-import { NutritionTrackerProvider as NutritionTrackerProviderSignedIn } from './context/signed-in/nutrition-tracker/nutrition-tracker.context';
+import { NutritionTrackerProvider as NutritionTrackerProviderSignedIn } from './contexts/signed-in/nutrition-tracker/nutrition-tracker.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
