@@ -5,7 +5,7 @@ import "./servings.styles.scss";
 
 import { ReactComponent as IncreaseServingsButton } from "../../../../../../assets/icons8-plus.svg";
 
-import { RecipesContext } from "../../../../../../context/shared/recipes/recipes.context";
+import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context";
 
 const Servings = ({ 
                   // currentDisplayedRecipe, updateIngredients 

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import "./nutrients-info.styles.scss";
 
-import { NutrientPredictorContext } from "../../../../context/shared/nutrient-predictor/nutrient-predictor.context";
+import { NutrientPredictorContext } from "../../../../contexts/shared/nutrient-predictor/nutrient-predictor.context";
 
 const NutrientsInfo = () => {
   const { prediction } = useContext(NutrientPredictorContext).imageAndPrediction;

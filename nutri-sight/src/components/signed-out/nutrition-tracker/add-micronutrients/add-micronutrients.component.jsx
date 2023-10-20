@@ -7,7 +7,7 @@ import FormInput from "../../../shared/form-input/form-input.component";
 
 import "./add-micronutrients.styles.scss";
 
-import { NutritionTrackerContext } from "../../../../context/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 
 const AddMicronutrients = () => {
   // const [micronutrients, setMicronutrients] = useState([]);

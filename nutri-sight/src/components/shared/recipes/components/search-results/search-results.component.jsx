@@ -5,7 +5,7 @@ import "./search-results.styles.scss";
 import Pagination from "../pagination/pagination.component";
 import SearchResult from "../search-result/search-result.component";
 
-import { RecipesContext } from "../../../../../context/shared/recipes/recipes.context";
+import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
 
 const RECIPES_PER_PAGE = 8;
 

@@ -3,7 +3,7 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 
 import "./navigation.styles.scss";
 
-import { UserContext } from "../../../context/shared/user/user.context";
+import { UserContext } from "../../../contexts/shared/user/user.context";
 
 import { signOutUser } from "../../../utils/firebase/firebase.utils";
 

@@ -7,7 +7,7 @@ import Button from "../../../shared/button/button.component";
 
 import ConsumptionInfo from "../consumption-info/consumption-info.component";
 
-import { NutritionTrackerContext } from "../../../../context/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 
 const defaultFormFields = {
   dateTracked: ""

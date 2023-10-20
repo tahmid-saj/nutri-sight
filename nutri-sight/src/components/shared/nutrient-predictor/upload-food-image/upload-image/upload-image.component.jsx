@@ -4,7 +4,7 @@ import "./upload-image.styles.scss";
 import FormInput from "../../../form-input/form-input.component";
 import Button from "../../../button/button.component";
 
-import { NutrientPredictorContext } from "../../../../../context/shared/nutrient-predictor/nutrient-predictor.context";
+import { NutrientPredictorContext } from "../../../../../contexts/shared/nutrient-predictor/nutrient-predictor.context";
 
 const UploadImage = () => {
   const [uploadedImage, setUploadedImage] = useState();

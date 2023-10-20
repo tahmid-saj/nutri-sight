@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import "./summary.styles.scss";
 
-import { NutritionTrackerContext } from "../../../../context/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 
 const date = new Date();
 let currentDay= String(date.getDate()).padStart(2, '0');

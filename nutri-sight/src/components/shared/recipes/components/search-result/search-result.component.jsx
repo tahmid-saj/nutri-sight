@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import "./search-result.styles.scss";
 
-import { RecipesContext } from "../../../../../context/shared/recipes/recipes.context";
+import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
 
 const SearchResult = ({ recipe, 
     // updateCurrentRecipe 
