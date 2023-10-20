@@ -26,11 +26,27 @@ const AddMicronutrients = () => {
     // setMicronutrients(inputData);
     // console.log(micronutrients);
 
-    const micronutrient = {
-      name: event.target.value,
-      amount: event.target.value,
-      unit: event.target.value,
-    };
+    let micronutrient;
+
+    if (event.target.name === "name") {
+      micronutrient = { 
+        name: event.target.value,
+        amount: formInputMicronutrients[micronutrientIndex].amount,
+        unit: formInputMicronutrients[micronutrientIndex].unit,
+       };
+    } else if (event.target.name === "amount") {
+      micronutrient = { 
+        name: formInputMicronutrients[micronutrientIndex].name,
+        amount: event.target.value,
+        unit: formInputMicronutrients[micronutrientIndex].unit,
+       };
+    } else if (event.target.name === "unit") {
+      micronutrient = {
+        name: formInputMicronutrients[micronutrientIndex].name,
+        amount: formInputMicronutrients[micronutrientIndex].amount,
+        unit: event.target.value,
+      }
+    }
 
     updateFormInputMicronutrients(micronutrient, micronutrientIndex);
   };
@@ -55,7 +71,8 @@ const AddMicronutrients = () => {
           <h4>Add micronutrients</h4>
           
           <AddMicronutrientsButton onClick={ () => handleAdd() }
-                className="add-micronutrients-button"></AddMicronutrientsButton>
+                className="add-micronutrients-button">      
+          </AddMicronutrientsButton>
         </div>
 
         <div>
@@ -63,12 +80,15 @@ const AddMicronutrients = () => {
             formInputMicronutrients.length !== 0 &&
             formInputMicronutrients.map((micronutrient, micronutrientIndex) => {
               return (
-                <div className="micronutrient-container">
+                <div key={ micronutrientIndex } className="micronutrient-container">
                   <FormInput label="Micronutrient" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
-                            name="micronutrient" value={ micronutrient.name }></FormInput>
+                            name="name" value={ micronutrient.name }></FormInput>
                   
-                  <FormInput label="Amount (g)" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
+                  <FormInput label="Amount" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
                             name="amount" value={ micronutrient.amount }></FormInput>
+
+                  <FormInput label="Unit" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
+                            name="unit" value={ micronutrient.unit }></FormInput>
 
                   <RemoveMicronutrientsButton onClick={ () => handleDelete(micronutrientIndex) }
                         className="remove-micronutrients-button"></RemoveMicronutrientsButton>

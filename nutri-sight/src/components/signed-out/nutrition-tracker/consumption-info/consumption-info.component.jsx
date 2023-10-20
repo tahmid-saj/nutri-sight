@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, Fragment } from "react";
 
 import "./consumption-info.styles.scss";
 
@@ -10,22 +10,30 @@ const ConsumptionInfo = ({ searchedDay }) => {
 
   return (
     <div className="consumption-info">
-      <h5>{`On ${searchedDay}`}</h5>
-
-      <h4>{`Total calories consumption   `}<h3><strong>{`${dayTrackedInfo.calories}`}</strong></h3></h4>
-      <h4>{`Total carbohydrate consumption   `}<h3><strong>{`${dayTrackedInfo.macronutrients.carbohydrates}`}</strong></h3></h4>
-      <h4>{`Total protein consumption   `}<h3><strong>{`${dayTrackedInfo.macronutrients.protein}`}</strong></h3></h4>
-      <h4>{`Total fat consumption   `}<h3><strong>{`${dayTrackedInfo.macronutrients.fat}`}</strong></h3></h4>
-
-      <h3>Micronutrients</h3>
       {
-        dayTrackedInfo.micronutrients.map((micronutrient, index) => {
-          return (
-            <h4 key={ index }>
-              {`${micronutrient.name} consumption   `}<h3><strong>{`${micronutrient.amount}`}</strong></h3>
-            </h4>
-          )
-        })
+        dayTrackedInfo === undefined || dayTrackedInfo === null ? <h4><strong>Date is not tracked</strong></h4> :
+        (
+          <Fragment>
+            <h5>{`On ${searchedDay}`}</h5>
+
+            <h4>{`Total calories consumption : ${dayTrackedInfo.calories}`}</h4>
+            <h4>{`Total carbohydrates consumption : ${dayTrackedInfo.macronutrients.carbohydrates} g`}</h4>
+            <h4>{`Total protein consumption : ${dayTrackedInfo.macronutrients.protein} g`}</h4>
+            <h4>{`Total fat consumption : ${dayTrackedInfo.macronutrients.fat} g`}</h4>
+
+            {
+              dayTrackedInfo.micronutrients && dayTrackedInfo.micronutrients.length !== 0 &&
+              <h3>Micronutrients</h3>
+            }
+            {
+              dayTrackedInfo.micronutrients.map((micronutrient, index) => {
+                return (
+                    <h4 key={ index }>{`${micronutrient.name} : ${micronutrient.amount} ${micronutrient.unit}`}</h4>
+                )
+              })
+            }
+          </Fragment>
+        )
       }
     </div>
   );
