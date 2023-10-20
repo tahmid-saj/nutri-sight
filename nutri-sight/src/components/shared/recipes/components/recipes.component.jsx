@@ -126,7 +126,7 @@ const Recipes = () => {
           displayedRecipesOnPage.length !== 0 &&
           <Fragment>
             <div 
-              // className={`${this.state.newSearchedRecipe === true ? "search-results-main-container" : ""}`}
+              className="search-results-main-container"
               >
               {
                   // this.state.recipesSearched && this.state.newSearchedRecipe === true &&
