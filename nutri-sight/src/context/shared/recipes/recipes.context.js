@@ -4,12 +4,38 @@ import { getRecipes, getRecipe } from "../../../utils/api-requests/recipes.reque
 
 import { calculateIngredientsAfterServingsUpdate } from "../../../utils/calculations/recipes.calculations";
 
+const RECIPES_PER_PAGE = 8;
+const PAGINATION_BUTTONS = {
+  next: "NEXT_PAGE",
+  previous: "PREVIOUS_PAGE",
+};
+
 // helper functions
 
 const displaySearchedRecipesHelper = async (searchedRecipes, recipeNameSearched) => {
   const recipes = await getRecipes(recipeNameSearched);
 
-  return recipes;
+  // placing page numbers in recipes
+  let recipeNumber = 0;
+
+  const updatedRecipes = recipes.map(recipe => {
+    const pageNumber = Math.floor(recipeNumber / RECIPES_PER_PAGE);
+    recipeNumber += 1;
+
+    return {
+      ...recipe,
+
+      pageNumber: pageNumber + 1,
+    }
+  });
+
+  return updatedRecipes;
+};
+
+const displaySearchedRecipesOnPageHelper = (searchedRecipes, currentPageNumber) => {
+  const recipesOnPage = searchedRecipes.filter(recipe => recipe.pageNumber === currentPageNumber);
+
+  return recipesOnPage;
 };
 
 const displayRecipeHelper = async (searchedRecipes, clickedRecipe) => {
@@ -77,8 +103,18 @@ export const RecipesContext = createContext({
   // TODO: may need to place page numbers here
   // searchedRecipes will contain results returned from https://forkify-api.herokuapp.com/api/v2/recipes?search=${recipeSearched}?key=
 
+  currentPageNumber: 1,
+  previousPageNumber: 0,
+  nextPageNumber: 2,
+  lastPageNumber: 0,
+
+  displayPreviousPage: false,
+  displayNextPage: false,
+
+  displayedRecipesOnPage: [],
+  // takes portion of recipeSearched for specific page number
+
   displayedRecipe: {},
-  // TODO: may need to place updated servings here
   // displayedRecipe will contain result returned from https://forkify-api.herokuapp.com/api/v2/recipes/${recipe.id}
   // displayedRecipe structure:
   // {
@@ -102,29 +138,80 @@ export const RecipesContext = createContext({
   // }
 
   displaySearchedRecipes: () => {},
+  displaySearchedRecipesOnPage: () => {},
   displayRecipe: () => {},
+
   updateServings: () => {},
   decreaseServings: () => {},
   increaseServings: () => {},
+
+  displayPaginationButtons: () => {},
 });
 
 export const RecipesProvider = ({ children }) => {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const [previousPageNumber, setPreviousPageNumber] = useState(0);
+  const [nextPageNumber, setNextPageNumber] = useState(2);
+  const [lastPageNumber, setLastPageNumber] = useState(0);
+  const [displayPreviousPage, setDisplayPreviousPage] = useState(false);
+  const [displayNextPage, setDisplayNextPage] = useState(false);
+
+  const [displayedRecipesOnPage, setDisplayedRecipesOnPage] = useState([]);
   const [displayedRecipe, setDisplayedRecipe] = useState({});
 
-  const displaySearchedRecipes = async (recipeNameSearched) => {
-    const returnedRecipes = await displaySearchedRecipesHelper(searchedRecipes, recipeNameSearched);
+  // pagination logic included here
+  const paginationUpdate = () => {
+    // (page 1 and there are no pages) recipeResultsLength < 8: both buttons are hidden
+    // (page 1 and there are other pages) recipeResultsLength > 8 and currentPage === 1: previous button is hidden, next button is visible
+    // (on page before than last page) recipeResultsLength > 8 and currentPage < lastPage: previous button is visible, next button is visible
+    // (last page) recipeResultsLength > 8 and currentPage === lastPage: previous button is visible, next button is hidden
 
+    if (currentPageNumber === 1 && searchedRecipes.length < RECIPES_PER_PAGE) {
+      setDisplayPreviousPage(false);
+      setDisplayNextPage(false);
+    } else if (currentPageNumber === 1 && searchedRecipes.length > RECIPES_PER_PAGE) {
+      setDisplayPreviousPage(false);
+      setDisplayNextPage(true);
+    } else if (currentPageNumber !== 1 && currentPageNumber < lastPageNumber && searchedRecipes.length > RECIPES_PER_PAGE) {
+      setDisplayPreviousPage(true);
+      setDisplayNextPage(true);
+    } else if (currentPageNumber !== 1 && currentPageNumber === lastPageNumber && searchedRecipes.length > RECIPES_PER_PAGE) {
+      setPreviousPageNumber(true);
+      setNextPageNumber(false);
+    }
+  };
+
+  useEffect(() => {
+    setDisplayedRecipesOnPage(displaySearchedRecipesOnPageHelper(searchedRecipes, currentPageNumber));
+    setLastPageNumber(Math.floor(searchedRecipes.length / RECIPES_PER_PAGE));
+
+    // pagination logic
+    console.log(searchedRecipes);
+    if (searchedRecipes.length !== 0) {
+      paginationUpdate();
+    }
+  }, [currentPageNumber, searchedRecipes]);
+
+  const displaySearchedRecipes = async (recipeNameSearched) => {
+    // full recipes list
+    const returnedRecipes = await displaySearchedRecipesHelper(searchedRecipes, recipeNameSearched);
     setSearchedRecipes(returnedRecipes);
 
+    // first displayed recipe
     const displayRecipe = {
       id: returnedRecipes[0].id,
       title: returnedRecipes[0].title
     };
 
     const firstDisplayedRecipe = await displayRecipeHelper(searchedRecipes, displayRecipe);
-
     setDisplayedRecipe(firstDisplayedRecipe);
+  };
+
+  const displaySearchedRecipesOnPage = (pageNumber) => {
+    // display recipe for page number 1
+    setCurrentPageNumber(1);
+    setDisplayedRecipesOnPage(displaySearchedRecipesOnPageHelper(searchedRecipes, pageNumber));
   };
 
   const displayRecipe = async (clickedRecipe) => {
@@ -145,10 +232,24 @@ export const RecipesProvider = ({ children }) => {
     setDisplayedRecipe(increaseServingsHelper(recipeToIncreaseServings));
   };
 
+  const displayPaginationButtons = (nextOrPrevious) => {
+    if (nextOrPrevious === PAGINATION_BUTTONS.next) {
+      setPreviousPageNumber(previousPageNumber + 1);
+      setCurrentPageNumber(currentPageNumber + 1);
+      setNextPageNumber(nextPageNumber + 1);
+    } else if (nextOrPrevious === PAGINATION_BUTTONS.previous) {
+      setPreviousPageNumber(previousPageNumber - 1);
+      setCurrentPageNumber(currentPageNumber - 1);
+      setNextPageNumber(nextPageNumber - 1);
+    }
+  };
+
   const value = { searchedRecipes, displaySearchedRecipes, 
-                  updateServings, 
-                  decreaseServings, increaseServings,
-                  displayedRecipe, displayRecipe };
+                  currentPageNumber, setCurrentPageNumber, displayedRecipesOnPage, displaySearchedRecipesOnPage,
+                  updateServings, decreaseServings, increaseServings,
+                  displayedRecipe, displayRecipe,
+                  previousPageNumber, nextPageNumber, lastPageNumber, displayPreviousPage, displayNextPage,
+                  setPreviousPageNumber, setNextPageNumber, setDisplayPreviousPage, setDisplayNextPage, displayPaginationButtons };
 
   return (
     <RecipesContext.Provider

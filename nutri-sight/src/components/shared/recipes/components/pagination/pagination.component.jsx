@@ -1,12 +1,55 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 
 import "./pagination.styles.scss";
 
 import Button from "../../../button/button.component";
 
-const RECIPES_PER_PAGE = 8;
+import { RecipesContext } from "../../../../../context/shared/recipes/recipes.context";
 
-class Pagination extends Component {
+const RECIPES_PER_PAGE = 8;
+const PAGINATION_BUTTONS = {
+  next: "NEXT_PAGE",
+  previous: "PREVIOUS_PAGE",
+};
+
+const Pagination = () => {
+  const { previousPageNumber, nextPageNumber, 
+          displayPreviousPage, displayNextPage, displayPaginationButtons } = useContext(RecipesContext);
+
+  const handlePreviousPage = (event) => {
+    event.preventDefault();
+
+    
+    displayPaginationButtons(PAGINATION_BUTTONS.previous);
+  };
+
+  const handleNextPage = (event) => {
+    event.preventDefault();
+
+    displayPaginationButtons(PAGINATION_BUTTONS.next);
+  };
+    
+  // render () {
+  return (
+    <div className="pagination-container">
+      <div className="pagination-buttons-container">
+        <button className="previous-page-button" type="button" onClick={ handlePreviousPage }
+          style={{ visibility: `${displayPreviousPage === false ? "hidden" : ""}` }}>
+          {`< Page ${previousPageNumber}`}
+        </button>
+        
+        <button className="next-page-button" type="button" onClick={ handleNextPage }
+          style={{ visibility: `${displayNextPage === false ? "hidden" : ""}` }}>
+          {`Page ${nextPageNumber} >`}
+        </button>
+      </div>
+    </div>
+  );
+  // }
+
+};
+
+class Pagination2 extends Component {
   handleButtonsDisplay = () => {
     // (page 1 and there are no pages) recipeResultsLength < 8: both buttons are hidden
     // (page 1 and there are other pages) recipeResultsLength > 8 and currentPage === 1: previous button is hidden, next button is visible

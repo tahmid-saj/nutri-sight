@@ -10,7 +10,7 @@ import { RecipesContext } from "../../../../../context/shared/recipes/recipes.co
 const RECIPES_PER_PAGE = 8;
 
 const SearchResults = () => {
-  const { searchedRecipes } = useContext(RecipesContext)
+  const { displayedRecipesOnPage } = useContext(RecipesContext)
 
   // constructor({ recipesSearched, updateCurrentRecipe }) {
   //   super();
@@ -44,7 +44,7 @@ const SearchResults = () => {
           //  )
           //})
 
-          searchedRecipes.map((recipe, index) => {
+          displayedRecipesOnPage.map((recipe, index) => {
             return <SearchResult key={ recipe.id } recipe={ recipe }></SearchResult>
           })
         }
@@ -52,7 +52,7 @@ const SearchResults = () => {
       </div>
 
       
-      {/* <Pagination></Pagination> */}
+      <Pagination></Pagination>
 
       
     </div>
