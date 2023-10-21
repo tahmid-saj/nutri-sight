@@ -8,7 +8,7 @@ import AboutLinks from "./about-links/about-links.component";
 
 const spanStyle = {
   padding: '20px',
-  background: '#efefef',
+  // background: '#efefef',
   color: '#000000'
 }
 
