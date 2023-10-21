@@ -10,21 +10,15 @@ import "./add-micronutrients.styles.scss";
 import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 
 const AddMicronutrients = () => {
-  // const [micronutrients, setMicronutrients] = useState([]);
+
   const { formInputMicronutrients, addFormInputMicronutrients,
           updateFormInputMicronutrients, deleteFormInputMicronutrients } = useContext(NutritionTrackerContext);
 
   const handleAdd = () => {
-    // const micronutrient = [...micronutrients, []];
-    // setMicronutrients(micronutrient);
     addFormInputMicronutrients();
   };
 
   const handleChange = (event, micronutrientIndex) => {
-    // const inputData = [...micronutrients];
-    // inputData[i] = onChangeValue.target.value;
-    // setMicronutrients(inputData);
-    // console.log(micronutrients);
 
     let micronutrient;
 
@@ -52,20 +46,12 @@ const AddMicronutrients = () => {
   };
 
   const handleDelete = (micronutrientIndex) => {
-    // const deleteMicronutrient = [...micronutrients];
-    // deleteMicronutrient.splice(i, 1);
-    // setMicronutrients(deleteMicronutrient);
 
     deleteFormInputMicronutrients(micronutrientIndex);
   };
 
   return (
     <div className="add-micronutrients-container">
-        {/* <h4>Add micronutrients</h4>
-        <AddMicronutrientsButton onChange={ this.handleChange } 
-              onClick={ this.handleClick } className="add-micronutrients-button"/>
-
-        <Micronutrients micronutrients={ this.state.micronutrients }/> */}
 
         <div className="add-micronutrients-button-container">
           <h4>Add micronutrients</h4>
@@ -91,66 +77,6 @@ const AddMicronutrients = () => {
                             name="unit" value={ micronutrient.unit }></FormInput>
 
                   <RemoveMicronutrientsButton onClick={ () => handleDelete(micronutrientIndex) }
-                        className="remove-micronutrients-button"></RemoveMicronutrientsButton>
-                </div>
-              );
-            })
-          }
-      </div>
-
-
-    </div>
-  );
-};
-
-const AddMicronutrients2 = () => {
-  const [micronutrients, setMicronutrients] = useState([]);
-
-  const handleAdd = () => {
-    const micronutrient = [...micronutrients, []];
-    setMicronutrients(micronutrient);
-  };
-
-  const handleChange = (onChangeValue, i) => {
-    const inputData = [...micronutrients];
-    inputData[i] = onChangeValue.target.value;
-    setMicronutrients(inputData);
-    console.log(micronutrients);
-  };
-
-  const handleDelete = (i) => {
-    const deleteMicronutrient = [...micronutrients];
-    deleteMicronutrient.splice(i, 1);
-    setMicronutrients(deleteMicronutrient);
-  };
-
-  return (
-    <div className="add-micronutrients-container">
-        {/* <h4>Add micronutrients</h4>
-        <AddMicronutrientsButton onChange={ this.handleChange } 
-              onClick={ this.handleClick } className="add-micronutrients-button"/>
-
-        <Micronutrients micronutrients={ this.state.micronutrients }/> */}
-
-        <div className="add-micronutrients-button-container">
-          <h4>Add micronutrients</h4>
-
-          <AddMicronutrientsButton onClick={ () => handleAdd() }
-                className="add-micronutrients-button"></AddMicronutrientsButton>
-        </div>
-
-        <div>
-          {
-            micronutrients.flatMap((data, i) => {
-              return (
-                <div className="micronutrient-container">
-                  <FormInput label="Micronutrient" type="text" required onChange={ event => handleChange(event, i) }
-                            name="micronutrient" value={ data }></FormInput>
-                  
-                  <FormInput label="Amount (g)" type="text" required onChange={ event => handleChange(event, i) }
-                            name="amount" value={ data }></FormInput>
-
-                  <RemoveMicronutrientsButton onClick={ () => handleDelete() }
                         className="remove-micronutrients-button"></RemoveMicronutrientsButton>
                 </div>
               );

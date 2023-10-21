@@ -186,11 +186,6 @@ export const NutritionTrackerProvider = ({ children }) => {
 
   }, [nutritionTrackedDays]);
 
-  // Testing micronutrients
-  useEffect(() => {
-    console.log(formInputMicronutrients);
-  }, [formInputMicronutrients]);
-
   const addDayTracked = (trackedDayInfo) => {
     setNutritionTrackedDays(addDayTrackedHelper(nutritionTrackedDays, formInputMicronutrients, trackedDayInfo));
     setFormInputMicronutrients([]);

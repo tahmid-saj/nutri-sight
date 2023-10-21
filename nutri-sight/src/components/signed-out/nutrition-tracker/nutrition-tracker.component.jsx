@@ -14,7 +14,6 @@ import { NutritionTrackerContext } from "../../../contexts/signed-out/nutrition-
 const NutritionTracker = () => {
   const { nutritionTrackedDays } = useContext(NutritionTrackerContext);
 
-  // render() {
   return (
     <div className="nutrition-tracker-container">
       {

@@ -22,17 +22,5 @@ const Header = (
   )
 };
 
-const Header2 = ({ displayRecipeViewHandler, updateSearchResults, handleSearchChange }) => {
-  return (
-    <header className="header-container">
-      <Search displayRecipeViewHandler={ displayRecipeViewHandler } 
-              updateSearchResults={ updateSearchResults }
-              handleSearchChange={ handleSearchChange }></Search>
-
-      <Navigation></Navigation>
-    </header>
-  )
-};
-
 export default Header;
 

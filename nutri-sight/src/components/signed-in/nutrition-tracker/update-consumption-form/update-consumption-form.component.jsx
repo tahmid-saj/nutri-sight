@@ -3,7 +3,6 @@ import { useState, useContext } from "react";
 import "./update-consumption-form.styles.scss";
 
 import FormInput from "../../../shared/form-input/form-input.component";
-// import Button from "../../../shared/button/button.component";
 import AddMicronutrients from "../add-micronutrients/add-micronutrients.component";
 
 import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
@@ -20,7 +19,6 @@ const UpdateConsumptionForm = () => {
   const { nutritionTrackedDays, addDayTracked, updateDayTracked } = useContext(NutritionTrackerContext);
 
   const [formFields, setFormFields] = useState(defaultFormFields);
-  // const { dateTracked, calories, carbohydrates, protein, fat } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);

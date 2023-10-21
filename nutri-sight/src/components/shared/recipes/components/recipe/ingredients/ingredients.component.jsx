@@ -4,11 +4,7 @@ import "./ingredients.styles.scss";
 
 import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context";
 
-const Ingredients = ({ 
-                    // currentDisplayedRecipe, currentDisplayedRecipeName, servingsRatio 
-                  }) => {
-  // const { ingredients } = currentDisplayedRecipe;
-
+const Ingredients = () => {
   const { displayedRecipe } = useContext(RecipesContext);
 
   return (
@@ -23,7 +19,6 @@ const Ingredients = ({
           displayedRecipe.updatedIngredients !== undefined && displayedRecipe.updatedIngredients.length !== 0 &&
           displayedRecipe.updatedIngredients.map((ingredient, index) => {
             return (
-              // <h4 key={ index }>{`${ingredient.quantity !== null ? (servingsRatio * ingredient.quantity) : ""} ${ingredient.unit} ${ingredient.description}`}</h4>
               <h4 key={ index }>{`${ingredient.quantity !== null ? (ingredient.quantity) : ""} ${ingredient.unit} ${ingredient.description}`}</h4>
             )
           })

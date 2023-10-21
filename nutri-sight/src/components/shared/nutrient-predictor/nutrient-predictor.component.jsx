@@ -23,31 +23,4 @@ const NutrientPredictor = () => {
   );
 };
 
-class NutrientPredictor2 extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      displayNutrientsInfo: false,
-    }
-  };
-
-  displayNutrients = (displayNutrientsInfo) => {
-    this.setState({ displayNutrientsInfo: displayNutrientsInfo })
-  }
-
-  render = () => {
-    return (
-      <div className="upload-food-image-nutrients-info-container">
-        <UploadFoodImage displayNutrients={ this.displayNutrients }></UploadFoodImage>
-  
-        {
-          this.state.displayNutrientsInfo &&
-          <NutrientsInfo></NutrientsInfo>
-        }
-      </div>
-    )
-  }
-};
-
 export default NutrientPredictor;

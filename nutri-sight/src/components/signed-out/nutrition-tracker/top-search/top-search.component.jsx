@@ -13,7 +13,6 @@ const TopSearch = () => {
 
       <div className="search-days-nutrition-tracker-container">
         <SearchDays></SearchDays>
-        {/* <ConsumptionInfo></ConsumptionInfo> */}
       </div>
     </div>
   );

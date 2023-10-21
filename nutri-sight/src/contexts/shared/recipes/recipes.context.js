@@ -100,7 +100,6 @@ const increaseServingsHelper = (recipeToIncreaseServings) => {
 export const RecipesContext = createContext({
   searchedRecipes: [],
   // TODO: may need to place page numbers here
-  // searchedRecipes will contain results returned from https://forkify-api.herokuapp.com/api/v2/recipes?search=${recipeSearched}?key=
 
   currentPageNumber: 1,
   previousPageNumber: 0,
@@ -114,7 +113,6 @@ export const RecipesContext = createContext({
   // takes portion of recipeSearched for specific page number
 
   displayedRecipe: {},
-  // displayedRecipe will contain result returned from https://forkify-api.herokuapp.com/api/v2/recipes/${recipe.id}
   // displayedRecipe structure:
   // {
   //   title: "spicy chicken and pepper jack pizza",
