@@ -37,31 +37,36 @@ const Navigation = () => {
 
         <div className="nav-links-container">
           <Link className="nav-link" to="/nutrient-predictor"
-            onClick={ () => changeStyle("none", "white") }>
+            // onClick={ () => changeStyle("none", "white") }
+            >
             Nutrient Predictor
           </Link>
 
           {
             currentUser ? (
               <Link className="nav-link" to="/nutrition-tracker-signed-in"
-                onClick={ () => changeStyle("none", "white") }>
+                // onClick={ () => changeStyle("none", "white") }
+                >
                 Nutrition Tracker
               </Link>
             ) : (
               <Link className="nav-link" to="/nutrition-tracker"
-                onClick={ () => changeStyle("none", "white") }>
+                // onClick={ () => changeStyle("none", "white") }
+                >
                 Nutrition Tracker
               </Link>
             )
           }
 
           <Link className="nav-link" to="/recipes"
-            onClick={ () => changeStyle("none", "white") }>
+            // onClick={ () => changeStyle("none", "white") }
+            >
             Recipes
           </Link>
 
           <Link className="nav-link" to="/store"
-            onClick={ () => changeStyle("none", "white") }>
+            // onClick={ () => changeStyle("none", "white") }
+            >
             Store
           </Link>
             
@@ -70,7 +75,8 @@ const Navigation = () => {
               <span className="nav-link" onClick={ handleSignOut }>Sign Out</span>
             ) : (
             <Link className="nav-link" to="/auth"
-              onClick={ () => changeStyle("none", "white") }>
+              // onClick={ () => changeStyle("none", "white") }
+              >
               Login
             </Link>
             )
@@ -81,38 +87,6 @@ const Navigation = () => {
 
       <Outlet/>
     </Fragment>
-
-  //   <Fragment>
-  //   <div className="navigation">
-  //     <Link className="logo" to="/">
-  //       <h1>nutri-sight</h1>
-  //     </Link>
-
-  //     <div className="nav-links-container">
-  //       <Link className="nav-link" to="/nutrient-predictor">
-  //         Nutrient Predictor
-  //       </Link>
-
-  //       <Link className="nav-link" to="/nutrition-tracker">
-  //         Nutrition Tracker
-  //       </Link>
-
-  //       <Link className="nav-link" to="/recipes">
-  //         Recipes
-  //       </Link>
-
-  //       <Link className="nav-link" to="/store">
-  //         Store
-  //       </Link>
-
-  //       <Link className="nav-link" to="/auth">
-  //         Login
-  //       </Link>
-  //     </div>
-  //   </div>
-
-  //   <Outlet/>
-  // </Fragment>
   );
 };
 

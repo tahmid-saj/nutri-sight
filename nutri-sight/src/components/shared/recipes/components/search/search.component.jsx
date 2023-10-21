@@ -13,11 +13,7 @@ const defaultFormFields = {
 
 const Search = () => {
   const { displaySearchedRecipes } = useContext(RecipesContext);
-
-  // { displayRecipeViewHandler, updateSearchResults, handleSearchChange }
-  // ) => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  // const { searchedRecipe } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -31,11 +27,6 @@ const Search = () => {
     displaySearchedRecipes(formFields.searchedRecipe);
 
     resetFormFields();
-
-    // const recipesSearched = await updateSearchResults(formFields.searchedRecipe);
-    // console.log(formFields.searchedRecipe, recipesSearched);
-    // await displayRecipeViewHandler(formFields.searchedRecipe, recipesSearched);
-    // handleSearchChange(true);
   };
 
   const handleChange = (event) => {
@@ -43,7 +34,6 @@ const Search = () => {
     const { name, value } = event.target;
 
     setFormFields({ [name]: value })
-    // handleSearchChange(false);
 
     console.log(formFields.searchedRecipe);
   };

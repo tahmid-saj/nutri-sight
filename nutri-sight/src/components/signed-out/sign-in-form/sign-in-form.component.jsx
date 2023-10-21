@@ -9,6 +9,8 @@ import Button from "../../shared/button/button.component";
 
 import "./sign-in-form.styles.scss";
 
+import { errorOnSignIn } from "../../../utils/errors/user.errors";
+
 const defaultFormFields = {
   email: "",
   password: ""
@@ -39,7 +41,7 @@ const SignInForm = () => {
       resetFormFields();
       navigate("/nutrient-predictor");
     } catch (error) {
-      console.log('user sign in failed', error);
+      errorOnSignIn(error);
     }
   };
 

@@ -20,7 +20,6 @@ const UpdateConsumptionForm = () => {
   const { nutritionTrackedDays, addDayTracked, updateDayTracked } = useContext(NutritionTrackerContext);
 
   const [formFields, setFormFields] = useState(defaultFormFields);
-  // const { dateTracked, calories, carbohydrates, protein, fat } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);

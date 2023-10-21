@@ -4,15 +4,12 @@ import "./search-result.styles.scss";
 
 import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
 
-const SearchResult = ({ recipe, 
-    // updateCurrentRecipe 
-  }) => {
+const SearchResult = ({ recipe }) => {
   const { displayRecipe } = useContext(RecipesContext);
 
   const handleClick = async (event) => {
     event.preventDefault();
 
-    // await updateCurrentRecipe(recipe);
     const clickedRecipe = {
       id: recipe.id,
       title: recipe.title,

@@ -5,11 +5,7 @@ import { getRecipes, getRecipe } from "../../../utils/api-requests/recipes.reque
 import { calculateIngredientsAfterServingsUpdate } from "../../../utils/calculations/recipes.calculations";
 import { validateRecipeNameSearched } from "../../../utils/validations/recipes.validations";
 
-const RECIPES_PER_PAGE = 8;
-const PAGINATION_BUTTONS = {
-  next: "NEXT_PAGE",
-  previous: "PREVIOUS_PAGE",
-};
+import { RECIPES_PER_PAGE, PAGINATION_BUTTONS } from "../../../utils/constants/recipes.constants";
 
 // helper functions
 
@@ -104,7 +100,6 @@ const increaseServingsHelper = (recipeToIncreaseServings) => {
 export const RecipesContext = createContext({
   searchedRecipes: [],
   // TODO: may need to place page numbers here
-  // searchedRecipes will contain results returned from https://forkify-api.herokuapp.com/api/v2/recipes?search=${recipeSearched}?key=
 
   currentPageNumber: 1,
   previousPageNumber: 0,
@@ -118,7 +113,6 @@ export const RecipesContext = createContext({
   // takes portion of recipeSearched for specific page number
 
   displayedRecipe: {},
-  // displayedRecipe will contain result returned from https://forkify-api.herokuapp.com/api/v2/recipes/${recipe.id}
   // displayedRecipe structure:
   // {
   //   title: "spicy chicken and pepper jack pizza",
