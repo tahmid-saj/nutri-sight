@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useState, useContext } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 
 import "./navigation.styles.scss";
@@ -7,6 +7,8 @@ import { UserContext } from "../../../contexts/shared/user/user.context";
 
 import { signOutUser } from "../../../utils/firebase/firebase.utils";
 
+import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
+
 const Navigation = () => {
   const [color, changeColor] = useState("white");
   document.body.style.backgroundColor = color;
@@ -14,9 +16,12 @@ const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  const { updateNutritionTrackedDaysAndSummary } = useContext(NutritionTrackerContext);
+
   const linearGradient = `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)), url("https://cdn.osxdaily.com/wp-content/uploads/2015/05/Green-Grass-Fields-Wallpaper-1931.jpg")`;
 
   const handleSignOut = () => {
+    updateNutritionTrackedDaysAndSummary();
     signOutUser();
     navigate("/auth");
   };
