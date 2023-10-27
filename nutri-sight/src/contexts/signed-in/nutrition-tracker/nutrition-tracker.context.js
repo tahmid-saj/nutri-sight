@@ -7,6 +7,10 @@ import { DEFAULT_MICRONUTRIENT, DEFAULT_NUTRITION_TRACKED_DAYS, DEFAULT_NUTRITIO
 
 import { UserContext } from "../../shared/user/user.context";
 
+import { getNutritionTrackedDaysData, getNutritionTrackedDaysSummaryData,
+  postNutritionTrackedDay, putNutritionTrackedDay,
+  putNutritionTrackedDays, putNutritionTrackedDaysSummary } from "../../../utils/api-requests/nutrition-tracker.requests";
+
 // helper functions
 
 const addMicronutrientsToTrackedDayInfoHelper = (formInputMicronutrients, trackedDayInfo) => {
