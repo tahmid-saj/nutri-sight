@@ -24,7 +24,7 @@ const SearchDays = () => {
     setSearchedDay(true);
 
     console.log(event.target.value);
-    resetFormFields();
+    // resetFormFields();
   };
 
   const handleChange = (event) => {

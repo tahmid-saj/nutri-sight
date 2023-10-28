@@ -29,6 +29,7 @@ const addDayTrackedHelper = async (nutritionTrackedDays, formInputMicronutrients
 
   if (validateAddDayTracked(nutritionTrackedDays, trackedDayWithMicronutrients)) return nutritionTrackedDays;
 
+  console.log(formInputMicronutrients)
   postNutritionTrackedDay(userId, email, trackedDayWithMicronutrients);
 
   return [
@@ -254,14 +255,17 @@ export const NutritionTrackerProvider = ({ children }) => {
 
   const addFormInputMicronutrients = () => {
     setFormInputMicronutrients(addFormInputMicronutrientsHelper(formInputMicronutrients));
+    console.log(formInputMicronutrients)
   };
 
   const updateFormInputMicronutrients = (micronutrient, micronutrientIndex) => {
     setFormInputMicronutrients(updateFormInputMicronutrientsHelper(formInputMicronutrients, micronutrient, micronutrientIndex));
+    console.log(formInputMicronutrients)
   };
 
   const deleteFormInputMicronutrients = (micronutrientIndex) => {
     setFormInputMicronutrients(deleteFormInputMicronutrientsHelper(formInputMicronutrients, micronutrientIndex));
+    console.log(formInputMicronutrients)
   };
 
   // set default nutrition tracked days
