@@ -217,14 +217,16 @@ export const NutritionTrackerProvider = ({ children }) => {
       if (currentUser) {
         const nutritionTrackedDaysData = await getNutritionTrackedDaysData(currentUser.uid, currentUser.email);
         const nutritionTrackedDaysSummaryData = await getNutritionTrackedDaysSummaryData(currentUser.uid, currentUser.email);
-
+          
         if (nutritionTrackedDaysData) {
           const { nutritionTrackedDays } = await nutritionTrackedDaysData;
+          console.log(nutritionTrackedDays);
           setNutritionTrackedDays(nutritionTrackedDays);
         }
 
         if (nutritionTrackedDaysSummaryData) {
           const { nutritionTrackedDaysSummary } = await nutritionTrackedDaysSummaryData;
+          console.log(nutritionTrackedDaysSummary);
           setNutritionTrackedDaysSummary(nutritionTrackedDaysSummary);
         }
       } else if (!currentUser) {
@@ -232,7 +234,7 @@ export const NutritionTrackerProvider = ({ children }) => {
         setDefaultNutritionTrackedDaysSummaryValues();
       }
     };
-    // fetchNutritionTrackedDaysData();
+    fetchNutritionTrackedDaysData();
   }, [currentUser]);
 
   const addDayTracked = async (trackedDayInfo) => {
