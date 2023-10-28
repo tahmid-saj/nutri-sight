@@ -55,10 +55,12 @@ const updateDayTrackedHelper = async (nutritionTrackedDays, formInputMicronutrie
 
   if (validateUpdateDayTracked(nutritionTrackedDays, trackedDayWithMicronutrients)) return nutritionTrackedDays;
 
-  putNutritionTrackedDay(userId, email, trackedDayWithMicronutrients);
-
+  let originalNutritionTrackedDay;
+  
   const updatedNutritionTrackedDays = nutritionTrackedDays.map((nutritionTrackedDay) => {
     if (String(nutritionTrackedDay.dateTracked) === String(trackedDayWithMicronutrients.dateTracked)) {
+      originalNutritionTrackedDay = nutritionTrackedDay;
+
       return {
         dateTracked: String(trackedDayWithMicronutrients.dateTracked),
         calories: Number(trackedDayWithMicronutrients.calories),
@@ -70,9 +72,11 @@ const updateDayTrackedHelper = async (nutritionTrackedDays, formInputMicronutrie
         micronutrients: trackedDayWithMicronutrients.micronutrients
       };
     }
-
+    
     return nutritionTrackedDay;
   })
+
+  putNutritionTrackedDay(userId, email, originalNutritionTrackedDay, trackedDayWithMicronutrients);
 
   return updatedNutritionTrackedDays;
 };
