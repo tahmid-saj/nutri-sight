@@ -220,13 +220,11 @@ export const NutritionTrackerProvider = ({ children }) => {
           
         if (nutritionTrackedDaysData) {
           const { nutritionTrackedDays } = await nutritionTrackedDaysData;
-          console.log(nutritionTrackedDays);
           setNutritionTrackedDays(nutritionTrackedDays);
         }
 
         if (nutritionTrackedDaysSummaryData) {
           const { nutritionTrackedDaysSummary } = await nutritionTrackedDaysSummaryData;
-          console.log(nutritionTrackedDaysSummary);
           setNutritionTrackedDaysSummary(nutritionTrackedDaysSummary);
         }
       } else if (!currentUser) {
@@ -282,8 +280,8 @@ export const NutritionTrackerProvider = ({ children }) => {
 
   // update nutrition tracked days and summary on sign out
   const updateNutritionTrackedDaysAndSummary = () => {
-    // putNutritionTrackedDays(currentUser.uid, currentUser.email, nutritionTrackedDays);
-    // putNutritionTrackedDaysSummary(currentUser.uid, currentUser.email, nutritionTrackedDaysSummary);
+    putNutritionTrackedDays(currentUser.uid, currentUser.email, nutritionTrackedDays);
+    putNutritionTrackedDaysSummary(currentUser.uid, currentUser.email, nutritionTrackedDaysSummary);
   };
 
   const value = { nutritionTrackedDays, formInputMicronutrients, 
