@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState, useContext } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 
 import "./navigation.styles.scss";
