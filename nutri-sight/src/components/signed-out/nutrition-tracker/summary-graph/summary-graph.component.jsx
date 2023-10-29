@@ -92,7 +92,7 @@ const SummaryGraph = () => {
 
   return (
     <Fragment>
-      <h2>Consumption Summary</h2>
+      <h2>Consumption Timeline</h2>
       <div className="summary-graph-container">
         <ReactApexChart options={ options } series={ series } type="bar" height={ 350 } width={ 1000 }/>
       </div>
