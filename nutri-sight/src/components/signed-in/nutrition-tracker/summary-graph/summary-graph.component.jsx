@@ -3,7 +3,7 @@ import ReactApexChart from 'react-apexcharts'
 
 import "./summary-graph.styles.scss";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
 
 import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants";
 
