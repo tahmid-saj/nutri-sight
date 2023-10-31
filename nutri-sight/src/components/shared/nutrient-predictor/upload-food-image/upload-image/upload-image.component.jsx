@@ -6,8 +6,10 @@ import Button from "../../../button/button.component";
 
 import { NutrientPredictorContext } from "../../../../../contexts/shared/nutrient-predictor/nutrient-predictor.context";
 
+// import * as nutritionPredictorExternal from "../../../../../utils/external-js/nutrition-predictor.external";
+
 const UploadImage = () => {
-  const [uploadedImage, setUploadedImage] = useState();
+  const [uploadedImage, setUploadedImage] = useState("");
 
   const { updateImage, updateImageAndPrediction } = useContext(NutrientPredictorContext);
 
@@ -27,6 +29,12 @@ const UploadImage = () => {
 
     setUploadedImage(event.target.value);
     updateImage(event.target.value);
+
+    const imageEl = document.getElementById('imageOutput');
+
+    if (imageEl !== null) {
+      imageEl.src = URL.createObjectURL(event.target.files[0]);
+    }
   };
 
   return (
@@ -38,6 +46,10 @@ const UploadImage = () => {
                   onChange={ handleChange } required value={ uploadedImage } accept="image/*"></FormInput>
         <Button buttonType="regularButton" type="submit">Detect Nutrients</Button>
       </form>
+
+      <img className="uploded-image-container"
+            id="imageOutput" 
+            style={{ width: "500px", height: "500px", visibility: `${uploadedImage === "" ? "hidden" : ""}` }}></img>
     </div>
   )
 };

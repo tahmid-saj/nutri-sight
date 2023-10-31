@@ -1,5 +1,5 @@
 import { Fragment, useContext, useState, Component } from "react";
-import ReactApexChart from 'react-apexcharts'
+import ReactApexChart from 'react-apexcharts';
 
 import "./summary-graph.styles.scss";
 

@@ -13,9 +13,9 @@ const NutrientsInfo = () => {
 
       <strong><h2>Macronutrients</h2></strong>
       <h4>{`Calories - ${prediction.calories}`}</h4>
-      <h4>{`Carb - ${prediction.macronutrients.carbohydrates.amount}`}</h4>
-      <h4>{`Protein - ${prediction.macronutrients.protein.amount}`}</h4>
-      <h4>{`Fat - ${prediction.macronutrients.fat.amount}`}</h4>
+      <h4>{`Carbohydrates - ${prediction.macronutrients.carbohydrates.amount} ${prediction.macronutrients.carbohydrates.unit}`}</h4>
+      <h4>{`Protein - ${prediction.macronutrients.protein.amount} ${prediction.macronutrients.protein.unit}`}</h4>
+      <h4>{`Fat - ${prediction.macronutrients.fat.amount} ${prediction.macronutrients.fat.unit}`}</h4>
 
       <strong><h2>Micronutrients</h2></strong>
 
