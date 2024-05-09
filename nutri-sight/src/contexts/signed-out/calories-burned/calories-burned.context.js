@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { calculateSummary } from "../../../utils/calculations/calories-burned.calculations";
 import { validateSearchActivity, validateAddTrackedActivityDate, 
   validateFilterActivityDates, validateRemoveActivityDate 
-} from "../../../utils/validations/calories-burned.validation"
+} from "../../../utils/validations/calories-burned.validations"
 
 import { getSearchActivity } from "../../../utils/api-requests/calories-burned.requests"
 
@@ -13,7 +13,7 @@ const searchActivityHelper = async (trackedDayInfo) => {
   return resActivityResults
 }
 
-const addTrackedActivityDateHelper = (trackedCaloriesBurned, trackedDayInfo) => {
+const addTrackedActivityDateHelper = (trackedCaloriesBurned, trackedDayInfo, activityId) => {
   return [ ...trackedCaloriesBurned,
     {
       dateTracked: String(trackedDayInfo.dateTracked),
@@ -21,7 +21,7 @@ const addTrackedActivityDateHelper = (trackedCaloriesBurned, trackedDayInfo) => 
       durationMinutes: Number(trackedDayInfo.durationMinutes),
       caloriesBurnedPerHour: Number(trackedDayInfo.caloriesBurnedPerHour),
       totalCaloriesBurned: Number(trackedDayInfo.totalCaloriesBurned),
-      activityId: Number(trackedDayInfo.activityId)
+      activityId: Number(activityId)
     }
   ]
 }
@@ -89,7 +89,8 @@ export const CaloriesBurnedContext = createContext({
   //   dailyAverageCaloriesBurned: 300,
   //   mostCaloriesBurned: {
   //     date: "2023-11-11",
-  //     caloriesBurned: 300
+  //     caloriesBurned: 300,
+  //     activity: "running"
   //   },
   //   totalTrackedDays: [],
   //   totalTrackedActivities: []
@@ -113,7 +114,8 @@ export const CaloriesBurnedProvider = ({ children }) => {
       dailyAverageCaloriesBurned: summary.dailyAverageCaloriesBurned,
       mostCaloriesBurned: {
         date: summary.mostCaloriesBurned.date,
-        caloriesBurned: summary.mostCaloriesBurned.caloriesBurned
+        caloriesBurned: summary.mostCaloriesBurned.caloriesBurned,
+        activity: summary.mostCaloriesBurned.activity
       },
       totalTrackedDays: summary.totalTrackedDays,
       totalTrackedActivities: summary.totalTrackedActivities
@@ -129,11 +131,12 @@ export const CaloriesBurnedProvider = ({ children }) => {
     }
   }, [trackedCaloriesBurned, filterConditions])
 
-  const searchActivity = (trackedDayInfo) => {
+  const searchActivity = async (trackedDayInfo) => {
     if (validateSearchActivity(trackedDayInfo)) {
       return
     } else {
-      setSearchActivityResults(searchActivityHelper(trackedDayInfo))
+      const resSearchedActivities = await searchActivityHelper(trackedDayInfo)
+      setSearchActivityResults(resSearchedActivities)
     }
   }
 
@@ -141,7 +144,7 @@ export const CaloriesBurnedProvider = ({ children }) => {
     if (validateAddTrackedActivityDate(trackedDayInfo)) {
       return
     } else {
-      setTrackedCaloriesBurned(addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo))
+      setTrackedCaloriesBurned(addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo, trackedCaloriesBurnedLength + 1))
       setTrackedCaloriesBurnedLength(trackedCaloriesBurnedLength + 1)
       console.log("created")
     }
