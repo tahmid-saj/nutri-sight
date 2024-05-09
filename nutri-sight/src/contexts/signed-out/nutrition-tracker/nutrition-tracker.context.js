@@ -182,8 +182,6 @@ export const NutritionTrackerProvider = ({ children }) => {
       averageDailyProteinConsumption: summary.averageDailyProtein,
       averageDailyFatConsumption: summary.averageDailyFat,
     });
-
-
   }, [nutritionTrackedDays]);
 
   const addDayTracked = (trackedDayInfo) => {
