@@ -35,7 +35,7 @@ const slideImages = [
   },
   {
     url: 'https://img.freepik.com/free-photo/flat-lay-tasty-local-food-assortment-with-copy-space_23-2148833802.jpg',
-    caption: 'Calories Tracker'
+    caption: 'Calories Burned'
   },
 ];
 
