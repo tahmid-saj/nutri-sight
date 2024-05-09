@@ -1,7 +1,9 @@
 import Button from "../../../../shared/button/button.component"
 import "./activity-date-form.styles.scss"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import FormInput from "../../../../shared/form-input/form-input.component"
+
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context"
 
 const defaultFormFields = {
   activity: "",
@@ -10,14 +12,16 @@ const defaultFormFields = {
 
 const ActivityDateForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
+  const { searchActivity } = useContext(CaloriesBurnedContext)
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
+    await searchActivity(formFields)
     resetFormFields()
   }
 
