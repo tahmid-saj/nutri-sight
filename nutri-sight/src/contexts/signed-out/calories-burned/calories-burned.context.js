@@ -1,27 +1,81 @@
 import { createContext, useEffect, useState } from "react";
+import { calculateSummary } from "../../../utils/calculations/calories-burned.calculations";
+import { validateSearchActivity, validateAddTrackedActivityDate, 
+  validateFilterActivityDates, validateRemoveActivityDate 
+} from "../../../utils/validations/calories-burned.validation"
+
+import { getSearchActivity } from "../../../utils/api-requests/calories-burned.requests"
 
 // helper functions
+const searchActivityHelper = async (trackedDayInfo) => {
+  const resActivityResults = await getSearchActivity(trackedDayInfo)
+
+  return resActivityResults
+}
+
+const addTrackedActivityDateHelper = (trackedCaloriesBurned, trackedDayInfo) => {
+  return [ ...trackedCaloriesBurned,
+    {
+      dateTracked: String(trackedDayInfo.dateTracked),
+      activity: String(trackedDayInfo.activity),
+      durationMinutes: Number(trackedDayInfo.durationMinutes),
+      caloriesBurnedPerHour: Number(trackedDayInfo.caloriesBurnedPerHour),
+      totalCaloriesBurned: Number(trackedDayInfo.totalCaloriesBurned),
+      activityId: Number(trackedDayInfo.activityId)
+    }
+  ]
+}
+
+const filterActivityDatesHelper = (trackedCaloriesBurned, filterConditions) => {
+  console.log(filterConditions)
+
+  let filteredTrackedCaloriesBurned = []
+  trackedCaloriesBurned.map((trackedActivity) => {
+    if (filterConditions.activity === "" || (trackedActivity.toLowerCase().includes(filterConditions.toLowerCase().activity))) {
+      if (filterConditions.dateTracked === "" || (filterConditions.dateTracked === trackedActivity.dateTracked)) {
+        filteredTrackedCaloriesBurned.push(trackedActivity)
+      }
+    }
+  })
+
+  return trackedCaloriesBurned
+}
+
+const removeActivityDateHelper = (trackedCaloriesBurned, activityId) => {
+  if (validateRemoveActivityDate(activityId)) return trackedCaloriesBurned
+
+  return trackedCaloriesBurned.filter(trackedActivity => trackedActivity.activityId !== activityId)
+}
 
 // initial state
 export const CaloriesBurnedContext = createContext({
   trackedCaloriesBurned: [],
-  trackedCaloriesBurnedView: [],
   // trackedCaloriesBurned and trackedCaloriesBurnedView structure:
   // [
   //   {
   //     dateTracked: "2023-11-11",
   //     activity: "running",
-  //     duration: 60,
+  //     durationMinutes: 60,
   //     caloriesBurnedPerHour: 354,
   //     totalCaloriesBurned: 354,
   //     activityId: 123
   //   }
   // ]
+  trackedCaloriesBurnedLength: 0,
+  filterConditions: {},
+  // filterConditions structure:
+  // {
+  //   dateTracked: "",
+  //   activity: ""
+  // }
+  
+  trackedCaloriesBurnedView: [],
 
   searchActivity: () => {},
   addTrackedActivityDate: () => {},
   filterActivityDates: () => {},
   removeActivityDate: () => {},
+  clearActivityDatesFilter: () => {},
 
   searchActivityResults: [],
   // searchActivityResults
@@ -45,10 +99,13 @@ export const CaloriesBurnedContext = createContext({
 // context provider
 export const CaloriesBurnedProvider = ({ children }) => {
   const [trackedCaloriesBurned, setTrackedCaloriesBurned] = useState([])
+  const [trackedCaloriesBurnedLength, setTrackedCaloriesBurnedLength] = useState(0)
+  const [filterConditions, setFilterConditions] = useState(null)
   const [searchActivityResults, setSearchActivityResults] = useState([])
+  const [trackedCaloriesBurnedView, setTrackedCaloriesBurnedView] = useState(trackedCaloriesBurned)
   const [trackedCaloriesBurnedSummary, setTrackedCaloriesBurnedSummary] = useState({})
-  const [trackedCaloriesBurnedView, setTrackedCaloriesBurnedView] = useState([])
 
+  // update trackedCaloriesBurnedSummary
   useEffect(() => {
     const summary = calculateSummary(trackedCaloriesBurned)
 
@@ -63,19 +120,61 @@ export const CaloriesBurnedProvider = ({ children }) => {
     })
   }, [trackedCaloriesBurned])
 
+  // update trackedCaloriesBurnedView when trackedCaloriesBurned or filterConditions change
+  useEffect(() => {
+    if (filterConditions !== null) {
+      setTrackedCaloriesBurnedView(filterActivityDatesHelper(trackedCaloriesBurned, filterConditions))
+    } else {
+      setTrackedCaloriesBurnedView(trackedCaloriesBurned)
+    }
+  }, [trackedCaloriesBurned, filterConditions])
+
   const searchActivity = (trackedDayInfo) => {
-    setSearchActivityResults(searchActivityHelper(trackedDayInfo))
+    if (validateSearchActivity(trackedDayInfo)) {
+      return
+    } else {
+      setSearchActivityResults(searchActivityHelper(trackedDayInfo))
+    }
   }
 
   const addTrackedActivityDate = (trackedDayInfo) => {
-    setTrackedCaloriesBurned(addTrackedActivityDateHelper(trackedDayInfo))
+    if (validateAddTrackedActivityDate(trackedDayInfo)) {
+      return
+    } else {
+      setTrackedCaloriesBurned(addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo))
+      setTrackedCaloriesBurnedLength(trackedCaloriesBurnedLength + 1)
+      console.log("created")
+    }
   }
 
   const filterActivityDates = (filterConditions) => {
-
+    if (validateFilterActivityDates(filterConditions)) {
+      console.log("invalid")
+      return
+    } else {
+      setFilterConditions(filterConditions)
+      setTrackedCaloriesBurnedView(filterActivityDatesHelper(trackedCaloriesBurned, filterConditions))
+      console.log("set")
+    }
   }
 
   const removeActivityDate = (activityId) => {
-
+    setTrackedCaloriesBurned(removeActivityDateHelper(trackedCaloriesBurned, activityId))
   }
+
+  const clearActivityDatesFilter = () => {
+    setFilterConditions(null)
+    setTrackedCaloriesBurnedView(trackedCaloriesBurned)
+  }
+
+  const value = { trackedCaloriesBurned, trackedCaloriesBurnedView, filterConditions, searchActivityResults,
+    searchActivity, addTrackedActivityDate, filterActivityDates, removeActivityDate, clearActivityDatesFilter,
+    trackedCaloriesBurnedSummary }
+  
+  return (
+    <CaloriesBurnedContext.Provider
+      value={ value }>
+      { children }
+    </CaloriesBurnedContext.Provider>
+  )
 }
