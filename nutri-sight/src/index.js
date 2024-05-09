@@ -10,7 +10,9 @@ import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './contexts/shared/user/user.context';
 import { NutrientPredictorProvider } from './contexts/shared/nutrient-predictor/nutrient-predictor.context';
 import { NutritionTrackerProvider as NutritionTrackerProviderSignedOut } from './contexts/signed-out/nutrition-tracker/nutrition-tracker.context';
+import { CaloriesBurnedProvider as CaloriesBurnedProviderSignedOut } from './contexts/signed-out/calories-burned/calories-burned.context';
 import { RecipesProvider } from './contexts/shared/recipes/recipes.context';
+
 
 import { NutritionTrackerProvider as NutritionTrackerProviderSignedIn } from './contexts/signed-in/nutrition-tracker/nutrition-tracker.context';
 
@@ -20,13 +22,15 @@ root.render(
     <BrowserRouter>
       <NutrientPredictorProvider>
         <NutritionTrackerProviderSignedOut>
-          <RecipesProvider>
-            <UserProvider>
-              <NutritionTrackerProviderSignedIn>
-                <App />
-              </NutritionTrackerProviderSignedIn>
-            </UserProvider>
-          </RecipesProvider>
+          <CaloriesBurnedProviderSignedOut>
+            <RecipesProvider>
+              <UserProvider>
+                <NutritionTrackerProviderSignedIn>
+                  <App />
+                </NutritionTrackerProviderSignedIn>
+              </UserProvider>
+            </RecipesProvider>
+          </CaloriesBurnedProviderSignedOut>
         </NutritionTrackerProviderSignedOut>
       </NutrientPredictorProvider>
     </BrowserRouter>
