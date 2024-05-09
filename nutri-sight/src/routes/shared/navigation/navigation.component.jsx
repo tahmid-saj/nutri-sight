@@ -63,16 +63,16 @@ const Navigation = () => {
             )
           }
 
+          <Link className="nav-link" to="/calories-burned"
+            // onClick={ () => changeStyle("none", "white") }
+            >
+            Calories Burned
+          </Link>
+
           <Link className="nav-link" to="/recipes"
             // onClick={ () => changeStyle("none", "white") }
             >
             Recipes
-          </Link>
-
-          <Link className="nav-link" to="/store"
-            // onClick={ () => changeStyle("none", "white") }
-            >
-            Store
           </Link>
             
           {
