@@ -33,7 +33,7 @@ const ActivityDateForm = () => {
   return (
     <div className="activity-date-form-container">
       <form onSubmit={ handleSubmit }>
-        <h4>Date tracked</h4>
+        <h4>Track the calories of an activity</h4>
         <FormInput type="date" required onChange={ handleChange }
                     name="dateTracked" value={ formFields.dateTracked }></FormInput>
         
