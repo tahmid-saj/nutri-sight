@@ -15,7 +15,7 @@ const ActivityDateTable = () => {
     return {
       Activity: activityResult.activity,
       SearchedActivity: activityResult.searchedActivity,
-      DateTracked: activityResult.DateTracked,
+      DateTracked: activityResult.dateTracked,
       CaloriesBurnedPerHour: activityResult.caloriesBurnedPerHour,
       DurationMinutes: activityResult.durationMinutes,
       TotalCaloriesBurned: activityResult.totalCaloriesBurned
@@ -27,7 +27,8 @@ const ActivityDateTable = () => {
     { field: "Activity" },
     { field: "CaloriesBurnedPerHour" },
     { field: "DurationMinutes" },
-    { field: "TotalCaloriesBurned" }
+    { field: "TotalCaloriesBurned" },
+    { field: "DateTracked" }
   ])
 
   const onAddSelected = (event) => {
@@ -37,6 +38,8 @@ const ActivityDateTable = () => {
     if (!selectedData[0] || selectedData[0] === null || !selectedData[0].Activity || selectedData[0] === undefined) {
       return
     }
+
+    console.log(selectedData[0])
 
     addTrackedActivityDate({
       dateTracked: selectedData[0].DateTracked,
@@ -52,8 +55,8 @@ const ActivityDateTable = () => {
     <div className="ag-theme-quartz-dark searched-calories-burned-activities-table-container" // applying the grid theme
       style={{ height: 700, width: '65%' }} // the grid will fill the size of the parent container
       >
-      <h3>Search Results</h3>
-      <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "multiple" }/>
+      <h3>Select the searched activities to track</h3>
+      <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
       <div className="add-activity-selected-button buttons-container">
         <Button onClick={ (e) => onAddSelected(e) }>Add Selected</Button>
       </div>
