@@ -15,12 +15,12 @@ const Summary = () => {
 
   return (
     <div className="nutrition-tracker-summary">
-      <h5>{`As of ${currentDate}`}</h5>
+      <h3>{`As of ${currentDate}`}</h3>
 
-      <h4>{`Average daily calories : ${nutritionTrackedDaysSummary.averageDailyCaloriesConsumption}`}</h4>
-      <h4>{`Average daily carbohydrates : ${nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption} g`}</h4>
-      <h4>{`Average daily protein : ${nutritionTrackedDaysSummary.averageDailyProteinConsumption} g`}</h4>
-      <h4>{`Average daily fat : ${nutritionTrackedDaysSummary.averageDailyFatConsumption} g`}</h4>
+      <h5>{`Average daily calories : ${nutritionTrackedDaysSummary.averageDailyCaloriesConsumption}`}</h5>
+      <h5>{`Average daily carbohydrates : ${nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption} g`}</h5>
+      <h5>{`Average daily protein : ${nutritionTrackedDaysSummary.averageDailyProteinConsumption} g`}</h5>
+      <h5>{`Average daily fat : ${nutritionTrackedDaysSummary.averageDailyFatConsumption} g`}</h5>
     </div>
   );
 };

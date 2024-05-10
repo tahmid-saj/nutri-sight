@@ -1,4 +1,4 @@
-h2 {
+h4 {
   margin: 10px 0;
 }
 
@@ -20,4 +20,14 @@ h2 {
   // margin: 5px auto;
   // height: 100%;
   padding-left: 0px;
+}
+
+.search-days-nutrition-tracker-separator-container {
+  hr.rounded {
+    border-top: 5px solid #bbb;
+    border-radius: 5px;
+    max-width: 100%;
+  }
+
+  padding-bottom: 30px;
 }
