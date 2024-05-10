@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 
-import { validateAddDayTracked, validateUpdateDayTracked } from "../../../utils/validations/nutrition-tracker.validations";
+import { validateAddDayTracked, validateUpdateDayTracked, 
+  validateFilterNutritionTrackedDays, validateRemoveNutritionTrackedDay } from "../../../utils/validations/nutrition-tracker.validations";
 import { calculateSummary } from "../../../utils/calculations/nutrition-tracker.calculations";
 
 import { DEFAULT_MICRONUTRIENT } from "../../../utils/constants/nutrition-tracker.constants";
@@ -10,7 +11,6 @@ import { DEFAULT_MICRONUTRIENT } from "../../../utils/constants/nutrition-tracke
 const addMicronutrientsToTrackedDayInfoHelper = (formInputMicronutrients, trackedDayInfo) => {
   return {
     ...trackedDayInfo,
-
     micronutrients: formInputMicronutrients
   }
 };
@@ -25,7 +25,6 @@ const addDayTrackedHelper = (nutritionTrackedDays, formInputMicronutrients, trac
 
   return [
     ...nutritionTrackedDays,
-
     {
       dateTracked: String(trackedDayWithMicronutrients.dateTracked),
       calories: Number(trackedDayWithMicronutrients.calories),
@@ -115,6 +114,25 @@ const deleteFormInputMicronutrientsHelper = (formInputMicronutrients, micronutri
   return deleteMicronutrients;
 };
 
+const filterDayTrackedHelper = (nutritionTrackedDays, filterConditions) => {
+  let filteredNutritionTrackedDays = []
+  nutritionTrackedDays.map((trackedDay) => {
+    if (filterConditions.filterStartDate === "" || (filterConditions.filterStartDate <= trackedDay.dateTracked)) {
+      if (filterConditions.filterEndDate === "" || (trackedDay.dateTracked <= filterConditions.filterEndDate)) {
+        filteredNutritionTrackedDays.push(trackedDay)
+      }
+    }
+  })
+
+  return filteredNutritionTrackedDays
+}
+
+const removeDayTrackedHelper = (nutritionTrackedDays, trackedDay) => {
+  if (validateRemoveNutritionTrackedDay(trackedDay)) return nutritionTrackedDays
+
+  return nutritionTrackedDays.filter(nutritionTrackedDay => nutritionTrackedDay.dateTracked !== trackedDay)
+}
+
 export const NutritionTrackerContext = createContext({
   nutritionTrackedDays: [],
   // nutritionTrackedDays structure:
@@ -147,6 +165,15 @@ export const NutritionTrackerContext = createContext({
   //   }
   // ]
 
+  filterConditions: {},
+  // filterConditions structure:
+  // {
+  //   filterStartDate: "",
+  //   filterEndDate: ""
+  // }
+
+  nutritionTrackedDaysView: [],
+
   addDayTracked: () => {},
   updateDayTracked: () => {},
   getDayTracked: () => {},
@@ -155,7 +182,7 @@ export const NutritionTrackerContext = createContext({
   updateFormInputMicronutrients: () => {},
   deleteFormInputMicronutrients: () => {},
 
-  nutritionTrackedDaysSummary: {}
+  nutritionTrackedDaysSummary: {},
   // nutritionTrackedDaysSummary structure:
   // {
   //   averageDailyCaloriesConsumption: 2222,
@@ -163,11 +190,17 @@ export const NutritionTrackerContext = createContext({
   //   averageDailyProteinConsumption: 777,
   //   averageDailyFatConsumption: 555,,
   // }
+
+  filterDayTracked: () => {},
+  removeDayTracked: () => {},
+  clearDayTrackedFilter: () => {}
 });
 
 export const NutritionTrackerProvider = ({ children }) => {
   const [nutritionTrackedDays, setNutritionTrackedDays] = useState([]);
   const [formInputMicronutrients, setFormInputMicronutrients] = useState([]);
+  const [filterConditions, setFilterConditions] = useState(null)
+  const [nutritionTrackedDaysView, setNutritionTrackedDaysView] = useState(nutritionTrackedDays)
   const [nutritionTrackedDaysSummary, setNutritionTrackedDaysSummary] = useState({});
 
   useEffect(() => {
@@ -183,6 +216,15 @@ export const NutritionTrackerProvider = ({ children }) => {
       averageDailyFatConsumption: summary.averageDailyFat,
     });
   }, [nutritionTrackedDays]);
+
+  // update nutritionTrackedDaysView when nutritionTrackedDays or filterConditions change
+  useEffect(() => {
+    if (filterConditions !== null) {
+      setNutritionTrackedDaysView(filterDayTrackedHelper(nutritionTrackedDays, filterConditions))
+    } else {
+      setNutritionTrackedDaysView(nutritionTrackedDays)
+    }
+  }, [nutritionTrackedDays, filterConditions])
 
   const addDayTracked = (trackedDayInfo) => {
     setNutritionTrackedDays(addDayTrackedHelper(nutritionTrackedDays, formInputMicronutrients, trackedDayInfo));
@@ -210,10 +252,31 @@ export const NutritionTrackerProvider = ({ children }) => {
     setFormInputMicronutrients(deleteFormInputMicronutrientsHelper(formInputMicronutrients, micronutrientIndex));
   };
 
+  const filterDayTracked = (filterConditions) => {
+    if (validateFilterNutritionTrackedDays(filterConditions)) {
+      console.log("invalid")
+      return
+    } else {
+      setFilterConditions(filterConditions)
+      setNutritionTrackedDaysView(filterDayTrackedHelper(nutritionTrackedDays, filterConditions))
+      console.log("set")
+    }
+  }
+
+  const removeDayTracked = (trackedDay) => {
+    setNutritionTrackedDays(removeDayTrackedHelper(nutritionTrackedDays, trackedDay))
+  }
+
+  const clearDayTrackedFilter = () => {
+    setFilterConditions(null)
+    setNutritionTrackedDaysView(nutritionTrackedDays)
+  }
+
   const value = { nutritionTrackedDays, formInputMicronutrients, 
                   addDayTracked, updateDayTracked, getDayTracked, 
                   addFormInputMicronutrients, updateFormInputMicronutrients, deleteFormInputMicronutrients, 
-                  nutritionTrackedDaysSummary }
+                  nutritionTrackedDaysSummary, 
+                  nutritionTrackedDaysView, filterDayTracked, removeDayTracked, clearDayTrackedFilter }
 
   return (
     <NutritionTrackerContext.Provider
