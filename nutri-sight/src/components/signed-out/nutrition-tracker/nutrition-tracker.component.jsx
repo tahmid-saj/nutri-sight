@@ -19,6 +19,7 @@ const NutritionTracker = () => {
       {
         nutritionTrackedDays.length !== 0 &&
         <Fragment>
+        <h2 className="nutrition-tracker-summary-header">Summary</h2>
           <TopSearch></TopSearch>
 
           <div className="form-view-separator-container">

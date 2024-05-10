@@ -35,6 +35,7 @@ const CaloriesBurnedGraphPie = () => {
       }
     }]
   }
+  
   return (
     <div className="calories-burned-graph-pie-container">
       <ReactApexChart options={ options } series={ series } type="donut" height={ 600 } width={ 500 }/>

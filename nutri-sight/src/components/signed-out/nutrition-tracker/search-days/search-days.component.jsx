@@ -41,7 +41,10 @@ const SearchDays = () => {
   return (
     <div className="search-days-nutrition-tracker-container">
       <div className="search-days-container">
-        <h2>Search Days Tracked</h2>
+        <div className="search-days-nutrition-tracker-separator-container">
+          <hr className="rounded"/>
+        </div>
+        <h4>Search Days Tracked</h4>
 
         <form onSubmit={ handleSubmit }>
           <FormInput type="date" required name="dateTracked" value={ formFields.dateTracked } 
