@@ -20,7 +20,7 @@ const NutritionTrackerTable = () => {
       Protein: trackedDate.macronutrients.protein,
       Fat: trackedDate.macronutrients.fat,
       Micronutrients: trackedDate.micronutrients.map((micronutrient) => {
-        return `${micronutrient.name} ${micronutrient.amount} ${micronutrient.unit}\n`
+        return `${micronutrient.name} (${micronutrient.amount} ${micronutrient.unit})\n`
       })
     }
   })
