@@ -69,7 +69,7 @@ const UpdateConsumptionForm = () => {
 
   return (
     <div className="update-consumption-form-container">
-      <h2>Update Consumption</h2>
+      <h2>Track Consumption</h2>
 
       <form>
         <h4>Date tracked</h4>

@@ -43,7 +43,7 @@ const CaloriesBurnedGraphLine = () => {
     xaxis: {
       type: 'string',
       labels: {
-        show: false
+        show: true
       }
     },
     yaxis: {
