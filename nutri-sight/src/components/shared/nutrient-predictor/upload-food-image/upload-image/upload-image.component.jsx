@@ -8,48 +8,74 @@ import { NutrientPredictorContext } from "../../../../../contexts/shared/nutrien
 
 // import * as nutritionPredictorExternal from "../../../../../utils/external-js/nutrition-predictor.external";
 
+const defaultFormFields = {
+  meal: "",
+  uploadedImage: ""
+}
+
 const UploadImage = () => {
-  const [uploadedImage, setUploadedImage] = useState("");
+  const [formFields, setFormFields] = useState(defaultFormFields);
 
   const { updateImage, updateImageAndPrediction } = useContext(NutrientPredictorContext);
+
+  const resetFormFields = (event) => {
+    event.preventDefault()
+    setFormFields(defaultFormFields)
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(uploadedImage);
+    console.log(formFields.uploadedImage);
 
-    updateImageAndPrediction(uploadedImage, "image");
+    if (formFields.meal !== "") {
+      console.log("meal hit")
+    } else {
+      updateImageAndPrediction(formFields.uploadedImage, "image");
+    }
+
     // displayNutrients(true);
+    // resetFormFields()
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event, type) => {
     event.preventDefault();
+    const { name, value } = event.target
 
-    console.log(event.target.value);
+    setFormFields({ ...formFields, [name]: value });
 
-    setUploadedImage(event.target.value);
-    updateImage(event.target.value);
+    if (type === "image") {
+      updateImage(event.target.value);
 
-    const imageEl = document.getElementById('imageOutput');
-
-    if (imageEl !== null) {
-      imageEl.src = URL.createObjectURL(event.target.files[0]);
+      const imageEl = document.getElementById('imageOutput');
+      if (imageEl !== null) {
+        imageEl.src = URL.createObjectURL(event.target.files[0]);
+      }
     }
   };
 
   return (
     <div className="upload-image-container">
-      <h3>Upload a food image</h3>
+      <h3>Upload a food image or enter a meal description</h3>
+      <h5>Example: 1 pound of steak with mashed potatoes and a can of sprite</h5>
 
-      <form onSubmit={ handleSubmit }>
+      <form className="upload-image-form-container" onSubmit={ handleSubmit }>
+        <FormInput label="Meal" type="text" onChange={ handleChange }
+                            name="meal" value={ formFields.meal }></FormInput>
+
         <FormInput type="file" id="uploadedImage" name="uploadedImage" 
-                  onChange={ handleChange } required value={ uploadedImage } accept="image/*"></FormInput>
-        <Button buttonType="regularButton" type="submit">Detect Nutrients</Button>
+                  onChange={ (e) => handleChange(e, "image") } value={ formFields.uploadedImage } accept="image/*"></FormInput>
+
+        <div className="buttons-container">
+          <Button buttonType="regularButton" type="submit">Predict</Button>
+          <Button buttonType="regularButton" type="button" onClick={ resetFormFields }>Clear</Button>
+        </div>
       </form>
 
-      <img className="uploded-image-container"
+      <img alt="" className="uploded-image-container"
             id="imageOutput" 
-            style={{ width: "500px", height: "500px", visibility: `${uploadedImage === "" ? "hidden" : ""}` }}></img>
+            style={{ width: "500px", height: "500px", visibility: `${formFields.uploadedImage === "" ? "hidden" : ""}` }}></img>
+
     </div>
   )
 };
