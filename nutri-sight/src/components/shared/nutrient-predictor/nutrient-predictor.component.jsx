@@ -7,7 +7,7 @@ import NutrientsInfo from "./nutrients-info/nutrients-info.component";
 import { NutrientPredictorContext } from "../../../contexts/shared/nutrient-predictor/nutrient-predictor.context";
 
 const NutrientPredictor = () => {
-  const { imageAndPrediction } = useContext(NutrientPredictorContext);
+  const { nutrientPredictions } = useContext(NutrientPredictorContext);
 
   return (
     <div className="upload-food-image-nutrients-info-container">
@@ -16,8 +16,7 @@ const NutrientPredictor = () => {
       ></UploadFoodImage>
 
       {
-        imageAndPrediction.prediction &&
-        <NutrientsInfo></NutrientsInfo>
+        nutrientPredictions.length ? <NutrientsInfo></NutrientsInfo> : null
       }
     </div>
   );

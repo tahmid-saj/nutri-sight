@@ -8,15 +8,17 @@ import { NutrientPredictorContext } from "../../../../../contexts/shared/nutrien
 
 // import * as nutritionPredictorExternal from "../../../../../utils/external-js/nutrition-predictor.external";
 
+import { NUTRIENT_PREDICTOR_ENUMS } from "../../../../../utils/constants/nutrient-predictor.constants";
+
 const defaultFormFields = {
-  meal: "",
+  mealDescription: "",
   uploadedImage: ""
 }
 
 const UploadImage = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
 
-  const { updateImage, updateImageAndPrediction } = useContext(NutrientPredictorContext);
+  const { updateImage, updateImageAndPrediction, detectNutrients } = useContext(NutrientPredictorContext);
 
   const resetFormFields = (event) => {
     event.preventDefault()
@@ -28,10 +30,11 @@ const UploadImage = () => {
 
     console.log(formFields.uploadedImage);
 
-    if (formFields.meal !== "") {
+    if (formFields.mealDescription !== "") {
+      await detectNutrients(formFields.mealDescription)
       console.log("meal hit")
     } else {
-      updateImageAndPrediction(formFields.uploadedImage, "image");
+      await updateImageAndPrediction(formFields.uploadedImage, NUTRIENT_PREDICTOR_ENUMS.image);
     }
 
     // displayNutrients(true);
@@ -44,7 +47,7 @@ const UploadImage = () => {
 
     setFormFields({ ...formFields, [name]: value });
 
-    if (type === "image") {
+    if (type === NUTRIENT_PREDICTOR_ENUMS.image) {
       updateImage(event.target.value);
 
       const imageEl = document.getElementById('imageOutput');
@@ -60,11 +63,11 @@ const UploadImage = () => {
       <h5>Example: 1 pound of steak with mashed potatoes and a can of sprite</h5>
 
       <form className="upload-image-form-container" onSubmit={ handleSubmit }>
-        <FormInput label="Meal" type="text" onChange={ handleChange }
-                            name="meal" value={ formFields.meal }></FormInput>
+        <FormInput label="Meal description" type="text" onChange={ handleChange }
+                            name="mealDescription" value={ formFields.mealDescription }></FormInput>
 
         <FormInput type="file" id="uploadedImage" name="uploadedImage" 
-                  onChange={ (e) => handleChange(e, "image") } value={ formFields.uploadedImage } accept="image/*"></FormInput>
+                  onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.image) } value={ formFields.uploadedImage } accept="image/*"></FormInput>
 
         <div className="buttons-container">
           <Button buttonType="regularButton" type="submit">Predict</Button>
