@@ -32,10 +32,12 @@ const updateImageAndPredictionHelper = async (imageAndPrediction, imgPath, img) 
   // TODO: need to implement separate prediction function call
   const predictionResponse = await getMealPredictions(img);
 
+  console.log(predictionResponse)
+
   return {
     imagePath: String(imgPath),
     image: img,
-    predictions: predictionResponse
+    predictionDescription: predictionResponse
   };
 }
 
@@ -96,11 +98,9 @@ export const NutrientPredictorProvider = ({ children }) => {
   const updateImageAndPrediction = async (imgPath, img) => {
     setPredictionInputType(NUTRIENT_PREDICTOR_ENUMS.image)
     const updateImageAndPredictionResponse = await updateImageAndPredictionHelper(imageAndPrediction, imgPath, img)
-    setImageAndPrediction({
-      ...imageAndPrediction,
-      predictionDescription: updateImageAndPredictionResponse
-    });
-    await detectNutrients(updateImageAndPredictionResponse, NUTRIENT_PREDICTOR_ENUMS.image)
+
+    setImageAndPrediction(updateImageAndPredictionResponse);
+    await detectNutrients(updateImageAndPredictionResponse.predictionDescription, NUTRIENT_PREDICTOR_ENUMS.image)
   };
 
   const detectNutrients = async (mealDescription, inputType) => {
