@@ -77,7 +77,7 @@ const UploadImage = () => {
 
       <img alt="" className="uploded-image-container"
             id="imageOutput" 
-            style={{ width: "500px", height: "500px", visibility: `${formFields.uploadedImage === "" ? "hidden" : ""}` }}></img>
+            style={{ width: "350px", height: "350px", visibility: `${formFields.uploadedImage === "" ? "hidden" : ""}` }}></img>
 
     </div>
   )
