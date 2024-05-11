@@ -1,5 +1,4 @@
 .navigation {
-  overflow: hidden;
   height: 70px;
   width: 100%;
   display: flex;
@@ -7,6 +6,8 @@
   // margin-bottom: 25px;
   background-color: #22ab76;
   // background-color: #00150d;
+  
+  padding: 0px 20px 3% 40px;
 
   h1 {
     color: white;
