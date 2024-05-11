@@ -24,13 +24,13 @@ const SummaryGraph = () => {
   })
 
   const series = [{
-      name: `${GRAPH_FIELDS.carbohydrates} (g)`,
+      name: GRAPH_FIELDS.carbohydrates,
       data: carbohydratesData
     }, {
-      name: `${GRAPH_FIELDS.protein} (g)`,
+      name: GRAPH_FIELDS.protein,
       data: proteinData
     }, {
-      name: `${GRAPH_FIELDS.fat} (g)`,
+      name: GRAPH_FIELDS.fat,
       data: fatData
     }];
   

@@ -3,6 +3,8 @@ import ReactApexChart from "react-apexcharts"
 import { useContext } from "react"
 import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context"
 
+import { GRAPH_FIELDS } from "../../../../../utils/constants/calories-burned.constants"
+
 const CaloriesBurnedGraphLine = () => {
   const { trackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
 
@@ -16,7 +18,7 @@ const CaloriesBurnedGraphLine = () => {
   })
 
   const series = [{
-    name: "Calories Burned",
+    name: GRAPH_FIELDS.caloriesBurnedTitle,
     data: [ ...trackedCalories.values() ]
   }]
 
@@ -36,7 +38,7 @@ const CaloriesBurnedGraphLine = () => {
     },
     
     title: {
-      text: "Tracked Days",
+      text: GRAPH_FIELDS.caloriesBurnedTitle,
       align: 'left'
     },
     labels: [ ...trackedCalories.keys() ],

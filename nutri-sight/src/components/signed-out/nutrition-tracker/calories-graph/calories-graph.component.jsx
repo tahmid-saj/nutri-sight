@@ -3,6 +3,8 @@ import ReactApexChart from "react-apexcharts"
 import { useContext } from "react"
 import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
 
+import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants"
+
 const CaloriesGraph = () => {
   const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext)
 
@@ -16,7 +18,7 @@ const CaloriesGraph = () => {
   })
 
   const series = [{
-    name: "Calories Consumption",
+    name: GRAPH_FIELDS.caloriesTitle,
     data: [ ...trackedCalories.values() ]
   }]
 
@@ -36,7 +38,7 @@ const CaloriesGraph = () => {
     },
     
     title: {
-      text: "Tracked Calories",
+      text: GRAPH_FIELDS.caloriesTitle,
       align: 'left'
     },
     labels: [ ...trackedCalories.keys() ],
