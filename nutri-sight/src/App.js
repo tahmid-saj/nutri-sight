@@ -21,8 +21,8 @@ function App() {
         <Route path="dashboard" element={ <DashboardRoute/> }/>
         <Route path="nutrient-predictor" element={ <NutrientPredictorRoute/> }/>
         <Route path="nutrition-tracker" element={ <NutritionTrackerRoute/> }/>
-        <Route path="recipes" element={ <RecipesRoute/> }/>
         <Route path="calories-burned" index element={ <CaloriesBurnedRoute/> }/>
+        <Route path="recipes" element={ <RecipesRoute/> }/>
         <Route path="auth" index element={ <AuthenticationRoute/> }/>
 
         <Route path="nutrition-tracker-signed-in" element={ <NutritionTrackerRouteSignedIn/> }/>

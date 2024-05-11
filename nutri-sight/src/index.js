@@ -15,6 +15,7 @@ import { RecipesProvider } from './contexts/shared/recipes/recipes.context';
 
 
 import { NutritionTrackerProvider as NutritionTrackerProviderSignedIn } from './contexts/signed-in/nutrition-tracker/nutrition-tracker.context';
+import { CaloriesBurnedProvider as CaloiriesBurnedProviderSignedIn } from './contexts/signed-in/calories-burned/calories-burned.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -26,7 +27,9 @@ root.render(
             <RecipesProvider>
               <UserProvider>
                 <NutritionTrackerProviderSignedIn>
-                  <App />
+                  <CaloiriesBurnedProviderSignedIn>
+                    <App />
+                  </CaloiriesBurnedProviderSignedIn>
                 </NutritionTrackerProviderSignedIn>
               </UserProvider>
             </RecipesProvider>
