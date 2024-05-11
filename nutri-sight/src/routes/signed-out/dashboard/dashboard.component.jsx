@@ -1,5 +1,5 @@
-import Dashboard from "../../../components/shared/dashboard/dashboard.component"
 import "./dashboard.styles.scss"
+import Dashboard from "../../../components/signed-out/dashboard/dashboard.component"
 
 const DashboardRoute = () => {
   return (
