@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import "./search-days.styles.scss";
 
@@ -15,18 +15,21 @@ const defaultFormFields = {
 
 const SearchDays = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const [searchedDay, setSearchedDay] = useState(false);
+  const [searchedClicked, setSearchClicked] = useState(false)
+
+  const { getDayTracked } = useContext(NutritionTrackerContext)
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
   const handleSubmit = (event) => {
+    setSearchClicked(true)
     event.preventDefault();
-    setSearchedDay(true);
 
     console.log(event.target.value);
     // resetFormFields();
+    getDayTracked(formFields.dateTracked)
   };
 
   const handleChange = (event) => {
@@ -35,7 +38,6 @@ const SearchDays = () => {
     console.log(name, value);
 
     setFormFields({ [name]: value })
-    setSearchedDay(false);
   };
 
   return (
@@ -56,8 +58,9 @@ const SearchDays = () => {
         </form>
       </div>
 
-      { formFields !== defaultFormFields && searchedDay && 
-        <ConsumptionInfo searchedDay={ formFields.dateTracked }></ConsumptionInfo> 
+      {
+        formFields !== defaultFormFields && searchedClicked &&
+        <ConsumptionInfo></ConsumptionInfo> 
       }
     </div>
   );

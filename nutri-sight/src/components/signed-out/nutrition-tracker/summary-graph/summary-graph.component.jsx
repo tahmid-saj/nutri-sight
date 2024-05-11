@@ -9,9 +9,7 @@ import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.cons
 
 const SummaryGraph = () => {
   const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext);
-  const caloriesData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
-    return nutritionTrackedDay.calories
-  });
+
   const carbohydratesData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
     return nutritionTrackedDay.macronutrients.carbohydrates
   });
@@ -26,9 +24,6 @@ const SummaryGraph = () => {
   })
 
   const series = [{
-      name: GRAPH_FIELDS.calories,
-      data: caloriesData
-    }, {
       name: GRAPH_FIELDS.carbohydrates,
       data: carbohydratesData
     }, {

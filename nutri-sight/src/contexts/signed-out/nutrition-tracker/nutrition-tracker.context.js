@@ -73,11 +73,6 @@ const getDayTrackedHelper = (nutritionTrackedDays, trackedDay) => {
   const trackedDayInfo = nutritionTrackedDays.find((nutritionTrackedDay) => {
     return String(nutritionTrackedDay.dateTracked) === String(trackedDay);
   });
-
-  if (!trackedDayInfo) {
-    console.log(`No tracked info found for ${trackedDay.dateTracked}`);
-    return undefined;
-  }
   
   return trackedDayInfo;
 };
@@ -179,6 +174,9 @@ export const NutritionTrackerContext = createContext({
   updateDayTracked: () => {},
   getDayTracked: () => {},
 
+  // tracked day in searchDays component
+  dayTrackedSearchResult: undefined,
+
   addFormInputMicronutrients: () => {},
   updateFormInputMicronutrients: () => {},
   deleteFormInputMicronutrients: () => {},
@@ -202,6 +200,7 @@ export const NutritionTrackerProvider = ({ children }) => {
   const [formInputMicronutrients, setFormInputMicronutrients] = useState([]);
   const [filterConditions, setFilterConditions] = useState(null)
   const [nutritionTrackedDaysView, setNutritionTrackedDaysView] = useState(nutritionTrackedDays)
+  const [dayTrackedSearchResult, setDayTrackedSearchResult] = useState(undefined)
   const [nutritionTrackedDaysSummary, setNutritionTrackedDaysSummary] = useState({});
 
   useEffect(() => {
@@ -238,7 +237,7 @@ export const NutritionTrackerProvider = ({ children }) => {
   };
 
   const getDayTracked = (trackedDay) => {
-    return getDayTrackedHelper(nutritionTrackedDays, trackedDay);
+    setDayTrackedSearchResult(getDayTrackedHelper(nutritionTrackedDays, trackedDay))
   };
 
   const addFormInputMicronutrients = () => {
@@ -277,7 +276,8 @@ export const NutritionTrackerProvider = ({ children }) => {
                   addDayTracked, updateDayTracked, getDayTracked, 
                   addFormInputMicronutrients, updateFormInputMicronutrients, deleteFormInputMicronutrients, 
                   nutritionTrackedDaysSummary, 
-                  nutritionTrackedDaysView, filterDayTracked, removeDayTracked, clearDayTrackedFilter }
+                  nutritionTrackedDaysView, dayTrackedSearchResult,
+                  filterDayTracked, removeDayTracked, clearDayTrackedFilter }
 
   return (
     <NutritionTrackerContext.Provider
