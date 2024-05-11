@@ -11,6 +11,7 @@ import Button from "../../../../shared/button/button.component";
 const ActivityDateTable = () => {
   const gridRef = useRef()
   const { searchActivityResults, addTrackedActivityDate } = useContext(CaloriesBurnedContext)
+  
   const rowData = searchActivityResults.map((activityResult) => {
     return {
       Activity: activityResult.activity,
@@ -31,7 +32,7 @@ const ActivityDateTable = () => {
     { field: "DateTracked" }
   ])
 
-  const onAddSelected = (event) => {
+  const onAddSelected = async (event) => {
     event.preventDefault()
     const selectedData = gridRef.current.api.getSelectedRows()
     // TODO: better manage selectedData[0] without the 0 in index
@@ -41,7 +42,7 @@ const ActivityDateTable = () => {
 
     console.log(selectedData[0])
 
-    addTrackedActivityDate({
+    await addTrackedActivityDate({
       dateTracked: selectedData[0].DateTracked,
       activity: selectedData[0].SearchedActivity,
       durationMinutes: selectedData[0].DurationMinutes,

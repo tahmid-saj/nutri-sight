@@ -32,7 +32,7 @@ const CaloriesBurnedTable = () => {
       { field: "Tag" },
     ])
   
-    const onRemoveSelected = (event) => {
+    const onRemoveSelected = async (event) => {
       event.preventDefault()
       const selectedData = gridRef.current.api.getSelectedRows()
       // TODO: better manage selectedData[0] without the 0 in index
@@ -42,7 +42,7 @@ const CaloriesBurnedTable = () => {
   
       console.log(selectedData[0])
   
-      removeActivityDate(selectedData[0].Tag)
+      await removeActivityDate(selectedData[0].Tag)
     }
 
   return (
