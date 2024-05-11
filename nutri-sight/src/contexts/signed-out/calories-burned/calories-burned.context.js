@@ -121,6 +121,8 @@ export const CaloriesBurnedProvider = ({ children }) => {
       totalTrackedDays: summary.totalTrackedDays,
       totalTrackedActivities: summary.totalTrackedActivities
     })
+
+    setTrackedCaloriesBurnedLength(trackedCaloriesBurned.length)
   }, [trackedCaloriesBurned])
 
   // update trackedCaloriesBurnedView when trackedCaloriesBurned or filterConditions change
@@ -146,7 +148,7 @@ export const CaloriesBurnedProvider = ({ children }) => {
       return
     } else {
       setTrackedCaloriesBurned(addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo, trackedCaloriesBurnedLength + 1))
-      setTrackedCaloriesBurnedLength(trackedCaloriesBurnedLength + 1)
+      // setTrackedCaloriesBurnedLength(trackedCaloriesBurnedLength + 1)
       console.log("created")
     }
   }

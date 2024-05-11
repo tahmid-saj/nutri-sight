@@ -189,6 +189,7 @@ export const NutritionTrackerContext = createContext({
 
   setDefaultNutritionTrackedDaysValues: () => {},
   setDefaultNutritionTrackedDaysSummaryValues: () => {},
+  updateNutritionTrackedDaysAndSummary: () => {}
 });
 
 export const NutritionTrackerProvider = ({ children }) => {
@@ -198,8 +199,8 @@ export const NutritionTrackerProvider = ({ children }) => {
 
   const { currentUser } = useContext(UserContext);
 
+  // update nutritionTrackedDaysSummary with average consumptions
   useEffect(() => {
-    // update nutritionTrackedDaysSummary with average consumptions
     console.log(nutritionTrackedDays);
 
     const summary = calculateSummary(nutritionTrackedDays);
