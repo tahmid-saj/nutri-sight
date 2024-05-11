@@ -59,10 +59,10 @@ const UploadImage = () => {
 
   return (
     <div className="upload-image-container">
-      <h3>Upload a food image or enter a meal description</h3>
-      <h5>Example: 1 pound of steak with mashed potatoes and a can of sprite</h5>
 
       <form className="upload-image-form-container" onSubmit={ handleSubmit }>
+        <h3>Upload a food image or enter a meal description</h3>
+        <h5>Example: 1 pound of steak with mashed potatoes and a can of sprite</h5>
         <FormInput label="Meal description" type="text" onChange={ handleChange }
                             name="mealDescription" value={ formFields.mealDescription }></FormInput>
 
@@ -75,9 +75,9 @@ const UploadImage = () => {
         </div>
       </form>
 
-      <img alt="" className="uploded-image-container"
+      <img alt="" className="uploaded-image-container"
             id="imageOutput" 
-            style={{ width: "350px", height: "350px", visibility: `${formFields.uploadedImage === "" ? "hidden" : ""}` }}></img>
+            style={{ width: "500px", height: "500px", visibility: `${formFields.uploadedImage === "" ? "hidden" : ""}` }}></img>
 
     </div>
   )
