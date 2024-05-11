@@ -41,6 +41,12 @@ const Navigation = () => {
         </Link>
 
         <div className="nav-links-container">
+          <Link className="nav-link" to="/dashboard"
+            // onClick={ () => changeStyle("none", "white") }
+            >
+            Dashboard
+          </Link>
+
           <Link className="nav-link" to="/nutrient-predictor"
             // onClick={ () => changeStyle("none", "white") }
             >

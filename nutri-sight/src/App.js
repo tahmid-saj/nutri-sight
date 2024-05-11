@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import HomeRoute from "./routes/shared/home/home.component";
 import Navigation from "./routes/shared/navigation/navigation.component";
 import AuthenticationRoute from "./routes/signed-out/authentication/authentication.component";
+
+import DashboardRoute from "./routes/shared/dashboard/dashboard.component";
 import NutrientPredictorRoute from "./routes/shared/nutrient-predictor/nutrient-predictor.component";
 import NutritionTrackerRoute from "./routes/signed-out/nutrition-tracker/nutrition-tracker.component";
 import CaloriesBurnedRoute from "./routes/signed-out/calories-burned/calories-burned.component"
@@ -16,6 +18,7 @@ function App() {
     <Routes>
       <Route path="/" element={ <Navigation/> }>
         <Route index element={ <HomeRoute/> }/>
+        <Route path="dashboard" element={ <DashboardRoute/> }/>
         <Route path="nutrient-predictor" element={ <NutrientPredictorRoute/> }/>
         <Route path="nutrition-tracker" element={ <NutritionTrackerRoute/> }/>
         <Route path="recipes" element={ <RecipesRoute/> }/>
