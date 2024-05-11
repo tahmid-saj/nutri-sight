@@ -4,10 +4,10 @@ import { useContext } from "react"
 import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
 
 const CaloriesGraph = () => {
-  const { nutritionTrackedDays } = useContext(NutritionTrackerContext)
+  const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext)
 
   let trackedCalories = new Map()
-  const trackedDayCalories = nutritionTrackedDays.map((trackedDate) => {
+  const trackedDayCalories = nutritionTrackedDaysView.map((trackedDate) => {
     if (trackedCalories.has(String(trackedDate.dateTracked))) {
       trackedCalories.set(String(trackedDate.dateTracked), Number(trackedCalories.get(trackedDate.dateTracked)) + Number(trackedDate.calories))
     } else {

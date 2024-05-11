@@ -6,6 +6,7 @@ import { validateSearchActivity, validateAddTrackedActivityDate,
 
 import { getSearchActivity } from "../../../utils/api-requests/calories-burned.requests"
 
+// TODO: sort the records by date
 // helper functions
 const searchActivityHelper = async (trackedDayInfo) => {
   const resActivityResults = await getSearchActivity(trackedDayInfo)

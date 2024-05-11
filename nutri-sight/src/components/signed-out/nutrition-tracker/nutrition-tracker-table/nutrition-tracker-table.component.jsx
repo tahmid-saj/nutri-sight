@@ -10,9 +10,9 @@ import Button from "../../../shared/button/button.component";
 
 const NutritionTrackerTable = () => {
   const gridRef = useRef()
-  const { nutritionTrackedDays } = useContext(NutritionTrackerContext)
+  const { nutritionTrackedDaysView, removeDayTracked, clearDayTrackedFilter } = useContext(NutritionTrackerContext)
 
-  const rowData = nutritionTrackedDays.map((trackedDate) => {
+  const rowData = nutritionTrackedDaysView.map((trackedDate) => {
     return {
       DateTracked: trackedDate.dateTracked,
       Calories: trackedDate.calories,
@@ -45,7 +45,7 @@ const NutritionTrackerTable = () => {
 
     console.log(selectedData[0])
 
-    // removeActivityDate(selectedData[0].Tag)
+    removeDayTracked(selectedData[0].DateTracked)
   }
 
   return (
@@ -58,7 +58,7 @@ const NutritionTrackerTable = () => {
       <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
       <div className="remove-tracked-date-selected-button">
         <Button onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
-        <Button type="button">Clear Filter</Button>
+        <Button type="button" onClick={ clearDayTrackedFilter }>Clear Filter</Button>
       </div>
     </div>
   )

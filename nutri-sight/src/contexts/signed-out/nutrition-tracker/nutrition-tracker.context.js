@@ -6,6 +6,7 @@ import { calculateSummary } from "../../../utils/calculations/nutrition-tracker.
 
 import { DEFAULT_MICRONUTRIENT } from "../../../utils/constants/nutrition-tracker.constants";
 
+// TODO: sort the records by date
 // helper functions
 
 const addMicronutrientsToTrackedDayInfoHelper = (formInputMicronutrients, trackedDayInfo) => {
@@ -193,7 +194,7 @@ export const NutritionTrackerContext = createContext({
 
   filterDayTracked: () => {},
   removeDayTracked: () => {},
-  clearDayTrackedFilter: () => {}
+  clearDayTrackedFilter: () => {},
 });
 
 export const NutritionTrackerProvider = ({ children }) => {

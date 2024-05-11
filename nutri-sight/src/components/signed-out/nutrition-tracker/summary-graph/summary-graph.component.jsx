@@ -8,20 +8,20 @@ import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutriti
 import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants";
 
 const SummaryGraph = () => {
-  const { nutritionTrackedDays } = useContext(NutritionTrackerContext);
-  const caloriesData = nutritionTrackedDays.map(nutritionTrackedDay => {
+  const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext);
+  const caloriesData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
     return nutritionTrackedDay.calories
   });
-  const carbohydratesData = nutritionTrackedDays.map(nutritionTrackedDay => {
+  const carbohydratesData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
     return nutritionTrackedDay.macronutrients.carbohydrates
   });
-  const proteinData = nutritionTrackedDays.map(nutritionTrackedDay => {
+  const proteinData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
     return nutritionTrackedDay.macronutrients.protein
   });
-  const fatData = nutritionTrackedDays.map(nutritionTrackedDay => {
+  const fatData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
     return nutritionTrackedDay.macronutrients.fat
   });
-  const trackedDays = nutritionTrackedDays.map(nutritionTrackedDay => {
+  const trackedDays = nutritionTrackedDaysView.map(nutritionTrackedDay => {
     return nutritionTrackedDay.dateTracked
   })
 
