@@ -1,13 +1,11 @@
+import "./nutrition-tracker-graph-macronutrients.styles.scss"
 import { Fragment, useContext, useState, Component } from "react";
 import ReactApexChart from 'react-apexcharts'
 
-import "./summary-graph.styles.scss";
+import { NutritionTrackerContext } from "../../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { GRAPH_FIELDS } from "../../../../../utils/constants/nutrition-tracker.constants";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
-
-import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants";
-
-const SummaryGraph = () => {
+const NutritionTrackerGraphMacronutrients = () => {
   const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext);
 
   const carbohydratesData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
@@ -24,16 +22,16 @@ const SummaryGraph = () => {
   })
 
   const series = [{
-      name: `${GRAPH_FIELDS.carbohydrates} (g)`,
-      data: carbohydratesData
-    }, {
-      name: `${GRAPH_FIELDS.protein} (g)`,
-      data: proteinData
-    }, {
-      name: `${GRAPH_FIELDS.fat} (g)`,
-      data: fatData
-    }];
-  
+    name: `${GRAPH_FIELDS.carbohydrates} (g)`,
+    data: carbohydratesData
+  }, {
+    name: `${GRAPH_FIELDS.protein} (g)`,
+    data: proteinData
+  }, {
+    name: `${GRAPH_FIELDS.fat} (g)`,
+    data: fatData
+  }];
+
   const options = {
     chart: {
       type: 'bar',
@@ -86,13 +84,11 @@ const SummaryGraph = () => {
   };
 
   return (
-    <Fragment>
-      <h5>Consumption Timeline</h5>
-      <div className="summary-graph-container">
-        <ReactApexChart options={ options } series={ series } type="bar" height={ 350 } width={ 1000 }/>
-      </div>
-    </Fragment>
+    <div className="nutrition-tracker-dashboard-graph-nutrients-container">
+        <h4>Macronutrients consumption</h4>
+        <ReactApexChart options={ options } series={ series } type="bar" height={ 350 } width={ "100%" }/>
+    </div>
   )
 }
 
-export default SummaryGraph;
+export default NutritionTrackerGraphMacronutrients

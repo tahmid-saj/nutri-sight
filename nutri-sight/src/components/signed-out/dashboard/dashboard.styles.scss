@@ -1,0 +1,21 @@
+.nutrition-tracker-dashboard-container, .calories-burned-dashboard-container {
+  h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.dashboard-separator-container {
+  hr.rounded {
+    border-top: 5px solid #98be8c;
+    border-radius: 5px;
+    max-width: 80%;
+  }
+}
+
+.calories-burned-dashboard-summary-graph-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
