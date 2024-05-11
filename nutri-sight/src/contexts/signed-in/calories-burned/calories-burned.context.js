@@ -24,6 +24,7 @@ const searchActivityHelper = async (trackedDayInfo) => {
 
 const addTrackedActivityDateHelper = async (trackedCaloriesBurned, trackedDayInfo, activityId, userId, email) => {
   await postAddActivity(userId, email, trackedDayInfo, activityId)
+  console.log("added")
 
   return [ ...trackedCaloriesBurned,
     {
@@ -55,7 +56,8 @@ const filterActivityDatesHelper = (trackedCaloriesBurned, filterConditions) => {
 const removeActivityDateHelper = async (trackedCaloriesBurned, activityId, userId, email) => {
   if (validateRemoveActivityDate(activityId)) return trackedCaloriesBurned
 
-  await deleteRemoveActivity(userId, email, activityId)
+  // await deleteRemoveActivity(userId, email, activityId)
+  console.log("removed")
 
   return trackedCaloriesBurned.filter(trackedActivity => trackedActivity.activityId !== activityId)
 }
@@ -152,22 +154,22 @@ export const CaloriesBurnedProvider = ({ children }) => {
     setTrackedCaloriesBurnedLength(trackedCaloriesBurned.length)
   }, [trackedCaloriesBurned])
 
-  useEffect(() => {
-    async function fetchTrackedCaloriesBurnedData() {
-      if (currentUser) {
-        const trackedCaloriesBurnedData = await getTrackedCaloriesBurned(currentUser.uid, currentUser.email)
+  // useEffect(() => {
+  //   async function fetchTrackedCaloriesBurnedData() {
+  //     if (currentUser) {
+  //       const trackedCaloriesBurnedData = await getTrackedCaloriesBurned(currentUser.uid, currentUser.email)
         
-        if (trackedCaloriesBurnedData) {
-          const { trackedCaloriesBurned } = await trackedCaloriesBurnedData
-          setTrackedCaloriesBurned(trackedCaloriesBurned)
-        }
-      } else if (!currentUser) {
-        setDefaultTrackedCaloriesBurnedValues()
-        setDefaultTrackedCaloriesBurnedSummaryValues()
-      }
-    }
-    fetchTrackedCaloriesBurnedData()
-  }, [currentUser])
+  //       if (trackedCaloriesBurnedData) {
+  //         const { trackedCaloriesBurned } = await trackedCaloriesBurnedData
+  //         setTrackedCaloriesBurned(trackedCaloriesBurned)
+  //       }
+  //     } else if (!currentUser) {
+  //       setDefaultTrackedCaloriesBurnedValues()
+  //       setDefaultTrackedCaloriesBurnedSummaryValues()
+  //     }
+  //   }
+  //   fetchTrackedCaloriesBurnedData()
+  // }, [currentUser])
 
   // update trackedCaloriesBurnedView when trackedCaloriesBurned or filterConditions change
   useEffect(() => {
@@ -191,7 +193,8 @@ export const CaloriesBurnedProvider = ({ children }) => {
     if (validateAddTrackedActivityDate(trackedDayInfo)) {
       return
     } else {
-      setTrackedCaloriesBurned(addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo, trackedCaloriesBurnedLength + 1, currentUser.uid, currentUser.email))
+      const resAddTrackedActivity = await addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo, trackedCaloriesBurnedLength + 1, currentUser.uid, currentUser.email)
+      setTrackedCaloriesBurned(resAddTrackedActivity)
       // setTrackedCaloriesBurnedLength(trackedCaloriesBurnedLength + 1)
       console.log("created")
     }
@@ -209,7 +212,8 @@ export const CaloriesBurnedProvider = ({ children }) => {
   }
 
   const removeActivityDate = async (activityId) => {
-    setTrackedCaloriesBurned(removeActivityDateHelper(trackedCaloriesBurned, activityId, currentUser.uid, currentUser.email))
+    const resRemoveActivityDate = await removeActivityDateHelper(trackedCaloriesBurned, activityId, currentUser.uid, currentUser.email)
+    setTrackedCaloriesBurned(resRemoveActivityDate)
   }
 
   const clearActivityDatesFilter = () => {
