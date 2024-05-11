@@ -18,6 +18,10 @@ const NutrientsInfo = () => {
 
           <h4>{`Calories - ${prediction.calories}`}</h4>
           <h4>{`Serving size - ${prediction.servingSizeG} g`}</h4>
+
+          <div className="nutrient-info-separator-container">
+            <hr className="rounded"/>
+          </div>
           <br></br>
 
           <strong><h4>Macronutrients</h4></strong>
@@ -25,6 +29,11 @@ const NutrientsInfo = () => {
           <h5>{`Protein - ${prediction.macronutrients.proteinG} g`}</h5>
           <h5>{`Fat - ${prediction.macronutrients.fatTotalG} g`}</h5>
           <h5>{`Saturated fat - ${prediction.macronutrients.fatSaturatedG} g`}</h5>
+
+          <div className="nutrient-info-separator-container">
+            <hr className="rounded"/>
+          </div>
+          <br></br>
 
           <strong><h4>Micronutrients</h4></strong>
             <Fragment key={ index }>

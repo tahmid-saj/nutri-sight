@@ -15,9 +15,11 @@ const NutrientPredictor = () => {
         // displayNutrients={ this.displayNutrients }
       ></UploadFoodImage>
 
+      <div className="nutrients-info-predictions-container">
       {
         nutrientPredictions.length ? <NutrientsInfo></NutrientsInfo> : null
       }
+      </div>
     </div>
   );
 };

@@ -1,9 +1,21 @@
 .nutrients-info-container {
-  background-color: rgba(225, 255, 216, 1);
+  background-color: rgba(0, 230, 103, 0.15);
+  box-shadow: 4px 4px rgba(0, 230, 103, 0.5);
   border-radius: 1.5rem;
   display: block;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  // width: 300px;
   text-align: center;
+  padding: 2%;
+  margin: 0% 2% 3% 2%;
+  width: 40%;
+}
+
+.nutrient-info-separator-container {
+  hr.rounded {
+    border-top: 5px solid rgba(0, 150, 103, 0.5);
+    border-radius: 5px;
+    max-width: 80%;
+  }
 }

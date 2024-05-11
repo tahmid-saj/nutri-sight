@@ -1,7 +1,13 @@
 .upload-food-image-nutrients-info-container {
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  display: flex;
-  padding: auto;
+  // display: block;
+  // padding: auto;
   margin-top: 3%;
+}
+
+.nutrients-info-predictions-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
