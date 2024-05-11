@@ -1,10 +1,18 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
+import { UserContext } from "../../shared/user/user.context";
+
 import { calculateSummary } from "../../../utils/calculations/calories-burned.calculations";
 import { validateSearchActivity, validateAddTrackedActivityDate, 
   validateFilterActivityDates, validateRemoveActivityDate 
 } from "../../../utils/validations/calories-burned.validations"
 
-import { getSearchActivity } from "../../../utils/api-requests/calories-burned.requests"
+import { getSearchActivity,
+  getTrackedCaloriesBurned,
+  postAddActivity, deleteRemoveActivity,
+  putTrackedCaloriesBurned
+} from "../../../utils/api-requests/calories-burned.requests"
+
+import { DEFAULT_TRACKED_CALORIES_BURNED, DEFAULT_TRACKED_CALORIES_BURNED_SUMMARY } from "../../../utils/constants/calories-burned.constants" 
 
 // TODO: sort the records by date
 // helper functions
@@ -14,7 +22,9 @@ const searchActivityHelper = async (trackedDayInfo) => {
   return resActivityResults
 }
 
-const addTrackedActivityDateHelper = (trackedCaloriesBurned, trackedDayInfo, activityId) => {
+const addTrackedActivityDateHelper = async (trackedCaloriesBurned, trackedDayInfo, activityId, userId, email) => {
+  await postAddActivity(userId, email, trackedDayInfo, activityId)
+
   return [ ...trackedCaloriesBurned,
     {
       dateTracked: String(trackedDayInfo.dateTracked),
@@ -42,10 +52,20 @@ const filterActivityDatesHelper = (trackedCaloriesBurned, filterConditions) => {
   return filteredTrackedCaloriesBurned
 }
 
-const removeActivityDateHelper = (trackedCaloriesBurned, activityId) => {
+const removeActivityDateHelper = async (trackedCaloriesBurned, activityId, userId, email) => {
   if (validateRemoveActivityDate(activityId)) return trackedCaloriesBurned
 
+  await deleteRemoveActivity(userId, email, activityId)
+
   return trackedCaloriesBurned.filter(trackedActivity => trackedActivity.activityId !== activityId)
+}
+
+const setDefaultTrackedCaloriesBurnedValuesHelper = () => {
+  return DEFAULT_TRACKED_CALORIES_BURNED
+}
+
+const setDefaultTrackedCaloriesBurnedSummaryValuesHelper = () => {
+  return DEFAULT_TRACKED_CALORIES_BURNED_SUMMARY
 }
 
 // initial state
@@ -84,7 +104,7 @@ export const CaloriesBurnedContext = createContext({
   //   from api
   // ]
 
-  trackedCaloriesBurnedSummary: {}
+  trackedCaloriesBurnedSummary: {},
   // trackedCaloriesBurnedSummary structure:
   // {
   //   dailyAverageCaloriesBurned: 300,
@@ -96,9 +116,14 @@ export const CaloriesBurnedContext = createContext({
   //   totalTrackedDays: [],
   //   totalTrackedActivities: []
   // }
+
+  setDefaultTrackedCaloriesBurnedValues: () => {},
+  setDefaultTrackedCaloriesBurnedSummaryValues: () => {},
+  updateTrackedCaloriesBurned: () => {}
 })
 
 // context provider
+// TODO: manage length state better everywhere via backend as well (it currently is not pulled on sign in)
 export const CaloriesBurnedProvider = ({ children }) => {
   const [trackedCaloriesBurned, setTrackedCaloriesBurned] = useState([])
   const [trackedCaloriesBurnedLength, setTrackedCaloriesBurnedLength] = useState(0)
@@ -106,6 +131,8 @@ export const CaloriesBurnedProvider = ({ children }) => {
   const [searchActivityResults, setSearchActivityResults] = useState([])
   const [trackedCaloriesBurnedView, setTrackedCaloriesBurnedView] = useState(trackedCaloriesBurned)
   const [trackedCaloriesBurnedSummary, setTrackedCaloriesBurnedSummary] = useState({})
+
+  const { currentUser } = useContext(UserContext)
 
   // update trackedCaloriesBurnedSummary
   useEffect(() => {
@@ -121,7 +148,26 @@ export const CaloriesBurnedProvider = ({ children }) => {
       totalTrackedDays: summary.totalTrackedDays,
       totalTrackedActivities: summary.totalTrackedActivities
     })
+
+    setTrackedCaloriesBurnedLength(trackedCaloriesBurned.length)
   }, [trackedCaloriesBurned])
+
+  useEffect(() => {
+    async function fetchTrackedCaloriesBurnedData() {
+      if (currentUser) {
+        const trackedCaloriesBurnedData = await getTrackedCaloriesBurned(currentUser.uid, currentUser.email)
+        
+        if (trackedCaloriesBurnedData) {
+          const { trackedCaloriesBurned } = await trackedCaloriesBurnedData
+          setTrackedCaloriesBurned(trackedCaloriesBurned)
+        }
+      } else if (!currentUser) {
+        setDefaultTrackedCaloriesBurnedValues()
+        setDefaultTrackedCaloriesBurnedSummaryValues()
+      }
+    }
+    fetchTrackedCaloriesBurnedData()
+  }, [currentUser])
 
   // update trackedCaloriesBurnedView when trackedCaloriesBurned or filterConditions change
   useEffect(() => {
@@ -141,12 +187,12 @@ export const CaloriesBurnedProvider = ({ children }) => {
     }
   }
 
-  const addTrackedActivityDate = (trackedDayInfo) => {
+  const addTrackedActivityDate = async (trackedDayInfo) => {
     if (validateAddTrackedActivityDate(trackedDayInfo)) {
       return
     } else {
-      setTrackedCaloriesBurned(addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo, trackedCaloriesBurnedLength + 1))
-      setTrackedCaloriesBurnedLength(trackedCaloriesBurnedLength + 1)
+      setTrackedCaloriesBurned(addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo, trackedCaloriesBurnedLength + 1, currentUser.uid, currentUser.email))
+      // setTrackedCaloriesBurnedLength(trackedCaloriesBurnedLength + 1)
       console.log("created")
     }
   }
@@ -162,8 +208,8 @@ export const CaloriesBurnedProvider = ({ children }) => {
     }
   }
 
-  const removeActivityDate = (activityId) => {
-    setTrackedCaloriesBurned(removeActivityDateHelper(trackedCaloriesBurned, activityId))
+  const removeActivityDate = async (activityId) => {
+    setTrackedCaloriesBurned(removeActivityDateHelper(trackedCaloriesBurned, activityId, currentUser.uid, currentUser.email))
   }
 
   const clearActivityDatesFilter = () => {
@@ -171,9 +217,23 @@ export const CaloriesBurnedProvider = ({ children }) => {
     setTrackedCaloriesBurnedView(trackedCaloriesBurned)
   }
 
+  const setDefaultTrackedCaloriesBurnedValues = () => {
+    setTrackedCaloriesBurned(setDefaultTrackedCaloriesBurnedValuesHelper())
+  }
+  
+  const setDefaultTrackedCaloriesBurnedSummaryValues = () => {
+    setTrackedCaloriesBurnedSummary(setDefaultTrackedCaloriesBurnedSummaryValuesHelper())
+  }
+
+  // update trackedCaloriesBurned on sign out
+  const updateTrackedCaloriesBurned = () => {
+    putTrackedCaloriesBurned(currentUser.uid, currentUser.email, trackedCaloriesBurned)
+  }
+
   const value = { trackedCaloriesBurned, trackedCaloriesBurnedView, filterConditions, searchActivityResults,
     searchActivity, addTrackedActivityDate, filterActivityDates, removeActivityDate, clearActivityDatesFilter,
-    trackedCaloriesBurnedSummary }
+    trackedCaloriesBurnedSummary,
+    setDefaultTrackedCaloriesBurnedValues, setDefaultTrackedCaloriesBurnedSummaryValues, updateTrackedCaloriesBurned }
   
   return (
     <CaloriesBurnedContext.Provider

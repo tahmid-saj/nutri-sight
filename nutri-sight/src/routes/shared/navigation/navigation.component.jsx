@@ -8,6 +8,7 @@ import { UserContext } from "../../../contexts/shared/user/user.context";
 import { signOutUser } from "../../../utils/firebase/firebase.utils";
 
 import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
+import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context";
 
 const Navigation = () => {
   const [color, changeColor] = useState("white");
@@ -17,11 +18,13 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const { updateNutritionTrackedDaysAndSummary } = useContext(NutritionTrackerContext);
+  const { updateTrackedCaloriesBurned } = useContext(CaloriesBurnedContext)
 
   const linearGradient = `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)), url("https://cdn.osxdaily.com/wp-content/uploads/2015/05/Green-Grass-Fields-Wallpaper-1931.jpg")`;
 
   const handleSignOut = () => {
     updateNutritionTrackedDaysAndSummary();
+    updateTrackedCaloriesBurned()
     signOutUser();
     navigate("/auth");
   };
