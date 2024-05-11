@@ -4,6 +4,8 @@ import "./consumption-info.styles.scss";
 
 import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 
+import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants";
+
 const ConsumptionInfo = () => {
   const { dayTrackedSearchResult } = useContext(NutritionTrackerContext);
 
@@ -16,9 +18,9 @@ const ConsumptionInfo = () => {
   }
 
   const trackedMacronutrients = new Map([
-    ["Carbohydrates (g)", dayTrackedSearchResult.macronutrients.carbohydrates !== 0 ? dayTrackedSearchResult.macronutrients.carbohydrates : 0],
-    ["Protein (g)", dayTrackedSearchResult.macronutrients.protein !== 0 ? dayTrackedSearchResult.macronutrients.protein : 0],
-    ["Fat (g)", dayTrackedSearchResult.macronutrients.fat !== 0 ? dayTrackedSearchResult.macronutrients.fat : 0]
+    [GRAPH_FIELDS.carbohydrates, dayTrackedSearchResult.macronutrients.carbohydrates !== 0 ? dayTrackedSearchResult.macronutrients.carbohydrates : 0],
+    [GRAPH_FIELDS.protein, dayTrackedSearchResult.macronutrients.protein !== 0 ? dayTrackedSearchResult.macronutrients.protein : 0],
+    [GRAPH_FIELDS.fat, dayTrackedSearchResult.macronutrients.fat !== 0 ? dayTrackedSearchResult.macronutrients.fat : 0]
   ])
   
   const series = [ ...trackedMacronutrients.values() ]

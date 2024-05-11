@@ -3,13 +3,15 @@ import ReactApexChart from "react-apexcharts";
 import { useContext, Fragment } from "react"
 import { NutritionTrackerContext } from "../../../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
 
+import { GRAPH_FIELDS } from "../../../../../../utils/constants/nutrition-tracker.constants";
+
 const NutritionTrackerGraphPie = () => {
   const { nutritionTrackedDaysSummary } = useContext(NutritionTrackerContext);
 
   const trackedMacronutrients = new Map([
-    ["Carbohydrates (g)", nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption : 0],
-    ["Protein (g)", nutritionTrackedDaysSummary.averageDailyProteinConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyProteinConsumption : 0],
-    ["Fat (g)", nutritionTrackedDaysSummary.averageDailyFatConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyFatConsumption : 0]
+    [GRAPH_FIELDS.carbohydrates, nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption : 0],
+    [GRAPH_FIELDS.protein, nutritionTrackedDaysSummary.averageDailyProteinConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyProteinConsumption : 0],
+    [GRAPH_FIELDS.fat, nutritionTrackedDaysSummary.averageDailyFatConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyFatConsumption : 0]
   ])
 
   const series = [ ...trackedMacronutrients.values() ]
