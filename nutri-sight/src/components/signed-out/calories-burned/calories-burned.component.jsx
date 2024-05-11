@@ -28,7 +28,7 @@ const CaloriesBurned = () => {
             </div>
 
             <div className="calories-burned-summary-separator-container">
-              <hr className="rounded"/>
+              <hr className="calories-burned-rounded"/>
             </div>
 
             <h2>Tracked Summary</h2>
@@ -41,7 +41,7 @@ const CaloriesBurned = () => {
             </div>
 
             <div className="calories-burned-summary-separator-container">
-              <hr className="rounded"/>
+              <hr className="calories-burned-rounded"/>
             </div>
           </Fragment>
           : null
