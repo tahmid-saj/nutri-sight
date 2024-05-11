@@ -69,10 +69,10 @@ const UpdateConsumptionForm = () => {
 
   return (
     <div className="update-consumption-form-container">
-      <h2>Track Consumption</h2>
+      <h2>Track some consumption</h2>
 
       <form>
-        <h4>Date tracked</h4>
+        <h5>Date tracked</h5>
         <FormInput type="date" required onChange={ handleChange }
                     name="dateTracked" value={ formFields.dateTracked }></FormInput>
 

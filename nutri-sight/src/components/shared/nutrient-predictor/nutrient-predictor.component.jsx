@@ -11,6 +11,7 @@ const NutrientPredictor = () => {
 
   return (
     <div className="upload-food-image-nutrients-info-container">
+      <h3>Predict some nutrients</h3>
       <UploadFoodImage 
         // displayNutrients={ this.displayNutrients }
       ></UploadFoodImage>

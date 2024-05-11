@@ -21,7 +21,7 @@ const CaloriesBurned = () => {
       {
         trackedCaloriesBurned.length ? 
           <Fragment>
-            <h1>Summary</h1>
+            <h2>Summary</h2>
             <div className="calories-burned-summary-container">
               <SummaryInfo></SummaryInfo> 
               <ActivityDateFilter></ActivityDateFilter>

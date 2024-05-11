@@ -12,6 +12,7 @@ const Recipes = () => {
 
   return (
     <Fragment>
+      <h3 className="recipes-header-caption">Search some recipes</h3>
       <Header></Header>
 
       <div className="search-results-recipe-container">
