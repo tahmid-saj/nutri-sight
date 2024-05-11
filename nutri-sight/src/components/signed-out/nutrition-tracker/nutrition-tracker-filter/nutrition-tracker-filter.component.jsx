@@ -12,13 +12,21 @@ const defaultFormFields = {
 
 const NutritionTrackerFilter = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
+  const { filterDayTracked, clearDayTrackedFilter } = useContext(NutritionTrackerContext)
   
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
   }
 
-  const handleSubmit = (even) => {
+  const handleSubmit = (event) => {
+    event.preventDefault()
 
+    if (formFields.filterStartDate === "" && formFields.filterEndDate === "" && !formFields.filterStartDate && !formFields.filterEndDate) {
+      console.log("please fill out all info")
+      return
+    }
+    
+    filterDayTracked(formFields)
   }
 
   const handleChange = (event) => {
@@ -30,6 +38,7 @@ const NutritionTrackerFilter = () => {
     event.preventDefault()
 
     resetFormFields()
+    clearDayTrackedFilter()
   }
 
   return (
