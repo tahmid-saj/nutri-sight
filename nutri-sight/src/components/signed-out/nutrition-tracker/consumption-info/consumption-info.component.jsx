@@ -4,14 +4,21 @@ import "./consumption-info.styles.scss";
 
 import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 
-const ConsumptionInfo = ({ searchedDay }) => {
-  const { getDayTracked } = useContext(NutritionTrackerContext);
-  const dayTrackedInfo = getDayTracked(searchedDay);
+const ConsumptionInfo = () => {
+  const { dayTrackedSearchResult } = useContext(NutritionTrackerContext);
+
+  if (!dayTrackedSearchResult) {
+    return (
+      <div className="consumption-info">
+        <h4><strong>Date is not tracked</strong></h4>
+      </div>
+    )
+  }
 
   const trackedMacronutrients = new Map([
-    ["Carbohydrates (g)", dayTrackedInfo.macronutrients.carbohydrates !== 0 ? dayTrackedInfo.macronutrients.carbohydrates : 0],
-    ["Protein (g)", dayTrackedInfo.macronutrients.protein !== 0 ? dayTrackedInfo.macronutrients.protein : 0],
-    ["Fat (g)", dayTrackedInfo.macronutrients.fat !== 0 ? dayTrackedInfo.macronutrients.fat : 0]
+    ["Carbohydrates (g)", dayTrackedSearchResult.macronutrients.carbohydrates !== 0 ? dayTrackedSearchResult.macronutrients.carbohydrates : 0],
+    ["Protein (g)", dayTrackedSearchResult.macronutrients.protein !== 0 ? dayTrackedSearchResult.macronutrients.protein : 0],
+    ["Fat (g)", dayTrackedSearchResult.macronutrients.fat !== 0 ? dayTrackedSearchResult.macronutrients.fat : 0]
   ])
   
   const series = [ ...trackedMacronutrients.values() ]
@@ -35,31 +42,30 @@ const ConsumptionInfo = ({ searchedDay }) => {
     }]
   }
 
+
   return (
     <div className="consumption-info">
       {
-        dayTrackedInfo === undefined || dayTrackedInfo === null ? <h4><strong>Date is not tracked</strong></h4> :
-        (
+        dayTrackedSearchResult !== undefined && dayTrackedSearchResult !== null &&
           <Fragment>
-            <h5>{`On ${searchedDay}`}</h5>
+            <h5>{`On ${dayTrackedSearchResult.dateTracked}`}</h5>
 
-            <h4>{`Total calories consumption : ${dayTrackedInfo.calories}`}</h4>
+            <h4>{`Total calories consumption : ${dayTrackedSearchResult.calories}`}</h4>
 
             <ReactApexChart options={ options } series={ series } type="donut" height={ 400 } width={ 400 }></ReactApexChart>
 
             {
-              dayTrackedInfo.micronutrients && dayTrackedInfo.micronutrients.length !== 0 &&
+              dayTrackedSearchResult.micronutrients && dayTrackedSearchResult.micronutrients.length !== 0 &&
               <h3>Micronutrients</h3>
             }
             {
-              dayTrackedInfo.micronutrients.map((micronutrient, index) => {
+              dayTrackedSearchResult.micronutrients.map((micronutrient, index) => {
                 return (
                     <h4 key={ index }>{`${micronutrient.name} : ${micronutrient.amount} ${micronutrient.unit}`}</h4>
                 )
               })
             }
           </Fragment>
-        )
       }
     </div>
   );
