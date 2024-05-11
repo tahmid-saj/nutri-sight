@@ -55,25 +55,34 @@ const Navigation = () => {
 
           {
             currentUser ? (
-              <Link className="nav-link" to="/nutrition-tracker-signed-in"
-                // onClick={ () => changeStyle("none", "white") }
-                >
-                Nutrition Tracker
-              </Link>
+              <Fragment>
+                <Link className="nav-link" to="/nutrition-tracker-signed-in"
+                  // onClick={ () => changeStyle("none", "white") }
+                  >
+                  Nutrition Tracker
+                </Link>
+
+                <Link className="nav-link" to="/calories-burned-signed-in"
+                  // onClick={ () => changeStyle("none", "white") }
+                  >
+                  Calories Burned
+                </Link>
+              </Fragment>
             ) : (
-              <Link className="nav-link" to="/nutrition-tracker"
-                // onClick={ () => changeStyle("none", "white") }
-                >
-                Nutrition Tracker
-              </Link>
+              <Fragment>
+                <Link className="nav-link" to="/nutrition-tracker"
+                  // onClick={ () => changeStyle("none", "white") }
+                  >
+                  Nutrition Tracker
+                </Link>
+                <Link className="nav-link" to="/calories-burned"
+                  // onClick={ () => changeStyle("none", "white") }
+                  >
+                  Calories Burned
+                </Link>
+              </Fragment>
             )
           }
-
-          <Link className="nav-link" to="/calories-burned"
-            // onClick={ () => changeStyle("none", "white") }
-            >
-            Calories Burned
-          </Link>
 
           <Link className="nav-link" to="/recipes"
             // onClick={ () => changeStyle("none", "white") }
