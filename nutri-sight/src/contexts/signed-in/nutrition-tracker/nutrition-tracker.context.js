@@ -9,7 +9,7 @@ import { DEFAULT_MICRONUTRIENT, DEFAULT_NUTRITION_TRACKED_DAYS, DEFAULT_NUTRITIO
 import { UserContext } from "../../shared/user/user.context";
 
 import { getNutritionTrackedDaysData, getNutritionTrackedDaysSummaryData,
-  postNutritionTrackedDay, putNutritionTrackedDay,
+  postNutritionTrackedDay, deleteNutritionTrackedDay, putNutritionTrackedDay,
   putNutritionTrackedDays, putNutritionTrackedDaysSummary } from "../../../utils/api-requests/nutrition-tracker.requests";
 
 // TODO: sort the records by date
@@ -144,8 +144,11 @@ const filterDayTrackedHelper = (nutritionTrackedDays, filterConditions) => {
   return filteredNutritionTrackedDays
 }
 
-const removeDayTrackedHelper = (nutritionTrackedDays, trackedDay) => {
+const removeDayTrackedHelper = async (nutritionTrackedDays, trackedDay, userId, email) => {
   if (validateRemoveNutritionTrackedDay(trackedDay)) return nutritionTrackedDays
+
+  deleteNutritionTrackedDay(userId, email, trackedDay)
+  console.log("removed")
 
   return nutritionTrackedDays.filter(nutritionTrackedDay => nutritionTrackedDay.dateTracked !== trackedDay)
 }
@@ -329,7 +332,7 @@ export const NutritionTrackerProvider = ({ children }) => {
   }
 
   const removeDayTracked = async (trackedDay) => {
-    const res = await removeDayTrackedHelper(nutritionTrackedDays, trackedDay)
+    const res = await removeDayTrackedHelper(nutritionTrackedDays, trackedDay, currentUser.uid, currentUser.email)
     setNutritionTrackedDays(res)
   }
 
