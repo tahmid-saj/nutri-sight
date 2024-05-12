@@ -10,7 +10,6 @@ import "./add-micronutrients.styles.scss";
 import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
 
 const AddMicronutrients = () => {
-
   const { formInputMicronutrients, addFormInputMicronutrients,
           updateFormInputMicronutrients, deleteFormInputMicronutrients } = useContext(NutritionTrackerContext);
 

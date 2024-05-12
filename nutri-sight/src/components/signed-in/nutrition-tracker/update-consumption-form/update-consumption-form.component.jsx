@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import "./update-consumption-form.styles.scss";
 
 import FormInput from "../../../shared/form-input/form-input.component";
+import Button from "../../../shared/button/button.component";
 import AddMicronutrients from "../add-micronutrients/add-micronutrients.component";
 
 import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
@@ -24,12 +25,12 @@ const UpdateConsumptionForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleAddTrackedDay = (event) => {
+  const handleAddTrackedDay = async (event) => {
     event.preventDefault();
 
     console.log(formFields);
 
-    addDayTracked({
+    await addDayTracked({
       dateTracked: formFields.dateTracked,
       calories: formFields.calories,
       macronutrients: {
@@ -42,12 +43,12 @@ const UpdateConsumptionForm = () => {
     resetFormFields(); 
   };
 
-  const handleUpdateTrackedDay = (event) => {
+  const handleUpdateTrackedDay = async (event) => {
     event.preventDefault();
 
     console.log(formFields);
 
-    updateDayTracked({
+    await updateDayTracked({
       dateTracked: formFields.dateTracked,
       calories: formFields.calories,
       macronutrients: {
@@ -68,10 +69,10 @@ const UpdateConsumptionForm = () => {
 
   return (
     <div className="update-consumption-form-container">
-      <h2>Update Consumption</h2>
+      <h2>Track some consumption</h2>
 
       <form>
-        <h4>Date tracked</h4>
+        <h5>Date tracked</h5>
         <FormInput type="date" required onChange={ handleChange }
                     name="dateTracked" value={ formFields.dateTracked }></FormInput>
 
