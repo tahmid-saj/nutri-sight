@@ -3,10 +3,9 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 
 import "./navigation.styles.scss";
 
-import { UserContext } from "../../../contexts/shared/user/user.context";
-
 import { signOutUser } from "../../../utils/firebase/firebase.utils";
 
+import { UserContext } from "../../../contexts/shared/user/user.context";
 import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
 import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context";
 
@@ -44,11 +43,21 @@ const Navigation = () => {
         </Link>
 
         <div className="nav-links-container">
-          <Link className="nav-link" to="/dashboard"
-            // onClick={ () => changeStyle("none", "white") }
-            >
-            Dashboard
-          </Link>
+          {
+            currentUser ? (
+              <Link className="nav-link" to="/dashboard-signed-in"
+                // onClick={ () => changeStyle("none", "white") }
+                >
+                Dashboard
+              </Link>
+            ) : (
+              <Link className="nav-link" to="/dashboard"
+                // onClick={ () => changeStyle("none", "white") }
+                >
+                Dashboard
+              </Link>
+            )
+          }
 
           <Link className="nav-link" to="/nutrient-predictor"
             // onClick={ () => changeStyle("none", "white") }
