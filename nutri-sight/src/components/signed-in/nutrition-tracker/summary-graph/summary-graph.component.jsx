@@ -1,5 +1,5 @@
 import { Fragment, useContext, useState, Component } from "react";
-import ReactApexChart from 'react-apexcharts';
+import ReactApexChart from 'react-apexcharts'
 
 import "./summary-graph.styles.scss";
 
@@ -8,27 +8,22 @@ import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutritio
 import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants";
 
 const SummaryGraph = () => {
-  const { nutritionTrackedDays } = useContext(NutritionTrackerContext);
-  const caloriesData = nutritionTrackedDays.map(nutritionTrackedDay => {
-    return nutritionTrackedDay.calories
-  });
-  const carbohydratesData = nutritionTrackedDays.map(nutritionTrackedDay => {
+  const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext);
+
+  const carbohydratesData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
     return nutritionTrackedDay.macronutrients.carbohydrates
   });
-  const proteinData = nutritionTrackedDays.map(nutritionTrackedDay => {
+  const proteinData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
     return nutritionTrackedDay.macronutrients.protein
   });
-  const fatData = nutritionTrackedDays.map(nutritionTrackedDay => {
+  const fatData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
     return nutritionTrackedDay.macronutrients.fat
   });
-  const trackedDays = nutritionTrackedDays.map(nutritionTrackedDay => {
+  const trackedDays = nutritionTrackedDaysView.map(nutritionTrackedDay => {
     return nutritionTrackedDay.dateTracked
   })
 
   const series = [{
-      name: GRAPH_FIELDS.calories,
-      data: caloriesData
-    }, {
       name: GRAPH_FIELDS.carbohydrates,
       data: carbohydratesData
     }, {
@@ -92,7 +87,7 @@ const SummaryGraph = () => {
 
   return (
     <Fragment>
-      <h2>Consumption Timeline</h2>
+      <h5>Consumption Timeline</h5>
       <div className="summary-graph-container">
         <ReactApexChart options={ options } series={ series } type="bar" height={ 350 } width={ 1000 }/>
       </div>

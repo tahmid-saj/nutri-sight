@@ -7,10 +7,38 @@
   width: 100%;
 }
 
+.nutrition-tracker-summary-filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .search-days-summary-container {
   display: block;
   // display: flex;
   align-items: center;
   justify-content: center;
   padding-left: 250px;
+}
+
+.calories-burned-summary-separator-container {
+  hr.rounded {
+    border-top: 5px solid #bbb;
+    border-radius: 5px;
+    max-width: 100%;
+    margin-right: 250px;
+  }
+
+  padding-bottom: 30px;
+}
+
+.nutrition-tracked-summary-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 12%;
+}
+
+.nutrition-tracked-summary-graph-table-container {
+  width: 100%;
 }
