@@ -23,7 +23,7 @@ const searchActivityHelper = async (trackedDayInfo) => {
 }
 
 const addTrackedActivityDateHelper = async (trackedCaloriesBurned, trackedDayInfo, activityId, userId, email) => {
-  await postAddActivity(userId, email, trackedDayInfo, activityId)
+  postAddActivity(userId, email, trackedDayInfo, activityId)
   console.log("added")
 
   return [ ...trackedCaloriesBurned,
@@ -55,8 +55,8 @@ const filterActivityDatesHelper = (trackedCaloriesBurned, filterConditions) => {
 
 const removeActivityDateHelper = async (trackedCaloriesBurned, activityId, userId, email) => {
   if (validateRemoveActivityDate(activityId)) return trackedCaloriesBurned
-
-  // await deleteRemoveActivity(userId, email, activityId)
+   
+  deleteRemoveActivity(userId, email, activityId)
   console.log("removed")
 
   return trackedCaloriesBurned.filter(trackedActivity => trackedActivity.activityId !== activityId)
@@ -154,22 +154,22 @@ export const CaloriesBurnedProvider = ({ children }) => {
     setTrackedCaloriesBurnedLength(trackedCaloriesBurned.length)
   }, [trackedCaloriesBurned])
 
-  // useEffect(() => {
-  //   async function fetchTrackedCaloriesBurnedData() {
-  //     if (currentUser) {
-  //       const trackedCaloriesBurnedData = await getTrackedCaloriesBurned(currentUser.uid, currentUser.email)
+  useEffect(() => {
+    async function fetchTrackedCaloriesBurnedData() {
+      if (currentUser) {
+        const trackedCaloriesBurnedData = await getTrackedCaloriesBurned(currentUser.uid, currentUser.email)
         
-  //       if (trackedCaloriesBurnedData) {
-  //         const { trackedCaloriesBurned } = await trackedCaloriesBurnedData
-  //         setTrackedCaloriesBurned(trackedCaloriesBurned)
-  //       }
-  //     } else if (!currentUser) {
-  //       setDefaultTrackedCaloriesBurnedValues()
-  //       setDefaultTrackedCaloriesBurnedSummaryValues()
-  //     }
-  //   }
-  //   fetchTrackedCaloriesBurnedData()
-  // }, [currentUser])
+        if (trackedCaloriesBurnedData) {
+          const { trackedCaloriesBurned } = await trackedCaloriesBurnedData
+          setTrackedCaloriesBurned(trackedCaloriesBurned)
+        }
+      } else if (!currentUser) {
+        setDefaultTrackedCaloriesBurnedValues()
+        setDefaultTrackedCaloriesBurnedSummaryValues()
+      }
+    }
+    fetchTrackedCaloriesBurnedData()
+  }, [currentUser])
 
   // update trackedCaloriesBurnedView when trackedCaloriesBurned or filterConditions change
   useEffect(() => {
