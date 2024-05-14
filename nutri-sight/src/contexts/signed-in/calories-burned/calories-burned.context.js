@@ -45,7 +45,9 @@ const filterActivityDatesHelper = (trackedCaloriesBurned, filterConditions) => {
   trackedCaloriesBurned.map((trackedActivity) => {
     if (filterConditions.activity === "" || (trackedActivity.activity.toLowerCase().includes(filterConditions.activity.toLowerCase()))) {
       if (filterConditions.dateTracked === "" || (filterConditions.dateTracked === trackedActivity.dateTracked)) {
-        filteredTrackedCaloriesBurned.push(trackedActivity)
+        if (filterConditions.durationMinutes === "" || (Number(filterConditions.durationMinutes) === Number(trackedActivity.durationMinutes))) {
+          filteredTrackedCaloriesBurned.push(trackedActivity)
+        }
       }
     }
   })

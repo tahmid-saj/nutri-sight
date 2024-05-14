@@ -11,6 +11,7 @@ import Button from "../../../../shared/button/button.component";
 const ActivityDateTable = () => {
   const gridRef = useRef()
   const { searchActivityResults, addTrackedActivityDate } = useContext(CaloriesBurnedContext)
+  
   const rowData = searchActivityResults.map((activityResult) => {
     return {
       Activity: activityResult.activity,
