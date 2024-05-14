@@ -7,7 +7,9 @@ import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calori
 
 const defaultFormFields = {
   activity: "",
-  dateTracked: ""
+  dateTracked: "",
+  weightPounds: "",
+  durationMinutes: ""
 }
 
 const ActivityDateForm = () => {
@@ -40,6 +42,13 @@ const ActivityDateForm = () => {
         <FormInput label="Activity" type="text" required onChange={ handleChange }
                             name="activity" value={ formFields.activity }></FormInput>
         
+        <p>Optional:</p>
+        <FormInput label="Weight (pounds)" type="text" onChange={ handleChange }
+                            name="weightPounds" value={ formFields.weightPounds }></FormInput>
+
+        <FormInput label="Duration (minutes)" type="text" onChange={ handleChange }
+                    name="durationMinutes" value={ formFields.durationMinutes }></FormInput>
+
         <Button type="submit">Search Activity</Button>
       </form>
     </div>
