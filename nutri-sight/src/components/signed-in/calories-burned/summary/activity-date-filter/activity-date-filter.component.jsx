@@ -7,7 +7,8 @@ import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calorie
 
 const defaultFormFields = {
   activity: "",
-  dateTracked: ""
+  dateTracked: "",
+  durationMinutes: ""
 }
 
 const ActivityDateFilter = () => {
@@ -22,7 +23,8 @@ const ActivityDateFilter = () => {
     event.preventDefault()
 
     if (formFields.activity === "" && formFields.dateTracked === "" &&
-      !formFields.activity && !formFields.dateTracked) {
+      !formFields.activity && !formFields.dateTracked &&
+      !formFields.durationMinutes && !formFields.durationMinutes) {
         console.log("please fill out all info")
         return
     }
@@ -51,7 +53,10 @@ const ActivityDateFilter = () => {
         
         <FormInput label="Activity" type="text" onChange={ handleChange }
                             name="activity" value={ formFields.activity }></FormInput>
-        
+
+        <FormInput label="Duration (minutes)" type="text" onChange={ handleChange }
+                    name="durationMinutes" value={ formFields.durationMinutes }></FormInput>
+
         <div className="buttons-container">
           <Button type="submit">Filter</Button>
           <Button type="button" onClick={ handleClearFilter }>Clear</Button>
