@@ -34,7 +34,9 @@ const filterActivityDatesHelper = (trackedCaloriesBurned, filterConditions) => {
   trackedCaloriesBurned.map((trackedActivity) => {
     if (filterConditions.activity === "" || (trackedActivity.activity.toLowerCase().includes(filterConditions.activity.toLowerCase()))) {
       if (filterConditions.dateTracked === "" || (filterConditions.dateTracked === trackedActivity.dateTracked)) {
-        filteredTrackedCaloriesBurned.push(trackedActivity)
+        if (filterConditions.durationMinutes === "" || (Number(filterConditions.durationMinutes) === Number(trackedActivity.durationMinutes))) {
+          filteredTrackedCaloriesBurned.push(trackedActivity)
+        }
       }
     }
   })
@@ -59,6 +61,7 @@ export const CaloriesBurnedContext = createContext({
   //     durationMinutes: 60,
   //     caloriesBurnedPerHour: 354,
   //     totalCaloriesBurned: 354,
+  //     weightPounds: 150,
   //     activityId: 123
   //   }
   // ]
@@ -67,7 +70,8 @@ export const CaloriesBurnedContext = createContext({
   // filterConditions structure:
   // {
   //   dateTracked: "",
-  //   activity: ""
+  //   activity: "",
+  //   durationMinutes: "",
   // }
   
   trackedCaloriesBurnedView: [],
