@@ -9,6 +9,7 @@ import NutritionTrackerSummary from "./nutrition-tracker/nutrition-tracker-summa
 import { useContext, Fragment } from "react"
 import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context"
 import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context"
+import ChatBot from "../../shared/chatbot/chatbot.component"
 
 const Dashboard = () => {
   const { nutritionTrackedDays } = useContext(NutritionTrackerContext)
@@ -16,12 +17,16 @@ const Dashboard = () => {
 
   if (nutritionTrackedDays.length === 0 && trackedCaloriesBurned.length === 0) {
     return (
-      <h4>Nothing yet, track nutrition and activities to get started!</h4>
+      <Fragment>
+        <ChatBot></ChatBot>
+        <h4>Nothing yet, track nutrition and activities to get started!</h4>
+      </Fragment>
     )
   }
 
   return (
     <div className="dashboard-container">
+      <ChatBot></ChatBot>
       {
         nutritionTrackedDays.length !== 0 &&
         <div className="nutrition-tracker-dashboard-container">
