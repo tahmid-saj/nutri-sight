@@ -8,11 +8,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { UserProvider } from './contexts/shared/user/user.context';
+import { ChatBotProvider } from './contexts/shared/chatbot/chatbot.context';
 import { NutrientPredictorProvider } from './contexts/shared/nutrient-predictor/nutrient-predictor.context';
 import { NutritionTrackerProvider as NutritionTrackerProviderSignedOut } from './contexts/signed-out/nutrition-tracker/nutrition-tracker.context';
 import { CaloriesBurnedProvider as CaloriesBurnedProviderSignedOut } from './contexts/signed-out/calories-burned/calories-burned.context';
 import { RecipesProvider } from './contexts/shared/recipes/recipes.context';
-
 
 import { NutritionTrackerProvider as NutritionTrackerProviderSignedIn } from './contexts/signed-in/nutrition-tracker/nutrition-tracker.context';
 import { CaloriesBurnedProvider as CaloiriesBurnedProviderSignedIn } from './contexts/signed-in/calories-burned/calories-burned.context';
@@ -21,21 +21,23 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <NutrientPredictorProvider>
-        <NutritionTrackerProviderSignedOut>
-          <CaloriesBurnedProviderSignedOut>
-            <RecipesProvider>
-              <UserProvider>
-                <NutritionTrackerProviderSignedIn>
-                  <CaloiriesBurnedProviderSignedIn>
-                    <App />
-                  </CaloiriesBurnedProviderSignedIn>
-                </NutritionTrackerProviderSignedIn>
-              </UserProvider>
-            </RecipesProvider>
-          </CaloriesBurnedProviderSignedOut>
-        </NutritionTrackerProviderSignedOut>
-      </NutrientPredictorProvider>
+      <ChatBotProvider>
+        <NutrientPredictorProvider>
+          <NutritionTrackerProviderSignedOut>
+            <CaloriesBurnedProviderSignedOut>
+              <RecipesProvider>
+                <UserProvider>
+                  <NutritionTrackerProviderSignedIn>
+                    <CaloiriesBurnedProviderSignedIn>
+                      <App />
+                    </CaloiriesBurnedProviderSignedIn>
+                  </NutritionTrackerProviderSignedIn>
+                </UserProvider>
+              </RecipesProvider>
+            </CaloriesBurnedProviderSignedOut>
+          </NutritionTrackerProviderSignedOut>
+        </NutrientPredictorProvider>
+      </ChatBotProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
