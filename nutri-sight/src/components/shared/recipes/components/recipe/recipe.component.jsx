@@ -1,13 +1,16 @@
 import "./recipe.styles.jsx";
 import { RecipeContainer } from "./recipe.styles.jsx";
 
-import { Component, useState } from "react";
+import { Component, useState, useContext } from "react";
 import Servings from "./servings/servings.component";
 import Ingredients from "./ingredients/ingredients.component";
+import NutrientPrediction from "./nutrient-prediction/nutrient-prediction.component.jsx";
 
 import SimplePaper from "../../../mui/paper/paper.component.jsx";
 import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js";
 import OutlinedCard from "../../../mui/card/card.component.jsx";
+
+import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context.js";
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.paper.formPaper
@@ -19,6 +22,8 @@ const cardStyles = {
 }
 
 const Recipe = () => {
+  const { displayedRecipe } = useContext(RecipesContext)
+
   return (
     <RecipeContainer>
       <SimplePaper styles={ paperStyles }>
@@ -28,6 +33,13 @@ const Recipe = () => {
       <OutlinedCard styles={ cardStyles }>
         <Ingredients></Ingredients>
       </OutlinedCard>
+
+      {
+        displayedRecipe.nutrientPredictions !== undefined && displayedRecipe.nutrientPredictions.length !== 0 ? (
+        <OutlinedCard>
+          <NutrientPrediction></NutrientPrediction>
+        </OutlinedCard>) : null
+      }
     </RecipeContainer>
   )
 }
