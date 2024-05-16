@@ -44,7 +44,7 @@ const Search = () => {
                 onChange={ handleChange } value={ formFields.searchedRecipe }></FormInput>
 
       <div className="search-button-container">
-        <Button buttonType="regularButton" type="submit">Search</Button>
+        <Button buttonType="regular-button" type="submit">Search</Button>
       </div>
     </form>
   );

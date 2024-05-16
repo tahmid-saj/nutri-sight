@@ -70,8 +70,8 @@ const UploadImage = () => {
                   onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.image) } value={ formFields.uploadedImage } accept="image/*"></FormInput>
 
         <div className="buttons-container">
-          <Button buttonType="regularButton" type="submit">Predict</Button>
-          <Button buttonType="regularButton" type="button" onClick={ resetFormFields }>Clear</Button>
+          <Button buttonType="regular-button" type="submit">Predict</Button>
+          <Button buttonType="regular-button" type="button" onClick={ resetFormFields }>Clear</Button>
         </div>
       </form>
 

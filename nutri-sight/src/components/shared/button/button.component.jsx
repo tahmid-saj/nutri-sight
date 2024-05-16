@@ -1,13 +1,23 @@
-import "./button.styles.scss";
+import "./button.styles.jsx";
+import { BaseButton, GoogleSignInButton, InvertedButton, RoundedButton } from "./button.styles.jsx";
 
 import { BUTTON_TYPE_CLASSES } from "../../../utils/constants/shared.constants";
 
+const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) => {
+  return ({
+    [BUTTON_TYPE_CLASSES.base]: RoundedButton,
+    [BUTTON_TYPE_CLASSES.google]: GoogleSignInButton,
+    [BUTTON_TYPE_CLASSES.inverted]: InvertedButton
+  }[buttonType])
+}
+
 const Button = ({ children, buttonType, ...otherProps }) => {
+  const CustomButton = getButton(buttonType)
+
   return (
-    <button className={`button-container ${buttonType === "regularButton" ? "button-rounded" : ""} 
-                      ${BUTTON_TYPE_CLASSES[buttonType]}`} { ...otherProps }>
+    <CustomButton { ...otherProps }>
       { children }
-    </button>
+    </CustomButton>
   );
 };
 

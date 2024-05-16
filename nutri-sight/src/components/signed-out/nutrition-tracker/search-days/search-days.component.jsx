@@ -53,7 +53,7 @@ const SearchDays = () => {
                       onChange={ handleChange }></FormInput>
 
           <div className="buttons-container">
-            <Button buttonType="regularButton" type="submit">Search Date</Button>
+            <Button buttonType="regular-button" type="submit">Search Date</Button>
           </div>
         </form>
       </div>

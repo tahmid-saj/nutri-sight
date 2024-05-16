@@ -1,41 +1,42 @@
 import { Fragment, useContext, useState } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 
-import "./navigation.styles.scss";
+import "./navigation.styles.jsx";
+import { OutletContainer } from "./navigation.styles.jsx";
 
 import { signOutUser } from "../../../utils/firebase/firebase.utils";
+import MiniDrawer from "../../../components/shared/mui/drawer/drawer.component.jsx";
 
 import { UserContext } from "../../../contexts/shared/user/user.context";
 import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
 import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context";
 
+import { NAV_LINKS } from "../../../utils/constants/shared.constants.js";
+
 const Navigation = () => {
-  const [color, changeColor] = useState("white");
-  document.body.style.backgroundColor = color;
-
   const { currentUser } = useContext(UserContext);
-  const navigate = useNavigate();
+  
+  // const { updateNutritionTrackedDaysAndSummary } = useContext(NutritionTrackerContext);
+  // const { updateTrackedCaloriesBurned } = useContext(CaloriesBurnedContext)
+  // const navigate = useNavigate();
 
-  const { updateNutritionTrackedDaysAndSummary } = useContext(NutritionTrackerContext);
-  const { updateTrackedCaloriesBurned } = useContext(CaloriesBurnedContext)
-
-  const linearGradient = `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)), url("https://cdn.osxdaily.com/wp-content/uploads/2015/05/Green-Grass-Fields-Wallpaper-1931.jpg")`;
-
-  const handleSignOut = () => {
-    updateNutritionTrackedDaysAndSummary();
-    updateTrackedCaloriesBurned()
-    signOutUser();
-    navigate("/auth");
-  };
-
-  const changeStyle = (backgroundImage, color) => {
-    changeColor(color);
-    document.body.style.backgroundImage = backgroundImage;
-  };
+  // const handleSignOut = () => {
+  //   updateNutritionTrackedDaysAndSummary();
+  //   updateTrackedCaloriesBurned()
+  //   signOutUser();
+  //   navigate("/auth");
+  // };
 
   return (
     <Fragment>
-      <div className="navigation">
+      <MiniDrawer
+        navLinksHeaders={
+          currentUser ? NAV_LINKS.signedIn : NAV_LINKS.signedOut
+        }
+      >
+      </MiniDrawer>
+
+      {/* <div className="navigation">
         <Link className="logo" to="/"
           // onClick={ () => changeColor("#00150d") }
           >
@@ -115,9 +116,11 @@ const Navigation = () => {
           }
 
         </div>
-      </div>
+      </div> */}
 
-      <Outlet/>
+      <OutletContainer>
+        <Outlet/>
+      </OutletContainer>
     </Fragment>
   );
 };

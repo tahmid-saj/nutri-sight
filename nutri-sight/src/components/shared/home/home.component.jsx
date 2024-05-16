@@ -1,59 +1,84 @@
-import React from 'react';
-import { Slide } from 'react-slideshow-image';
-import 'react-slideshow-image/dist/styles.css'
+import "./home.styles.jsx";
+import { HomeContainer } from "./home.styles.jsx";
+import MediaCard from "../mui/card/card.component.jsx"
+import { Fragment } from "react";
 
-import "./home.styles.scss";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/shared/user/user.context";
 
-import AboutLinks from "./about-links/about-links.component";
+import { NAV_LINKS } from "../../../utils/constants/shared.constants";
 
-const spanStyle = {
-  padding: '20px',
-  // background: '#efefef',
-  color: '#000000'
+const styles = {
+  width: 475,
+  height: 400,
 }
-
-const divStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundSize: 'cover',
-  height: '650px'
-}
-
-const slideImages = [
-  {
-    url: 'https://img.freepik.com/premium-photo/top-view-classic-spaghetti-pasta-with-tomato-sauce-dark-plate-copy-space_67155-5968.jpg',
-    caption: 'Nutrient Predictor'
-  },
-  {
-    url: 'https://img.freepik.com/premium-photo/background-cooking-black-wooden-background-top-view-free-space-your-text_187166-5650.jpg',
-    caption: 'Nutrition Tracker'
-  },
-  {
-    url: 'https://i.pinimg.com/736x/e6/7d/af/e67daf68a6e8f6d4a9283cb7d64b098c.jpg',
-    caption: 'Recipes'
-  },
-  {
-    url: 'https://img.freepik.com/free-photo/flat-lay-tasty-local-food-assortment-with-copy-space_23-2148833802.jpg',
-    caption: 'Calories Burned'
-  },
-];
 
 const Home = () => {
-  return (
-    <div className="slide-container">
-      <Slide>
-      {slideImages.map((slideImage, index)=> (
-          <div key={index}>
-            <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
-              <span style={ spanStyle }>{slideImage.caption}</span>
-            </div>
-          </div>
-        ))} 
-      </Slide>
+  const { currentUser } = useContext(UserContext)
+  
+  const homeCardContent = {
+    chatbot: {
+      header: "Chatbot",
+      description: "Receive advice on maintaining a healthy diet, nutrition, exercise and much more",
+      imageUrl: "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/334804806/original/793cad2ae511c4c9b30c1d5e8206b8eb8ab21087/create-a-ai-chat-bot-embedded-website-for-you.png",
+      path: currentUser ? NAV_LINKS.paths.signedIn.chatbot : NAV_LINKS.paths.signedOut.chatbot
+    },
+    storage: {
+      header: "Storage",
+      description: "Upon signing up and logging into your account, we will store your data and provide specific advices for you",
+      imageUrl: "https://media.istockphoto.com/id/1352564117/vector/database-sql-structured-query-language-people-team-discuss-coding-for-storing-data-in-server.jpg?s=612x612&w=0&k=20&c=eRlvikJYlY8tJ8pVxgZFUv5GLgQbTy_rq18jKLZxq8A=",
+      path: currentUser ? NAV_LINKS.paths.signedIn.dashboard : NAV_LINKS.paths.signedOut.auth
+    },
+    nutrientPredictor: {
+      header: "Nutrient Predictor",
+      description: "Get a prediction on the nutrients of your daily meals by either providing a description or an image of the food",
+      imageUrl: "https://samsungfood.com/wp-content/uploads/2023/08/analyize_nutrition-1024x923.jpg",
+      path: currentUser ? NAV_LINKS.paths.signedIn.nutrientPredictor : NAV_LINKS.paths.signedOut.nutrientPredictor
+    },
+    nutritionTracker: {
+      header: "Nutrition Tracker",
+      description: "Track your everyday consumption and better manage a healthy diet",
+      imageUrl: "https://static.vecteezy.com/system/resources/thumbnails/013/416/799/small_2x/woman-choose-between-healthy-and-unhealthy-food-free-vector.jpg",
+      path: currentUser ? NAV_LINKS.paths.signedIn.nutritionTracker : NAV_LINKS.paths.signedOut.nutritionTracker
+    },
+    caloriesBurned: {
+      header: "Calories Burned",
+      description: "Determine the calories burned through your exercises and activities, and add them to the tracker",
+      imageUrl: "https://static.vecteezy.com/system/resources/thumbnails/006/461/712/small/set-of-man-doing-exercise-gym-bike-jump-rope-and-treadmill-illustration-vector.jpg",
+      path: currentUser ? NAV_LINKS.paths.signedIn.caloriesBurned : NAV_LINKS.paths.signedOut.caloriesBurned
+    },
+    recipes: {
+      header: "Recipes",
+      description: "Search over 1,000,000 recipes and get their nutrition information and detailed instructions on making them",
+      imageUrl: "https://png.pngtree.com/png-vector/20220712/ourmid/pngtree-flat-style-vector-illustration-of-a-creative-cooking-cookbook-featuring-healthy-recipes-vector-png-image_47565766.jpg",
+      path: currentUser ? NAV_LINKS.paths.signedIn.recipes : NAV_LINKS.paths.signedOut.recipes
+    },
+  }
 
-      <AboutLinks />
-    </div>
+  return (
+    <Fragment>
+      <HomeContainer>
+        <MediaCard styles={ styles } header={ homeCardContent.chatbot.header } imageUrl={ homeCardContent.chatbot.imageUrl } 
+          imageTitle={ homeCardContent.chatbot.header } path={ homeCardContent.chatbot.path } content={ homeCardContent.chatbot.description }></MediaCard>
+
+        <MediaCard styles={ styles } header={ homeCardContent.storage.header } imageUrl={ homeCardContent.storage.imageUrl } 
+          imageTitle={ homeCardContent.storage.header } path={ homeCardContent.storage.path } content={ homeCardContent.storage.description }></MediaCard>
+        
+        <MediaCard styles={ styles } header={ homeCardContent.nutrientPredictor.header } imageUrl={ homeCardContent.nutrientPredictor.imageUrl } 
+          imageTitle={ homeCardContent.nutrientPredictor.header } path={ homeCardContent.nutrientPredictor.path } content={ homeCardContent.nutrientPredictor.description }></MediaCard>
+      </HomeContainer>
+
+      <HomeContainer>
+        <MediaCard styles={ styles } header={ homeCardContent.nutritionTracker.header } imageUrl={ homeCardContent.nutritionTracker.imageUrl } 
+          imageTitle={ homeCardContent.nutritionTracker.header } path={ homeCardContent.nutritionTracker.path } content={ homeCardContent.nutritionTracker.description }></MediaCard>
+
+        <MediaCard styles={ styles } header={ homeCardContent.caloriesBurned.header } imageUrl={ homeCardContent.caloriesBurned.imageUrl } 
+          imageTitle={ homeCardContent.caloriesBurned.header } path={ homeCardContent.caloriesBurned.path } content={ homeCardContent.caloriesBurned.description }></MediaCard>
+        
+        <MediaCard styles={ styles } header={ homeCardContent.recipes.header } imageUrl={ homeCardContent.recipes.imageUrl } 
+          imageTitle={ homeCardContent.recipes.header } path={ homeCardContent.recipes.path } content={ homeCardContent.recipes.description }></MediaCard>
+      </HomeContainer>
+    </Fragment>
   );
 };
 
