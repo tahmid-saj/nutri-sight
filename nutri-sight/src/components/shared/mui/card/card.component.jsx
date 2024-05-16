@@ -1,38 +1,49 @@
-import * as React from 'react';
+import { Fragment } from 'react';
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
 
-export default function MediaCard({ styles, header, imageUrl, imageTitle, path, content }) {
+export default function OutlinedCard({ styles, header, content, children }) {
   return (
-    <Card sx={{ margin: "1%", width: styles.width, height: styles.height }}>
-      <CardMedia
-        // sx={{ height: styles.height }}
-        // src={ "https://buffer.com/library/content/images/2023/10/free-images.jpg" }
-        title={`${imageTitle}`}
-      />
-      <img src={`${imageUrl}`} alt={ `${imageTitle}` } width={ "auto" } height={ styles.height * 0.5 } objectFit={ "contain" }/>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          { header }
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          { content }
-        </Typography>
-      </CardContent>
+    <Box sx={{ minWidth: 275 }}>
+      <Card sx={{ backgroundColor: styles.backgroundColor }} variant="outlined">
+        <Fragment>
+          <CardContent>
+            {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              Word of the Day
+            </Typography> */}
+            
+            {
+              header ? 
+            <Typography variant="h6" component="div">
+              { header }
+            </Typography> : null
+            }
 
-      <CardActions>
-        {/* <Button size="small">Share</Button> */}
-        <Button size="small">
-          <Link to={ path }>
-            Learn More
-          </Link>
-        </Button>
-      </CardActions>
-    </Card>
+            {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              adjective
+            </Typography> */}
+
+            {
+              content ?
+              <Typography variant="body2">
+                { content }
+              </Typography> : null
+            }
+
+            {
+              children ? children : null
+            }
+          </CardContent>
+
+          {/* <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions> */}
+        </Fragment>
+      </Card>
+    </Box>
   );
 }

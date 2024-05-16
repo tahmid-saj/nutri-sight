@@ -1,8 +1,14 @@
+import "./nutrients-info.styles.jsx";
+import { NutrientsInfoContainer } from "./nutrients-info.styles.jsx";
+
 import React, { useContext, Fragment } from "react";
-
-import "./nutrients-info.styles.scss";
-
 import { NutrientPredictorContext } from "../../../../contexts/shared/nutrient-predictor/nutrient-predictor.context";
+import { Divider, Typography } from "@mui/material";
+import OutlinedCard from "../../mui/card/card.component.jsx";
+
+const outlinedCardStyles = {
+  backgroundColor: "#E7FFE7"
+}
 
 const NutrientsInfo = () => {
   const { nutrientPredictions } = useContext(NutrientPredictorContext);
@@ -12,38 +18,38 @@ const NutrientsInfo = () => {
   return (
     nutrientPredictions.map((prediction, index) => {
       return (
-        <div key={ index } className="nutrients-info-container">
-          <strong><h3>{`${prediction.name.toUpperCase()}`}</h3></strong>
+        <NutrientsInfoContainer key={ index }>
+          <OutlinedCard styles={ outlinedCardStyles }>
+          <strong><Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">{`${prediction.name.toUpperCase()}`}</Typography></strong>
           <br></br>
 
-          <h4>{`Calories - ${prediction.calories}`}</h4>
-          <h4>{`Serving size - ${prediction.servingSizeG} g`}</h4>
+          <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Calories - ${prediction.calories}`}</Typography>
+          <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Serving size - ${prediction.servingSizeG} g`}</Typography>
 
-          <div className="nutrient-info-separator-container">
-            <hr className="rounded"/>
-          </div>
+          <br></br>
+          <Divider/>
           <br></br>
 
           <strong><h4>Macronutrients</h4></strong>
-          <h5>{`Carbohydrates - ${prediction.macronutrients.carbohydratesTotalG} g`}</h5>
-          <h5>{`Protein - ${prediction.macronutrients.proteinG} g`}</h5>
-          <h5>{`Fat - ${prediction.macronutrients.fatTotalG} g`}</h5>
-          <h5>{`Saturated fat - ${prediction.macronutrients.fatSaturatedG} g`}</h5>
+          <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Carbohydrates - ${prediction.macronutrients.carbohydratesTotalG} g`}</Typography>
+          <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Protein - ${prediction.macronutrients.proteinG} g`}</Typography>
+          <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Fat - ${prediction.macronutrients.fatTotalG} g`}</Typography>
+          <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Saturated fat - ${prediction.macronutrients.fatSaturatedG} g`}</Typography>
 
-          <div className="nutrient-info-separator-container">
-            <hr className="rounded"/>
-          </div>
+          <br></br>
+          <Divider/>
           <br></br>
 
           <strong><h4>Micronutrients</h4></strong>
             <Fragment key={ index }>
-              <h5>{`Sodium - ${prediction.micronutrients.sodiumMG} mg`}</h5>
-              <h5>{`Potassium - ${prediction.micronutrients.potassiumMG} mg`}</h5>
-              <h5>{`Cholesterol - ${prediction.micronutrients.cholesterolMg} mg`}</h5>
-              <h5>{`Fiber - ${prediction.micronutrients.fiberG} g`}</h5>
-              <h5>{`Sugar - ${prediction.micronutrients.sugarG} g`}</h5>
+              <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Sodium - ${prediction.micronutrients.sodiumMG} mg`}</Typography>
+              <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Potassium - ${prediction.micronutrients.potassiumMG} mg`}</Typography>
+              <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Cholesterol - ${prediction.micronutrients.cholesterolMg} mg`}</Typography>
+              <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Fiber - ${prediction.micronutrients.fiberG} g`}</Typography>
+              <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Sugar - ${prediction.micronutrients.sugarG} g`}</Typography>
             </Fragment>
-        </div>
+          </OutlinedCard>
+        </NutrientsInfoContainer>
       )
     })
   )
