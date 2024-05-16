@@ -1,8 +1,9 @@
+import "./search-result.styles.jsx";
+import { SearchResultContainer } from "./search-result.styles.jsx";
+
 import { useContext } from "react";
-
-import "./search-result.styles.scss";
-
 import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
+import { Typography } from "@mui/material";
 
 const SearchResult = ({ recipe }) => {
   const { displayRecipe } = useContext(RecipesContext);
@@ -19,10 +20,10 @@ const SearchResult = ({ recipe }) => {
   }
 
   return (
-    <div className="search-result-container" onClick={ handleClick }>
-      <h3>{`${recipe.title}`}</h3>
-      <h5>{`${recipe.publisher}`}</h5>
-    </div>
+    <SearchResultContainer onClick={ handleClick }>
+      <Typography variant="subtitle1">{`${recipe.title}`}</Typography>
+      <Typography variant="body2">{`${recipe.publisher}`}</Typography>
+    </SearchResultContainer>
   )
 };
 

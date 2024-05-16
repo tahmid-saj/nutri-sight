@@ -9,7 +9,9 @@ import Typography from '@mui/material/Typography';
 export default function OutlinedCard({ styles, header, content, children }) {
   return (
     <Box sx={{ minWidth: 275 }}>
-      <Card sx={{ backgroundColor: styles.backgroundColor }} variant="outlined">
+      <Card 
+        sx={ styles } 
+        variant="outlined">
         <Fragment>
           <CardContent>
             {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>

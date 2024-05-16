@@ -5,9 +5,10 @@ import React, { useContext, Fragment } from "react";
 import { NutrientPredictorContext } from "../../../../contexts/shared/nutrient-predictor/nutrient-predictor.context";
 import { Divider, Typography } from "@mui/material";
 import OutlinedCard from "../../mui/card/card.component.jsx";
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js";
 
 const outlinedCardStyles = {
-  backgroundColor: "#E7FFE7"
+  backgroundColor: COLOR_CODES.card.infoCard
 }
 
 const NutrientsInfo = () => {

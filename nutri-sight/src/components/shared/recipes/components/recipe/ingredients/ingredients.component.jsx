@@ -1,32 +1,33 @@
+import "./ingredients.styles.jsx";
+import { IngredientsContainer, IngredientQuantitiesContainer } from "./ingredients.styles.jsx";
+
 import { useContext } from "react";
-
-import "./ingredients.styles.scss";
-
 import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context";
+import { Typography } from "@mui/material";
 
 const Ingredients = () => {
   const { displayedRecipe } = useContext(RecipesContext);
 
   return (
-    <div className="ingredients-container">
-      <h2>Recipe Ingredients</h2>
-      <h3>{`${displayedRecipe.title}`}</h3>
+    <IngredientsContainer>
+      <Typography variant="h5">Recipe Ingredients</Typography>
+      <Typography variant="h6">{`${displayedRecipe.title}`}</Typography>
 
-      <div className="ingredient-quantities-container">
+      <IngredientQuantitiesContainer>
         {
           displayedRecipe !== undefined && 
           displayedRecipe.ingredients !== undefined && displayedRecipe.ingredients.length !== 0 &&
           displayedRecipe.updatedIngredients !== undefined && displayedRecipe.updatedIngredients.length !== 0 &&
           displayedRecipe.updatedIngredients.map((ingredient, index) => {
             return (
-              <h4 key={ index }>{`${ingredient.quantity !== null ? (ingredient.quantity) : ""} ${ingredient.unit} ${ingredient.description}`}</h4>
+              <Typography sx={{ padding: "1.5%" }} key={ index }>{`${ingredient.quantity !== null ? (ingredient.quantity) : ""} ${ingredient.unit} ${ingredient.description}`}</Typography>
             )
           })
         }
 
 
-      </div>
-    </div>
+      </IngredientQuantitiesContainer>
+    </IngredientsContainer>
   )
 };
 

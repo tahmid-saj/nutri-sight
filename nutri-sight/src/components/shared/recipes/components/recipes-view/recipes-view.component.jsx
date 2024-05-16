@@ -5,9 +5,7 @@ import Recipe from "../recipe/recipe.component";
 
 const RecipesView = () => {
   return (
-    <Fragment>
-      <Recipe></Recipe>
-    </Fragment>
+    <Recipe></Recipe>
   )
 };
 

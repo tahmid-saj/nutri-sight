@@ -141,6 +141,7 @@ export default function MiniDrawer({ navLinksHeaders, children }) {
         <Toolbar
           sx={{ 
             background: "linear-gradient(109.6deg, rgb(5, 84, 94) 16%, rgb(187, 187, 187) 91.1%)",
+            // background: "#23c686",
             width: "100%"
           }}>
           <IconButton

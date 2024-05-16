@@ -6,6 +6,7 @@ import { ChatBotContainer, ChatBotInputMessage } from "./chatbot.styles.jsx"
 import ChatBotResponse from "./chatbot-response/chatbot-response.component"
 import { ChatBotContext } from "../../../contexts/shared/chatbot/chatbot.context"
 import { Divider, Typography } from "@mui/material"
+import { ButtonsContainer } from "../button/button.styles.jsx"
 
 const defaultFormFields = {
   messageInput: ""
@@ -40,10 +41,10 @@ const ChatBot = () => {
       <ChatBotInputMessage onSubmit={ handleSubmit }>
         <FormInput label="Message chatbot" type="text" required onChange={ handleChange }
                   name="messageInput" value={ formFields.messageInput }/>
-        <div className="buttons-container">
+        <ButtonsContainer>
           <Button type="submit">Send</Button>
           <Button type="button" onClick={ resetFormFields }>Clear</Button>
-        </div>
+        </ButtonsContainer>
       </ChatBotInputMessage>
 
       {

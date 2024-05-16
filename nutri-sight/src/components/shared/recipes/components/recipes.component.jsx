@@ -1,3 +1,6 @@
+import "./recipes.styles.jsx"
+import { SearchResultsRecipeContainer, SearchResultsMainContainer } from "./recipes.styles.jsx";
+
 import React, { Fragment, Component, useEffect, useContext } from "react";
 
 import Header from "./header/header.component";
@@ -6,34 +9,30 @@ import Recipe from "./recipe/recipe.component";
 import RecipesView from "./recipes-view/recipes-view.component";
 
 import { RecipesContext } from "../../../../contexts/shared/recipes/recipes.context";
+import { Divider, Typography } from "@mui/material";
 
 const Recipes = () => {
   const { displayedRecipe, displayedRecipesOnPage } = useContext(RecipesContext);
 
   return (
     <Fragment>
-      <h3 className="recipes-header-caption">Search some recipes</h3>
+      <SearchResultsRecipeContainer>
+      <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">Search some recipes</Typography>
       <Header></Header>
 
-      <div className="search-results-recipe-container">
+      <Divider sx={{ marginRight: "2%" }}/>
+
         { 
           displayedRecipesOnPage.length !== 0 &&
-          <Fragment>
-            <div 
-              className="search-results-main-container"
-              >
-              {
-                  <SearchResults></SearchResults>
-              }
-            </div>
+          <SearchResultsMainContainer>
+              <SearchResults></SearchResults>
               {
                 displayedRecipe !== undefined && displayedRecipe !== null &&
                 <RecipesView ></RecipesView>
               }
-                            
-          </Fragment>
+          </SearchResultsMainContainer>
         }
-      </div>
+      </SearchResultsRecipeContainer>
     </Fragment>
   );
 };
