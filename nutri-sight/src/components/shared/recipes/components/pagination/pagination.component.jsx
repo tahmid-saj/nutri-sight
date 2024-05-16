@@ -1,10 +1,11 @@
+import "./pagination.styles.jsx";
+import { PaginationContainer, PaginationButtonsContainer } from "./pagination.styles.jsx";
+
 import React, { Component, useContext } from "react";
-
-import "./pagination.styles.scss";
-
 import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
 
 import { PAGINATION_BUTTONS } from "../../../../../utils/constants/recipes.constants";
+import Button from "../../../button/button.component.jsx";
 
 const Pagination = () => {
   const { previousPageNumber, nextPageNumber, 
@@ -23,19 +24,19 @@ const Pagination = () => {
   };
     
   return (
-    <div className="pagination-container">
-      <div className="pagination-buttons-container">
-        <button className="previous-page-button" type="button" onClick={ handlePreviousPage }
+    <PaginationContainer>
+      <PaginationButtonsContainer>
+        <Button type="button" onClick={ handlePreviousPage }
           style={{ visibility: `${displayPreviousPage === false ? "hidden" : ""}` }}>
           {`< Page ${previousPageNumber}`}
-        </button>
+        </Button>
         
-        <button className="next-page-button" type="button" onClick={ handleNextPage }
+        <Button type="button" onClick={ handleNextPage }
           style={{ visibility: `${displayNextPage === false ? "hidden" : ""}` }}>
           {`Page ${nextPageNumber} >`}
-        </button>
-      </div>
-    </div>
+        </Button>
+      </PaginationButtonsContainer>
+    </PaginationContainer>
   );
 
 };

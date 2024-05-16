@@ -1,11 +1,10 @@
 import { useState, useContext } from "react";
 
-import "./search.styles.scss";
-
 import FormInput from "../../../form-input/form-input.component";
 import Button from "../../../button/button.component";
 
 import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
+import { ButtonsContainer } from "../../../button/button.styles";
 
 const defaultFormFields = {
   searchedRecipe: ""
@@ -39,13 +38,13 @@ const Search = () => {
   };
 
   return (
-    <form onSubmit={ handleSubmit } className="search-recipe-container">
+    <form onSubmit={ handleSubmit }>
       <FormInput label="Search recipes" type="text" required name="searchedRecipe"
                 onChange={ handleChange } value={ formFields.searchedRecipe }></FormInput>
 
-      <div className="search-button-container">
+      <ButtonsContainer>
         <Button buttonType="regular-button" type="submit">Search</Button>
-      </div>
+      </ButtonsContainer>
     </form>
   );
 };

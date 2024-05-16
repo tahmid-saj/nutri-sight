@@ -7,11 +7,11 @@ export const UploadImageContainer = styled.div`
 `
 
 export const UploadImageForm = styled.form`
-  background-color: rgba(0, 230, 103, 0.15);
+  /* background-color: rgba(0, 230, 103, 0.15);
   box-shadow: 4px 4px rgba(0, 230, 103, 0.5);
-  border-radius: 1.5rem;
+  border-radius: 1.5rem; */
   padding: 2%;
-  width: 60%;
+  /* width: 60%; */
 `
 
 export const UploadedImage = styled.img`

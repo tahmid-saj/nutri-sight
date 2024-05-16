@@ -1,7 +1,8 @@
-import React from "react";
+import "./header.styles.jsx";
+import { HeaderContainer } from "./header.styles.jsx";
 
-import "./header.styles.scss";
-import "../recipes.styles.scss";
+import React from "react";
+// import "../recipes.styles.scss";
 
 import Search from "../search/search.component";
 import Navigation from "../navigation/navigation.component";
@@ -10,15 +11,15 @@ const Header = (
   // { displayRecipeViewHandler, updateSearchResults, handleSearchChange }
   ) => {
   return (
-    <header className="header-container">
+    <HeaderContainer>
       <Search 
               // displayRecipeViewHandler={ displayRecipeViewHandler } 
               // updateSearchResults={ updateSearchResults }
               // handleSearchChange={ handleSearchChange }
               ></Search>
 
-      <Navigation></Navigation>
-    </header>
+      {/* <Navigation></Navigation> */}
+    </HeaderContainer>
   )
 };
 
