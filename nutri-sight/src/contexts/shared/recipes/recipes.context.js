@@ -6,6 +6,7 @@ import { calculateIngredientsAfterServingsUpdate } from "../../../utils/calculat
 import { validateRecipeNameSearched } from "../../../utils/validations/recipes.validations";
 
 import { RECIPES_PER_PAGE, PAGINATION_BUTTONS } from "../../../utils/constants/recipes.constants";
+import { getNutrientPredictions } from "../../../utils/api-requests/nutrient-predictor.requests";
 
 // helper functions
 
@@ -39,6 +40,7 @@ const displaySearchedRecipesOnPageHelper = (searchedRecipes, currentPageNumber) 
 
 const displayRecipeHelper = async (searchedRecipes, clickedRecipe) => {
   const recipe = await getRecipe(clickedRecipe);
+  const nutrientPredictions = await getNutrientPredictions(clickedRecipe.title)
 
   return {
     title: recipe.title,
@@ -49,6 +51,7 @@ const displayRecipeHelper = async (searchedRecipes, clickedRecipe) => {
     cookingTime: recipe.cooking_time,
     ingredients: recipe.ingredients,
     updatedIngredients: recipe.ingredients,
+    nutrientPredictions: nutrientPredictions
   };
 };
 
@@ -131,7 +134,8 @@ export const RecipesContext = createContext({
   //       unit: "" or "cup" or "g" etc,
   //       description: "chopped sweet onion"
   //     },
-  //   ]
+  //   ],
+  //   nutrientPredictions: [ predictions from nutrient predictor API ]
   // }
 
   displaySearchedRecipes: () => {},
