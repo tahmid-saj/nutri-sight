@@ -1,27 +1,31 @@
-import React, { Component, useContext } from "react";
+import "./nutrient-predictor.styles.jsx";
+import { NutrientPredictorContainer, NutrientPredictionInfo } from "./nutrient-predictor.styles"
 
-import "./nutrient-predictor.styles.scss";
+import React, { Component, useContext } from "react";
 import UploadFoodImage from "./upload-food-image/upload-food-image.component";
 import NutrientsInfo from "./nutrients-info/nutrients-info.component";
 
 import { NutrientPredictorContext } from "../../../contexts/shared/nutrient-predictor/nutrient-predictor.context";
+import { Divider, Typography } from "@mui/material";
 
 const NutrientPredictor = () => {
   const { nutrientPredictions } = useContext(NutrientPredictorContext);
 
   return (
-    <div className="upload-food-image-nutrients-info-container">
-      <h3>Predict some nutrients</h3>
+    <NutrientPredictorContainer>
+      <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">Predict some nutrients</Typography>
       <UploadFoodImage 
         // displayNutrients={ this.displayNutrients }
       ></UploadFoodImage>
 
-      <div className="nutrients-info-predictions-container">
+      <Divider/>
+
+      <NutrientPredictionInfo>
       {
         nutrientPredictions.length ? <NutrientsInfo></NutrientsInfo> : null
       }
-      </div>
-    </div>
+      </NutrientPredictionInfo>
+    </NutrientPredictorContainer>
   );
 };
 
