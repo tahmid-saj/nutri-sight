@@ -6,7 +6,10 @@ import FormInput from "../../../shared/form-input/form-input.component";
 import Button from "../../../shared/button/button.component";
 import AddMicronutrients from "../add-micronutrients/add-micronutrients.component";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+// import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { useDispatch, useSelector } from "react-redux"
+import { selectNutritionTrackedDays, selectFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector"
+import { addDayTracked, updateDayTracked, setFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
 
 const defaultFormFields = {
   dateTracked: "",
@@ -17,7 +20,10 @@ const defaultFormFields = {
 };
 
 const UpdateConsumptionForm = () => {
-  const { nutritionTrackedDays, addDayTracked, updateDayTracked } = useContext(NutritionTrackerContext);
+  // const { nutritionTrackedDays, addDayTracked, updateDayTracked } = useContext(NutritionTrackerContext);
+  const dispatch = useDispatch()
+  const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
+  const formInputMicronutrients = useSelector(selectFormInputMicronutrients)
 
   const [formFields, setFormFields] = useState(defaultFormFields);
 
@@ -30,7 +36,7 @@ const UpdateConsumptionForm = () => {
 
     console.log(formFields);
 
-    addDayTracked({
+    dispatch(addDayTracked(nutritionTrackedDays, formInputMicronutrients, {
       dateTracked: formFields.dateTracked,
       calories: formFields.calories,
       macronutrients: {
@@ -38,7 +44,8 @@ const UpdateConsumptionForm = () => {
         protein: formFields.protein,
         fat: formFields.fat,
       }
-    });
+    }))
+    dispatch(setFormInputMicronutrients([]))
 
     resetFormFields(); 
   };
@@ -48,7 +55,7 @@ const UpdateConsumptionForm = () => {
 
     console.log(formFields);
 
-    updateDayTracked({
+    dispatch(updateDayTracked(nutritionTrackedDays, formInputMicronutrients, {
       dateTracked: formFields.dateTracked,
       calories: formFields.calories,
       macronutrients: {
@@ -56,7 +63,8 @@ const UpdateConsumptionForm = () => {
         protein: formFields.protein,
         fat: formFields.fat,
       }
-    });
+    }))
+    dispatch(setFormInputMicronutrients([]))
 
     resetFormFields(); 
   };

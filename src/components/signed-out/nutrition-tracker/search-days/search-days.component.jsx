@@ -7,7 +7,10 @@ import Button from "../../../shared/button/button.component";
 
 import ConsumptionInfo from "../consumption-info/consumption-info.component";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+// import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { useDispatch, useSelector } from "react-redux"
+import { selectNutritionTrackedDays } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
+import { getDayTracked } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
 
 const defaultFormFields = {
   dateTracked: ""
@@ -17,7 +20,9 @@ const SearchDays = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [searchedClicked, setSearchClicked] = useState(false)
 
-  const { getDayTracked } = useContext(NutritionTrackerContext)
+  // const { getDayTracked } = useContext(NutritionTrackerContext)
+  const dispatch = useDispatch()
+  const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -29,7 +34,7 @@ const SearchDays = () => {
 
     console.log(event.target.value);
     // resetFormFields();
-    getDayTracked(formFields.dateTracked)
+    dispatch(getDayTracked(nutritionTrackedDays, formFields.dateTracked))
   };
 
   const handleChange = (event) => {

@@ -7,8 +7,8 @@ import { loggerMiddleware } from "./middleware/logger"
 
 // root-reducer
 const middlewares = [
-  process.env.NODE_ENV !== "production" && loggerMiddleware,
-  process.env.NODE_ENV !== "production" && logger
+  // process.env.NODE_ENV !== "production" && loggerMiddleware,
+  // process.env.NODE_ENV !== "production" && logger
 ].filter(Boolean)
 
 const composeEnhancer = (

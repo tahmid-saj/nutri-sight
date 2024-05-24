@@ -3,12 +3,15 @@ import ReactApexChart from 'react-apexcharts'
 
 import "./summary-graph.styles.scss";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+// import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { useSelector } from "react-redux"
+import { selectNutritionTrackedDaysView } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
 
 import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants";
 
 const SummaryGraph = () => {
-  const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext);
+  // const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext);
+  const nutritionTrackedDaysView = useSelector(selectNutritionTrackedDaysView)
 
   const carbohydratesData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
     return nutritionTrackedDay.macronutrients.carbohydrates

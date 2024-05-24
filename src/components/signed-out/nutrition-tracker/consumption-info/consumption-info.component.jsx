@@ -2,12 +2,15 @@ import { useContext, Fragment } from "react";
 import ReactApexChart from "react-apexcharts";
 import "./consumption-info.styles.scss";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+// import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { useSelector } from "react-redux"
+import { selectDayTrackedSearchResult } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
 
 import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants";
 
 const ConsumptionInfo = () => {
-  const { dayTrackedSearchResult } = useContext(NutritionTrackerContext);
+  // const { dayTrackedSearchResult } = useContext(NutritionTrackerContext);
+  const dayTrackedSearchResult = useSelector(selectDayTrackedSearchResult)
 
   if (!dayTrackedSearchResult) {
     return (

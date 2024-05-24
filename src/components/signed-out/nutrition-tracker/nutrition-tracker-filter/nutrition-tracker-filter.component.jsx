@@ -3,7 +3,9 @@ import FormInput from "../../../shared/form-input/form-input.component";
 import "./nutrition-tracker-filter.styles.scss"
 
 import { useState, useContext } from "react"
-import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+// import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { useDispatch } from "react-redux"
+import { filterDayTracked, clearDayTrackedFilter } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
 
 const defaultFormFields = {
   filterStartDate: "",
@@ -12,7 +14,8 @@ const defaultFormFields = {
 
 const NutritionTrackerFilter = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
-  const { filterDayTracked, clearDayTrackedFilter } = useContext(NutritionTrackerContext)
+  // const { filterDayTracked, clearDayTrackedFilter } = useContext(NutritionTrackerContext)
+  const dispatch = useDispatch()
   
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
@@ -26,7 +29,7 @@ const NutritionTrackerFilter = () => {
       return
     }
     
-    filterDayTracked(formFields)
+    dispatch(filterDayTracked(formFields))
   }
 
   const handleChange = (event) => {
@@ -38,7 +41,7 @@ const NutritionTrackerFilter = () => {
     event.preventDefault()
 
     resetFormFields()
-    clearDayTrackedFilter()
+    dispatch(clearDayTrackedFilter())
   }
 
   return (

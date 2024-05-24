@@ -1,4 +1,4 @@
-import React, { Component, useContext, Fragment } from "react";
+import React, { Component, useEffect, Fragment } from "react";
 
 import Summary from "./summary/summary.component";
 
@@ -11,14 +11,50 @@ import TopSearch from "./top-search/top-search.component";
 
 // import { NutritionTrackerContext } from "../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import { useDispatch, useSelector } from "react-redux"
+import { selectNutritionTrackedDays, selectFilterConditions, selectNutritionTrackedDaysView } from "../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
+import { setNutritionTrackedDaysSummary, setNutritionTrackedDaysView, 
+  filterDayTrackedHelper 
+} from "../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
+import { calculateSummary } from "../../../utils/calculations/nutrition-tracker.calculations";
 
 const NutritionTracker = () => {
-  const { nutritionTrackedDays } = useContext(NutritionTrackerContext);
+  // const { nutritionTrackedDays } = useContext(NutritionTrackerContext);
+  const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
+  const filterConditions = useSelector(selectFilterConditions)
+  const nutritionTrackedDaysView = useSelector(selectNutritionTrackedDaysView)
+  const dispatch = useDispatch()
+
+  // update summary if nutritionTrackedDays changes
+  useEffect(() => {
+    if (nutritionTrackedDays && nutritionTrackedDays.length) {
+      // update nutritionTrackedDaysSummary with average consumptions
+      console.log(nutritionTrackedDays);
+  
+      const summary = calculateSummary(nutritionTrackedDays);
+  
+      dispatch(setNutritionTrackedDaysSummary({
+        averageDailyCaloriesConsumption: summary.averageDailyCalories,
+        averageDailyCarbohydratesConsumption: summary.averageDailyCarbohydrates,
+        averageDailyProteinConsumption: summary.averageDailyProtein,
+        averageDailyFatConsumption: summary.averageDailyFat,
+      }))
+    }
+  }, [nutritionTrackedDays, dispatch])
+
+  // update nutritionTrackedDaysView when nutritionTrackedDays or filterConditions change
+  useEffect(() => {
+    if (filterConditions) {
+      const filteredTrackedDays = filterDayTrackedHelper(nutritionTrackedDays, filterConditions)
+      dispatch(setNutritionTrackedDaysView(filteredTrackedDays))
+    } else {
+      dispatch(setNutritionTrackedDaysView(nutritionTrackedDays))
+    }
+  }, [nutritionTrackedDays, filterConditions, dispatch])
 
   return (
     <div className="nutrition-tracker-container">
       {
-        nutritionTrackedDays.length !== 0 &&
+        nutritionTrackedDays && nutritionTrackedDays.length !== 0 &&
         <Fragment>
         <h2 className="nutrition-tracker-summary-header">Summary</h2>
           <TopSearch></TopSearch>

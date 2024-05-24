@@ -29,7 +29,7 @@ root.render(
         <BrowserRouter>
           <ChatBotProvider>
             <NutrientPredictorProvider>
-              <NutritionTrackerProviderSignedOut>
+              {/* <NutritionTrackerProviderSignedOut> */}
                 <CaloriesBurnedProviderSignedOut>
                   <RecipesProvider>
                     {/* <UserProvider> */}
@@ -41,7 +41,7 @@ root.render(
                     {/* </UserProvider> */}
                   </RecipesProvider>
                 </CaloriesBurnedProviderSignedOut>
-              </NutritionTrackerProviderSignedOut>
+              {/* </NutritionTrackerProviderSignedOut> */}
             </NutrientPredictorProvider>
           </ChatBotProvider>
         </BrowserRouter>
