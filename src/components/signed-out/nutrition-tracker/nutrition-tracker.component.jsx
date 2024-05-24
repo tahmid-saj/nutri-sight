@@ -9,7 +9,8 @@ import ConsumptionInfo from "./consumption-info/consumption-info.component";
 
 import TopSearch from "./top-search/top-search.component";
 
-import { NutritionTrackerContext } from "../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+// import { NutritionTrackerContext } from "../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { useDispatch, useSelector } from "react-redux"
 
 const NutritionTracker = () => {
   const { nutritionTrackedDays } = useContext(NutritionTrackerContext);
