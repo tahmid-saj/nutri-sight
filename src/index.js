@@ -17,28 +17,36 @@ import { RecipesProvider } from './contexts/shared/recipes/recipes.context';
 import { NutritionTrackerProvider as NutritionTrackerProviderSignedIn } from './contexts/signed-in/nutrition-tracker/nutrition-tracker.context';
 import { CaloriesBurnedProvider as CaloiriesBurnedProviderSignedIn } from './contexts/signed-in/calories-burned/calories-burned.context';
 
+import { Provider } from "react-redux"
+import { persistor, store } from "./store/store"
+import { PersistGate } from "redux-persist/integration/react"
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ChatBotProvider>
-        <NutrientPredictorProvider>
-          <NutritionTrackerProviderSignedOut>
-            <CaloriesBurnedProviderSignedOut>
-              <RecipesProvider>
-                <UserProvider>
-                  <NutritionTrackerProviderSignedIn>
-                    <CaloiriesBurnedProviderSignedIn>
-                      <App />
-                    </CaloiriesBurnedProviderSignedIn>
-                  </NutritionTrackerProviderSignedIn>
-                </UserProvider>
-              </RecipesProvider>
-            </CaloriesBurnedProviderSignedOut>
-          </NutritionTrackerProviderSignedOut>
-        </NutrientPredictorProvider>
-      </ChatBotProvider>
-    </BrowserRouter>
+    <Provider store={ store }>
+      {/* <PersistGate loading={ null } persistor={ persistor }> */}
+        <BrowserRouter>
+          <ChatBotProvider>
+            <NutrientPredictorProvider>
+              <NutritionTrackerProviderSignedOut>
+                <CaloriesBurnedProviderSignedOut>
+                  <RecipesProvider>
+                    <UserProvider>
+                      <NutritionTrackerProviderSignedIn>
+                        <CaloiriesBurnedProviderSignedIn>
+                          <App />
+                        </CaloiriesBurnedProviderSignedIn>
+                      </NutritionTrackerProviderSignedIn>
+                    </UserProvider>
+                  </RecipesProvider>
+                </CaloriesBurnedProviderSignedOut>
+              </NutritionTrackerProviderSignedOut>
+            </NutrientPredictorProvider>
+          </ChatBotProvider>
+        </BrowserRouter>
+      {/* </PersistGate> */}
+    </Provider>
   </React.StrictMode>
 );
 
