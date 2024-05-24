@@ -1,12 +1,15 @@
 import "./calories-graph.styles.scss"
 import ReactApexChart from "react-apexcharts"
 import { useContext } from "react"
-import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
+// import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
+import { useSelector } from "react-redux"
+import { selectNutritionTrackedDaysView } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector"
 
 import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants"
 
 const CaloriesGraph = () => {
-  const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext)
+  // const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext)
+  const nutritionTrackedDaysView = useSelector(selectNutritionTrackedDaysView)
 
   let trackedCalories = new Map()
   const trackedDayCalories = nutritionTrackedDaysView.map((trackedDate) => {

@@ -7,14 +7,18 @@ import FormInput from "../../../shared/form-input/form-input.component";
 
 import "./add-micronutrients.styles.scss";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+// import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { useDispatch, useSelector } from "react-redux"
+import { selectFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
+import { addFormInputMicronutrients, updateFormInputMicronutrients, deleteFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
 
 const AddMicronutrients = () => {
-  const { formInputMicronutrients, addFormInputMicronutrients,
-          updateFormInputMicronutrients, deleteFormInputMicronutrients } = useContext(NutritionTrackerContext);
+  // const { formInputMicronutrients, addFormInputMicronutrients, updateFormInputMicronutrients, deleteFormInputMicronutrients } = useContext(NutritionTrackerContext);
+  const dispatch = useDispatch()
+  const formInputMicronutrients = useSelector(selectFormInputMicronutrients)
 
   const handleAdd = () => {
-    addFormInputMicronutrients();
+    dispatch(addFormInputMicronutrients(formInputMicronutrients))
   };
 
   const handleChange = (event, micronutrientIndex) => {
@@ -41,12 +45,12 @@ const AddMicronutrients = () => {
       }
     }
 
-    updateFormInputMicronutrients(micronutrient, micronutrientIndex);
+    dispatch(updateFormInputMicronutrients(formInputMicronutrients, micronutrient, micronutrientIndex))
   };
 
   const handleDelete = (micronutrientIndex) => {
 
-    deleteFormInputMicronutrients(micronutrientIndex);
+    dispatch(deleteFormInputMicronutrients(formInputMicronutrients, micronutrientIndex))
   };
 
   return (

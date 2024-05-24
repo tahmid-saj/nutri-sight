@@ -181,6 +181,10 @@ export const clearDayTrackedFilter = () => {
   return createAction(NUTRITION_TRACKER_ACTION_TYPES.SET_FILTER_CONDITIONS, null)
 }
 
+export const setFormInputMicronutrients = (formInputMicronutrients) => {
+  return createAction(NUTRITION_TRACKER_ACTION_TYPES.SET_FORM_INPUT_MICRONUTRIENTS, formInputMicronutrients)
+}
+
 export const setNutritionTrackedDaysView = (nutritionTrackedDaysView) => {
   return createAction(NUTRITION_TRACKER_ACTION_TYPES.SET_NUTRITION_TRACKED_DAYS_VIEW, nutritionTrackedDaysView)
 }

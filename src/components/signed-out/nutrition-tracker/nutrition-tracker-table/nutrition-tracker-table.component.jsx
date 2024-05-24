@@ -5,12 +5,19 @@ import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+// import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+import { useDispatch, useSelector } from "react-redux"
+import { selectNutritionTrackedDaysView, selectNutritionTrackedDays } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
+import { removeDayTracked, clearDayTrackedFilter } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
+
 import Button from "../../../shared/button/button.component";
 
 const NutritionTrackerTable = () => {
   const gridRef = useRef()
-  const { nutritionTrackedDaysView, removeDayTracked, clearDayTrackedFilter } = useContext(NutritionTrackerContext)
+  // const { nutritionTrackedDaysView, removeDayTracked, clearDayTrackedFilter } = useContext(NutritionTrackerContext)
+  const dispatch = useDispatch()
+  const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
+  const nutritionTrackedDaysView = useSelector(selectNutritionTrackedDaysView)
 
   const rowData = nutritionTrackedDaysView.map((trackedDate) => {
     return {
@@ -45,7 +52,12 @@ const NutritionTrackerTable = () => {
 
     console.log(selectedData[0])
 
-    removeDayTracked(selectedData[0].DateTracked)
+    dispatch(removeDayTracked(nutritionTrackedDays, selectedData[0].DateTracked))
+  }
+
+  const onClearFilter = (event) => {
+    event.preventDefault()
+    dispatch(clearDayTrackedFilter())
   }
 
   return (
@@ -58,7 +70,7 @@ const NutritionTrackerTable = () => {
       <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
       <div className="remove-tracked-date-selected-button">
         <Button onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
-        <Button type="button" onClick={ clearDayTrackedFilter }>Clear Filter</Button>
+        <Button type="button" onClick={ onClearFilter }>Clear Filter</Button>
       </div>
     </div>
   )
