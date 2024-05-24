@@ -14,7 +14,28 @@ import DashboardRouteSignedIn from "./routes/signed-in/dashboard/dashboard.compo
 import NutritionTrackerRouteSignedIn from "./routes/signed-in/nutrition-tracker/nutrition-tracker.component";
 import CaloriesBurnedRouteSignedIn from "./routes/signed-in/calories-burned/calories-burned.component"
 
+import { useEffect } from "react";
+import { useDispatch } from "react-redux"
+import { setCurrentUser } from "./store/shared/user/user.action";
+
+import { onAuthStateChangedListener,
+  createUserDocumentFromAuth
+} from "./utils/firebase/firebase.utils";
+
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      if (user) {
+        createUserDocumentFromAuth(user)
+      }
+      dispatch(setCurrentUser(user))
+    })
+
+    return unsubscribe
+  }, [dispatch])
+
   return (
     <Routes>
       <Route path="/" element={ <Navigation/> }>
