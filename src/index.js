@@ -32,13 +32,13 @@ root.render(
               <NutritionTrackerProviderSignedOut>
                 <CaloriesBurnedProviderSignedOut>
                   <RecipesProvider>
-                    <UserProvider>
+                    {/* <UserProvider> */}
                       <NutritionTrackerProviderSignedIn>
                         <CaloiriesBurnedProviderSignedIn>
                           <App />
                         </CaloiriesBurnedProviderSignedIn>
                       </NutritionTrackerProviderSignedIn>
-                    </UserProvider>
+                    {/* </UserProvider> */}
                   </RecipesProvider>
                 </CaloriesBurnedProviderSignedOut>
               </NutritionTrackerProviderSignedOut>

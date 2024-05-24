@@ -7,14 +7,18 @@ import { OutletContainer } from "./navigation.styles.jsx";
 import { signOutUser } from "../../../utils/firebase/firebase.utils";
 import MiniDrawer from "../../../components/shared/mui/drawer/drawer.component.jsx";
 
-import { UserContext } from "../../../contexts/shared/user/user.context";
+// import { UserContext } from "../../../contexts/shared/user/user.context";
 import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
 import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context";
 
 import { NAV_LINKS } from "../../../utils/constants/shared.constants.js";
 
+import { useSelector } from "react-redux"
+import { selectCurrentUser } from "../../../store/shared/user/user.selector.js";
+
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  // const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser)
   
   // const { updateNutritionTrackedDaysAndSummary } = useContext(NutritionTrackerContext);
   // const { updateTrackedCaloriesBurned } = useContext(CaloriesBurnedContext)
