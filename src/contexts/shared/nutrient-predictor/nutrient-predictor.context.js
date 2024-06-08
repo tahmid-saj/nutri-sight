@@ -21,8 +21,8 @@ const updateImageHelper = (imageAndPrediction, imgPath) => {
   };
 };
 
-const updateImageAndPredictionHelper = async (imageAndPrediction, imgPath, img) => {
-  console.log(img);
+const updateImageAndPredictionHelper = async (imageAndPrediction, imgPath, imageInputType) => {
+  console.log(imageInputType);
 
   // TODO: need validation to check if imgPath and img are valid and an image
   if (validateImgPath(imgPath) === true) {
@@ -30,13 +30,13 @@ const updateImageAndPredictionHelper = async (imageAndPrediction, imgPath, img) 
   }
 
   // TODO: need to implement separate prediction function call
-  const predictionResponse = await getMealPredictions(img);
+  const predictionResponse = await getMealPredictions(imgPath);
 
   console.log(predictionResponse)
 
   return {
     imagePath: String(imgPath),
-    image: img,
+    image: imageInputType,
     predictionDescription: predictionResponse
   };
 }
@@ -51,7 +51,7 @@ export const NutrientPredictorContext = createContext({
   // imageAndPrediction structure
   // {
   //   imagePath: "path to image",
-  //   image: "image itself",
+  //   image: "image type",
   //   predictionDescription: "1 pound of steak with mashed potatoes and a can of sprite"
   // }
 
@@ -95,12 +95,22 @@ export const NutrientPredictorProvider = ({ children }) => {
     setImageAndPrediction(updateImageHelper(imageAndPrediction, imgPath));
   };
 
-  const updateImageAndPrediction = async (imgPath, img) => {
-    setPredictionInputType(NUTRIENT_PREDICTOR_ENUMS.image)
-    const updateImageAndPredictionResponse = await updateImageAndPredictionHelper(imageAndPrediction, imgPath, img)
+  const updateImageAndPrediction = async (imgPath, imageInputType) => {
+    if (imageInputType === NUTRIENT_PREDICTOR_ENUMS.image) {
+      setPredictionInputType(NUTRIENT_PREDICTOR_ENUMS.image)
+      const updateImageAndPredictionResponse = await updateImageAndPredictionHelper(imageAndPrediction, imgPath, imageInputType)
 
-    setImageAndPrediction(updateImageAndPredictionResponse);
-    await detectNutrients(updateImageAndPredictionResponse.predictionDescription, NUTRIENT_PREDICTOR_ENUMS.image)
+      setImageAndPrediction(updateImageAndPredictionResponse);
+
+      await detectNutrients(updateImageAndPredictionResponse.predictionDescription, NUTRIENT_PREDICTOR_ENUMS.image)
+    } else if (imageInputType === NUTRIENT_PREDICTOR_ENUMS.url) {
+      setPredictionInputType(NUTRIENT_PREDICTOR_ENUMS.url)
+      const updateImageAndPredictionResponse = await updateImageAndPredictionHelper(imageAndPrediction, imgPath, imageInputType)
+      
+      setImageAndPrediction(updateImageAndPredictionResponse);
+
+      await detectNutrients(updateImageAndPredictionResponse.predictionDescription, NUTRIENT_PREDICTOR_ENUMS.url)
+    }
   };
 
   const detectNutrients = async (mealDescription, inputType) => {

@@ -15,7 +15,8 @@ import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js"
 
 const defaultFormFields = {
   mealDescription: "",
-  uploadedImage: ""
+  uploadedImage: "",
+  imageUrl: "",
 }
 
 const paperStyles = {
@@ -38,10 +39,16 @@ const UploadImage = () => {
     console.log(formFields.uploadedImage);
 
     if (formFields.mealDescription !== "") {
+      // use the meal description to predict
       await detectNutrients(formFields.mealDescription)
       console.log("meal hit")
     } else {
-      await updateImageAndPrediction(formFields.uploadedImage, NUTRIENT_PREDICTOR_ENUMS.image);
+      // use the uploaded image to predict
+      if (formFields.uploadedImage && formFields.uploadedImage !== "") {
+        await updateImageAndPrediction(formFields.uploadedImage, NUTRIENT_PREDICTOR_ENUMS.image);
+      } else if (formFields.imageUrl && formFields.imageUrl !== "") {
+        await updateImageAndPrediction(formFields.imageUrl, NUTRIENT_PREDICTOR_ENUMS.url)
+      }
     }
 
     // displayNutrients(true);
@@ -54,12 +61,17 @@ const UploadImage = () => {
 
     setFormFields({ ...formFields, [name]: value });
 
-    if (type === NUTRIENT_PREDICTOR_ENUMS.image) {
-      updateImage(event.target.value);
+    if (type === NUTRIENT_PREDICTOR_ENUMS.image || type === NUTRIENT_PREDICTOR_ENUMS.url) {
+      updateImage(event.target.value, type);
 
       const imageEl = document.getElementById('imageOutput');
       if (imageEl !== null) {
-        imageEl.src = URL.createObjectURL(event.target.files[0]);
+
+        if (type === NUTRIENT_PREDICTOR_ENUMS.image) {
+          imageEl.src = URL.createObjectURL(event.target.files[0]);
+        } else if (type === NUTRIENT_PREDICTOR_ENUMS.url) {
+          imageEl.src = event.target.value;
+        }
       }
     }
   };
@@ -73,7 +85,10 @@ const UploadImage = () => {
           <FormInput label="Meal description" type="text" onChange={ handleChange }
                               name="mealDescription" value={ formFields.mealDescription }></FormInput>
 
-          <FormInput type="file" id="uploadedImage" name="uploadedImage" 
+          <FormInput label="Image URL" type="url" id="imageUrl" name="imageUrl" 
+                    onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.url) } value={ formFields.imageUrl }></FormInput>
+
+          <FormInput disabled type="file" id="uploadedImage" name="uploadedImage" 
                     onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.image) } value={ formFields.uploadedImage } accept="image/*"></FormInput>
 
           <ButtonsContainer>
@@ -84,7 +99,7 @@ const UploadImage = () => {
       </SimplePaper>
 
         <UploadedImage alt="" id="imageOutput" 
-              style={{ width: "500px", height: "500px", visibility: `${formFields.uploadedImage === "" ? "hidden" : ""}` }}></UploadedImage>
+              style={{ width: "500px", height: "500px", visibility: `${(formFields.uploadedImage === "" && formFields.imageUrl === "") ? "hidden" : ""}` }}></UploadedImage>
 
     </UploadImageContainer>
   )
