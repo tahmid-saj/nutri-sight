@@ -26,8 +26,25 @@ const processNutrientPredictions = async (nutrientPredictions) => {
 
 // nutrient predictor api requests
 
-export const getMealPredictions = async (image) => {
-  return "1 pound of steak with mashed potatoes and a can of sprite"
+export const getMealPredictions = async (imagePath) => {
+  try {
+    const resNutrientPrediction = await fetch(`${process.env.REACT_APP_API_URL_NUTRIENT_PREDICTOR}${process.env.REACT_APP_API_URL_NUTRIENT_PREDICTION}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain"
+      },
+      body: String(imagePath)
+    })
+
+    const { message } = await resNutrientPrediction.json()
+    return message
+  } catch (error) {
+    errorOnGetNutrientPredictions()
+
+    if (error) {
+      return console.error("Request failed: ", error)
+    }
+  }
 };
 
 export const getNutrientPredictions = async (mealDescription) => {

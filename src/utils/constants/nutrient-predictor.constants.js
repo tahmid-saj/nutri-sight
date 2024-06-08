@@ -9,4 +9,5 @@ export const IMAGE_EXTENSIONS = {
 export const NUTRIENT_PREDICTOR_ENUMS = {
   text: "text",
   image: "image",
+  url: "url",
 }
