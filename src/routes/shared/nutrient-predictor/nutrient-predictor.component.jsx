@@ -1,7 +1,7 @@
 import React from 'react';
 
 import "./nutrient-predictor.styles.scss";
-import NutrientPredictor from '../../../components/shared/nutrient-predictor/nutrient-predictor.component';
+import NutrientPredictor from '../../../pages/shared/nutrient-predictor/nutrient-predictor.component';
 
 const NutrientPredictorRoute = () => {
   return (

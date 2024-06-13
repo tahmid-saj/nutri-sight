@@ -1,14 +1,14 @@
-import CaloriesBurnedGraphPie from "./calories-burned/calories-burned-graph/calories-burned-graph-pie.component"
-import CaloriesBurnedGraph from "./calories-burned/calories-burned-graph/calories-burned-graph.component"
-import CaloriesBurnedSummary from "./calories-burned/calories-burned-summary/calories-burned-summary.component"
+import CaloriesBurnedGraphPie from "../../../components/signed-in/dashboard/calories-burned/calories-burned-graph/calories-burned-graph-pie.component"
+import CaloriesBurnedGraph from "../../../components/signed-in/dashboard/calories-burned/calories-burned-graph/calories-burned-graph.component"
+import CaloriesBurnedSummary from "../../../components/signed-in/dashboard/calories-burned/calories-burned-summary/calories-burned-summary.component"
 import "./dashboard.styles.scss"
-import NutritionTrackerGraphCalories from "./nutrition-tracker/nutrition-tracker-graph-calories/nutrition-tracker-graph-calories.component"
-import NutritionTrackerGraphMacronutrients from "./nutrition-tracker/nutrition-tracker-graph-macronutrients/nutrition-tracker-graph-macronutrients.component"
-import NutritionTrackerSummary from "./nutrition-tracker/nutrition-tracker-summary/nutrition-tracker-summary.component"
+import NutritionTrackerGraphCalories from "../../../components/signed-in/dashboard/nutrition-tracker/nutrition-tracker-graph-calories/nutrition-tracker-graph-calories.component"
+import NutritionTrackerGraphMacronutrients from "../../../components/signed-in/dashboard/nutrition-tracker/nutrition-tracker-graph-macronutrients/nutrition-tracker-graph-macronutrients.component"
+import NutritionTrackerSummary from "../../../components/signed-in/dashboard/nutrition-tracker/nutrition-tracker-summary/nutrition-tracker-summary.component"
 
 import { useContext, Fragment } from "react"
-import { NutritionTrackerContext } from "../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
-import { CaloriesBurnedContext } from "../../../contexts/signed-out/calories-burned/calories-burned.context"
+import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context"
+import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context"
 import ChatBot from "../../shared/chatbot/chatbot.component"
 
 const Dashboard = () => {

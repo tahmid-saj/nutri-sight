@@ -158,10 +158,19 @@ export default function MiniDrawer({ navLinksHeaders, children }) {
           >
             <MenuIcon />
           </IconButton>
+            
+          <div className="nutri-sight-title">
+            <Typography variant="h6" noWrap component="div">
+              nutri-sight
+            </Typography>
 
-          <Typography variant="h6" noWrap component="div">
-            nutri-sight
-          </Typography>
+            {
+              currentUser ?
+              <Typography variant="body2" noWrap component="div">
+                { `Hello ${currentUser.displayName}` }
+              </Typography> : null
+            }
+          </div>
         </Toolbar>
       </AppBar>
 

@@ -1,12 +1,14 @@
 import "./home.styles.jsx";
 import { HomeContainer } from "./home.styles.jsx";
-import MediaCard from "../mui/media-card/media-card.component.jsx"
+import MediaCard from "../../../components/shared/mui/media-card/media-card.component.jsx"
 import { Fragment } from "react";
 
 import { useContext } from "react";
-import { UserContext } from "../../../contexts/shared/user/user.context";
+// import { UserContext } from "../../../contexts/shared/user/user.context";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../store/shared/user/user.selector.js";
 
-import { NAV_LINKS } from "../../../utils/constants/shared.constants";
+import { NAV_LINKS } from "../../../utils/constants/shared.constants.js";
 
 const styles = {
   width: 475,
@@ -14,7 +16,8 @@ const styles = {
 }
 
 const Home = () => {
-  const { currentUser } = useContext(UserContext)
+  // const { currentUser } = useContext(UserContext)
+  const currentUser = useSelector(selectCurrentUser)
   
   const homeCardContent = {
     chatbot: {
