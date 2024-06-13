@@ -69,8 +69,8 @@ export async function getTrackedCaloriesBurned(userId, email) {
 // calories burned operations
 export async function postAddActivity(userId, email, trackedDayInfo, activityId) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}/${process.env.REACT_APP_API_URL_POST_TRACKED_CALORIES_BURNED}`)
-    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}/${process.env.REACT_APP_API_URL_POST_TRACKED_CALORIES_BURNED}`, {
+    console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
+    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -96,8 +96,8 @@ export async function postAddActivity(userId, email, trackedDayInfo, activityId)
 
 export async function deleteRemoveActivity(userId, email, activityId) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}/${process.env.REACT_APP_API_URL_DELETE_TRACKED_CALORIES_BURNED}`)
-    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}/${process.env.REACT_APP_API_URL_DELETE_TRACKED_CALORIES_BURNED}`, {
+    console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
+    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "text/plain"
@@ -117,8 +117,8 @@ export async function deleteRemoveActivity(userId, email, activityId) {
 // signing out
 export async function putTrackedCaloriesBurned(userId, email, trackedCaloriesBurned) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}/${process.env.REACT_APP_API_URL_PUT_TRACKED_CALORIES_BURNED}`)
-    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}/${process.env.REACT_APP_API_URL_PUT_TRACKED_CALORIES_BURNED}`, {
+    console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
+    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
