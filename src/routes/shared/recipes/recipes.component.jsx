@@ -1,6 +1,6 @@
 import "./recipes.styles.scss";
 
-import Recipes from "../../../components/shared/recipes/components/recipes.component";
+import Recipes from "../../../pages/shared/recipes/recipes.component";
 
 const RecipesRoute = () => {
   return (

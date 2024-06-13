@@ -1,17 +1,17 @@
 import "./calories-burned.styles.scss"
 
-import SummaryInfo from "./summary/summary-info/summary-info.component"
-import ActivityDateFilter from "./summary/activity-date-filter/activity-date-filter.component"
+import SummaryInfo from "../../../components/signed-in/calories-burned/summary/summary-info/summary-info.component"
+import ActivityDateFilter from "../../../components/signed-in/calories-burned/summary/activity-date-filter/activity-date-filter.component"
 
-import CaloriesBurnedGraphPie from "./view/calories-burned-graph/calories-burned-graph-pie.component"
-import CaloriesBurnedGraphLine from "./view/calories-burned-graph/calories-burned-graph-line.component"
-import CaloriesBurnedTable from "./view/calories-burned-table/calories-burned-table.component"
+import CaloriesBurnedGraphPie from "../../../components/signed-in/calories-burned/view/calories-burned-graph/calories-burned-graph-pie.component"
+import CaloriesBurnedGraphLine from "../../../components/signed-in/calories-burned/view/calories-burned-graph/calories-burned-graph-line.component"
+import CaloriesBurnedTable from "../../../components/signed-in/calories-burned/view/calories-burned-table/calories-burned-table.component"
 
-import ActivityDateForm from "./add-activity/activity-date-form/activity-date-form.component"
-import ActivityDateTable from "./add-activity/activity-date-table/activity-date-table.component"
+import ActivityDateForm from "../../../components/signed-in/calories-burned/add-activity/activity-date-form/activity-date-form.component"
+import ActivityDateTable from "../../../components/signed-in/calories-burned/add-activity/activity-date-table/activity-date-table.component"
 
 import { Fragment, useContext } from "react"
-import { CaloriesBurnedContext } from "../../../contexts/signed-out/calories-burned/calories-burned.context"
+import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context"
 
 const CaloriesBurned = () => {
   const { trackedCaloriesBurned } = useContext(CaloriesBurnedContext)

@@ -2,10 +2,10 @@ import "./nutrient-predictor.styles.jsx";
 import { NutrientPredictorContainer, NutrientPredictionInfo } from "./nutrient-predictor.styles"
 
 import React, { Component, useContext } from "react";
-import UploadFoodImage from "./upload-food-image/upload-food-image.component";
-import NutrientsInfo from "./nutrients-info/nutrients-info.component";
+import UploadFoodImage from "../../../components/shared/nutrient-predictor/upload-food-image/upload-food-image.component.jsx";
+import NutrientsInfo from "../../../components/shared/nutrient-predictor/nutrients-info/nutrients-info.component.jsx";
 
-import { NutrientPredictorContext } from "../../../contexts/shared/nutrient-predictor/nutrient-predictor.context";
+import { NutrientPredictorContext } from "../../../contexts/shared/nutrient-predictor/nutrient-predictor.context.js";
 import { Divider, Typography } from "@mui/material";
 
 const NutrientPredictor = () => {

@@ -1,6 +1,6 @@
 import "./calories-burned.styles.scss";
 
-import CaloriesBurned from "../../../components/signed-out/calories-burned/calories-burned.component";
+import CaloriesBurned from "../../../pages/signed-out/calories-burned/calories-burned.component";
 
 const CaloriesBurnedRoute = () => {
   return (

@@ -1,13 +1,13 @@
 import React, { Component, useEffect, Fragment } from "react";
 
-import Summary from "./summary/summary.component";
+import Summary from "../../../components/signed-out/nutrition-tracker/summary/summary.component";
 
 import "./nutrition-tracker.styles.scss";
-import SearchDays from "./search-days/search-days.component";
-import UpdateConsumptionForm from "./update-consumption-form/update-consumption-form.component";
-import ConsumptionInfo from "./consumption-info/consumption-info.component";
+import SearchDays from "../../../components/signed-out/nutrition-tracker/search-days/search-days.component";
+import UpdateConsumptionForm from "../../../components/signed-out/nutrition-tracker/update-consumption-form/update-consumption-form.component";
+import ConsumptionInfo from "../../../components/signed-out/nutrition-tracker/consumption-info/consumption-info.component";
 
-import TopSearch from "./top-search/top-search.component";
+import TopSearch from "../../../components/signed-out/nutrition-tracker/top-search/top-search.component";
 
 // import { NutritionTrackerContext } from "../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import { useDispatch, useSelector } from "react-redux"

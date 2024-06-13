@@ -3,12 +3,12 @@ import { SearchResultsRecipeContainer, SearchResultsMainContainer } from "./reci
 
 import React, { Fragment, Component, useEffect, useContext } from "react";
 
-import Header from "./header/header.component";
-import SearchResults from "./search-results/search-results.component";
-import Recipe from "./recipe/recipe.component";
-import RecipesView from "./recipes-view/recipes-view.component";
+import Header from "../../../components/shared/recipes/components/header/header.component.jsx";
+import SearchResults from "../../../components/shared/recipes/components/search-results/search-results.component.jsx";
+import Recipe from "../../../components/shared/recipes/components/recipe/recipe.component.jsx";
+import RecipesView from "../../../components/shared/recipes/components/recipes-view/recipes-view.component.jsx";
 
-import { RecipesContext } from "../../../../contexts/shared/recipes/recipes.context";
+import { RecipesContext } from "../../../contexts/shared/recipes/recipes.context.js";
 import { Divider, Typography } from "@mui/material";
 
 const Recipes = () => {

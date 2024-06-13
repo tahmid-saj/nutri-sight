@@ -1,4 +1,4 @@
-import CaloriesBurned from "../../../components/signed-in/calories-burned/calories-burned.component";
+import CaloriesBurned from "../../../pages/signed-in/calories-burned/calories-burned.component";
 import "./calories-burned.styles.scss";
 
 
