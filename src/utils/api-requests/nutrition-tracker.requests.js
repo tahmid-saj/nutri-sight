@@ -32,8 +32,8 @@ export const getNutritionTrackedDaysSummaryData = async (userId, email) => {
 // nutrition tracked days operations
 export const postNutritionTrackedDay = async (userId, email, nutritionTrackedDay) => {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}/${process.env.REACT_APP_API_URL_POST_NUTRITION_TRACKED_DAY}`);
-    const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}/${process.env.REACT_APP_API_URL_POST_NUTRITION_TRACKED_DAY}`, {
+    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`);
+    const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -50,8 +50,8 @@ export const postNutritionTrackedDay = async (userId, email, nutritionTrackedDay
 
 export const deleteNutritionTrackedDay = async (userId, email, trackedDay) => {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}/${process.env.REACT_APP_API_URL_DELETE_NUTRITION_TRACKED_DAY}`)
-    const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}/${process.env.REACT_APP_API_URL_DELETE_NUTRITION_TRACKED_DAY}`, {
+    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`)
+    const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "text/plain"
@@ -75,8 +75,8 @@ export const putNutritionTrackedDay = async (userId, email, originalNutritionTra
       updatedNutritionTrackedDay: updatedNutritionTrackedDay,
     }
 
-    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}/${process.env.REACT_APP_API_URL_PUT_NUTRITION_TRACKED_DAY}`);
-    const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}/${process.env.REACT_APP_API_URL_PUT_NUTRITION_TRACKED_DAY}`, {
+    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`);
+    const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json"
