@@ -11,6 +11,9 @@ import "./sign-in-form.styles.scss";
 
 import { errorOnSignIn } from "../../../utils/errors/user.errors";
 
+import { useDispatch } from "react-redux";
+import { googleSignInStart, emailSignInStart } from "../../../store/shared/user/user.action";
+
 const defaultFormFields = {
   email: "",
   password: ""
@@ -22,22 +25,27 @@ const SignInForm = () => {
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch()
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
+    // await signInWithGooglePopup();
+    dispatch(googleSignInStart())
     
-    navigate("/nutrient-predictor");
     resetFormFields();
+    navigate("/nutrient-predictor");
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const signInResponse = await signInAuthUserWithEmailAndPassword(email, password);
+      // const signInResponse = await signInAuthUserWithEmailAndPassword(email, password);
+      dispatch(emailSignInStart(email, password))
+
       resetFormFields();
       navigate("/nutrient-predictor");
     } catch (error) {

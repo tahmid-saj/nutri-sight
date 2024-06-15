@@ -14,42 +14,54 @@ import DashboardRouteSignedIn from "./routes/signed-in/dashboard/dashboard.compo
 import NutritionTrackerRouteSignedIn from "./routes/signed-in/nutrition-tracker/nutrition-tracker.component";
 import CaloriesBurnedRouteSignedIn from "./routes/signed-in/calories-burned/calories-burned.component"
 
-import { useEffect } from "react";
-import { useDispatch } from "react-redux"
-import { setCurrentUser } from "./store/shared/user/user.action";
+import { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { checkUserSession, setCurrentUser } from "./store/shared/user/user.action";
 
 import { onAuthStateChangedListener,
   createUserDocumentFromAuth
 } from "./utils/firebase/firebase.utils";
+import { selectCurrentUser } from "./store/shared/user/user.selector";
 
 function App() {
   const dispatch = useDispatch()
+  const currentUser = useSelector(selectCurrentUser)
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user)
-      }
-      dispatch(setCurrentUser(user))
-    })
+    // const unsubscribe = onAuthStateChangedListener((user) => {
+    //   if (user) {
+    //     createUserDocumentFromAuth(user)
+    //   }
+    //   dispatch(setCurrentUser(user))
+    // })
 
-    return unsubscribe
+    // return unsubscribe
+    dispatch(checkUserSession())
   }, [dispatch])
 
   return (
     <Routes>
       <Route path="/" element={ <Navigation/> }>
         <Route index element={ <HomeRoute/> }/>
-        <Route path="dashboard" element={ <DashboardRoute/> }/>
         <Route path="nutrient-predictor" element={ <NutrientPredictorRoute/> }/>
-        <Route path="nutrition-tracker" element={ <NutritionTrackerRoute/> }/>
-        <Route path="calories-burned" index element={ <CaloriesBurnedRoute/> }/>
         <Route path="recipes" element={ <RecipesRoute/> }/>
-        <Route path="auth" index element={ <AuthenticationRoute/> }/>
 
-        <Route path="dashboard-signed-in" element={ <DashboardRouteSignedIn/> }/>
-        <Route path="nutrition-tracker-signed-in" element={ <NutritionTrackerRouteSignedIn/> }/>
-        <Route path="calories-burned-signed-in" element={ <CaloriesBurnedRouteSignedIn/> }/>
+        {
+          currentUser ? (
+            <Fragment>
+              <Route path="dashboard-signed-in" element={ <DashboardRouteSignedIn/> }/>
+              <Route path="nutrition-tracker-signed-in" element={ <NutritionTrackerRouteSignedIn/> }/>
+              <Route path="calories-burned-signed-in" element={ <CaloriesBurnedRouteSignedIn/> }/>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Route path="dashboard" element={ <DashboardRoute/> }/>
+              <Route path="nutrition-tracker" element={ <NutritionTrackerRoute/> }/>
+              <Route path="calories-burned" index element={ <CaloriesBurnedRoute/> }/>
+              <Route path="auth" index element={ <AuthenticationRoute/> }/>
+            </Fragment>
+          )
+        }
       </Route>
     </Routes>
   );

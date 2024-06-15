@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState, useContext } from "react";
-import { UserContext } from "../../shared/user/user.context";
+// import { UserContext } from "../../shared/user/user.context";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../store/shared/user/user.selector";
 
 import { calculateSummary } from "../../../utils/calculations/calories-burned.calculations";
 import { validateSearchActivity, validateAddTrackedActivityDate, 
@@ -136,7 +138,8 @@ export const CaloriesBurnedProvider = ({ children }) => {
   const [trackedCaloriesBurnedView, setTrackedCaloriesBurnedView] = useState(trackedCaloriesBurned)
   const [trackedCaloriesBurnedSummary, setTrackedCaloriesBurnedSummary] = useState({})
 
-  const { currentUser } = useContext(UserContext)
+  // const { currentUser } = useContext(UserContext)
+  const currentUser = useSelector(selectCurrentUser)
 
   // update trackedCaloriesBurnedSummary
   useEffect(() => {
