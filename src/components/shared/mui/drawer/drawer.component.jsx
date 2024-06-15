@@ -37,12 +37,13 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Link, useNavigate } from 'react-router-dom';
 import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
 import { CaloriesBurnedContext } from "../../../../contexts/signed-in/calories-burned/calories-burned.context";
-import { signOutUser } from '../../../../utils/firebase/firebase.utils';
+// import { signOutUser } from '../../../../utils/firebase/firebase.utils';
 
 import { NAV_LINKS } from '../../../../utils/constants/shared.constants';
 
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { selectCurrentUser } from "../../../../store/shared/user/user.selector";
+import { signOutStart } from "../../../../store/shared/user/user.action";
 
 const drawerWidth = 240;
 
@@ -115,6 +116,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function MiniDrawer({ navLinksHeaders, children }) {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
+  const dispatch = useDispatch()
 
   const currentUser = useSelector(selectCurrentUser)
   const { updateNutritionTrackedDaysAndSummary } = useContext(NutritionTrackerContext);
@@ -132,7 +134,8 @@ export default function MiniDrawer({ navLinksHeaders, children }) {
   const handleSignOut = () => {
     updateNutritionTrackedDaysAndSummary();
     updateTrackedCaloriesBurned()
-    signOutUser();
+    // signOutUser();
+    dispatch(signOutStart())
     navigate("/")
   }
 
@@ -161,7 +164,7 @@ export default function MiniDrawer({ navLinksHeaders, children }) {
             
           <div className="nutri-sight-title">
             <Typography variant="h6" noWrap component="div">
-              nutri-sight
+              Nutrition Tracker
             </Typography>
 
             {

@@ -6,7 +6,9 @@ import { calculateSummary } from "../../../utils/calculations/nutrition-tracker.
 
 import { DEFAULT_MICRONUTRIENT, DEFAULT_NUTRITION_TRACKED_DAYS, DEFAULT_NUTRITION_TRACKED_DAYS_SUMMARY } from "../../../utils/constants/nutrition-tracker.constants";
 
-import { UserContext } from "../../shared/user/user.context";
+// import { UserContext } from "../../shared/user/user.context";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../store/shared/user/user.selector";
 
 import { getNutritionTrackedDaysData, getNutritionTrackedDaysSummaryData,
   postNutritionTrackedDay, deleteNutritionTrackedDay, putNutritionTrackedDay,
@@ -239,7 +241,8 @@ export const NutritionTrackerProvider = ({ children }) => {
   const [dayTrackedSearchResult, setDayTrackedSearchResult] = useState(undefined)
   const [nutritionTrackedDaysSummary, setNutritionTrackedDaysSummary] = useState({});
 
-  const { currentUser } = useContext(UserContext);
+  // const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser)
 
   // update nutritionTrackedDaysSummary with average consumptions
   useEffect(() => {
