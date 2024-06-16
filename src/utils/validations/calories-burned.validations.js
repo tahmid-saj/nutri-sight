@@ -1,4 +1,5 @@
 import { errorOnInvalidTrackedDate } from "../errors/calories-burned.errors"
+import { REGEX_PATTERNS } from "./regex.constants"
 
 // calories burned validations
 
@@ -6,8 +7,8 @@ import { errorOnInvalidTrackedDate } from "../errors/calories-burned.errors"
 
 export const validateSearchActivity = (trackedDayInfo) => {
   // number
-  if (!(/^[0-9]*$/.test(String(trackedDayInfo.weightPounds))) || Number(trackedDayInfo.weightPounds) < 0 ||
-    !(/^[0-9]*$/.test(String(trackedDayInfo.durationMinutes))) || Number(trackedDayInfo.durationMinutes) < 0) {
+  if (!(REGEX_PATTERNS.floatNumbers.test(String(trackedDayInfo.weightPounds))) || Number(trackedDayInfo.weightPounds) < 0 ||
+    !(REGEX_PATTERNS.floatNumbers.test(String(trackedDayInfo.durationMinutes))) || Number(trackedDayInfo.durationMinutes) < 0) {
     return true
   }
 
@@ -29,7 +30,7 @@ export const validateFilterActivityDates = (filterConditions) => {
   const today = new Date()
 
   // number
-  if (!(/^[0-9]*$/.test(String(filterConditions.durationMinutes))) || Number(filterConditions.durationMinutes) < 0) {
+  if (!(REGEX_PATTERNS.floatNumbers.test(String(filterConditions.durationMinutes))) || Number(filterConditions.durationMinutes) < 0) {
     return true
   }
 

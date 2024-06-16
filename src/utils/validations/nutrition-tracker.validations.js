@@ -1,6 +1,7 @@
 import { errorOnTrackedDayExists, errorOnInvalidMacronutrientInputs, 
         errorOnInvalidMicronutrientInput, errorOnEmptyMicronutrients,
         errorOnDayNotTracked, errorOnStartDateBeforeEndDate } from "../errors/nutrition-tracker.errors";
+import { REGEX_PATTERNS } from "./regex.constants";
 
 // nutrition tracker validation functions
 
@@ -17,13 +18,13 @@ export const validateAddDayTracked = (nutritionTrackedDays, trackedDayInfo) => {
   }
 
   // check if macronutrients data types are valid
-  if (!(/^[0-9]*$/.test(String(trackedDayInfo.calories))) || 
+  if (!(REGEX_PATTERNS.floatNumbers.test(String(trackedDayInfo.calories))) || 
       Number(trackedDayInfo.calories) < 0 || 
-      !(/^[0-9]*$/.test(String(trackedDayInfo.macronutrients.carbohydrates))) || 
+      !(REGEX_PATTERNS.floatNumbers.test(String(trackedDayInfo.macronutrients.carbohydrates))) || 
       Number(trackedDayInfo.macronutrients.carbohydrates) < 0 ||
-      !(/^[0-9]*$/.test(String(trackedDayInfo.macronutrients.protein))) || 
+      !(REGEX_PATTERNS.floatNumbers.test(String(trackedDayInfo.macronutrients.protein))) || 
       Number(trackedDayInfo.macronutrients.protein) < 0 ||
-      !(/^[0-9]*$/.test(String(trackedDayInfo.macronutrients.fat))) || 
+      !(REGEX_PATTERNS.floatNumbers.test(String(trackedDayInfo.macronutrients.fat))) || 
       Number(trackedDayInfo.macronutrients.fat) < 0) {
 
     errorOnInvalidMacronutrientInputs();
@@ -41,7 +42,7 @@ export const validateAddDayTracked = (nutritionTrackedDays, trackedDayInfo) => {
       return true;
     }
 
-    if (!(/^[0-9]*$/.test(String(micronutrient.amount))) || 
+    if (!(REGEX_PATTERNS.floatNumbers.test(String(micronutrient.amount))) || 
        Number(micronutrient.amount) <= 0) {
 
         errorOnInvalidMicronutrientInput();
@@ -86,13 +87,13 @@ export const validateUpdateDayTracked = (nutritionTrackedDays, updatedTrackedDay
   }
 
   // check if macronutrients data types are valid
-  if (!(/^[0-9]*$/.test(String(updatedTrackedDayInfo.calories))) || 
+  if (!(REGEX_PATTERNS.floatNumbers.test(String(updatedTrackedDayInfo.calories))) || 
     Number(updatedTrackedDayInfo.calories) < 0 || 
-    !(/^[0-9]*$/.test(String(updatedTrackedDayInfo.macronutrients.carbohydrates))) || 
+    !(REGEX_PATTERNS.floatNumbers.test(String(updatedTrackedDayInfo.macronutrients.carbohydrates))) || 
     Number(updatedTrackedDayInfo.macronutrients.carbohydrates) < 0 ||
-    !(/^[0-9]*$/.test(String(updatedTrackedDayInfo.macronutrients.protein))) || 
+    !(REGEX_PATTERNS.floatNumbers.test(String(updatedTrackedDayInfo.macronutrients.protein))) || 
     Number(updatedTrackedDayInfo.macronutrients.protein) < 0 ||
-    !(/^[0-9]*$/.test(String(updatedTrackedDayInfo.macronutrients.fat))) || 
+    !(REGEX_PATTERNS.floatNumbers.test(String(updatedTrackedDayInfo.macronutrients.fat))) || 
     Number(updatedTrackedDayInfo.macronutrients.fat) < 0) {
 
     errorOnInvalidMacronutrientInputs();
@@ -110,7 +111,7 @@ export const validateUpdateDayTracked = (nutritionTrackedDays, updatedTrackedDay
       return true;
     }
 
-    if (!(/^[0-9]*$/.test(String(micronutrient.amount))) || 
+    if (!(REGEX_PATTERNS.floatNumbers.test(String(micronutrient.amount))) || 
        Number(micronutrient.amount) <= 0) {
 
       errorOnInvalidMicronutrientInput();
