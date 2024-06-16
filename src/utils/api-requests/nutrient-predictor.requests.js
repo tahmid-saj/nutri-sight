@@ -53,7 +53,7 @@ export const getFoodObjectDetection = async (uploadedImage) => {
     const resFoodObjectDetection = await fetch(`${process.env.REACT_APP_API_URL_OBJECT_DETECTOR}${process.env.REACT_APP_API_URL_FOOD_OBJECT_DETECTION}`, {
       method: "POST",
       headers: {
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
       },
       body: formData
     })
