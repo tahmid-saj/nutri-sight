@@ -21,7 +21,10 @@ export const validateImgPath = (imgPath) => {
 
   if (!(imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.png || 
     imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.jpeg ||
-    imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.jpg)) {
+    imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.jpg ||
+    imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.PNG || 
+    imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.JPEG ||
+    imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.JPG)) {
       
     errorOnInvalidImageType();
 

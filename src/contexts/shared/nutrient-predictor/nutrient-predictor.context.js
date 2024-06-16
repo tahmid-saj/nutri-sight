@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 
 import { validateImgPath } from "../../../utils/validations/nutrient-predictor.validations";
-import { getMealPredictions, getNutrientPredictions } from "../../../utils/api-requests/nutrient-predictor.requests";
+import { getFoodObjectDetection, getMealPredictions, getNutrientPredictions } from "../../../utils/api-requests/nutrient-predictor.requests";
 
 import { NUTRIENT_PREDICTOR_ENUMS } from "../../../utils/constants/nutrient-predictor.constants"
 
@@ -21,8 +21,9 @@ const updateImageHelper = (imageAndPrediction, imgPath) => {
   };
 };
 
-const updateImageAndPredictionHelper = async (imageAndPrediction, imgPath, imageInputType) => {
-  console.log(imageInputType);
+const updateImageAndPredictionHelper = async (imageAndPrediction, imgPath, imageInputType, uploadedImage) => {
+  console.log(imgPath);
+  console.log(uploadedImage)
 
   // TODO: need validation to check if imgPath and img are valid and an image
   if (validateImgPath(imgPath) === true) {
@@ -30,7 +31,12 @@ const updateImageAndPredictionHelper = async (imageAndPrediction, imgPath, image
   }
 
   // TODO: need to implement separate prediction function call
-  const predictionResponse = await getMealPredictions(imgPath);
+  let predictionResponse
+  if (imageInputType === NUTRIENT_PREDICTOR_ENUMS.image) {
+    predictionResponse = await getFoodObjectDetection(uploadedImage)
+  } else if (imageInputType === NUTRIENT_PREDICTOR_ENUMS.url) {
+    predictionResponse = await getMealPredictions(imgPath);
+  }
 
   console.log(predictionResponse)
 
@@ -87,18 +93,18 @@ export const NutrientPredictorProvider = ({ children }) => {
   const [imageAndPrediction, setImageAndPrediction] = useState({});
   const [nutrientPredictions, setNutrientPredictions] = useState([])
 
-  useEffect(() => {
-    console.log(imageAndPrediction);
-  }, [imageAndPrediction]);
+  // useEffect(() => {
+  //   console.log(imageAndPrediction);
+  // }, [imageAndPrediction]);
 
   const updateImage = (imgPath) => {
     setImageAndPrediction(updateImageHelper(imageAndPrediction, imgPath));
   };
 
-  const updateImageAndPrediction = async (imgPath, imageInputType) => {
+  const updateImageAndPrediction = async (imgPath, imageInputType, uploadedImage) => {
     if (imageInputType === NUTRIENT_PREDICTOR_ENUMS.image) {
       setPredictionInputType(NUTRIENT_PREDICTOR_ENUMS.image)
-      const updateImageAndPredictionResponse = await updateImageAndPredictionHelper(imageAndPrediction, imgPath, imageInputType)
+      const updateImageAndPredictionResponse = await updateImageAndPredictionHelper(imageAndPrediction, imgPath, imageInputType, uploadedImage)
 
       setImageAndPrediction(updateImageAndPredictionResponse);
 
