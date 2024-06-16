@@ -63,7 +63,7 @@ const UploadImage = () => {
 
     setFormFields({ 
       ...formFields,
-      uploadedImage: name === "uploadedImagePath" ? URL.createObjectURL(event.target.files[0]) : "",
+      uploadedImage: name === "uploadedImagePath" ? event.target.files[0] : "",
       [name]: value }
     );
 
@@ -97,7 +97,7 @@ const UploadImage = () => {
           <FormInput label="Image URL" type="url" id="imageUrl" name="imageUrl" 
                     onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.url) } value={ formFields.imageUrl }></FormInput>
 
-          <FormInput type="file" id="uploadedImagePath" name="uploadedImagePath" 
+          <FormInput disabled type="file" id="uploadedImagePath" name="uploadedImagePath" 
                     onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.image) } value={ formFields.uploadedImagePath } accept="image/*"></FormInput>
 
           <ButtonsContainer>
