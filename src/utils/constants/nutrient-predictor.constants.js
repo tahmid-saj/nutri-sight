@@ -4,6 +4,9 @@ export const IMAGE_EXTENSIONS = {
   png: "png",
   jpeg: "jpeg",
   jpg: "jpg",
+  PNG: "PNG",
+  JPEG: "JPEG",
+  JPG: "JPG",
 };
 
 export const NUTRIENT_PREDICTOR_ENUMS = {
