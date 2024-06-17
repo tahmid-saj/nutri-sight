@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react"
+import { Fragment, useContext, useState } from "react"
 import "./search-exercise-form.styles.scss"
 import { Typography } from "@mui/material"
 import FormInput from "../../../shared/form-input/form-input.component"
@@ -7,6 +7,8 @@ import Button from "../../../shared/button/button.component"
 import { ButtonsContainer } from "../../../shared/button/button.styles"
 import SimplePaper from "../../../shared/mui/paper/paper.component"
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants"
+
+import { FitnessContext } from "../../../../contexts/signed-out/fitness/fitness.context"
 
 const defaultFormFields = {
   exerciseName: "",
@@ -21,6 +23,7 @@ const paperStyles = {
 
 const SearchExerciseForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
+  const { searchExercise } = useContext(FitnessContext)
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
@@ -34,6 +37,7 @@ const SearchExerciseForm = () => {
       return
     }
 
+    searchExercise(formFields)
     resetFormFields()
   }
 
