@@ -8,3 +8,8 @@ export const errorOnInvalidSearchedExerciseName = () => {
 export const errorOnInvalidExerciseSetsReps = () => {
   alert("Invalid exercise sets / reps")
 }
+
+// api requests
+export const errorOnGetSearchExercise = () => {
+  alert("Error searching exercise")
+}

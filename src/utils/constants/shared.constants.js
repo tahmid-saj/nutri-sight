@@ -176,5 +176,9 @@ export const COLOR_CODES = {
   paper: {
     formPaper: "#EAFAF1",
     infoPaper: "#F7F9F9"
+  },
+  scrollbar: {
+    scroll: "#666666",
+    background: "white"
   }
 }

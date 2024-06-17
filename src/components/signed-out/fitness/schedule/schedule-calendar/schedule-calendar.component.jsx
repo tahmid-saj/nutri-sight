@@ -1,35 +1,51 @@
 import "./schedule-calendar.styles.scss"
 import 'rsuite/Calendar/styles/index.css';
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
 import { Typography } from "@mui/material";
+import { FitnessContext } from "../../../../../contexts/signed-out/fitness/fitness.context";
 
-function getTodoList(date) {
-  const day = date.getDate();
+function getScheduledData(date, exercises) {
+  // const day = date.getDate();
+  date = date.toISOString().split('T')[0]
 
-  switch (day) {
-    case 10:
-      return [
-        { time: '10:30 am', title: 'Meeting' },
-        { time: '12:00 pm', title: 'Lunch' }
-      ];
-    case 15:
-      return [
-        { time: '09:30 pm', title: 'Products Introduction Meeting' },
-        { time: '12:30 pm', title: 'Client entertaining' },
-        { time: '02:00 pm', title: 'Product design discussion' },
-        { time: '05:00 pm', title: 'Product test and acceptance' },
-        { time: '06:30 pm', title: 'Reporting' },
-        { time: '10:00 pm', title: 'Going home to walk the dog' }
-      ];
-    default:
-      return [];
-  }
+  // switch (day) {
+  //   case 10:
+  //     return [
+  //       { time: '10:30 am', title: 'Meeting' },
+  //       { time: '12:00 pm', title: 'Lunch' }
+  //     ];
+  //   case 15:
+  //     return [
+  //       { time: '09:30 pm', title: 'Products Introduction Meeting' },
+  //       { time: '12:30 pm', title: 'Client entertaining' },
+  //       { time: '02:00 pm', title: 'Product design discussion' },
+  //       { time: '05:00 pm', title: 'Product test and acceptance' },
+  //       { time: '06:30 pm', title: 'Reporting' },
+  //       { time: '10:00 pm', title: 'Going home to walk the dog' }
+  //     ];
+  //   default:
+  //     return [];
+  // }
+
+  let scheduledExercisesForDate = []
+  exercises.map((exercise) => {
+    if (exercise.exerciseDate === date) {
+      scheduledExercisesForDate.push({
+        type: exercise.exerciseType,
+        name: exercise.exerciseName
+      })
+    }
+  })
+
+  return scheduledExercisesForDate
 }
 
 const ScheduleCalendar = () => {
+  const { exercises, selectScheduledExercise } = useContext(FitnessContext)
+
   function renderCell(date) {
-    const list = getTodoList(date);
+    const list = getScheduledData(date, exercises);
     const displayList = list.filter((item, index) => index < 1);
 
     if (list.length) {
@@ -59,7 +75,7 @@ const ScheduleCalendar = () => {
           <ul className="calendar-todo-list">
             {displayList.map((item, index) => (
               <li key={index}>
-                <Badge /> <b>{item.time}</b> - {item.title}
+                <Badge /> <b>{item.type}</b> - {item.name}
               </li>
             ))}
             {/* {moreCount ? moreItem : null} */}
@@ -73,7 +89,9 @@ const ScheduleCalendar = () => {
   }
 
   const onSelectDate = (date) => {
-    alert("Date selected: " + date)
+    const selectedDate = date.toISOString().split('T')[0]
+    console.log(selectedDate)
+    selectScheduledExercise(selectedDate)
   }
 
   return (

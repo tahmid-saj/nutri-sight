@@ -10,6 +10,7 @@ import Button from "../../../../shared/button/button.component";
 import { ButtonsContainer } from "../../../../shared/button/button.styles";
 import SimplePaper from "../../../../shared/mui/paper/paper.component";
 import { COLOR_CODES } from "../../../../../utils/constants/shared.constants";
+import { FitnessContext } from "../../../../../contexts/signed-out/fitness/fitness.context";
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.paper.formPaper,
@@ -17,7 +18,26 @@ const paperStyles = {
 }
 
 const ScheduleDayInfo = () => {
+  const { exercisesView, removeExercise, unselectScheduledExercise } = useContext(FitnessContext)
+  console.log(exercisesView)
+
   const gridRef = useRef()
+
+  const rowData = exercisesView.map((exercise) => {
+    return {
+      // AddToExpenses: "",
+      Date: exercise.exerciseDate,
+      Exercise: exercise.exerciseName,
+      Sets: exercise.exerciseSets,
+      Reps: exercise.exerciseReps,
+      Type: exercise.exerciseType,
+      Muscle: exercise.exerciseMuscle,
+      Equipment: exercise.exerciseEquipment,
+      Difficulty: exercise.exerciseDifficulty,
+      Instructions: exercise.exerciseInstructions,
+      Tag: exercise.exerciseTag
+    }
+  })
 
   // column definitions
   const [columnDefs, setColumnDefs] = useState([
@@ -30,6 +50,7 @@ const ScheduleDayInfo = () => {
     { field: "Equipment" },
     { field: "Difficulty" },
     { field: "Instructions" },
+    { field: "Tag" },
   ])
 
   const onRemoveSelected = (event) => {
@@ -41,7 +62,12 @@ const ScheduleDayInfo = () => {
     }
 
     console.log(selectedData[0])
-    // removeInsurance(selectedData[0].For)
+    removeExercise(selectedData[0].Tag)
+  }
+
+  const handleUnselect = (event) => {
+    event.preventDefault()
+    unselectScheduledExercise()
   }
 
   return (
@@ -54,11 +80,14 @@ const ScheduleDayInfo = () => {
           style={{ height: 500, width: '100%' }} // the grid will fill the size of the parent container
           >
           <AgGridReact 
-            // rowData={ rowData } 
+            rowData={ rowData } 
             columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "multiple" }/>
             <ButtonsContainer>
               <div className="remove-exercise-selected-button">
-                <Button onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
+                <Button type="button" onClick={ (e) => onRemoveSelected(e) }>Remove</Button>
+              </div>
+              <div className="unselect-exercise-button">
+                <Button type="button" onClick={ (e) => handleUnselect(e) }>Unselect</Button>
               </div>
             </ButtonsContainer>
         </div>
