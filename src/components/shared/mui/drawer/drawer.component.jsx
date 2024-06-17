@@ -26,6 +26,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -210,7 +211,8 @@ export default function MiniDrawer({ navLinksHeaders, children }) {
                     { header === NAV_LINKS.headers.dashboard ? <DashboardIcon/> : null }
                     { header === NAV_LINKS.headers.nutrientPredictor ? <CameraAltIcon/> : null }
                     { header === NAV_LINKS.headers.nutritionTracker ? <RestaurantIcon/> : null }
-                    { header === NAV_LINKS.headers.caloriesBurned ? <FitnessCenterIcon/> : null }
+                    { header === NAV_LINKS.headers.fitness ? <FitnessCenterIcon/> : null }
+                    { header === NAV_LINKS.headers.caloriesBurned ? <DirectionsRunIcon/> : null }
                     { header === NAV_LINKS.headers.recipes ? <FoodBankIcon/> : null }
                   </ListItemIcon>
 
