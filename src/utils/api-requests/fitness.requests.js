@@ -21,8 +21,7 @@ export async function getSearchedExercise(exerciseQuery) {
     })
     const resJSON = await response.json()
 
-    console.log(resJSON)
-    return []
+    return resJSON.searchedExercises
   } catch (error) {
     console.log(error)
     errorOnGetSearchExercise()

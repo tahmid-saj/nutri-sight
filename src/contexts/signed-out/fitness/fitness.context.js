@@ -75,11 +75,20 @@ export const FitnessContext = createContext({
   searchExercise: () => {},
   addExercise: () => {},
   selectScheduledExercise: () => {},
+  unselectScheduledExercise: () => {},
   removeExercise: () => {},
+
+  // exerciseQuery structure:
+  // {
+  //   exerciseName:,
+  //   exerciseType: (optional),
+  //   exerciseMuscle: (optional),
+  //   exerciseDifficulty: (optional),
+  // }
 })
 
 // actual context
-export const ExerciseProvider = ({ children }) => {
+export const FitnessProvider = ({ children }) => {
   const [exercises, setExercises] = useState([])
   const [exercisesTagLimit, setExercisesTagLimit] = useState(0)
   const [selectedScheduledExerciseDate, setSelectedScheduledExerciseDate] = useState(null)
@@ -87,6 +96,7 @@ export const ExerciseProvider = ({ children }) => {
   const [exercisesView, setExercisesView] = useState(exercises)
 
   // update exercisesTagLimit when exercises change
+  // TODO: need to better manage tags
   useEffect(() => {
     setExercisesTagLimit(exercises.length)
   }, [exercises])
@@ -122,6 +132,11 @@ export const ExerciseProvider = ({ children }) => {
     setExercisesView(selectScheduledExerciseHelper(exercises, exerciseDate))
   }
 
+  const unselectScheduledExercise = () => {
+    setSelectedScheduledExerciseDate(null)
+    setExercisesView(exercises)
+  }
+
   const removeExercise = (exerciseTag) => {
     if (validateRemoveExercise(exerciseTag)) {
       return
@@ -131,7 +146,7 @@ export const ExerciseProvider = ({ children }) => {
   }
 
   const value = { exercises, exercisesSearchResults, exercisesView,
-    searchExercise, addExercise, selectScheduledExercise, removeExercise  }
+    searchExercise, addExercise, selectScheduledExercise, unselectScheduledExercise, removeExercise }
 
   return (
     <FitnessContext.Provider value={ value }>
