@@ -1,4 +1,4 @@
-import { validateAddDayTracked, validateUpdateDayTracked, 
+import { validatePredictionInfo, validateAddDayTracked, validateUpdateDayTracked, 
   validateFilterNutritionTrackedDays, validateRemoveNutritionTrackedDay 
 } from "../../../utils/validations/nutrition-tracker.validations";
 import { calculateSummary } from "../../../utils/calculations/nutrition-tracker.calculations";
@@ -9,6 +9,24 @@ import { NUTRITION_TRACKER_ACTION_TYPES } from "./nutrition-tracker.types";
 
 // TODO: sort the records by date
 // helper functions
+
+const addDayTrackedFromPredictionHelper = (nutritionTrackedDays, predictionNutritionInfo) => {
+  if (validatePredictionInfo(nutritionTrackedDays, predictionNutritionInfo)) return nutritionTrackedDays
+
+  return [
+    ...nutritionTrackedDays,
+    {
+      dateTracked: String(predictionNutritionInfo.dateTracked),
+      calories: Number(predictionNutritionInfo.calories),
+      macronutrients: {
+        carbohydrates: Number(predictionNutritionInfo.macronutrients.carbohydrates),
+        protein: Number(predictionNutritionInfo.macronutrients.protein),
+        fat: Number(predictionNutritionInfo.macronutrients.fat),
+      },
+      micronutrients: predictionNutritionInfo.micronutrients
+    }
+  ]
+}
 
 const addMicronutrientsToTrackedDayInfoHelper = (formInputMicronutrients, trackedDayInfo) => {
   return {
@@ -191,4 +209,10 @@ export const setNutritionTrackedDaysView = (nutritionTrackedDaysView) => {
 
 export const setNutritionTrackedDaysSummary = (nutritionTrackedDaysSummary) => {
   return createAction(NUTRITION_TRACKER_ACTION_TYPES.SET_NUTRITION_TRACKED_DAYS_SUMMARY, nutritionTrackedDaysSummary)
+}
+
+export const addDayTrackedFromPrediction = (nutritionTrackedDays, predictionNutritionInfo) => {
+  const newNutritionTrackedDays = addDayTrackedFromPredictionHelper(nutritionTrackedDays, predictionNutritionInfo)
+  
+  return createAction(NUTRITION_TRACKER_ACTION_TYPES.SET_NUTRITION_TRACKED_DAYS, newNutritionTrackedDays)
 }
