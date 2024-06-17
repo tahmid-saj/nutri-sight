@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 
-import { validateAddDayTracked, validateUpdateDayTracked, 
+import { validatePredictionInfo, validateAddDayTracked, validateUpdateDayTracked, 
   validateFilterNutritionTrackedDays, validateRemoveNutritionTrackedDay } from "../../../utils/validations/nutrition-tracker.validations";
 import { calculateSummary } from "../../../utils/calculations/nutrition-tracker.calculations";
 
@@ -8,6 +8,24 @@ import { DEFAULT_MICRONUTRIENT } from "../../../utils/constants/nutrition-tracke
 
 // TODO: sort the records by date
 // helper functions
+
+const addDayTrackedFromPredictionHelper = (nutritionTrackedDays, predictionNutritionInfo) => {
+  if (validatePredictionInfo(nutritionTrackedDays, predictionNutritionInfo)) return nutritionTrackedDays
+
+  return [
+    ...nutritionTrackedDays,
+    {
+      dateTracked: String(predictionNutritionInfo.dateTracked),
+      calories: Number(predictionNutritionInfo.calories),
+      macronutrients: {
+        carbohydrates: Number(predictionNutritionInfo.macronutrients.carbohydrates),
+        protein: Number(predictionNutritionInfo.macronutrients.protein),
+        fat: Number(predictionNutritionInfo.macronutrients.fat),
+      },
+      micronutrients: predictionNutritionInfo.micronutrients
+    }
+  ]
+}
 
 const addMicronutrientsToTrackedDayInfoHelper = (formInputMicronutrients, trackedDayInfo) => {
   return {
@@ -181,6 +199,8 @@ export const NutritionTrackerContext = createContext({
   updateFormInputMicronutrients: () => {},
   deleteFormInputMicronutrients: () => {},
 
+  addDayTrackedFromPrediction: () => {},
+
   nutritionTrackedDaysSummary: {},
   // nutritionTrackedDaysSummary structure:
   // {
@@ -272,12 +292,18 @@ export const NutritionTrackerProvider = ({ children }) => {
     setNutritionTrackedDaysView(nutritionTrackedDays)
   }
 
+  const addDayTrackedFromPrediction = (predictionNutritionInfo) => {
+    setNutritionTrackedDays(addDayTrackedFromPredictionHelper(nutritionTrackedDays, predictionNutritionInfo))
+    setFormInputMicronutrients([]);
+  }
+
   const value = { nutritionTrackedDays, formInputMicronutrients, 
                   addDayTracked, updateDayTracked, getDayTracked, 
                   addFormInputMicronutrients, updateFormInputMicronutrients, deleteFormInputMicronutrients, 
                   nutritionTrackedDaysSummary, 
                   nutritionTrackedDaysView, dayTrackedSearchResult,
-                  filterDayTracked, removeDayTracked, clearDayTrackedFilter }
+                  filterDayTracked, removeDayTracked, clearDayTrackedFilter,
+                  addDayTrackedFromPrediction }
 
   return (
     <NutritionTrackerContext.Provider

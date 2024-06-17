@@ -5,6 +5,74 @@ import { REGEX_PATTERNS } from "./regex.constants";
 
 // nutrition tracker validation functions
 
+export const validatePredictionInfo = (nutritionTrackedDays, predictionNutritionInfo) => {
+  // check that trackedDayInfo's day doesn't exist in nutritionTrackedDays
+  const trackedDayExists = nutritionTrackedDays.find((nutritionTrackedDay) => {
+    return nutritionTrackedDay.dateTracked === predictionNutritionInfo.dateTracked;
+  });
+
+  if (trackedDayExists) {
+    errorOnTrackedDayExists();
+
+    return true;
+  }
+
+  // check if macronutrients data types are valid
+  if (!(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo.calories))) || 
+      Number(predictionNutritionInfo.calories) < 0 || 
+      !(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo.macronutrients.carbohydrates))) || 
+      Number(predictionNutritionInfo.macronutrients.carbohydrates) < 0 ||
+      !(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo.macronutrients.protein))) || 
+      Number(predictionNutritionInfo.macronutrients.protein) < 0 ||
+      !(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo.macronutrients.fat))) || 
+      Number(predictionNutritionInfo.macronutrients.fat) < 0) {
+
+    errorOnInvalidMacronutrientInputs();
+
+    return true;
+  }
+
+  // check if micronutrients are valid
+  // check if micronutrients data types are valid
+  const invalidMicronutrients = predictionNutritionInfo.micronutrients.find(micronutrient => {
+    if (String(micronutrient.name).length > 50 || String(micronutrient.unit).length > 5 ) {
+
+      errorOnInvalidMicronutrientInput();
+
+      return true;
+    }
+
+    if (!(REGEX_PATTERNS.floatNumbers.test(String(micronutrient.amount))) || 
+       Number(micronutrient.amount) < 0) {
+
+        errorOnInvalidMicronutrientInput();
+
+      return true;
+    }
+
+    return false;
+  });
+
+  if (invalidMicronutrients) return true;
+
+  // check if micronutrients are not empty
+  const emptyMicronutrients = predictionNutritionInfo.micronutrients.find(micronutrient => {
+    if (String(micronutrient.name) === "" || String(micronutrient.amount) === "" ||
+        String(micronutrient.unit) === "") {
+
+          errorOnEmptyMicronutrients();
+
+      return true;
+    }
+
+    return false;
+  });
+
+  if (emptyMicronutrients) return true;
+
+  return false;
+}
+
 export const validateAddDayTracked = (nutritionTrackedDays, trackedDayInfo) => {
   // check that trackedDayInfo's day doesn't exist in nutritionTrackedDays
   const trackedDayExists = nutritionTrackedDays.find((nutritionTrackedDay) => {
@@ -71,7 +139,7 @@ export const validateAddDayTracked = (nutritionTrackedDays, trackedDayInfo) => {
   if (emptyMicronutrients) return true;
 
   return false;
-};
+}
 
 export const validateUpdateDayTracked = (nutritionTrackedDays, updatedTrackedDayInfo) => {
   // check that updatedTrackedDayInfo exists in nutritionTrackedDays
