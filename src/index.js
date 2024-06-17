@@ -15,7 +15,7 @@ import { CaloriesBurnedProvider as CaloriesBurnedProviderSignedOut } from './con
 import { RecipesProvider } from './contexts/shared/recipes/recipes.context';
 
 import { NutritionTrackerProvider as NutritionTrackerProviderSignedIn } from './contexts/signed-in/nutrition-tracker/nutrition-tracker.context';
-import { CaloriesBurnedProvider as CaloiriesBurnedProviderSignedIn } from './contexts/signed-in/calories-burned/calories-burned.context';
+import { CaloriesBurnedProvider as CaloriesBurnedProviderSignedIn } from './contexts/signed-in/calories-burned/calories-burned.context';
 
 import { Provider } from "react-redux"
 import { persistor, store } from "./store/store"
@@ -34,9 +34,9 @@ root.render(
                   <RecipesProvider>
                     {/* <UserProvider> */}
                       <NutritionTrackerProviderSignedIn>
-                        <CaloiriesBurnedProviderSignedIn>
+                        <CaloriesBurnedProviderSignedIn>
                           <App />
-                        </CaloiriesBurnedProviderSignedIn>
+                        </CaloriesBurnedProviderSignedIn>
                       </NutritionTrackerProviderSignedIn>
                     {/* </UserProvider> */}
                   </RecipesProvider>
