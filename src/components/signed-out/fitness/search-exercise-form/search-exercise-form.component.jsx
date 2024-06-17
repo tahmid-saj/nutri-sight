@@ -32,7 +32,7 @@ const SearchExerciseForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    if (!formFields.exerciseName || formFields.exerciseName === "") {
+    if (!formFields.exerciseMuscle || formFields.exerciseMuscle === "") {
       console.log("please fill in all info")
       return
     }
@@ -53,27 +53,10 @@ const SearchExerciseForm = () => {
 
       <SimplePaper styles={ paperStyles }>
         <form onSubmit={ handleSubmit } className="fitness-search-exercise-form">
-          <FormInput label="Name of exercise" type="text" required onChange={ handleChange }
-            name="exerciseName" value={ formFields.exerciseName }></FormInput>
-          
           <div className="fitness-search-exercise-form-dropdown">
-            <Typography sx={{ display: "inline-block", position: "relative", marginRight: "2%" }} paragraph>Type</Typography>
-            <DropButton name="exerciseType" id="exerciseType" 
-                    onChange={ handleChange } value={ formFields.exerciseType }>
-              <option value="cardio">Cardio</option>
-              <option value="strength">Strength</option>
-              <option value="powerlifting">Powerlifting</option>
-              <option value="stretching">Stretching</option>
-              <option value="plyometrics">Plyometrics</option>
-              <option value="strongman">Strongman</option>
-              <option value="olympic_weightlifting">Olympic Weightlifting</option>
-            </DropButton>
-          </div>
-
-          <div className="fitness-search-exercise-form-dropdown">
-            <Typography sx={{ display: "inline-block", position: "relative", marginRight: "2%" }} paragraph>Muscle</Typography>
+            <Typography sx={{ display: "inline-block", position: "relative", marginRight: "2%", marginTop: "4%" }} paragraph>Muscle</Typography>
             <DropButton name="exerciseMuscle" id="exerciseMuscle" 
-                    onChange={ handleChange } value={ formFields.exerciseMuscle }>
+                    required onChange={ handleChange } value={ formFields.exerciseMuscle }>
               <option value="abdominals">Abdominals</option>
               <option value="abductors">Abductors</option>
               <option value="biceps">Biceps</option>
@@ -91,6 +74,25 @@ const SearchExerciseForm = () => {
               <option value="triceps">Triceps</option>
             </DropButton>
           </div>
+
+          <Typography sx={{ marginTop: "2%" }} paragraph>Optional:</Typography>
+
+          <div className="fitness-search-exercise-form-dropdown">
+            <Typography sx={{ display: "inline-block", position: "relative", marginRight: "2%" }} paragraph>Type</Typography>
+            <DropButton name="exerciseType" id="exerciseType" 
+                    onChange={ handleChange } value={ formFields.exerciseType }>
+              <option value="cardio">Cardio</option>
+              <option value="strength">Strength</option>
+              <option value="powerlifting">Powerlifting</option>
+              <option value="stretching">Stretching</option>
+              <option value="plyometrics">Plyometrics</option>
+              <option value="strongman">Strongman</option>
+              <option value="olympic_weightlifting">Olympic Weightlifting</option>
+            </DropButton>
+          </div>
+          
+          <FormInput label="Name of exercise" type="text" onChange={ handleChange }
+            name="exerciseName" value={ formFields.exerciseName }></FormInput>
 
           <div className="fitness-search-exercise-form-dropdown">
             <Typography sx={{ display: "inline-block", position: "relative", marginRight: "2%" }} paragraph>Difficulty</Typography>

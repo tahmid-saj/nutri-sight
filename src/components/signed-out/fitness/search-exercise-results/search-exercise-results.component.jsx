@@ -9,6 +9,10 @@ import { useContext } from "react"
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.paper.formPaper,
+  overflow: "scroll",
+  height: "60rem",
+  scrollbarColor: `${COLOR_CODES.scrollbar.scroll} ${COLOR_CODES.scrollbar.background}`,
+  scrollbarWidth: "thin"
 }
 
 const SearchExerciseResults = () => {
@@ -32,3 +36,5 @@ const SearchExerciseResults = () => {
 }
 
 export default SearchExerciseResults
+
+// style="overflow:scroll; height:400px;

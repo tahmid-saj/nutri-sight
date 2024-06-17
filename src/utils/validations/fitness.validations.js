@@ -6,11 +6,11 @@ import { REGEX_PATTERNS } from "./regex.constants";
 // context
 
 export const validateSearchedExercise = (exerciseQuery) => {
-  if (REGEX_PATTERNS.search.test(exerciseQuery.exerciseName)) {
+  // if (!REGEX_PATTERNS.search.test(String(exerciseQuery.exerciseName))) {
 
-    errorOnInvalidSearchedExerciseName();
-    return true;
-  }
+  //   errorOnInvalidSearchedExerciseName();
+  //   return true;
+  // }
 
   return false
 }

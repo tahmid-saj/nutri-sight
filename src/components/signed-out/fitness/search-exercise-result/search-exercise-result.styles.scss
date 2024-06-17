@@ -2,4 +2,10 @@
   display: block;
   justify-content: center;
   align-items: center;
+  padding: 2%;
+
+  &:hover {
+    background-color: rgba(1, 146, 66, 0.15);
+    border: none;
+  }
 }

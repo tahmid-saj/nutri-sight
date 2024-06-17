@@ -5,8 +5,14 @@ import ScheduleDayInfo from "../../../components/signed-out/fitness/schedule/sch
 import SearchExerciseForm from "../../../components/signed-out/fitness/search-exercise-form/search-exercise-form.component"
 import SearchExerciseResults from "../../../components/signed-out/fitness/search-exercise-results/search-exercise-results.component"
 import "./fitness.styles.scss"
+import { useContext, Fragment } from "react"
+import { FitnessContext } from "../../../contexts/signed-out/fitness/fitness.context"
 
 const Fitness = () => {
+  const { exercises, exercisesSearchResults } = useContext(FitnessContext)
+
+  console.log(exercises, exercisesSearchResults)
+
   return (
     <div className="fitness-container">
       <div className="fitness-schedule-container">
@@ -30,8 +36,13 @@ const Fitness = () => {
       <br/>
 
       <div className="fitness-search-add-container">
-        <SearchExerciseResults></SearchExerciseResults>
-        <AddExerciseForm></AddExerciseForm>
+        {
+          exercisesSearchResults.length !== 0 ?
+          <Fragment>
+            <SearchExerciseResults></SearchExerciseResults>
+            <AddExerciseForm></AddExerciseForm>
+          </Fragment> : null
+        }
       </div>
     </div>
   )

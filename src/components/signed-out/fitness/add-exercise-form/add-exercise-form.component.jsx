@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { Fragment, useContext, useState } from "react"
 import "./add-exercise-form.styles.scss"
 import { Typography } from "@mui/material"
 import FormInput from "../../../shared/form-input/form-input.component"
@@ -7,6 +7,7 @@ import Button from "../../../shared/button/button.component"
 import SimplePaper from "../../../shared/mui/paper/paper.component"
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants"
 import AddExerciseFormInfo from "./add-exercise-form-info/add-exercise-form-info.component"
+import { FitnessContext } from "../../../../contexts/signed-out/fitness/fitness.context"
 
 const defaultFormFields = {
   exerciseDate: "",
@@ -20,6 +21,13 @@ const paperStyles = {
 
 const AddExerciseForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
+  const { addExercise, selectedSearchedExercise } = useContext(FitnessContext)
+
+  if (!selectedSearchedExercise) {
+    return (
+      <Fragment></Fragment>
+    )
+  }
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
@@ -33,6 +41,7 @@ const AddExerciseForm = () => {
       return
     }
 
+    addExercise(formFields)
     resetFormFields()
   }
 

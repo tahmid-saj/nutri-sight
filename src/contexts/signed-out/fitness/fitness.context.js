@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext } from "react";
-import { validateSearchExercise, validateAddExercise,
+import { validateSearchedExercise, validateAddExercise,
   validateRemoveExercise
 } from "../../../utils/validations/fitness.validations"
 import { getSearchedExercise } from "../../../utils/api-requests/fitness.requests"
@@ -8,31 +8,36 @@ import { getSearchedExercise } from "../../../utils/api-requests/fitness.request
 const searchExerciseHelper = async (exerciseQuery) => {
   const resSearchedExerciseResults = await getSearchedExercise(exerciseQuery)
 
+  console.log(resSearchedExerciseResults)
+
   return resSearchedExerciseResults
 }
 
-const addExerciseHelper = (exercises, exercisesTagLimit, exercise) => {
+const addExerciseHelper = (exercises, exercisesTagLimit, exercise, selectedSearchedExercise) => {
   return [
     ...exercises,
     {
       exerciseDate: String(exercise.exerciseDate),
-      exerciseName: String(exercise.exerciseName),
+      exerciseName: String(selectedSearchedExercise.exerciseName),
       exerciseSets: Number(exercise.exerciseSets),
       exerciseReps: Number(exercise.exerciseReps),
-      exerciseType: String(exercise.exerciseType),
-      exerciseMuscle: String(exercise.exerciseMuscle),
-      exerciseEquipment: String(exercise.exerciseEquipment),
-      exerciseDifficulty: String(exercise.exerciseDifficulty),
-      exerciseInstructions: String(exercise.exerciseInstructions),
+      exerciseType: String(selectedSearchedExercise.exerciseType),
+      exerciseMuscle: String(selectedSearchedExercise.exerciseMuscle),
+      exerciseEquipment: String(selectedSearchedExercise.exerciseEquipment),
+      exerciseDifficulty: String(selectedSearchedExercise.exerciseDifficulty),
+      exerciseInstructions: String(selectedSearchedExercise.exerciseInstructions),
       exerciseTag: Number(exercisesTagLimit),
     }
   ]
 }
 
 const selectScheduledExerciseHelper = (exercises, exerciseDate) => {
-  const selectedScheduledExercises = exercises.map((exercise) => {
+  let selectedScheduledExercises = []
+  
+  exercises.map((exercise) => {
     if (exercise.exerciseDate === exerciseDate) {
-      return exercise
+      console.log(exerciseDate)
+      selectedScheduledExercises.push(exercise)
     }
   })
 
@@ -69,13 +74,19 @@ export const FitnessContext = createContext({
   // exercisesSearchResults is a list of exercises from the API
   exercisesSearchResults: [],
 
+  // selectedSearchedExercise is the exercise clicked on in the search results
+  selectedSearchedExercise: null,
+
   // exercisesView is the filtered version of exercises
   exercisesView: [],
 
   searchExercise: () => {},
   addExercise: () => {},
+
   selectScheduledExercise: () => {},
   unselectScheduledExercise: () => {},
+  selectSearchedExercises: () => {},
+
   removeExercise: () => {},
 
   // exerciseQuery structure:
@@ -93,6 +104,7 @@ export const FitnessProvider = ({ children }) => {
   const [exercisesTagLimit, setExercisesTagLimit] = useState(0)
   const [selectedScheduledExerciseDate, setSelectedScheduledExerciseDate] = useState(null)
   const [exercisesSearchResults, setExercisesSearchResults] = useState([])
+  const [selectedSearchedExercise, setSelectedSearchedExercise] = useState(null)
   const [exercisesView, setExercisesView] = useState(exercises)
 
   // update exercisesTagLimit when exercises change
@@ -110,12 +122,13 @@ export const FitnessProvider = ({ children }) => {
     }
   }, [exercises, selectedScheduledExerciseDate])
 
-  const searchExercise = (exerciseQuery) => {
-    if (validateSearchExercise(exerciseQuery)) {
+  const searchExercise = async (exerciseQuery) => {
+    if (validateSearchedExercise(exerciseQuery)) {
       return
     } else {
-      const resSearchedExercises = searchExerciseHelper(exerciseQuery)
+      const resSearchedExercises = await searchExerciseHelper(exerciseQuery)
       setExercisesSearchResults(resSearchedExercises)
+      console.log(resSearchedExercises)
     }
   }
 
@@ -123,7 +136,7 @@ export const FitnessProvider = ({ children }) => {
     if (validateAddExercise(exercise)) {
       return
     } else {
-      setExercises(addExerciseHelper(exercises, exercisesTagLimit + 1, exercise))
+      setExercises(addExerciseHelper(exercises, exercisesTagLimit + 1, exercise, selectedSearchedExercise))
     }
   }
 
@@ -136,6 +149,10 @@ export const FitnessProvider = ({ children }) => {
     setSelectedScheduledExerciseDate(null)
     setExercisesView(exercises)
   }
+  
+  const selectSearchedExercises = (exercise) => {
+    setSelectedSearchedExercise(exercise)
+  }
 
   const removeExercise = (exerciseTag) => {
     if (validateRemoveExercise(exerciseTag)) {
@@ -145,8 +162,10 @@ export const FitnessProvider = ({ children }) => {
     }
   }
 
-  const value = { exercises, exercisesSearchResults, exercisesView,
-    searchExercise, addExercise, selectScheduledExercise, unselectScheduledExercise, removeExercise }
+  const value = { exercises, exercisesSearchResults, exercisesView, selectedSearchedExercise,
+    searchExercise, addExercise, 
+    selectScheduledExercise, unselectScheduledExercise, selectSearchedExercises,
+    removeExercise }
 
   return (
     <FitnessContext.Provider value={ value }>
