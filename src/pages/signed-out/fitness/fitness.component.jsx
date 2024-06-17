@@ -19,7 +19,15 @@ const Fitness = () => {
         <ScheduleDayInfo></ScheduleDayInfo>
       </div>
 
+      <br/>
+      <Divider/>
+      <br/>
+
       <SearchExerciseForm></SearchExerciseForm>
+
+      <br/>
+      <Divider/>
+      <br/>
 
       <div className="fitness-search-add-container">
         <SearchExerciseResults></SearchExerciseResults>

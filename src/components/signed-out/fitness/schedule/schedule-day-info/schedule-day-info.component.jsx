@@ -45,7 +45,7 @@ const ScheduleDayInfo = () => {
   }
 
   return (
-    <Fragment>
+    <div className="fitness-schedule-day-info-container">
       <Typography sx={{ display: "flex", marginLeft: "2%" }} 
         variant="h6">{`Exercises planned`}</Typography>
 
@@ -63,7 +63,7 @@ const ScheduleDayInfo = () => {
             </ButtonsContainer>
         </div>
       </SimplePaper>
-    </Fragment>
+    </div>
   )
 }
 
