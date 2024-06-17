@@ -20,13 +20,13 @@ const outlinedCardStyles = {
 
 const NutrientsInfo = () => {
   const { nutrientPredictions } = useContext(NutrientPredictorContext);
+  
   const currentUser = useSelector(selectCurrentUser)
 
   const { addDayTrackedFromPrediction: addDayTrackedFromPredictionSignedIn } = useContext(NutritionTrackerContext)
   
   const dispatch = useDispatch()
   const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
-
   
   const handleAddToTracker = (prediction) => {
     const currentDate = new Date()
