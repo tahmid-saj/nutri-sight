@@ -13,6 +13,7 @@ export const NAV_LINKS = {
     dashboard: "Dashboard",
     nutrientPredictor: "Nutrient Predictor",
     nutritionTracker: "Nutrition Tracker",
+    fitness: "Fitness",
     caloriesBurned: "Calories Burned",
     recipes: "Recipes",
     signedOut: "Sign In / Register",
@@ -29,6 +30,7 @@ export const NAV_LINKS = {
       dashboard: "/dashboard",
       nutrientPredictor: "/nutrient-predictor",
       nutritionTracker: "/nutrition-tracker",
+      fitness: "/fitness",
       caloriesBurned: "/calories-burned",
       recipes: "/recipes",
       auth: "/auth",
@@ -39,6 +41,7 @@ export const NAV_LINKS = {
       dashboard: "/dashboard-signed-in",
       nutrientPredictor: "/nutrient-predictor",
       nutritionTracker: "/nutrition-tracker-signed-in",
+      // fitness: "/fitness-signed-in",
       caloriesBurned: "/calories-burned-signed-in",
       recipes: "/recipes",
       auth: "/",
@@ -65,6 +68,10 @@ export const NAV_LINKS = {
       {
         header: "Nutrition Tracker",
         path: "/nutrition-tracker",
+      },
+      {
+        header: "Fitness",
+        path: "/fitness",
       },
       {
         header: "Calories Burned",
@@ -122,6 +129,10 @@ export const NAV_LINKS = {
         header: "Nutrition Tracker",
         path: "/nutrition-tracker-signed-in",
       },
+      // {
+      //   header: "Fitness",
+      //   path: "/fitness-signed-in",
+      // },
       {
         header: "Calories Burned",
         path: "/calories-burned-signed-in",

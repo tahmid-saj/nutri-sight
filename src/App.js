@@ -7,6 +7,7 @@ import AuthenticationRoute from "./routes/signed-out/authentication/authenticati
 import DashboardRoute from "./routes/signed-out/dashboard/dashboard.component";
 import NutrientPredictorRoute from "./routes/shared/nutrient-predictor/nutrient-predictor.component";
 import NutritionTrackerRoute from "./routes/signed-out/nutrition-tracker/nutrition-tracker.component";
+import FitnessRoute from "./routes/signed-out/fitness/fitness.component";
 import CaloriesBurnedRoute from "./routes/signed-out/calories-burned/calories-burned.component"
 import RecipesRoute from "./routes/shared/recipes/recipes.component";
 
@@ -57,6 +58,7 @@ function App() {
             <Fragment>
               <Route path="dashboard" element={ <DashboardRoute/> }/>
               <Route path="nutrition-tracker" element={ <NutritionTrackerRoute/> }/>
+              <Route path="fitness" element={ <FitnessRoute/> }/>
               <Route path="calories-burned" index element={ <CaloriesBurnedRoute/> }/>
               <Route path="auth" index element={ <AuthenticationRoute/> }/>
             </Fragment>

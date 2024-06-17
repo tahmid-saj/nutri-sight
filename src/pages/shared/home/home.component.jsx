@@ -44,6 +44,12 @@ const Home = () => {
       imageUrl: "https://static.vecteezy.com/system/resources/thumbnails/013/416/799/small_2x/woman-choose-between-healthy-and-unhealthy-food-free-vector.jpg",
       path: currentUser ? NAV_LINKS.paths.signedIn.nutritionTracker : NAV_LINKS.paths.signedOut.nutritionTracker
     },
+    fitness: {
+      header: "Fitness",
+      description: "Search thousands of exercises and their instructions, then add them to a schedule",
+      imageUrl: "https://media.istockphoto.com/id/1222178625/vector/stay-home-concept-people-doing-exercise-in-cozy-modern-interior-vector-illustration-in-flat.jpg?s=612x612&w=0&k=20&c=urkPKOi8j2wcHxaoDBummTwezO38qA3BSvqHqc6Mzb8=",
+      path: currentUser ? NAV_LINKS.paths.signedIn.fitness : NAV_LINKS.paths.signedOut.fitness
+    },
     caloriesBurned: {
       header: "Calories Burned",
       description: "Determine the calories burned through your exercises and activities, and add them to the tracker",
@@ -55,6 +61,18 @@ const Home = () => {
       description: "Search over 1,000,000 recipes and get their nutrition information and detailed instructions on making them",
       imageUrl: "https://png.pngtree.com/png-vector/20220712/ourmid/pngtree-flat-style-vector-illustration-of-a-creative-cooking-cookbook-featuring-healthy-recipes-vector-png-image_47565766.jpg",
       path: currentUser ? NAV_LINKS.paths.signedIn.recipes : NAV_LINKS.paths.signedOut.recipes
+    },
+    notifications: {
+      header: "Notifications",
+      description: "Upon signing up and tracking nutrition and fitness, receive notifications of any planned activities on your calendar",
+      imageUrl: "https://media.istockphoto.com/id/1336859622/vector/calendar-with-to-do-checklist-business-task-planning.jpg?s=612x612&w=0&k=20&c=rgIc9ejSfwmsEauhssGSaW5ZM6XjyB6-sBQQLU5qUA4=",
+      path: currentUser ? NAV_LINKS.paths.signedIn.dashboard : NAV_LINKS.paths.signedOut.auth
+    },
+    summary: {
+      header: "All in one place",
+      description: "Manage day to day activities on nutrition, wellness and fitness all in one place",
+      imageUrl: "https://webstockreview.net/images/nutrition-clipart-physical-wellness-1.png",
+      path: currentUser ? NAV_LINKS.paths.signedIn.dashboard : NAV_LINKS.paths.signedOut.dashboard
     },
   }
 
@@ -75,11 +93,22 @@ const Home = () => {
         <MediaCard styles={ styles } header={ homeCardContent.nutritionTracker.header } imageUrl={ homeCardContent.nutritionTracker.imageUrl } 
           imageTitle={ homeCardContent.nutritionTracker.header } path={ homeCardContent.nutritionTracker.path } content={ homeCardContent.nutritionTracker.description }></MediaCard>
 
+        <MediaCard styles={ styles } header={ homeCardContent.fitness.header } imageUrl={ homeCardContent.fitness.imageUrl } 
+          imageTitle={ homeCardContent.fitness.header } path={ homeCardContent.fitness.path } content={ homeCardContent.fitness.description }></MediaCard>
+
         <MediaCard styles={ styles } header={ homeCardContent.caloriesBurned.header } imageUrl={ homeCardContent.caloriesBurned.imageUrl } 
           imageTitle={ homeCardContent.caloriesBurned.header } path={ homeCardContent.caloriesBurned.path } content={ homeCardContent.caloriesBurned.description }></MediaCard>
-        
+      </HomeContainer>
+
+      <HomeContainer>
         <MediaCard styles={ styles } header={ homeCardContent.recipes.header } imageUrl={ homeCardContent.recipes.imageUrl } 
           imageTitle={ homeCardContent.recipes.header } path={ homeCardContent.recipes.path } content={ homeCardContent.recipes.description }></MediaCard>
+
+        <MediaCard styles={ styles } header={ homeCardContent.notifications.header } imageUrl={ homeCardContent.notifications.imageUrl } 
+          imageTitle={ homeCardContent.notifications.header } path={ homeCardContent.notifications.path } content={ homeCardContent.notifications.description }></MediaCard>
+
+        <MediaCard styles={ styles } header={ homeCardContent.summary.header } imageUrl={ homeCardContent.summary.imageUrl } 
+          imageTitle={ homeCardContent.summary.header } path={ homeCardContent.summary.path } content={ homeCardContent.summary.description }></MediaCard>
       </HomeContainer>
     </Fragment>
   );
