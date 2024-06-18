@@ -20,7 +20,7 @@ const searchExerciseHelper = async (exerciseQuery) => {
 }
 
 const addExerciseHelper = async (exercises, exercisesTagLimit, exercise, selectedSearchedExercise, userId, email) => {
-  await postAddExercise(userId, email, exercise, exercisesTagLimit, selectedSearchedExercise)
+  postAddExercise(userId, email, exercise, exercisesTagLimit, selectedSearchedExercise)
 
   return [
     ...exercises,
@@ -53,7 +53,7 @@ const selectScheduledExerciseHelper = (exercises, exerciseDate) => {
 }
 
 const removeExerciseHelper = async (exercises, exerciseTag, userId, email) => {
-  await deleteRemoveExercise(userId, email, exerciseTag)
+  deleteRemoveExercise(userId, email, exerciseTag)
 
   return exercises.filter(exercise => exercise.exerciseTag !== exerciseTag)
 }
@@ -196,7 +196,7 @@ export const FitnessProvider = ({ children }) => {
     if (validateRemoveExercise(exerciseTag)) {
       return
     } else {
-      const resRemoveExercise = await removeExerciseHelper(exercises, exerciseTag)
+      const resRemoveExercise = await removeExerciseHelper(exercises, exerciseTag, currentUser.uid, currentUser.email)
       setExercises(resRemoveExercise)
     }
   }

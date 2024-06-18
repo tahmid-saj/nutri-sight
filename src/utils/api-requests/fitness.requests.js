@@ -66,9 +66,9 @@ export async function postAddExercise(userId, email, exercise, exerciseTag, sele
       })
     })
 
-    console.log("resp")
+    // console.log("resp")
 
-    return response.status
+    // return response.status
   } catch (error) {
     console.log(error)
     errorOnPostAddExercise()
@@ -86,9 +86,9 @@ export async function deleteRemoveExercise(userId, email, exerciseTag) {
       body: String(exerciseTag)
     })
 
-    console.log("removed")
+    // console.log("removed")
 
-    return response.status
+    // return response.status
   } catch (error) {
     console.log(error)
     errorOnDeleteRemoveExercise()
@@ -109,7 +109,7 @@ export async function putExercises(userId, email, exercises) {
       })
     })
 
-    return response.status
+    // return response.status
   } catch (error) {
     console.log(error)
     errorOnPutExercises()
