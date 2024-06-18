@@ -13,6 +13,7 @@ import RecipesRoute from "./routes/shared/recipes/recipes.component";
 
 import DashboardRouteSignedIn from "./routes/signed-in/dashboard/dashboard.component";
 import NutritionTrackerRouteSignedIn from "./routes/signed-in/nutrition-tracker/nutrition-tracker.component";
+import FitnessRouteSignedIn from "./routes/signed-in/fitness/fitness.component";
 import CaloriesBurnedRouteSignedIn from "./routes/signed-in/calories-burned/calories-burned.component"
 
 import { Fragment, useEffect } from "react";
@@ -52,6 +53,7 @@ function App() {
             <Fragment>
               <Route path="dashboard-signed-in" element={ <DashboardRouteSignedIn/> }/>
               <Route path="nutrition-tracker-signed-in" element={ <NutritionTrackerRouteSignedIn/> }/>
+              <Route path="fitness-signed-in" element={ <FitnessRouteSignedIn/> }/>
               <Route path="calories-burned-signed-in" element={ <CaloriesBurnedRouteSignedIn/> }/>
             </Fragment>
           ) : (

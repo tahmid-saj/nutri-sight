@@ -43,7 +43,7 @@ export async function getTrackedCaloriesBurned(userId, email) {
 export async function postAddActivity(userId, email, trackedDayInfo, activityId) {
   try {
     console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
-    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -70,7 +70,7 @@ export async function postAddActivity(userId, email, trackedDayInfo, activityId)
 export async function deleteRemoveActivity(userId, email, activityId) {
   try {
     console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
-    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "text/plain"
@@ -91,7 +91,7 @@ export async function deleteRemoveActivity(userId, email, activityId) {
 export async function putTrackedCaloriesBurned(userId, email, trackedCaloriesBurned) {
   try {
     console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
-    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
