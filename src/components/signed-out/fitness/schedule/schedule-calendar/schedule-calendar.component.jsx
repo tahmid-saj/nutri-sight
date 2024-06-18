@@ -79,9 +79,9 @@ const ScheduleCalendar = () => {
                 <Badge /> <b>{item.type}</b> - {item.name}
               </li>
             ))}
-            {/* {moreCount ? moreItem : null} */}
+            {moreCount ? `${moreCount} more` : null}
           </ul>
-          {moreCount} more
+          {/* {moreCount} more */}
         </Fragment>
       );
     }

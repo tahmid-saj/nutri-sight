@@ -148,6 +148,16 @@ const removeDayTrackedHelper = (nutritionTrackedDays, trackedDay) => {
   return nutritionTrackedDays.filter(nutritionTrackedDay => nutritionTrackedDay.dateTracked !== trackedDay)
 }
 
+export const selectScheduledNutritionTrackedDayHelper = (nutritionTrackedDays, trackedDay) => {
+  const filteredNutritionTrackedDay = nutritionTrackedDays.find((nutritionTrackedDay) => {
+    return nutritionTrackedDay.dateTracked === trackedDay
+  })
+
+  if (!filteredNutritionTrackedDay) return null
+
+  return filteredNutritionTrackedDay
+}
+
 // actions
 
 export const addDayTracked = (nutritionTrackedDays, formInputMicronutrients, trackedDayInfo) => {
@@ -215,4 +225,12 @@ export const addDayTrackedFromPrediction = (nutritionTrackedDays, predictionNutr
   const newNutritionTrackedDays = addDayTrackedFromPredictionHelper(nutritionTrackedDays, predictionNutritionInfo)
   
   return createAction(NUTRITION_TRACKER_ACTION_TYPES.SET_NUTRITION_TRACKED_DAYS, newNutritionTrackedDays)
+}
+
+export const selectScheduledNutritionTrackedDay = (dayTracked) => {
+  return createAction(NUTRITION_TRACKER_ACTION_TYPES.SET_SELECTED_NUTRITION_TRACKED_DAY, dayTracked)
+}
+
+export const setScheduledNutritionTrackedDaysView = (scheduledNutritionTrackedDaysView) => {
+  return createAction(NUTRITION_TRACKER_ACTION_TYPES.SET_SCHEDULED_NUTRITION_TRACKED_DAYS_VIEW, scheduledNutritionTrackedDaysView)
 }

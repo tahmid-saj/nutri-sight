@@ -4,6 +4,10 @@ export const NUTRITION_TRACKER_INITIAL_STATE = {
   nutritionTrackedDays: [],
   formInputMicronutrients: [],
   filterConditions: null,
+
+  selectedNutritionTrackedDay: null,
+  scheduledNutritionTrackedDaysView: null,
+
   nutritionTrackedDaysView: [],
   dayTrackedSearchResult: undefined,
   nutritionTrackedDaysSummary: {}
@@ -27,6 +31,16 @@ export const nutritionTrackerReducer = (state=NUTRITION_TRACKER_INITIAL_STATE, a
       return {
         ...state,
         filterConditions: payload
+      }
+    case NUTRITION_TRACKER_ACTION_TYPES.SET_SELECTED_NUTRITION_TRACKED_DAY:
+      return {
+        ...state,
+        selectedNutritionTrackedDay: payload
+      }
+    case NUTRITION_TRACKER_ACTION_TYPES.SET_SCHEDULED_NUTRITION_TRACKED_DAYS_VIEW:
+      return {
+        ...state,
+        scheduledNutritionTrackedDaysView: payload
       }
     case NUTRITION_TRACKER_ACTION_TYPES.SET_NUTRITION_TRACKED_DAYS_VIEW:
       return {
