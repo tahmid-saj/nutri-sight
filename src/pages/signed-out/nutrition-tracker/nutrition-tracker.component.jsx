@@ -16,6 +16,8 @@ import { setNutritionTrackedDaysSummary, setNutritionTrackedDaysView,
   filterDayTrackedHelper 
 } from "../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
 import { calculateSummary } from "../../../utils/calculations/nutrition-tracker.calculations";
+import ScheduleCalendar from "../../../components/signed-out/fitness/schedule/schedule-calendar/schedule-calendar.component";
+import { Divider } from "rsuite";
 
 const NutritionTracker = () => {
   // const { nutritionTrackedDays } = useContext(NutritionTrackerContext);
@@ -53,6 +55,14 @@ const NutritionTracker = () => {
 
   return (
     <div className="nutrition-tracker-container">
+      <ScheduleCalendar></ScheduleCalendar>
+
+      <br/>
+      <Divider/>
+      <br/>
+
+      
+
       {
         nutritionTrackedDays && nutritionTrackedDays.length !== 0 &&
         <Fragment>

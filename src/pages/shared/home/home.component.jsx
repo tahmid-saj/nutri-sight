@@ -8,11 +8,12 @@ import { useContext } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../store/shared/user/user.selector.js";
 
-import { NAV_LINKS } from "../../../utils/constants/shared.constants.js";
+import { COLOR_CODES, NAV_LINKS } from "../../../utils/constants/shared.constants.js";
 
 const styles = {
   width: 475,
   height: 400,
+  backgroundColor: COLOR_CODES.general["0"]
 }
 
 const Home = () => {

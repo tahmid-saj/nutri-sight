@@ -14,10 +14,10 @@ import { Paper } from "@mui/material";
 
 const paperStyles = {
   searchResults: {
-    backgroundColor: COLOR_CODES.paper.formPaper
+    backgroundColor: COLOR_CODES.general["0"]
   },
   searchResult: {
-    backgroundColor: COLOR_CODES.paper.infoPaper
+    backgroundColor: COLOR_CODES.general["0"]
   }
 }
 

@@ -15,7 +15,7 @@ import { addDayTrackedFromPrediction, setFormInputMicronutrients } from "../../.
 import { selectNutritionTrackedDays } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js";
 
 const outlinedCardStyles = {
-  backgroundColor: COLOR_CODES.card.infoCard
+  backgroundColor: COLOR_CODES.general["1"]
 }
 
 const NutrientsInfo = () => {

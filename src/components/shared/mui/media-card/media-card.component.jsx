@@ -9,13 +9,13 @@ import { Link } from 'react-router-dom';
 
 export default function MediaCard({ styles, header, imageUrl, imageTitle, path, content }) {
   return (
-    <Card sx={{ margin: "1%", width: styles.width, height: styles.height }}>
+    <Card sx={{ margin: "1%", ...styles }}>
       <CardMedia
         // sx={{ height: styles.height }}
         // src={ "https://buffer.com/library/content/images/2023/10/free-images.jpg" }
         title={`${imageTitle}`}
       />
-      <img src={`${imageUrl}`} alt={ `${imageTitle}` } width={ "auto" } height={ styles.height * 0.5 } objectFit={ "contain" }/>
+      <img src={`${imageUrl}`} alt={ `${imageTitle}` } width={ styles.width } height={ styles.height * 0.6 } objectFit={ "contain" }/>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           { header }

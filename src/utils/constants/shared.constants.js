@@ -180,5 +180,18 @@ export const COLOR_CODES = {
   scrollbar: {
     scroll: "#666666",
     background: "white"
-  }
+  },
+  general: {
+    "0": "#74c6be",
+    "1": "#38a59d",
+    "2": "#2c837d",
+    "3": "#05837c",
+    "4": "#166c6b",
+    "5": "#c6efeb",
+    "6": "#3ca99f",
+    "7": "#237e76",
+    "8": "#115852",
+    "9": "#0a3632",
+  },
+  background: "#a8afb8"
 }

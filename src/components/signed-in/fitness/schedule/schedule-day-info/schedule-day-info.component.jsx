@@ -13,7 +13,7 @@ import { COLOR_CODES } from "../../../../../utils/constants/shared.constants";
 import { FitnessContext } from "../../../../../contexts/signed-in/fitness/fitness.context";
 
 const paperStyles = {
-  backgroundColor: COLOR_CODES.paper.formPaper,
+  backgroundColor: COLOR_CODES.general["8"],
   height: 600
 }
 

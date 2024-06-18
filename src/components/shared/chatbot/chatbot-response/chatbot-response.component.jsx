@@ -7,7 +7,7 @@ import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js"
 import OutlinedCard from "../../mui/card/card.component.jsx"
 
 const cardStyles = {
-  backgroundColor: COLOR_CODES.card.infoCard,
+  backgroundColor: COLOR_CODES.general["0"],
   margin: "2%"
 }
 
