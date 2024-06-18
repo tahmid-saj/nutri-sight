@@ -80,8 +80,6 @@ const NutritionTracker = () => {
       <Divider/>
       <br/>
 
-      
-
       {
         nutritionTrackedDays && nutritionTrackedDays.length !== 0 &&
         <Fragment>
