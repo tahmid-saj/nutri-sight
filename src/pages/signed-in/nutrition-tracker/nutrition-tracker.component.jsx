@@ -10,14 +10,27 @@ import ConsumptionInfo from "../../../components/signed-in/nutrition-tracker/con
 import TopSearch from "../../../components/signed-in/nutrition-tracker/top-search/top-search.component";
 
 import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
+import ScheduleCalendar from "../../../components/signed-in/nutrition-tracker/schedule/schedule-calendar/schedule-calendar.component";
+import ScheduleDayInfo from "../../../components/signed-in/nutrition-tracker/schedule/schedule-day-info/schedule-day-info.component";
+import { Divider } from "@mui/material";
 
 const NutritionTracker = () => {
-  const { nutritionTrackedDays } = useContext(NutritionTrackerContext);
+  const { nutritionTrackedDays, scheduledNutritionTrackedDaysView } = useContext(NutritionTrackerContext);
 
   return (
     <div className="nutrition-tracker-container">
+      <ScheduleCalendar></ScheduleCalendar>
       {
-        nutritionTrackedDays.length !== 0 &&
+        scheduledNutritionTrackedDaysView ?
+        <ScheduleDayInfo></ScheduleDayInfo> : null
+      }
+
+      <br/>
+      <Divider/>
+      <br/>
+
+      {
+        nutritionTrackedDays && nutritionTrackedDays.length !== 0 &&
         <Fragment>
         <h2 className="nutrition-tracker-summary-header">Summary</h2>
           <TopSearch></TopSearch>
