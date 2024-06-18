@@ -12,7 +12,7 @@ import { COLOR_CODES, NAV_LINKS } from "../../../utils/constants/shared.constant
 
 const styles = {
   width: 475,
-  height: 400,
+  height: 500,
   backgroundColor: COLOR_CODES.general["0"]
 }
 
@@ -24,13 +24,13 @@ const Home = () => {
     chatbot: {
       header: "Chatbot",
       description: "Receive advice on maintaining a healthy diet, nutrition, exercise and much more",
-      imageUrl: "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/334804806/original/793cad2ae511c4c9b30c1d5e8206b8eb8ab21087/create-a-ai-chat-bot-embedded-website-for-you.png",
+      imageUrl: "https://media.licdn.com/dms/image/D4D12AQESxyAG3GNCQQ/article-cover_image-shrink_720_1280/0/1688674501094?e=2147483647&v=beta&t=TbnHoFrlrAZCHk6Qfm6lfBD9qNSgJ0IyOFdKa32mBWE",
       path: currentUser ? NAV_LINKS.paths.signedIn.chatbot : NAV_LINKS.paths.signedOut.chatbot
     },
     storage: {
       header: "Storage",
       description: "Upon signing up and logging into your account, we will store your data and provide specific advices for you",
-      imageUrl: "https://media.istockphoto.com/id/1352564117/vector/database-sql-structured-query-language-people-team-discuss-coding-for-storing-data-in-server.jpg?s=612x612&w=0&k=20&c=eRlvikJYlY8tJ8pVxgZFUv5GLgQbTy_rq18jKLZxq8A=",
+      imageUrl: "https://media.istockphoto.com/id/1470864494/vector/computer-cloud-database-sharing-file-storage-and-search-business-technology-services-and.jpg?b=1&s=612x612&w=0&k=20&c=F4P8bKXbSsoZpCF4JahdPLz4OV7imHxMvgfDew4y9J8=",
       path: currentUser ? NAV_LINKS.paths.signedIn.dashboard : NAV_LINKS.paths.signedOut.auth
     },
     nutrientPredictor: {
@@ -42,37 +42,37 @@ const Home = () => {
     nutritionTracker: {
       header: "Nutrition Tracker",
       description: "Track your everyday consumption and better manage a healthy diet",
-      imageUrl: "https://static.vecteezy.com/system/resources/thumbnails/013/416/799/small_2x/woman-choose-between-healthy-and-unhealthy-food-free-vector.jpg",
+      imageUrl: "https://www.fdli.org/wp-content/uploads/2021/09/Food-Labeling-Greenthal-scaled.jpeg",
       path: currentUser ? NAV_LINKS.paths.signedIn.nutritionTracker : NAV_LINKS.paths.signedOut.nutritionTracker
     },
     fitness: {
       header: "Fitness",
       description: "Search thousands of exercises and their instructions, then add them to a schedule",
-      imageUrl: "https://media.istockphoto.com/id/1222178625/vector/stay-home-concept-people-doing-exercise-in-cozy-modern-interior-vector-illustration-in-flat.jpg?s=612x612&w=0&k=20&c=urkPKOi8j2wcHxaoDBummTwezO38qA3BSvqHqc6Mzb8=",
+      imageUrl: "https://www.comparethemarket.com.au/wp-content/uploads/2023/02/Most-Dangerous-Gym-Equipment-Featured-Image.png",
       path: currentUser ? NAV_LINKS.paths.signedIn.fitness : NAV_LINKS.paths.signedOut.fitness
     },
     caloriesBurned: {
       header: "Calories Burned",
       description: "Determine the calories burned through your exercises and activities, and add them to the tracker",
-      imageUrl: "https://static.vecteezy.com/system/resources/thumbnails/006/461/712/small/set-of-man-doing-exercise-gym-bike-jump-rope-and-treadmill-illustration-vector.jpg",
+      imageUrl: "https://img.freepik.com/free-vector/people-running-activity_24908-55933.jpg",
       path: currentUser ? NAV_LINKS.paths.signedIn.caloriesBurned : NAV_LINKS.paths.signedOut.caloriesBurned
     },
     recipes: {
       header: "Recipes",
       description: "Search over 1,000,000 recipes and get their nutrition information and detailed instructions on making them",
-      imageUrl: "https://png.pngtree.com/png-vector/20220712/ourmid/pngtree-flat-style-vector-illustration-of-a-creative-cooking-cookbook-featuring-healthy-recipes-vector-png-image_47565766.jpg",
+      imageUrl: "https://hips.hearstapps.com/hmg-prod/images/led-tyson-recipe-1549405466.jpg?crop=0.888888888888889xw:1xh;center,top&resize=1200:*",
       path: currentUser ? NAV_LINKS.paths.signedIn.recipes : NAV_LINKS.paths.signedOut.recipes
     },
     notifications: {
       header: "Notifications",
       description: "Upon signing up and tracking nutrition and fitness, receive notifications of any planned activities on your calendar",
-      imageUrl: "https://media.istockphoto.com/id/1336859622/vector/calendar-with-to-do-checklist-business-task-planning.jpg?s=612x612&w=0&k=20&c=rgIc9ejSfwmsEauhssGSaW5ZM6XjyB6-sBQQLU5qUA4=",
+      imageUrl: "https://media.istockphoto.com/id/1395865981/vector/3d-reminder-in-calendar-on-purple-background-notifications-page-with-floating-elements-alert.jpg?s=612x612&w=0&k=20&c=JTK6NaSe9bYp9Pq2sfBoDYYCOhGEZlQNcQQJgy25FWI=",
       path: currentUser ? NAV_LINKS.paths.signedIn.dashboard : NAV_LINKS.paths.signedOut.auth
     },
     summary: {
       header: "All in one place",
       description: "Manage day to day activities on nutrition, wellness and fitness all in one place",
-      imageUrl: "https://webstockreview.net/images/nutrition-clipart-physical-wellness-1.png",
+      imageUrl: "https://media.istockphoto.com/id/1345079251/vector/flat-vector-illustration-of-stock-trader-working-on-computer.jpg?s=612x612&w=0&k=20&c=GMvrs8GIsUf-zOua-9b3vHrgRPWxhUrddEULrytSTNE=",
       path: currentUser ? NAV_LINKS.paths.signedIn.dashboard : NAV_LINKS.paths.signedOut.dashboard
     },
   }
