@@ -17,6 +17,16 @@ export const selectFilterConditions = createSelector(
   (nutritionTracker) => nutritionTracker.filterConditions
 )
 
+export const selectSelectedNutritionTrackedDay = createSelector(
+  [selectNutritionTrackerReducer],
+  (nutritionTracker) => nutritionTracker.selectedNutritionTrackedDay
+)
+
+export const selectScheduledNutritionTrackedDaysView = createSelector(
+  [selectNutritionTrackerReducer],
+  (nutritionTracker) => nutritionTracker.scheduledNutritionTrackedDaysView
+)
+
 export const selectNutritionTrackedDaysView = createSelector(
   [selectNutritionTrackerReducer],
   (nutritionTracker) => nutritionTracker.nutritionTrackedDaysView

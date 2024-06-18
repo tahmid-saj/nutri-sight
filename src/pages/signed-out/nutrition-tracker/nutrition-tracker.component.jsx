@@ -11,18 +11,23 @@ import TopSearch from "../../../components/signed-out/nutrition-tracker/top-sear
 
 // import { NutritionTrackerContext } from "../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import { useDispatch, useSelector } from "react-redux"
-import { selectNutritionTrackedDays, selectFilterConditions, selectNutritionTrackedDaysView } from "../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
+import { selectNutritionTrackedDays, selectFilterConditions, selectNutritionTrackedDaysView,
+  selectSelectedNutritionTrackedDay, selectScheduledNutritionTrackedDaysView
+} from "../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
 import { setNutritionTrackedDaysSummary, setNutritionTrackedDaysView, 
-  filterDayTrackedHelper 
+  filterDayTrackedHelper, selectScheduledNutritionTrackedDayHelper, setScheduledNutritionTrackedDaysView
 } from "../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
 import { calculateSummary } from "../../../utils/calculations/nutrition-tracker.calculations";
-import ScheduleCalendar from "../../../components/signed-out/fitness/schedule/schedule-calendar/schedule-calendar.component";
+import ScheduleCalendar from "../../../components/signed-out/nutrition-tracker/schedule/schedule-calendar/schedule-calendar.component";
 import { Divider } from "rsuite";
+import ScheduleDayInfo from "../../../components/signed-out/nutrition-tracker/schedule/schedule-day-info/schedule-day-info.component";
 
 const NutritionTracker = () => {
   // const { nutritionTrackedDays } = useContext(NutritionTrackerContext);
   const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
   const filterConditions = useSelector(selectFilterConditions)
+  const selectedNutritionTrackedDay = useSelector(selectSelectedNutritionTrackedDay)
+  const scheduledNutritionTrackedDaysView = useSelector(selectScheduledNutritionTrackedDaysView)
   const nutritionTrackedDaysView = useSelector(selectNutritionTrackedDaysView)
   const dispatch = useDispatch()
 
@@ -53,9 +58,23 @@ const NutritionTracker = () => {
     }
   }, [nutritionTrackedDays, filterConditions, dispatch])
 
+  // update scheduledNutritionTrackedDaysView when nutritionTrackedDays or selectedNutritionTrackedDay change
+  useEffect(() => {
+    if (selectedNutritionTrackedDay) {
+      console.log(nutritionTrackedDays, selectedNutritionTrackedDay)
+      dispatch(setScheduledNutritionTrackedDaysView(selectScheduledNutritionTrackedDayHelper(nutritionTrackedDays, selectedNutritionTrackedDay)))
+    } else {
+      dispatch(setScheduledNutritionTrackedDaysView(null))
+    }
+  }, [nutritionTrackedDays, selectedNutritionTrackedDay, dispatch])
+
   return (
     <div className="nutrition-tracker-container">
       <ScheduleCalendar></ScheduleCalendar>
+      {
+        scheduledNutritionTrackedDaysView ?
+        <ScheduleDayInfo></ScheduleDayInfo> : null
+      }
 
       <br/>
       <Divider/>
