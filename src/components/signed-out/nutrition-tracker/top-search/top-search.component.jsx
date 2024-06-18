@@ -30,9 +30,9 @@ const TopSearch = () => {
         <NutritionTrackerTable></NutritionTrackerTable>
       </div>
 
-      <div className="search-days-nutrition-tracker-container">
+      {/* <div className="search-days-nutrition-tracker-container">
         <SearchDays></SearchDays>
-      </div>
+      </div> */}
     </div>
   );
 };

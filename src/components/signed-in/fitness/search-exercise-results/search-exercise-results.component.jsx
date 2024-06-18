@@ -8,7 +8,7 @@ import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.c
 import { useContext } from "react"
 
 const paperStyles = {
-  backgroundColor: COLOR_CODES.paper.formPaper,
+  backgroundColor: COLOR_CODES.general["1"],
   overflow: "scroll",
   height: "60rem",
   scrollbarColor: `${COLOR_CODES.scrollbar.scroll} ${COLOR_CODES.scrollbar.background}`,

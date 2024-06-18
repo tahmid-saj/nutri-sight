@@ -21,7 +21,7 @@ const defaultFormFields = {
 }
 
 const paperStyles = {
-  backgroundColor: COLOR_CODES.paper.formPaper
+  backgroundColor: COLOR_CODES.general["0"]
 }
 
 const UploadImage = () => {

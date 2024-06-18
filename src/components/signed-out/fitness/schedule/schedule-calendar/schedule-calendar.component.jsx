@@ -4,6 +4,7 @@ import { Fragment, useContext, useState } from "react";
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
 import { Typography } from "@mui/material";
 import { FitnessContext } from "../../../../../contexts/signed-out/fitness/fitness.context";
+import { COLOR_CODES } from "../../../../../utils/constants/shared.constants";
 
 function getScheduledData(date, exercises) {
   // const day = date.getDate();
@@ -95,10 +96,10 @@ const ScheduleCalendar = () => {
   }
 
   return (
-    <div className="fitness-schedule-calendar-container">
+    <div className="fitness-schedule-calendar-container" style={{ backgroundColor: COLOR_CODES.general["0"] }}>
       <Typography sx={{ display: "flex", marginLeft: "1%" }} 
         variant="h6">{`Exercises calendar`}</Typography>
-      <Calendar bordered renderCell={ renderCell } onSelect={ onSelectDate }/>
+      <Calendar bordered renderCell={ renderCell } onSelect={ onSelectDate } style={{ backgroundColor: COLOR_CODES.general["0"] }}/>
     </div>
   )
 }

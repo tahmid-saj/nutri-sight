@@ -41,7 +41,7 @@ import { CaloriesBurnedContext } from "../../../../contexts/signed-in/calories-b
 import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context";
 // import { signOutUser } from '../../../../utils/firebase/firebase.utils';
 
-import { NAV_LINKS } from '../../../../utils/constants/shared.constants';
+import { COLOR_CODES, NAV_LINKS } from '../../../../utils/constants/shared.constants';
 
 import { useDispatch, useSelector } from "react-redux"
 import { selectCurrentUser } from "../../../../store/shared/user/user.selector";
@@ -149,7 +149,7 @@ export default function MiniDrawer({ navLinksHeaders, children }) {
       <AppBar position="fixed" open={open}>
         <Toolbar
           sx={{ 
-            background: "linear-gradient(109.6deg, rgb(5, 84, 94) 16%, rgb(187, 187, 187) 91.1%)",
+            background: COLOR_CODES.general["4"],
             // background: "#23c686",
             width: "100%"
           }}>
@@ -181,7 +181,7 @@ export default function MiniDrawer({ navLinksHeaders, children }) {
         </Toolbar>
       </AppBar>
 
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={ open }>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}

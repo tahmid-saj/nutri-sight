@@ -13,11 +13,11 @@ import OutlinedCard from "../../../mui/card/card.component.jsx";
 import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context.js";
 
 const paperStyles = {
-  backgroundColor: COLOR_CODES.paper.formPaper
+  backgroundColor: COLOR_CODES.general["6"]
 }
 
 const cardStyles = {
-  backgroundColor: COLOR_CODES.card.infoCard,
+  backgroundColor: COLOR_CODES.general["6"],
   margin: "1% 0% 1% 0%"
 }
 
@@ -36,7 +36,7 @@ const Recipe = () => {
 
       {
         displayedRecipe.nutrientPredictions !== undefined && displayedRecipe.nutrientPredictions.length !== 0 ? (
-        <OutlinedCard>
+        <OutlinedCard styles={ cardStyles }>
           <NutrientPrediction></NutrientPrediction>
         </OutlinedCard>) : null
       }

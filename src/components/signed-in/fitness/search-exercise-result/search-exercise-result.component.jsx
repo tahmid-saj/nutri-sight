@@ -6,7 +6,7 @@ import { useContext } from "react"
 import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context"
 
 const outlinedCardStyles = {
-  backgroundColor: COLOR_CODES.card.infoCard
+  backgroundColor: COLOR_CODES.general["5"]
 }
 
 const SearchExerciseResult = ({ exerciseSearchResult }) => {
