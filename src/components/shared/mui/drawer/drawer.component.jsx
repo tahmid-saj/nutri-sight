@@ -38,6 +38,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Link, useNavigate } from 'react-router-dom';
 import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
 import { CaloriesBurnedContext } from "../../../../contexts/signed-in/calories-burned/calories-burned.context";
+import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context";
 // import { signOutUser } from '../../../../utils/firebase/firebase.utils';
 
 import { NAV_LINKS } from '../../../../utils/constants/shared.constants';
@@ -122,6 +123,7 @@ export default function MiniDrawer({ navLinksHeaders, children }) {
   const currentUser = useSelector(selectCurrentUser)
   const { updateNutritionTrackedDaysAndSummary } = useContext(NutritionTrackerContext);
   const { updateTrackedCaloriesBurned } = useContext(CaloriesBurnedContext)
+  const { updateExercises } = useContext(FitnessContext)
   const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
@@ -135,6 +137,7 @@ export default function MiniDrawer({ navLinksHeaders, children }) {
   const handleSignOut = () => {
     updateNutritionTrackedDaysAndSummary();
     updateTrackedCaloriesBurned()
+    updateExercises()
     // signOutUser();
     dispatch(signOutStart())
     navigate("/")
