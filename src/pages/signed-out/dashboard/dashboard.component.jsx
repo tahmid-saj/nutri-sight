@@ -14,12 +14,16 @@ import { selectNutritionTrackedDays, selectScheduledNutritionTrackedDaysView,
 import { selectScheduledNutritionTrackedDayHelper, setScheduledNutritionTrackedDaysView } from "../../../store/signed-out/nutrition-tracker/nutrition-tracker.action"
 
 import { CaloriesBurnedContext } from "../../../contexts/signed-out/calories-burned/calories-burned.context"
+import { FitnessContext } from "../../../contexts/signed-out/fitness/fitness.context"
 import ChatBot from "../../shared/chatbot/chatbot.component"
+import { Divider } from "@mui/material"
 
 import ScheduleCalendarNutritionTracker from "../../../components/signed-out/dashboard/nutrition-tracker/schedule/schedule-calendar/schedule-calendar.component"
 import ScheduleDayInfoNutritionTracker from "../../../components/signed-out/dashboard/nutrition-tracker/schedule/schedule-day-info/schedule-day-info.component"
 import ScheduleCalendarCaloriesBurned from "../../../components/signed-out/dashboard/calories-burned/schedule/schedule-calendar/schedule-calendar.component"
 import ScheduleDayInfoCaloriesBurned from "../../../components/signed-out/dashboard/calories-burned/schedule/schedule-day-info/schedule-day-info.component"
+import ScheduleCalendarFitness from "../../../components/signed-out/dashboard/fitness/schedule/schedule-calendar/schedule-calendar.component"
+import ScheduleDayInfoFitness from "../../../components/signed-out/dashboard/fitness/schedule/schedule-day-info/schedule-day-info.component"
 
 const Dashboard = () => {
   const dispatch = useDispatch()
@@ -28,6 +32,7 @@ const Dashboard = () => {
   const selectedNutritionTrackedDay = useSelector(selectSelectedNutritionTrackedDay)
 
   const { trackedCaloriesBurned, scheduledTrackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
+  const { exercises, selectedSearchedExercise } = useContext(FitnessContext)
 
     // update scheduledNutritionTrackedDaysView when nutritionTrackedDays or selectedNutritionTrackedDay change
     useEffect(() => {
@@ -87,6 +92,25 @@ const Dashboard = () => {
 
             <CaloriesBurnedGraphPie></CaloriesBurnedGraphPie>
             <CaloriesBurnedGraph></CaloriesBurnedGraph>
+          </div>
+        </Fragment>
+      }
+
+      {
+        exercises.length !== 0 &&
+        <Fragment>
+          <div className="fitness-dashboard-container">
+          <div className="dashboard-separator-container">
+            <hr className="rounded"/>
+          </div>
+          <h3>Fitness</h3>
+          <ScheduleCalendarFitness></ScheduleCalendarFitness>
+
+          <br/>
+          <Divider/>
+          <br/>
+
+          <ScheduleDayInfoFitness></ScheduleDayInfoFitness>
           </div>
         </Fragment>
       }
