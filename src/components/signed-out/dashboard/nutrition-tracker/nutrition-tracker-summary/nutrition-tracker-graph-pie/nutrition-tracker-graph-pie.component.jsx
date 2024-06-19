@@ -1,12 +1,15 @@
 import "./nutrition-tracker-graph-pie.styles.scss"
 import ReactApexChart from "react-apexcharts";
-import { useContext, Fragment } from "react"
-import { NutritionTrackerContext } from "../../../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
+// import { useContext, Fragment } from "react"
+// import { NutritionTrackerContext } from "../../../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
 
 import { GRAPH_FIELDS } from "../../../../../../utils/constants/nutrition-tracker.constants";
 
+import { useSelector } from "react-redux";
+import { selectNutritionTrackedDaysSummary } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
+
 const NutritionTrackerGraphPie = () => {
-  const { nutritionTrackedDaysSummary } = useContext(NutritionTrackerContext);
+  const nutritionTrackedDaysSummary = useSelector(selectNutritionTrackedDaysSummary)
 
   const trackedMacronutrients = new Map([
     [GRAPH_FIELDS.carbohydrates, nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption : 0],

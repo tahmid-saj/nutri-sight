@@ -1,7 +1,9 @@
 import "./nutrition-tracker-summary.styles.scss"
-import { useContext } from "react";
-import { NutritionTrackerContext } from "../../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
+// import { useContext } from "react";
+// import { NutritionTrackerContext } from "../../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import NutritionTrackerGraphPie from "./nutrition-tracker-graph-pie/nutrition-tracker-graph-pie.component";
+import { useSelector } from "react-redux";
+import { selectNutritionTrackedDaysSummary } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
 
 const date = new Date();
 let currentDay= String(date.getDate()).padStart(2, '0');
@@ -10,7 +12,7 @@ let currentYear = date.getFullYear();
 let currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
 
 const NutritionTrackerSummary = () => {
-  const { nutritionTrackedDaysSummary } = useContext(NutritionTrackerContext)
+  const nutritionTrackedDaysSummary = useSelector(selectNutritionTrackedDaysSummary)
 
   return (
     <div className="nutrition-tracker-dashboard-summary-container">
