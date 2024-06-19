@@ -1,8 +1,7 @@
 import "./nutrition-tracker-graph-macronutrients.styles.scss"
-import { Fragment, useContext, useState, Component } from "react";
+import { Fragment, useState, Component } from "react";
 import ReactApexChart from 'react-apexcharts'
 
-// import { NutritionTrackerContext } from "../../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import { GRAPH_FIELDS } from "../../../../../utils/constants/nutrition-tracker.constants";
 
 import { useSelector } from "react-redux";

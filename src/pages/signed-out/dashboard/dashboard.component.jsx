@@ -7,7 +7,6 @@ import NutritionTrackerGraphMacronutrients from "../../../components/signed-out/
 import NutritionTrackerSummary from "../../../components/signed-out/dashboard/nutrition-tracker/nutrition-tracker-summary/nutrition-tracker-summary.component"
 
 import { useContext, Fragment, useEffect } from "react"
-// import { NutritionTrackerContext } from "../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
 import { useDispatch, useSelector } from "react-redux"
 import { selectNutritionTrackedDays, selectScheduledNutritionTrackedDaysView,
   selectSelectedNutritionTrackedDay
@@ -19,8 +18,8 @@ import ChatBot from "../../shared/chatbot/chatbot.component"
 
 import ScheduleCalendarNutritionTracker from "../../../components/signed-out/dashboard/nutrition-tracker/schedule/schedule-calendar/schedule-calendar.component"
 import ScheduleDayInfoNutritionTracker from "../../../components/signed-out/dashboard/nutrition-tracker/schedule/schedule-day-info/schedule-day-info.component"
-// import ScheduleCalendarCaloriesBurned from "../../../components/signed-out/dashboard/calories-burned"
-// import ScheduleDayInfoCaloriesBurned from "../../../components/signed-out/calories-burned/schedule/schedule-day-info/schedule-day-info.component"
+import ScheduleCalendarCaloriesBurned from "../../../components/signed-out/dashboard/calories-burned/schedule/schedule-calendar/schedule-calendar.component"
+import ScheduleDayInfoCaloriesBurned from "../../../components/signed-out/dashboard/calories-burned/schedule/schedule-day-info/schedule-day-info.component"
 
 const Dashboard = () => {
   const dispatch = useDispatch()
@@ -80,11 +79,11 @@ const Dashboard = () => {
             <div className="calories-burned-dashboard-summary-graph-container">
               <CaloriesBurnedSummary></CaloriesBurnedSummary>
             </div>
-            {/* <ScheduleCalendarCaloriesBurned></ScheduleCalendarCaloriesBurned>
+            <ScheduleCalendarCaloriesBurned></ScheduleCalendarCaloriesBurned>
             {
               scheduledTrackedCaloriesBurnedView ?
               <ScheduleDayInfoCaloriesBurned></ScheduleDayInfoCaloriesBurned> : null
-            } */}
+            }
 
             <CaloriesBurnedGraphPie></CaloriesBurnedGraphPie>
             <CaloriesBurnedGraph></CaloriesBurnedGraph>

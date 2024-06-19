@@ -13,20 +13,28 @@ const paperStyles = {
 const ScheduleDayInfo = () => {
   const { scheduledTrackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
 
+  if (!scheduledTrackedCaloriesBurnedView.length) return <Fragment/>
+
   return (
     <div className="calories-burned-schedule-day-info">
-      <SimplePaper styles={ paperStyles }>
-        <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">{`${scheduledTrackedCaloriesBurnedView.dateTracked}`}</Typography>
-        <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Activity - ${scheduledTrackedCaloriesBurnedView.activity}`}</Typography>
-        <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Total calories burned - ${scheduledTrackedCaloriesBurnedView.totalCaloriesBurned}`}</Typography>
+    {
+      scheduledTrackedCaloriesBurnedView.map((trackedCaloriesBurned) => {
+        return (
+          <SimplePaper styles={ paperStyles }>
+            <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">{`${trackedCaloriesBurned.dateTracked}`}</Typography>
+            <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Activity - ${trackedCaloriesBurned.activity}`}</Typography>
+            <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Total calories burned - ${trackedCaloriesBurned.totalCaloriesBurned}`}</Typography>
 
-        <br/>
-        <Divider/>
-        <br/>
+            <br/>
+            <Divider/>
+            <br/>
 
-        <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Duration (mins) - ${scheduledTrackedCaloriesBurnedView.durationMinutes}`}</Typography>
-        <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Calories burned / hr - ${scheduledTrackedCaloriesBurnedView.caloriesBurnedPerHour}`}</Typography>
-      </SimplePaper>
+            <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Duration (mins) - ${trackedCaloriesBurned.durationMinutes}`}</Typography>
+            <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Calories burned / hr - ${trackedCaloriesBurned.caloriesBurnedPerHour}`}</Typography>
+          </SimplePaper>
+        )
+      })
+    }
     </div>
   )
 }

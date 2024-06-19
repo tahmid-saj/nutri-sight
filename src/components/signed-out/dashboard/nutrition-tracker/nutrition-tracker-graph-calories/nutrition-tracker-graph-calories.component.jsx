@@ -1,7 +1,5 @@
 import "./nutrition-tracker-graph-calories.styles.scss"
 import ReactApexChart from "react-apexcharts"
-// import { useContext } from "react"
-// import { NutritionTrackerContext } from "../../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
 import { useSelector } from "react-redux"
 import { selectNutritionTrackedDays } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector"
 
