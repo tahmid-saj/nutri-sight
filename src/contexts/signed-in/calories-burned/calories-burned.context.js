@@ -77,7 +77,7 @@ const setDefaultTrackedCaloriesBurnedSummaryValuesHelper = () => {
 const selectScheduledTrackedCaloriesBurnedHelper = (trackedCaloriesBurned, trackedDay) => {
   console.log(trackedDay)
 
-  const filteredTrackedCaloriesBurned = trackedCaloriesBurned.find((caloriesTrackedDay) => {
+  const filteredTrackedCaloriesBurned = trackedCaloriesBurned.filter((caloriesTrackedDay) => {
     return caloriesTrackedDay.dateTracked === trackedDay
   })
 

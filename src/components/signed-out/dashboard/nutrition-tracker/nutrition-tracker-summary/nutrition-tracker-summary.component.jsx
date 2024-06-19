@@ -1,6 +1,4 @@
 import "./nutrition-tracker-summary.styles.scss"
-// import { useContext } from "react";
-// import { NutritionTrackerContext } from "../../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import NutritionTrackerGraphPie from "./nutrition-tracker-graph-pie/nutrition-tracker-graph-pie.component";
 import { useSelector } from "react-redux";
 import { selectNutritionTrackedDaysSummary } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";

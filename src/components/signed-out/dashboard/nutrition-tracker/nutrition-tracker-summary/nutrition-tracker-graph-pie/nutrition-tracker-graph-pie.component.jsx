@@ -1,7 +1,5 @@
 import "./nutrition-tracker-graph-pie.styles.scss"
 import ReactApexChart from "react-apexcharts";
-// import { useContext, Fragment } from "react"
-// import { NutritionTrackerContext } from "../../../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
 
 import { GRAPH_FIELDS } from "../../../../../../utils/constants/nutrition-tracker.constants";
 
