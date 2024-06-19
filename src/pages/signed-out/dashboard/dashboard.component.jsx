@@ -6,20 +6,45 @@ import NutritionTrackerGraphCalories from "../../../components/signed-out/dashbo
 import NutritionTrackerGraphMacronutrients from "../../../components/signed-out/dashboard/nutrition-tracker/nutrition-tracker-graph-macronutrients/nutrition-tracker-graph-macronutrients.component"
 import NutritionTrackerSummary from "../../../components/signed-out/dashboard/nutrition-tracker/nutrition-tracker-summary/nutrition-tracker-summary.component"
 
-import { useContext, Fragment } from "react"
-import { NutritionTrackerContext } from "../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
+import { useContext, Fragment, useEffect } from "react"
+// import { NutritionTrackerContext } from "../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
+import { useDispatch, useSelector } from "react-redux"
+import { selectNutritionTrackedDays, selectScheduledNutritionTrackedDaysView,
+  selectSelectedNutritionTrackedDay
+} from "../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector"
+import { selectScheduledNutritionTrackedDayHelper, setScheduledNutritionTrackedDaysView } from "../../../store/signed-out/nutrition-tracker/nutrition-tracker.action"
+
 import { CaloriesBurnedContext } from "../../../contexts/signed-out/calories-burned/calories-burned.context"
 import ChatBot from "../../shared/chatbot/chatbot.component"
 
+import ScheduleCalendarNutritionTracker from "../../../components/signed-out/dashboard/nutrition-tracker/schedule/schedule-calendar/schedule-calendar.component"
+import ScheduleDayInfoNutritionTracker from "../../../components/signed-out/dashboard/nutrition-tracker/schedule/schedule-day-info/schedule-day-info.component"
+// import ScheduleCalendarCaloriesBurned from "../../../components/signed-out/dashboard/calories-burned"
+// import ScheduleDayInfoCaloriesBurned from "../../../components/signed-out/calories-burned/schedule/schedule-day-info/schedule-day-info.component"
+
 const Dashboard = () => {
-  const { nutritionTrackedDays } = useContext(NutritionTrackerContext)
-  const { trackedCaloriesBurned } = useContext(CaloriesBurnedContext)
+  const dispatch = useDispatch()
+  const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
+  const scheduledNutritionTrackedDaysView = useSelector(selectScheduledNutritionTrackedDaysView)
+  const selectedNutritionTrackedDay = useSelector(selectSelectedNutritionTrackedDay)
+
+  const { trackedCaloriesBurned, scheduledTrackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
+
+    // update scheduledNutritionTrackedDaysView when nutritionTrackedDays or selectedNutritionTrackedDay change
+    useEffect(() => {
+      if (selectedNutritionTrackedDay) {
+        console.log(nutritionTrackedDays, selectedNutritionTrackedDay)
+        dispatch(setScheduledNutritionTrackedDaysView(selectScheduledNutritionTrackedDayHelper(nutritionTrackedDays, selectedNutritionTrackedDay)))
+      } else {
+        dispatch(setScheduledNutritionTrackedDaysView(null))
+      }
+    }, [nutritionTrackedDays, selectedNutritionTrackedDay, dispatch])
 
   if (nutritionTrackedDays.length === 0 && trackedCaloriesBurned.length === 0) {
     return (
       <Fragment>
         <ChatBot></ChatBot>
-        <h4>Nothing yet, track nutrition and activities to get started!</h4>
+        <h4>Nothing yet, track nutrition, exercises or activities to get started!</h4>
       </Fragment>
     )
   }
@@ -31,6 +56,12 @@ const Dashboard = () => {
         nutritionTrackedDays.length !== 0 &&
         <div className="nutrition-tracker-dashboard-container">
           <h3>Nutrition Tracker</h3>
+          <ScheduleCalendarNutritionTracker></ScheduleCalendarNutritionTracker>
+          {
+            scheduledNutritionTrackedDaysView ?
+            <ScheduleDayInfoNutritionTracker></ScheduleDayInfoNutritionTracker> : null
+          }
+
           <NutritionTrackerSummary></NutritionTrackerSummary>
           <NutritionTrackerGraphCalories></NutritionTrackerGraphCalories>
           <NutritionTrackerGraphMacronutrients></NutritionTrackerGraphMacronutrients>
@@ -49,6 +80,12 @@ const Dashboard = () => {
             <div className="calories-burned-dashboard-summary-graph-container">
               <CaloriesBurnedSummary></CaloriesBurnedSummary>
             </div>
+            {/* <ScheduleCalendarCaloriesBurned></ScheduleCalendarCaloriesBurned>
+            {
+              scheduledTrackedCaloriesBurnedView ?
+              <ScheduleDayInfoCaloriesBurned></ScheduleDayInfoCaloriesBurned> : null
+            } */}
+
             <CaloriesBurnedGraphPie></CaloriesBurnedGraphPie>
             <CaloriesBurnedGraph></CaloriesBurnedGraph>
           </div>

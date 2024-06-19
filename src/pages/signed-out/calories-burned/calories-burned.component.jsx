@@ -13,11 +13,20 @@ import ActivityDateTable from "../../../components/signed-out/calories-burned/ad
 import { Fragment, useContext } from "react"
 import { CaloriesBurnedContext } from "../../../contexts/signed-out/calories-burned/calories-burned.context"
 
+import ScheduleCalendar from "../../../components/signed-out/calories-burned/schedule/schedule-calendar/schedule-calendar.component"
+import ScheduleDayInfo from "../../../components/signed-out/calories-burned/schedule/schedule-day-info/schedule-day-info.component"
+
 const CaloriesBurned = () => {
-  const { trackedCaloriesBurned } = useContext(CaloriesBurnedContext)
+  const { trackedCaloriesBurned, scheduledTrackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
 
   return (
     <div className="calories-burned-container">
+      <ScheduleCalendar></ScheduleCalendar>
+      {
+        scheduledTrackedCaloriesBurnedView ?
+        <ScheduleDayInfo></ScheduleDayInfo> : null
+      }
+
       {
         trackedCaloriesBurned.length ? 
           <Fragment>
