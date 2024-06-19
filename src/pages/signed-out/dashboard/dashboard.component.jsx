@@ -76,14 +76,14 @@ const Dashboard = () => {
 
           <div className="calories-burned-dashboard-container">
             <h3>Calories Burned</h3>
-            <div className="calories-burned-dashboard-summary-graph-container">
-              <CaloriesBurnedSummary></CaloriesBurnedSummary>
-            </div>
             <ScheduleCalendarCaloriesBurned></ScheduleCalendarCaloriesBurned>
             {
               scheduledTrackedCaloriesBurnedView ?
               <ScheduleDayInfoCaloriesBurned></ScheduleDayInfoCaloriesBurned> : null
             }
+            <div className="calories-burned-dashboard-summary-graph-container">
+              <CaloriesBurnedSummary></CaloriesBurnedSummary>
+            </div>
 
             <CaloriesBurnedGraphPie></CaloriesBurnedGraphPie>
             <CaloriesBurnedGraph></CaloriesBurnedGraph>
