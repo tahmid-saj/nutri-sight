@@ -3,7 +3,7 @@ import { Typography, Divider } from "@mui/material"
 import { Fragment, useContext } from "react"
 import SimplePaper from "../../../../shared/mui/paper/paper.component"
 import { COLOR_CODES } from "../../../../../utils/constants/shared.constants"
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context"
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context"
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"],

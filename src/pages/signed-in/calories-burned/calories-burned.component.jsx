@@ -18,7 +18,6 @@ import ScheduleDayInfo from "../../../components/signed-in/calories-burned/sched
 
 const CaloriesBurned = () => {
   const { trackedCaloriesBurned, scheduledTrackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
-  console.log(scheduledTrackedCaloriesBurnedView)
 
   return (
     <div className="calories-burned-container">
