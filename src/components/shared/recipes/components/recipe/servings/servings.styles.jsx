@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const ServingsContainer = styled.div`
+  display: block;
   justify-content: space-between;
   align-items: center;
   padding: 2%;
