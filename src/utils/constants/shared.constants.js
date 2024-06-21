@@ -204,6 +204,7 @@ export const COMMON_SPACING = {
   screenWidthOnDrawerClose: 500,
   navBarWidth: 225,
   navBarMargin: 230,
+  hiddenAppBarMarginTop: 60,
   pageContent: {
     margin: {
       top: "0%",

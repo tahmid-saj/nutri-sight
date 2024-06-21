@@ -1,5 +1,6 @@
 import styled from "styled-components"
+import { COMMON_SPACING } from "../../../utils/constants/shared.constants"
 
-export const OutletContainer = styled.div`
-  padding-left: 3%;
+export const DrawerContainer = styled.div`
+  margin-bottom: 60px;
 `

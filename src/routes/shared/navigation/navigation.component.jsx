@@ -2,7 +2,7 @@ import { Fragment, useContext, useState } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 
 import "./navigation.styles.jsx";
-import { OutletContainer } from "./navigation.styles.jsx";
+import { DrawerContainer } from "./navigation.styles.jsx";
 
 import { signOutUser } from "../../../utils/firebase/firebase.utils";
 import MiniDrawer from "../../../components/shared/mui/drawer/drawer.component.jsx";
@@ -40,7 +40,9 @@ const Navigation = () => {
         }
       >
       </MiniDrawer> */}
-      <HiddenDrawer></HiddenDrawer>
+      <DrawerContainer>
+        <HiddenDrawer></HiddenDrawer>
+      </DrawerContainer>
 
       {/* <div className="navigation">
         <Link className="logo" to="/"
