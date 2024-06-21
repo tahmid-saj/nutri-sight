@@ -11,9 +11,10 @@ import { selectCurrentUser } from "../../../store/shared/user/user.selector.js";
 import { COLOR_CODES, NAV_LINKS } from "../../../utils/constants/shared.constants.js";
 
 const styles = {
-  width: 475,
-  height: 500,
-  backgroundColor: COLOR_CODES.general["0"]
+  width: 350,
+  height: 450,
+  backgroundColor: COLOR_CODES.general["0"],
+  marginBottom: "6%"
 }
 
 const Home = () => {
@@ -79,38 +80,54 @@ const Home = () => {
 
   return (
     <Fragment>
-      <HomeContainer>
-        <MediaCard styles={ styles } header={ homeCardContent.chatbot.header } imageUrl={ homeCardContent.chatbot.imageUrl } 
-          imageTitle={ homeCardContent.chatbot.header } path={ homeCardContent.chatbot.path } content={ homeCardContent.chatbot.description }></MediaCard>
+      <div className="container">
+        <div className="row justify-content-center align-items-center">
+          <div className="col-sm-12 col-md-6 col-lg-4">
+            <MediaCard styles={ styles } header={ homeCardContent.chatbot.header } imageUrl={ homeCardContent.chatbot.imageUrl } 
+            imageTitle={ homeCardContent.chatbot.header } path={ homeCardContent.chatbot.path } content={ homeCardContent.chatbot.description }></MediaCard>
+          </div>
 
-        <MediaCard styles={ styles } header={ homeCardContent.storage.header } imageUrl={ homeCardContent.storage.imageUrl } 
-          imageTitle={ homeCardContent.storage.header } path={ homeCardContent.storage.path } content={ homeCardContent.storage.description }></MediaCard>
-        
-        <MediaCard styles={ styles } header={ homeCardContent.nutrientPredictor.header } imageUrl={ homeCardContent.nutrientPredictor.imageUrl } 
-          imageTitle={ homeCardContent.nutrientPredictor.header } path={ homeCardContent.nutrientPredictor.path } content={ homeCardContent.nutrientPredictor.description }></MediaCard>
-      </HomeContainer>
+          <div className="col-sm-12 col-md-6 col-lg-4">
+            <MediaCard styles={ styles } header={ homeCardContent.storage.header } imageUrl={ homeCardContent.storage.imageUrl } 
+            imageTitle={ homeCardContent.storage.header } path={ homeCardContent.storage.path } content={ homeCardContent.storage.description }></MediaCard>
+          </div>
 
-      <HomeContainer>
-        <MediaCard styles={ styles } header={ homeCardContent.nutritionTracker.header } imageUrl={ homeCardContent.nutritionTracker.imageUrl } 
-          imageTitle={ homeCardContent.nutritionTracker.header } path={ homeCardContent.nutritionTracker.path } content={ homeCardContent.nutritionTracker.description }></MediaCard>
+          <div className="col-sm-12 col-md-6 col-lg-4">
+            <MediaCard styles={ styles } header={ homeCardContent.nutrientPredictor.header } imageUrl={ homeCardContent.nutrientPredictor.imageUrl } 
+            imageTitle={ homeCardContent.nutrientPredictor.header } path={ homeCardContent.nutrientPredictor.path } content={ homeCardContent.nutrientPredictor.description }></MediaCard>
+          </div>
 
-        <MediaCard styles={ styles } header={ homeCardContent.fitness.header } imageUrl={ homeCardContent.fitness.imageUrl } 
-          imageTitle={ homeCardContent.fitness.header } path={ homeCardContent.fitness.path } content={ homeCardContent.fitness.description }></MediaCard>
+          <div className="col-sm-12 col-md-6 col-lg-4">
+            <MediaCard styles={ styles } header={ homeCardContent.nutritionTracker.header } imageUrl={ homeCardContent.nutritionTracker.imageUrl } 
+            imageTitle={ homeCardContent.nutritionTracker.header } path={ homeCardContent.nutritionTracker.path } content={ homeCardContent.nutritionTracker.description }></MediaCard>
+          </div>
 
-        <MediaCard styles={ styles } header={ homeCardContent.caloriesBurned.header } imageUrl={ homeCardContent.caloriesBurned.imageUrl } 
-          imageTitle={ homeCardContent.caloriesBurned.header } path={ homeCardContent.caloriesBurned.path } content={ homeCardContent.caloriesBurned.description }></MediaCard>
-      </HomeContainer>
+          <div className="col-sm-12 col-md-6 col-lg-4">
+            <MediaCard styles={ styles } header={ homeCardContent.fitness.header } imageUrl={ homeCardContent.fitness.imageUrl } 
+            imageTitle={ homeCardContent.fitness.header } path={ homeCardContent.fitness.path } content={ homeCardContent.fitness.description }></MediaCard>
+          </div>
 
-      <HomeContainer>
-        <MediaCard styles={ styles } header={ homeCardContent.recipes.header } imageUrl={ homeCardContent.recipes.imageUrl } 
-          imageTitle={ homeCardContent.recipes.header } path={ homeCardContent.recipes.path } content={ homeCardContent.recipes.description }></MediaCard>
+          <div className="col-sm-12 col-md-6 col-lg-4">
+            <MediaCard styles={ styles } header={ homeCardContent.caloriesBurned.header } imageUrl={ homeCardContent.caloriesBurned.imageUrl } 
+            imageTitle={ homeCardContent.caloriesBurned.header } path={ homeCardContent.caloriesBurned.path } content={ homeCardContent.caloriesBurned.description }></MediaCard>
+          </div>
 
-        <MediaCard styles={ styles } header={ homeCardContent.notifications.header } imageUrl={ homeCardContent.notifications.imageUrl } 
-          imageTitle={ homeCardContent.notifications.header } path={ homeCardContent.notifications.path } content={ homeCardContent.notifications.description }></MediaCard>
+          <div className="col-sm-12 col-md-6 col-lg-4">
+            <MediaCard styles={ styles } header={ homeCardContent.recipes.header } imageUrl={ homeCardContent.recipes.imageUrl } 
+            imageTitle={ homeCardContent.recipes.header } path={ homeCardContent.recipes.path } content={ homeCardContent.recipes.description }></MediaCard>
+          </div>
 
-        <MediaCard styles={ styles } header={ homeCardContent.summary.header } imageUrl={ homeCardContent.summary.imageUrl } 
-          imageTitle={ homeCardContent.summary.header } path={ homeCardContent.summary.path } content={ homeCardContent.summary.description }></MediaCard>
-      </HomeContainer>
+          <div className="col-sm-12 col-md-6 col-lg-4">
+            <MediaCard styles={ styles } header={ homeCardContent.notifications.header } imageUrl={ homeCardContent.notifications.imageUrl } 
+            imageTitle={ homeCardContent.notifications.header } path={ homeCardContent.notifications.path } content={ homeCardContent.notifications.description }></MediaCard>
+          </div>
+
+          <div className="col-sm-12 col-md-6 col-lg-4">
+            <MediaCard styles={ styles } header={ homeCardContent.summary.header } imageUrl={ homeCardContent.summary.imageUrl } 
+            imageTitle={ homeCardContent.summary.header } path={ homeCardContent.summary.path } content={ homeCardContent.summary.description }></MediaCard>
+          </div>
+        </div>
+      </div>
     </Fragment>
   );
 };
