@@ -1,16 +1,17 @@
 .sign-in-container {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  margin-top: 2%;
+  display: block;
+  // flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // width: 400px;
+  margin: 2% 20% 2% 20%;
 
   h2 {
     margin: 10px 0;
   }
 
-  .buttons-container {
-    display: flex;
-    justify-content: space-between;
+  .button-container {
     width: 400px;
+    margin-bottom: 4%;
   }
 }
