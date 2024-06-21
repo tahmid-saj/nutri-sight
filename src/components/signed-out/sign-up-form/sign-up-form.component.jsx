@@ -7,12 +7,15 @@ import { createAuthUserWithEmailAndPassword,
 import FormInput from "../../shared/form-input/form-input.component";
 import Button from "../../shared/button/button.component";
 
-import "./sign-up-form.styles.scss";
+import "./sign-up-form.styles.jsx";
+import { SignUpContainer } from "./sign-up-form.styles.jsx";
 
 import { errorOnEmailAlreadyInUse, errorOnUserCreation } from "../../../utils/errors/user.errors";
 
 import { useDispatch } from "react-redux";
 import { signUpStart } from "../../../store/shared/user/user.action";
+import { Typography } from "@mui/material";
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.js";
 
 const defaultFormFields = {
   displayName: "",
@@ -64,8 +67,8 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className="sign-up-container">
-      <h2>Sign Up</h2>
+    <SignUpContainer>
+      <Typography sx={{ color: COLOR_CODES.general["0"] }} variant="h6">Sign Up</Typography>
 
       <form onSubmit={ handleSubmit }>
         <FormInput label="Display name" type="text" required onChange={ handleChange }
@@ -82,7 +85,7 @@ const SignUpForm = () => {
         
         <Button type="submit">Sign Up</Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 

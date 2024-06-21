@@ -33,9 +33,7 @@ const AuthenticationRoute = () => {
   ]
 
   return (
-    <div className="authentication-container">
-      <ItemTabs tabList={ tabList } panelList={ panelList }></ItemTabs>
-    </div>
+    <ItemTabs tabList={ tabList } panelList={ panelList }></ItemTabs>
   );
 };
 
