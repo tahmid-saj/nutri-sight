@@ -7,12 +7,15 @@ import { signInWithGooglePopup,
 import FormInput from "../../shared/form-input/form-input.component";
 import Button from "../../shared/button/button.component";
 
-import "./sign-in-form.styles.scss";
+import "./sign-in-form.styles.jsx";
+import { SignInContainer, ButtonContainer } from "./sign-in-form.styles.jsx";
 
 import { errorOnSignIn } from "../../../utils/errors/user.errors";
 
 import { useDispatch } from "react-redux";
 import { googleSignInStart, emailSignInStart } from "../../../store/shared/user/user.action";
+import { Typography } from "@mui/material";
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.js";
 
 const defaultFormFields = {
   email: "",
@@ -60,8 +63,8 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="sign-in-container">
-      <h2>Sign In</h2>
+    <SignInContainer>
+      <Typography sx={{ color: COLOR_CODES.general["0"] }} variant="h6">Log back in</Typography>
       
       <form onSubmit={ handleSubmit }>
         <FormInput label="Email" type="email" required onChange={ handleChange }
@@ -72,18 +75,22 @@ const SignInForm = () => {
 
         <div className="container">
           <div className="row justify-content-evenly align-items-center">
-            <div className="col-sm-12 col-md-2 button-container">
-              <Button type="submit">Sign In</Button>
+            <div className="col-sm-12 col-md-2">
+              <ButtonContainer>
+                <Button type="submit">Sign In</Button>
+              </ButtonContainer>
             </div>
 
-            <div className="col-sm-12 col-md-2 button-container">
-              <Button buttonType="google-sign-in" type="button"
-                      onClick={ signInWithGoogle }>Google Sign In</Button>
+            <div className="col-sm-12 col-md-2">
+              <ButtonContainer>
+                <Button buttonType="google-sign-in" type="button"
+                        onClick={ signInWithGoogle }>Google Sign In</Button>
+              </ButtonContainer>
             </div>
           </div>
         </div>                  
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
