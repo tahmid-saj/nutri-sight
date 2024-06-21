@@ -15,7 +15,7 @@ import { NAV_LINKS } from "../../../utils/constants/shared.constants.js";
 
 import { useSelector } from "react-redux"
 import { selectCurrentUser } from "../../../store/shared/user/user.selector.js";
-import ResponsiveDrawer from "../../../components/shared/mui/responsive-drawer/responsive-drawer.component.jsx";
+import HiddenDrawer from "../../../components/shared/mui/hidden-drawer/hidden-drawer.component.jsx";
 
 const Navigation = () => {
   // const { currentUser } = useContext(UserContext);
@@ -40,7 +40,7 @@ const Navigation = () => {
         }
       >
       </MiniDrawer> */}
-      <ResponsiveDrawer></ResponsiveDrawer>
+      <HiddenDrawer></HiddenDrawer>
 
       {/* <div className="navigation">
         <Link className="logo" to="/"
@@ -124,9 +124,7 @@ const Navigation = () => {
         </div>
       </div> */}
 
-      <OutletContainer>
-        <Outlet/>
-      </OutletContainer>
+      <Outlet/>
     </Fragment>
   );
 };

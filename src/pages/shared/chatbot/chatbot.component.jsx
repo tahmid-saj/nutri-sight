@@ -7,6 +7,7 @@ import ChatBotResponse from "../../../components/shared/chatbot/chatbot-response
 import { ChatBotContext } from "../../../contexts/shared/chatbot/chatbot.context.js"
 import { Divider, Typography } from "@mui/material"
 import { ButtonsContainer } from "../../../components/shared/button/button.styles.jsx"
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.js"
 
 const defaultFormFields = {
   messageInput: ""
@@ -35,25 +36,30 @@ const ChatBot = () => {
 
   return (
     <ChatBotContainer>
-      <Typography variant="h6">Ask the chatbot for some nutrition advice</Typography>
-      <Typography paragraph>Example: Can you give me some nutrition advice?</Typography>
+      <div className="container">
+        <Typography sx={{ color: COLOR_CODES.general["6"] }} variant="h6">Ask the chatbot for some nutrition advice</Typography>
+        <Typography sx={{ color: COLOR_CODES.general["7"] }} paragraph>Example: Can you give me some nutrition advice?</Typography>
 
-      <ChatBotInputMessage onSubmit={ handleSubmit }>
-        <FormInput label="Message chatbot" type="text" required onChange={ handleChange }
-                  name="messageInput" value={ formFields.messageInput }/>
-        <ButtonsContainer>
-          <Button type="submit">Send</Button>
-          <Button type="button" onClick={ resetFormFields }>Clear</Button>
-        </ButtonsContainer>
-      </ChatBotInputMessage>
+        <ChatBotInputMessage onSubmit={ handleSubmit }>
+          <FormInput label="Message chatbot" type="text" required onChange={ handleChange }
+                    name="messageInput" value={ formFields.messageInput }/>
+            <div className="row justify-content-evenly align-items-center">
+              <div className="col-sm-12 col-md-2">
+                <Button type="submit">Send</Button>
+              </div>
+              <div className="col-sm-12 col-md-2">
+                <Button type="button" onClick={ resetFormFields }>Clear</Button>
+              </div>
+            </div>
+        </ChatBotInputMessage>
 
-      {
-        chatbotResponse !== "" && chatbotResponse !== undefined &&
-        <ChatBotResponse></ChatBotResponse>
-      }
+        {
+          chatbotResponse !== "" && chatbotResponse !== undefined &&
+          <ChatBotResponse></ChatBotResponse>
+        }
 
-      <Divider orientation="horizontal" flexItem/>
-
+        <Divider orientation="horizontal" flexItem/>
+      </div>
     </ChatBotContainer>
   )
 }

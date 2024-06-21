@@ -11,6 +11,7 @@
     "@emotion/styled": "^11.11.5",
     "@fontsource/roboto": "^5.0.13",
     "@mui/icons-material": "^5.15.17",
+    "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.17",
     "@mui/x-date-pickers": "^7.7.0",
     "@reduxjs/toolkit": "^2.2.5",

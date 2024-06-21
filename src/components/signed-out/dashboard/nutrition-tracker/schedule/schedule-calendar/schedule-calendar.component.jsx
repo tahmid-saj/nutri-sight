@@ -61,7 +61,7 @@ const ScheduleCalendar = () => {
   }
 
   return (
-    <div className="nutrition-tracker-schedule-calendar-container" style={{ backgroundColor: COLOR_CODES.general["0"] }}>
+    <div className="nutrition-tracker-calendar-container" style={{ backgroundColor: COLOR_CODES.general["0"] }}>
       <Typography sx={{ display: "flex", marginLeft: "1%" }} 
         variant="h6">{`Nutrition tracker calendar`}</Typography>
       <Calendar bordered renderCell={ renderCell } onSelect={ onSelectDate } style={{ backgroundColor: COLOR_CODES.general["0"] }}/>

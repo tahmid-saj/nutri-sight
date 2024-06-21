@@ -7,14 +7,14 @@ import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the 
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 
 import SimplePaper from "../../../../../shared/mui/paper/paper.component";
-import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../../utils/constants/shared.constants";
 import { FitnessContext } from "../../../../../../contexts/signed-out/fitness/fitness.context";
 import Button from "../../../../../shared/button/button.component";
 import { ButtonsContainer } from "../../../../../shared/button/button.styles";
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["8"],
-  height: 600
+  height: COMMON_SPACING.calendarDayInfo.height
 }
 
 const ScheduleDayInfo = () => {
@@ -58,7 +58,7 @@ const ScheduleDayInfo = () => {
 
   return (
     <div className="fitness-schedule-day-info-container">
-      <Typography sx={{ display: "flex", marginLeft: "2%" }} 
+      <Typography sx={{ display: "flex", marginLeft: "2%", color: COLOR_CODES.general["0"] }} 
         variant="h6">{`Exercises planned`}</Typography>
 
       <SimplePaper styles={ paperStyles }>

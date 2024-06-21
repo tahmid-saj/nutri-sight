@@ -1,10 +1,17 @@
-import "./nutrition-tracker-graph-pie.styles.scss"
+import "./nutrition-tracker-graph-pie.styles.jsx"
+import { NutritionTrackerDashboardGraphPieContainer } from "./nutrition-tracker-graph-pie.styles.jsx";
 import ReactApexChart from "react-apexcharts";
 
 import { GRAPH_FIELDS } from "../../../../../../utils/constants/nutrition-tracker.constants";
 
 import { useSelector } from "react-redux";
 import { selectNutritionTrackedDaysSummary } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
+import SimplePaper from "../../../../../shared/mui/paper/paper.component.jsx";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../../utils/constants/shared.constants.js";
+
+const paperStyles = {
+  backgroundColor: COLOR_CODES.general["0"]
+}
 
 const NutritionTrackerGraphPie = () => {
   const nutritionTrackedDaysSummary = useSelector(selectNutritionTrackedDaysSummary)
@@ -20,15 +27,11 @@ const NutritionTrackerGraphPie = () => {
   const options = {
     chart: {
       type: 'donut',
-      height: 400,
     },
     labels: [ ...trackedMacronutrients.keys() ],
     responsive: [{
       breakpoint: 50,
       options: {
-        chart: {
-          height: 400
-        },
         legend: {
           position: 'bottom'
         }
@@ -37,9 +40,12 @@ const NutritionTrackerGraphPie = () => {
   }
 
   return (
-    <div className="nutrition-tracker-dashboard-graph-pie-container">
-      <ReactApexChart options={ options } series={ series } type="donut" height={ 400 } width={ 400 }></ReactApexChart>
-    </div>
+    <NutritionTrackerDashboardGraphPieContainer>
+      <SimplePaper styles={ paperStyles }>
+        <ReactApexChart options={ options } series={ series } type="donut" 
+          height={ COMMON_SPACING.pieChart.height } width={ COMMON_SPACING.pieChart.width }></ReactApexChart>
+      </SimplePaper>
+    </NutritionTrackerDashboardGraphPieContainer>
   )
 }
 
