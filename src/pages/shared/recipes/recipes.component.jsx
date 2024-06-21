@@ -10,6 +10,7 @@ import RecipesView from "../../../components/shared/recipes/components/recipes-v
 
 import { RecipesContext } from "../../../contexts/shared/recipes/recipes.context.js";
 import { Divider, Typography } from "@mui/material";
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.js";
 
 const Recipes = () => {
   const { displayedRecipe, displayedRecipesOnPage } = useContext(RecipesContext);
@@ -17,20 +18,30 @@ const Recipes = () => {
   return (
     <Fragment>
       <SearchResultsRecipeContainer>
-      <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">Search some recipes</Typography>
+      <Typography sx={{ display: "flex", justifyContent: "center", color: COLOR_CODES.general["6"] }} 
+        variant="h6">Search some recipes</Typography>
       <Header></Header>
 
-      <Divider sx={{ marginRight: "2%" }}/>
+      <br></br>
 
         { 
           displayedRecipesOnPage.length !== 0 &&
-          <SearchResultsMainContainer>
-              <SearchResults></SearchResults>
-              {
-                displayedRecipe !== undefined && displayedRecipe !== null &&
-                <RecipesView ></RecipesView>
-              }
-          </SearchResultsMainContainer>
+          <div className="container">
+            <SearchResultsMainContainer>
+              <div className="row">
+                <div className="col-sm-12 col-md-6 col-lg-6">
+                  <SearchResults></SearchResults>
+                </div>
+
+                <div className="col-sm-12 col-md-6 col-lg-6">
+                  {
+                    displayedRecipe !== undefined && displayedRecipe !== null &&
+                    <RecipesView ></RecipesView>
+                  }
+                </div>
+              </div>
+            </SearchResultsMainContainer>
+          </div>
         }
       </SearchResultsRecipeContainer>
     </Fragment>

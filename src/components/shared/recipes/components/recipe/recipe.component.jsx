@@ -21,6 +21,15 @@ const cardStyles = {
   margin: "1% 0% 1% 0%"
 }
 
+const nutrientPredictionCardStyles = {
+  backgroundColor: COLOR_CODES.general["6"],
+  margin: "1% 0% 1% 0%",
+  overflow: "scroll",
+  height: "70rem",
+  scrollbarColor: `${COLOR_CODES.scrollbar.scroll} ${COLOR_CODES.scrollbar.background}`,
+  scrollbarWidth: "thin"
+}
+
 const Recipe = () => {
   const { displayedRecipe } = useContext(RecipesContext)
 
@@ -36,7 +45,7 @@ const Recipe = () => {
 
       {
         displayedRecipe.nutrientPredictions !== undefined && displayedRecipe.nutrientPredictions.length !== 0 ? (
-        <OutlinedCard styles={ cardStyles }>
+        <OutlinedCard styles={ nutrientPredictionCardStyles }>
           <NutrientPrediction></NutrientPrediction>
         </OutlinedCard>) : null
       }

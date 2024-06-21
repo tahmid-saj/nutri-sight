@@ -1,5 +1,7 @@
 import "./search-results.styles"
-import { SearchResultsContainer, PaginationContainer } from "./search-results.styles";
+import { SearchResultsContainer, SearchResultContainer,
+  PaginationContainer 
+} from "./search-results.styles";
 
 import React, { Component, useState, useContext, Fragment } from "react";
 import Pagination from "../pagination/pagination.component";
@@ -14,7 +16,7 @@ import { Paper } from "@mui/material";
 
 const paperStyles = {
   searchResults: {
-    backgroundColor: COLOR_CODES.general["0"]
+    backgroundColor: COLOR_CODES.general["2"]
   },
   searchResult: {
     backgroundColor: COLOR_CODES.general["0"]
@@ -31,7 +33,9 @@ const SearchResults = () => {
           displayedRecipesOnPage.map((recipe, index) => {
             return (
               <Paper styles={ paperStyles.searchResult }>
-                <SearchResult key={ recipe.id } recipe={ recipe }></SearchResult>
+                <SearchResultContainer>
+                    <SearchResult key={ recipe.id } recipe={ recipe }></SearchResult>
+                </SearchResultContainer>
               </Paper>
             )
           })

@@ -1,5 +1,5 @@
 import "./search-result.styles.jsx";
-import { SearchResultContainer } from "./search-result.styles.jsx";
+import { RecipeResult } from "./search-result.styles.jsx";
 
 import { useContext } from "react";
 import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
@@ -20,10 +20,10 @@ const SearchResult = ({ recipe }) => {
   }
 
   return (
-    <SearchResultContainer onClick={ handleClick }>
+    <RecipeResult onClick={ handleClick }>
       <Typography variant="subtitle1">{`${recipe.title}`}</Typography>
       <Typography variant="body2">{`${recipe.publisher}`}</Typography>
-    </SearchResultContainer>
+    </RecipeResult>
   )
 };
 

@@ -10,5 +10,5 @@ export const IngredientQuantitiesContainer = styled.div`
   display: block;
   align-items: center;
   justify-content: center;
-  padding: 2% 0% 2% 0%;
+  padding: 2%;
 `

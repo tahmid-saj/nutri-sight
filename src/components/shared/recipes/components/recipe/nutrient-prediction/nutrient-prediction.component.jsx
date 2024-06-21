@@ -17,7 +17,7 @@ import { selectNutritionTrackedDays } from "../../../../../../store/signed-out/n
 import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants"
 
 const outlinedCardStyles = {
-  backgroundColor: COLOR_CODES.general["5"]
+  backgroundColor: COLOR_CODES.general["0"]
 }
 
 const NutrientPrediction = () => {
