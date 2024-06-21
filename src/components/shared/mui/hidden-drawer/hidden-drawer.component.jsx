@@ -151,8 +151,11 @@ export default function HiddenDrawer() {
   );
 
   return (
-    <div>
-      <Button onClick={toggleDrawer(true)}>
+    <div className="nutrition-tracker-app-bar">
+      <Button sx={{ position: "fixed", top: "0", width: "100%", justifyContent: "left", 
+        backgroundColor: COLOR_CODES.general["9"] 
+        }}
+        onClick={toggleDrawer(true)}>
         <div className='nutrition-tracker-title'>
           <MenuIcon/>
           <Typography sx={{ marginLeft: "10px", color: COLOR_CODES.general["0"] }} variant="h6">

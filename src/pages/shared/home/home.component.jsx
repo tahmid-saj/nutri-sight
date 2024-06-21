@@ -11,7 +11,7 @@ import { selectCurrentUser } from "../../../store/shared/user/user.selector.js";
 import { COLOR_CODES, NAV_LINKS } from "../../../utils/constants/shared.constants.js";
 
 const styles = {
-  width: 350,
+  width: 360,
   height: 450,
   backgroundColor: COLOR_CODES.general["0"],
   marginBottom: "6%"
@@ -79,8 +79,8 @@ const Home = () => {
   }
 
   return (
-    <Fragment>
-      <div className="container">
+    <div className="container">
+      <HomeContainer>
         <div className="row justify-content-center align-items-center">
           <div className="col-sm-12 col-md-6 col-lg-4">
             <MediaCard styles={ styles } header={ homeCardContent.chatbot.header } imageUrl={ homeCardContent.chatbot.imageUrl } 
@@ -127,8 +127,8 @@ const Home = () => {
             imageTitle={ homeCardContent.summary.header } path={ homeCardContent.summary.path } content={ homeCardContent.summary.description }></MediaCard>
           </div>
         </div>
-      </div>
-    </Fragment>
+      </HomeContainer>
+    </div>
   );
 };
 
