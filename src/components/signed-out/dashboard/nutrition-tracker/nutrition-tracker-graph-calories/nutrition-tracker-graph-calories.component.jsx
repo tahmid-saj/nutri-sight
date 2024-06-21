@@ -1,9 +1,15 @@
-import "./nutrition-tracker-graph-calories.styles.scss"
+import "./nutrition-tracker-graph-calories.styles.jsx"
+import { NutritionTrackerDashboardGraphCalories } from "./nutrition-tracker-graph-calories.styles.jsx"
 import ReactApexChart from "react-apexcharts"
 import { useSelector } from "react-redux"
 import { selectNutritionTrackedDays } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector"
-
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
 import { GRAPH_FIELDS } from "../../../../../utils/constants/nutrition-tracker.constants"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx"
+
+const paperStyles = {
+  backgroundColor: COLOR_CODES.general["1"]
+}
 
 const NutritionTrackerGraphCalories = () => {
   const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
@@ -25,7 +31,7 @@ const NutritionTrackerGraphCalories = () => {
   const options = {
     chart: {
       type: 'area',
-      height: 500,
+      height: COMMON_SPACING.lineChart.height,
       zoom: {
         enabled: true
       }
@@ -57,9 +63,12 @@ const NutritionTrackerGraphCalories = () => {
   };
 
   return (
-    <div className="nutrition-tracker-dashboard-graph-calories">
-      <ReactApexChart options={ options } series={ series } type="area" height={ 500 } width={ "95%" }/>
-    </div>
+    <NutritionTrackerDashboardGraphCalories>
+      <SimplePaper styles={ paperStyles }>
+        <ReactApexChart options={ options } series={ series } type="area" 
+          height={ COMMON_SPACING.lineChart.height } width={ COMMON_SPACING.lineChart.width }/>
+      </SimplePaper>
+    </NutritionTrackerDashboardGraphCalories>
   )
 }
 

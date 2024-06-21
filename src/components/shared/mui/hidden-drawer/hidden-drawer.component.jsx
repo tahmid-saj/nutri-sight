@@ -1,22 +1,19 @@
-import "./responsive-drawer.styles.scss"
-import { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
+import "./hidden-drawer.styles.scss"
+import { useState, useContext } from 'react';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import Button from '@mui/material/Button';
 import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 
 import HomeIcon from '@mui/icons-material/Home'
 import SmartToyIcon from '@mui/icons-material/SmartToy';
@@ -45,13 +42,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { selectCurrentUser } from "../../../../store/shared/user/user.selector";
 import { signOutStart } from "../../../../store/shared/user/user.action";
 
-import { ResponsiveStylingContext } from "../../../../contexts/shared/responsive-styling/responsive-styling.context";
-
-const drawerWidth = COMMON_SPACING.navBarWidth;
-
-function ResponsiveDrawer(props) {
-  const { window } = props;
-  const { mobileOpen, isClosing, setMobileOpen, setIsClosing } = useContext(ResponsiveStylingContext)
+export default function HiddenDrawer() {
+  const [open, setOpen] = useState(true);
 
   const currentUser = useSelector(selectCurrentUser)
   const { updateNutritionTrackedDaysAndSummary } = useContext(NutritionTrackerContext);
@@ -59,28 +51,6 @@ function ResponsiveDrawer(props) {
   const { updateExercises } = useContext(FitnessContext)
   const navigate = useNavigate();
   const dispatch = useDispatch()
-
-  let navLinksHeaders;
-  if (currentUser) {
-    navLinksHeaders = NAV_LINKS.signedIn
-  } else {
-    navLinksHeaders = NAV_LINKS.signedOut
-  }
-
-  const handleDrawerClose = () => {
-    setIsClosing(true);
-    setMobileOpen(false);
-  };
-
-  const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
-  };
-
-  const handleDrawerToggle = () => {
-    if (!isClosing) {
-      setMobileOpen(!mobileOpen);
-    }
-  };
 
   const handleSignOut = () => {
     updateNutritionTrackedDaysAndSummary();
@@ -91,10 +61,19 @@ function ResponsiveDrawer(props) {
     navigate("/")
   }
 
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
+  let navLinksHeaders;
+  if (currentUser) {
+    navLinksHeaders = NAV_LINKS.signedIn
+  } else {
+    navLinksHeaders = NAV_LINKS.signedOut
+  }
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         { navLinksHeaders.section1.map(({ header, path }, index) => (
           <Link to={ `${path}` }>
@@ -120,9 +99,8 @@ function ResponsiveDrawer(props) {
       <Divider />
 
       <List>
-        {
-          navLinksHeaders.section2.map(({ header, path }, index) => {
-            return (
+        { navLinksHeaders.section2.map(({ header, path }, index) => {
+          return (
               currentUser ? (
                 <span onClick={ handleSignOut }>
                   <ListItem key={header} disablePadding>
@@ -147,8 +125,7 @@ function ResponsiveDrawer(props) {
                 </Link>
               )
             )
-          })
-        }
+        })}
       </List>
 
       <Divider/>
@@ -170,100 +147,29 @@ function ResponsiveDrawer(props) {
           </Link>
         ))}
       </List>
-    </div>
-  );
-
-  // Remove this const when copying and pasting into your project.
-  const container = window !== undefined ? () => window().document.body : undefined;
-
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar 
-          sx={{ 
-            backgroundColor: COLOR_CODES.general["4"],
-            width: "100%"
-          }}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-
-          <div className='nutrition-tracker-title'>
-            <Typography variant="h6" noWrap component="div">
-              Nutrition Tracker
-            </Typography>
-            {
-              currentUser ?
-              <Typography variant="body2" noWrap component="div">
-                { `Hello ${currentUser.displayName}` }
-              </Typography> : null
-            }
-          </div>
-        </Toolbar>
-      </AppBar>
-
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onTransitionEnd={handleDrawerTransitionEnd}
-          onClose={handleDrawerClose}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
-      >
-        <Toolbar />
-      </Box>
     </Box>
   );
+
+  return (
+    <div>
+      <Button onClick={toggleDrawer(true)}>
+        <div className='nutrition-tracker-title'>
+          <MenuIcon/>
+          <Typography sx={{ marginLeft: "10px", color: COLOR_CODES.general["0"] }} variant="h6">
+            Nutrition Tracker
+          </Typography>
+          {
+            currentUser ?
+            <Typography sx={{ color: COLOR_CODES.general["5"] }} variant="body2">
+              { `Hello ${currentUser.displayName}` }
+            </Typography> : null
+          }
+        </div>
+      </Button>
+      
+      <Drawer open={open} onClose={toggleDrawer(false)}>
+        {DrawerList}
+      </Drawer>
+    </div>
+  );
 }
-
-ResponsiveDrawer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * Remove this when copying and pasting into your project.
-   */
-  window: PropTypes.func,
-};
-
-export default ResponsiveDrawer;

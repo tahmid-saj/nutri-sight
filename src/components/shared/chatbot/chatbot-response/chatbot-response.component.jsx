@@ -8,7 +8,7 @@ import OutlinedCard from "../../mui/card/card.component.jsx"
 
 const cardStyles = {
   backgroundColor: COLOR_CODES.general["0"],
-  margin: "2%"
+  margin: "4% 2% 2% 2%"
 }
 
 const ChatBotResponse = () => {

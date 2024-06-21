@@ -57,7 +57,7 @@ const ScheduleCalendar = () => {
   }
 
   return (
-    <div className="calories-burned-schedule-calendar-container" style={{ backgroundColor: COLOR_CODES.general["0"] }}>
+    <div className="calories-burned-calendar-container" style={{ backgroundColor: COLOR_CODES.general["0"] }}>
       <Typography sx={{ display: "flex", marginLeft: "1%" }} 
         variant="h6">{`Calories burned calendar`}</Typography>
       <Calendar bordered renderCell={ renderCell } onSelect={ onSelectDate } style={{ backgroundColor: COLOR_CODES.general["0"] }}/>
