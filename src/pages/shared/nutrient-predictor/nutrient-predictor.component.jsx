@@ -7,13 +7,15 @@ import NutrientsInfo from "../../../components/shared/nutrient-predictor/nutrien
 
 import { NutrientPredictorContext } from "../../../contexts/shared/nutrient-predictor/nutrient-predictor.context.js";
 import { Divider, Typography } from "@mui/material";
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.js";
 
 const NutrientPredictor = () => {
   const { nutrientPredictions } = useContext(NutrientPredictorContext);
 
   return (
     <NutrientPredictorContainer>
-      <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">Predict some nutrients</Typography>
+      <Typography sx={{ display: "flex", justifyContent: "center", color: COLOR_CODES.general["6"] }} 
+        variant="h6">Predict some nutrients</Typography>
       <UploadFoodImage 
         // displayNutrients={ this.displayNutrients }
       ></UploadFoodImage>

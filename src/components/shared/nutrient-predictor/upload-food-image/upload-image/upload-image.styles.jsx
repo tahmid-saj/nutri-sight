@@ -4,6 +4,7 @@ export const UploadImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 2% 0% 2% 0%;
 `
 
 export const UploadImageForm = styled.form`
@@ -14,9 +15,15 @@ export const UploadImageForm = styled.form`
   /* width: 60%; */
 `
 
+export const UploadedImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2% 2% 2% 2%;
+`
+
 export const UploadedImage = styled.img`
   box-shadow: 5px 5px 5px 5px rgb(150, 150, 150);
   border-radius: 1.5rem;
-  margin: 2% 2% 4% 2%;
   padding: 2%;
 `

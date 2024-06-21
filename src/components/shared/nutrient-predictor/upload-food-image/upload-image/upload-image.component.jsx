@@ -1,5 +1,5 @@
 import "./upload-image.styles.jsx";
-import { UploadImageContainer, UploadImageForm, UploadedImage } from "./upload-image.styles.jsx";
+import { UploadImageContainer, UploadImageForm, UploadedImage, UploadedImageContainer } from "./upload-image.styles.jsx";
 
 import React, { useState, useContext } from "react";
 import FormInput from "../../../form-input/form-input.component";
@@ -87,33 +87,42 @@ const UploadImage = () => {
 
   return (
     <UploadImageContainer>
-      <SimplePaper styles={ paperStyles }>
-        <UploadImageForm onSubmit={ handleSubmit }>
-          <Typography variant="h6">Upload a food image or enter a meal description</Typography>
-          <Typography paragraph>Example: 1 pound of steak with mashed potatoes and a can of sprite</Typography>
-          <FormInput label="Meal description" type="text" onChange={ handleChange }
-                              name="mealDescription" value={ formFields.mealDescription }></FormInput>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <SimplePaper styles={ paperStyles }>
+              <UploadImageForm onSubmit={ handleSubmit }>
+                <Typography variant="h6">Upload a food image or enter a meal description</Typography>
+                <Typography paragraph>Example: 1 pound of steak with mashed potatoes and a can of sprite</Typography>
+                <FormInput label="Meal description" type="text" onChange={ handleChange }
+                                    name="mealDescription" value={ formFields.mealDescription }></FormInput>
 
-          <FormInput label="Image URL" type="url" id="imageUrl" name="imageUrl" 
-                    onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.url) } value={ formFields.imageUrl }></FormInput>
+                <FormInput label="Image URL" type="url" id="imageUrl" name="imageUrl" 
+                          onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.url) } value={ formFields.imageUrl }></FormInput>
 
-          <FormInput disabled type="file" id="uploadedImagePath" name="uploadedImagePath" 
-                    onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.image) } value={ formFields.uploadedImagePath } accept="image/*"></FormInput>
+                <FormInput disabled type="file" id="uploadedImagePath" name="uploadedImagePath" 
+                          onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.image) } value={ formFields.uploadedImagePath } accept="image/*"></FormInput>
 
-          <ButtonsContainer>
-            <Button buttonType="regular-button" type="submit">Predict</Button>
-            <Button buttonType="regular-button" type="button" onClick={ resetFormFields }>Clear</Button>
-          </ButtonsContainer>
-        </UploadImageForm>
-      </SimplePaper>
+                <ButtonsContainer>
+                  <Button buttonType="regular-button" type="submit">Predict</Button>
+                  <Button buttonType="regular-button" type="button" onClick={ resetFormFields }>Clear</Button>
+                </ButtonsContainer>
+              </UploadImageForm>
+            </SimplePaper>
+          </div>
 
-      <UploadedImage alt="" id="imageOutput" 
-            style={{ width: "500px", height: "500px", 
-            visibility: `${(formFields.uploadedImagePath === "" && formFields.imageUrl === "") ? "hidden" : ""}` }}></UploadedImage>
+          <div className="col">
+            <UploadedImageContainer>
+              <UploadedImage alt="" id="imageOutput" 
+                    style={{ width: "375px", height: "375px", 
+                    visibility: `${(formFields.uploadedImagePath === "" && formFields.imageUrl === "") ? "hidden" : ""}` }}></UploadedImage>
 
-          {/* <UploadedImage alt="" id="imageOutput" 
-                style={{ width: "500px", height: "500px" }}></UploadedImage> */}
-
+                  {/* <UploadedImage alt="" id="imageOutput" 
+                        style={{ width: "500px", height: "500px" }}></UploadedImage> */}
+            </UploadedImageContainer>
+          </div>
+        </div>
+      </div>
     </UploadImageContainer>
   )
 };
