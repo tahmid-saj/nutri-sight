@@ -64,7 +64,7 @@ const SignInForm = () => {
 
   return (
     <SignInContainer>
-      <Typography sx={{ color: COLOR_CODES.general["0"] }} variant="h6">Log back in</Typography>
+      <Typography sx={{ color: COLOR_CODES.general["6"] }} variant="h6">Log back in</Typography>
       
       <form onSubmit={ handleSubmit }>
         <FormInput label="Email" type="email" required onChange={ handleChange }
