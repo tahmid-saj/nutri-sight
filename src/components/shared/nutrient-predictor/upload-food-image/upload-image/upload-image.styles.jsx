@@ -16,10 +16,11 @@ export const UploadImageForm = styled.form`
 `
 
 export const UploadedImageContainer = styled.div`
-  display: flex;
+  display: ${(props) => props.visible === "hidden" ? "none" : "flex"};
   justify-content: center;
   align-items: center;
   margin: 2% 2% 2% 2%;
+  visibility: ${(props) => props.visible};
 `
 
 export const UploadedImage = styled.img`

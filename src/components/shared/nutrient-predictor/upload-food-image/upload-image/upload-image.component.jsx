@@ -111,11 +111,13 @@ const UploadImage = () => {
             </SimplePaper>
           </div>
 
-          <div className="col">
-            <UploadedImageContainer>
+          <div className="col" visible>
+            <UploadedImageContainer
+              visible={ `${(formFields.uploadedImagePath === "" && formFields.imageUrl === "") ? "hidden" : ""}` }>
               <UploadedImage alt="" id="imageOutput" 
                     style={{ width: "375px", height: "375px", 
-                    visibility: `${(formFields.uploadedImagePath === "" && formFields.imageUrl === "") ? "hidden" : ""}` }}></UploadedImage>
+                    // visibility: `${(formFields.uploadedImagePath === "" && formFields.imageUrl === "") ? "hidden" : ""}` 
+                    }}></UploadedImage>
 
                   {/* <UploadedImage alt="" id="imageOutput" 
                         style={{ width: "500px", height: "500px" }}></UploadedImage> */}
