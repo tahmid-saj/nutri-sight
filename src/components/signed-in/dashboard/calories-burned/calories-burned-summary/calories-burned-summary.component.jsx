@@ -1,19 +1,38 @@
-import "./calories-burned-summary.styles.scss"
+import "./calories-burned-summary.styles.jsx"
+import { CaloriesBurnedDashboardSummaryContainer } from "./calories-burned-summary.styles.jsx"
 import { useContext } from "react"
 import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context"
+import { Divider, Typography } from "@mui/material"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx"
+import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js"
+
+const paperStyles = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: COLOR_CODES.general["1"],
+  marginLeft: "2%",
+  marginRight: "2%"
+}
 
 const CaloriesBurnedSummary = () => {
   const { trackedCaloriesBurnedSummary } = useContext(CaloriesBurnedContext)
 
   return (
-    <div className="calories-burned-dashboard-summary-container">
-      <h3>{ `Daily average burned : ${trackedCaloriesBurnedSummary.dailyAverageCaloriesBurned}` }</h3>
-      <br></br>
-      <h3>Most calories burned</h3>
-      <h4>{ `Date : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.date}` }</h4>
-      <h4>{ `Calories burned : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.caloriesBurned}` }</h4>
-      <h4>{ `Activity : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.activity}` }</h4>
-    </div>
+    <SimplePaper styles={ paperStyles }>
+      <CaloriesBurnedDashboardSummaryContainer>
+        <Typography variant="h6">{ `Daily average burned : ${trackedCaloriesBurnedSummary.dailyAverageCaloriesBurned}` }</Typography>
+
+        <br/>
+        <Divider/>
+        <br/>
+
+        <Typography variant="h6">Most calories burned</Typography>
+        <Typography variant="body1">{ `Date : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.date}` }</Typography>
+        <Typography variant="body1">{ `Calories burned : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.caloriesBurned}` }</Typography>
+        <Typography variant="body1">{ `Activity : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.activity}` }</Typography>
+      </CaloriesBurnedDashboardSummaryContainer>
+    </SimplePaper>
   )
 }
 

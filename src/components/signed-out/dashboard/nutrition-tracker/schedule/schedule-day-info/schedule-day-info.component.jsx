@@ -40,7 +40,8 @@ const ScheduleDayInfo = () => {
             {
               scheduledNutritionTrackedDaysView.micronutrients.map((micronutrient) => {
                 return (
-                  <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`${micronutrient.name} - ${micronutrient.amount} ${micronutrient.unit}`}</Typography>
+                  <Typography sx={{ display: "flex", justifyContent: "center" }} 
+                    variant="body1">{`${micronutrient.name} - ${micronutrient.amount} ${micronutrient.unit}`}</Typography>
                 )
               })
             }
