@@ -1,13 +1,27 @@
-import React, { Component, useContext, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 
 import { ReactComponent as AddMicronutrientsButton } from "../../../../assets/add-micronutrients.svg";
 import { ReactComponent as RemoveMicronutrientsButton } from "../../../../assets/close-button.svg";
 
 import FormInput from "../../../shared/form-input/form-input.component";
 
-import "./add-micronutrients.styles.scss";
+import "./add-micronutrients.styles.jsx";
+import { AddMicronutrientsButtonContainer,
+  MicronutrientContainer
+} from "./add-micronutrients.styles.jsx";
 
 import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
+import { Typography } from "@mui/material";
+import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js";
+
+const paperStyles = {
+  display: "flex",
+  justifyContent: "space-evenly",
+  alignItems: "center",
+  backgroundColor: COLOR_CODES.general["5"],
+  height: 100
+}
 
 const AddMicronutrients = () => {
   const { formInputMicronutrients, addFormInputMicronutrients,
@@ -50,41 +64,37 @@ const AddMicronutrients = () => {
   };
 
   return (
-    <div className="add-micronutrients-container">
-
-        <div className="add-micronutrients-button-container">
-          <h4>Add micronutrients</h4>
+    <Fragment>
+        <AddMicronutrientsButtonContainer>
+          <Typography variant="body1">Add micronutrients</Typography>
           
           <AddMicronutrientsButton onClick={ () => handleAdd() }
                 className="add-micronutrients-button">      
           </AddMicronutrientsButton>
-        </div>
+        </AddMicronutrientsButtonContainer>
 
         <div>
           {
             formInputMicronutrients.length !== 0 &&
             formInputMicronutrients.map((micronutrient, micronutrientIndex) => {
               return (
-                <div key={ micronutrientIndex } className="micronutrient-container">
-                  <FormInput label="Micronutrient" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
-                            name="name" value={ micronutrient.name }></FormInput>
-                  
-                  <FormInput label="Amount" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
-                            name="amount" value={ micronutrient.amount }></FormInput>
-
-                  <FormInput label="Unit" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
-                            name="unit" value={ micronutrient.unit }></FormInput>
-
+                <MicronutrientContainer key={ micronutrientIndex }>
                   <RemoveMicronutrientsButton onClick={ () => handleDelete(micronutrientIndex) }
                         className="remove-micronutrients-button"></RemoveMicronutrientsButton>
-                </div>
+                  <SimplePaper styles={ paperStyles }>
+                    <FormInput label="Micronutrient" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
+                              name="name" value={ micronutrient.name }></FormInput>
+                    <FormInput label="Amount" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
+                              name="amount" value={ micronutrient.amount }></FormInput>
+                    <FormInput label="Unit" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
+                              name="unit" value={ micronutrient.unit }></FormInput>
+                  </SimplePaper>
+                </MicronutrientContainer>
               );
             })
           }
       </div>
-
-
-    </div>
+    </Fragment>
   );
 };
 
