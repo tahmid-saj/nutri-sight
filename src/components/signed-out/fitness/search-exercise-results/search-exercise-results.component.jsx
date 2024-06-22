@@ -1,6 +1,7 @@
 import OutlinedCard from "../../../shared/mui/card/card.component"
 import SimplePaper from "../../../shared/mui/paper/paper.component"
-import "./search-exercise-results.styles.scss"
+import "./search-exercise-results.styles.jsx"
+import { FitnessSearchExerciseResults } from "./search-exercise-results.styles.jsx"
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants"
 import { Typography } from "@mui/material"
 import SearchExerciseResult from "../search-exercise-result/search-exercise-result.component"
@@ -8,9 +9,9 @@ import { FitnessContext } from "../../../../contexts/signed-out/fitness/fitness.
 import { useContext } from "react"
 
 const paperStyles = {
-  backgroundColor: COLOR_CODES.general["1"],
+  backgroundColor: COLOR_CODES.general["7"],
   overflow: "scroll",
-  height: "60rem",
+  height: "50rem",
   scrollbarColor: `${COLOR_CODES.scrollbar.scroll} ${COLOR_CODES.scrollbar.background}`,
   scrollbarWidth: "thin"
 }
@@ -19,9 +20,7 @@ const SearchExerciseResults = () => {
   const { exercisesSearchResults } = useContext(FitnessContext)
 
   return (
-    <div className="fitness-search-exercise-results">
-      <Typography variant="h6">Search results</Typography>
-
+    <FitnessSearchExerciseResults>
       <SimplePaper styles={ paperStyles }>
         {
           exercisesSearchResults.map((exerciseSearchResult) => {
@@ -31,7 +30,7 @@ const SearchExerciseResults = () => {
           }) 
         }
       </SimplePaper>
-    </div>
+    </FitnessSearchExerciseResults>
   )
 }
 

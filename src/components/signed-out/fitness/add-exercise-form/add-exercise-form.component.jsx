@@ -1,5 +1,6 @@
 import { Fragment, useContext, useState } from "react"
-import "./add-exercise-form.styles.scss"
+import "./add-exercise-form.styles.jsx"
+import { FitnessAddExerciseFormContainer, FitnessAddExerciseForm } from "./add-exercise-form.styles.jsx"
 import { Typography } from "@mui/material"
 import FormInput from "../../../shared/form-input/form-input.component"
 import { ButtonsContainer } from "../../../shared/button/button.styles"
@@ -52,13 +53,12 @@ const AddExerciseForm = () => {
   }
 
   return (
-    <div className="fitness-add-exercise-form-container">
-      <Typography variant="h6">Add exercise to the schedule</Typography>
-
+    <FitnessAddExerciseFormContainer>
       <SimplePaper styles={ paperStyles }>
+        <Typography sx={{ color: "black" }} variant="h6">Add exercise to the schedule</Typography>
         <AddExerciseFormInfo></AddExerciseFormInfo>
 
-        <form onSubmit={ handleSubmit } className="fitness-add-exercise-form">
+        <FitnessAddExerciseForm onSubmit={ handleSubmit }>
           <FormInput label="Scheduled date" type="date" required onChange={ handleChange }
               name="exerciseDate" value={ formFields.exerciseDate }></FormInput>
 
@@ -67,14 +67,20 @@ const AddExerciseForm = () => {
           
           <FormInput label="Reps" type="text" onChange={ handleChange }
               name="exerciseReps" value={ formFields.exerciseReps }></FormInput>
-          
-          <ButtonsContainer>
-              <Button type="submit">Add</Button>
-              <Button type="button" onClick={ resetFormFields }>Clear</Button>
-          </ButtonsContainer>
-        </form>
+
+          <div className="container">
+            <div className="row justify-content-evenly align-items-center">
+              <div className="col-sm-12 col-md-12 col-lg-12">
+                <Button type="submit">Add</Button>
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-12">
+                <Button type="button" onClick={ resetFormFields }>Clear</Button>
+              </div>
+            </div>
+          </div>
+        </FitnessAddExerciseForm>
       </SimplePaper>
-    </div>
+    </FitnessAddExerciseFormContainer>
   )
 }
 
