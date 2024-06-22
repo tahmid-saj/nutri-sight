@@ -1,4 +1,5 @@
-import "./schedule-day-info.styles.scss"
+import "./schedule-day-info.styles.jsx"
+import { CaloriesBurnedScheduleDayInfo } from "./schedule-day-info.styles.jsx"
 import { Typography, Divider } from "@mui/material"
 import { Fragment, useContext } from "react"
 import SimplePaper from "../../../../../shared/mui/paper/paper.component"
@@ -16,7 +17,7 @@ const ScheduleDayInfo = () => {
   if (!scheduledTrackedCaloriesBurnedView.length) return <Fragment/>
 
   return (
-    <div className="calories-burned-schedule-day-info">
+    <CaloriesBurnedScheduleDayInfo>
     {
       scheduledTrackedCaloriesBurnedView.map((trackedCaloriesBurned) => {
         return (
@@ -35,7 +36,7 @@ const ScheduleDayInfo = () => {
         )
       })
     }
-    </div>
+    </CaloriesBurnedScheduleDayInfo>
   )
 }
 

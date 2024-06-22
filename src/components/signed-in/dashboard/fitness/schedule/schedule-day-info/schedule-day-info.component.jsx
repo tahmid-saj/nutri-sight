@@ -1,4 +1,7 @@
-import "./schedule-day-info.styles.scss"
+import "./schedule-day-info.styles.jsx"
+import { FitnessScheduleDayInfoContainer,
+  FitnessScheduleDayInfo
+} from "./schedule-day-info.styles.jsx";
 import { useState, useContext, Fragment } from "react"
 import { Typography } from "@mui/material";
 
@@ -57,25 +60,26 @@ const ScheduleDayInfo = () => {
   }
 
   return (
-    <div className="fitness-schedule-day-info-container">
+    <FitnessScheduleDayInfoContainer>
       <Typography sx={{ display: "flex", marginLeft: "2%", color: COLOR_CODES.general["0"] }} 
         variant="h6">{`Exercises planned`}</Typography>
 
       <SimplePaper styles={ paperStyles }>
-        <div className="ag-theme-quartz-dark fitness-schedule-day-info" // applying the grid theme
-          style={{ height: 500, width: '100%' }} // the grid will fill the size of the parent container
-          >
-          <AgGridReact 
-            rowData={ rowData } 
-            columnDefs={ columnDefs } rowSelection={ "multiple" }/>
-            <ButtonsContainer>
-              <div className="unselect-exercise-button">
-                <Button type="button" onClick={ (e) => handleUnselect(e) }>Unselect</Button>
-              </div>
-            </ButtonsContainer>
-        </div>
+        <FitnessScheduleDayInfo>
+          <div className="ag-theme-quartz-dark" // applying the grid theme
+            style={{ height: 475, width: '100%' }} // the grid will fill the size of the parent container
+            >
+            <AgGridReact 
+              rowData={ rowData } 
+              columnDefs={ columnDefs } rowSelection={ "multiple" }/>
+          </div>
+        </FitnessScheduleDayInfo>
+
+        <ButtonsContainer>
+          <Button type="button" onClick={ (e) => handleUnselect(e) }>Unselect</Button>
+        </ButtonsContainer>
       </SimplePaper>
-    </div>
+    </FitnessScheduleDayInfoContainer>
   )
 }
 

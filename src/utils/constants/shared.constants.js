@@ -217,6 +217,12 @@ export const COMMON_SPACING = {
     width: 375,
     height: 600
   },
+  summaryInfoCard: {
+    width: 375
+  },
+  filter: {
+    width: 375
+  },
   pieChart: {
     width: 375,
     height: 375
@@ -228,5 +234,11 @@ export const COMMON_SPACING = {
   lineChart: {
     width: "100%",
     height: 400
+  },
+  table: {
+    width: "100%"
+  },
+  filterTable: {
+    height: 650
   }
 }

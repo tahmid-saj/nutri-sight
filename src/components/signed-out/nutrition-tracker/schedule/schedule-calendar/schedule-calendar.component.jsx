@@ -1,4 +1,5 @@
-import "./schedule-calendar.styles.scss"
+import "./schedule-calendar.styles.jsx"
+import { CalendarTodoList, NutritionTrackerCalendarContainer } from "./schedule-calendar.styles.jsx";
 import 'rsuite/Calendar/styles/index.css';
 import { Fragment, useContext, useState } from "react";
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
@@ -38,14 +39,14 @@ const ScheduleCalendar = () => {
 
       return (
         <Fragment>
-          <ul className="calendar-todo-list">
+          <CalendarTodoList>
             {displayList.map((item, index) => (
               <li key={index}>
                 <Badge /> <b>{`Calories: ${item.calories}`}</b>
               </li>
             ))}
             {moreCount ? `${moreCount} more` : null}
-          </ul>
+          </CalendarTodoList>
           {/* {moreCount} more */}
         </Fragment>
       );
@@ -61,11 +62,11 @@ const ScheduleCalendar = () => {
   }
 
   return (
-    <div className="nutrition-tracker-schedule-calendar-container" style={{ backgroundColor: COLOR_CODES.general["0"] }}>
+    <NutritionTrackerCalendarContainer>
       <Typography sx={{ display: "flex", marginLeft: "1%" }} 
         variant="h6">{`Nutrition tracker calendar`}</Typography>
       <Calendar bordered renderCell={ renderCell } onSelect={ onSelectDate } style={{ backgroundColor: COLOR_CODES.general["0"] }}/>
-    </div>
+    </NutritionTrackerCalendarContainer>
   )
 }
 

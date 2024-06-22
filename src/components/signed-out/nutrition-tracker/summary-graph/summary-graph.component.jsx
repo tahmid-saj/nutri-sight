@@ -1,13 +1,20 @@
 import { Fragment, useContext, useState, Component } from "react";
 import ReactApexChart from 'react-apexcharts'
 
-import "./summary-graph.styles.scss";
-
+import "./summary-graph.styles.jsx";
+import { SummaryGraphContainer } from "./summary-graph.styles.jsx";
 // import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import { useSelector } from "react-redux"
 import { selectNutritionTrackedDaysView } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
 
 import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants";
+import { Typography } from "@mui/material";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js";
+import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
+
+const paperStyles = {
+  backgroundColor: COLOR_CODES.general["1"]
+}
 
 const SummaryGraph = () => {
   // const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext);
@@ -89,12 +96,13 @@ const SummaryGraph = () => {
   };
 
   return (
-    <Fragment>
-      <h5>Consumption Timeline</h5>
-      <div className="summary-graph-container">
-        <ReactApexChart options={ options } series={ series } type="bar" height={ 350 } width={ 1000 }/>
-      </div>
-    </Fragment>
+    <SummaryGraphContainer>
+      <SimplePaper styles={ paperStyles }>
+        <Typography variant="body1">Consumption timeline</Typography>
+          <ReactApexChart options={ options } series={ series } type="bar" 
+            height={ COMMON_SPACING.barChart.height } width={ COMMON_SPACING.barChart.width }/>
+      </SimplePaper>
+    </SummaryGraphContainer>
   )
 }
 

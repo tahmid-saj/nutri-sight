@@ -1,4 +1,5 @@
-import "./nutrition-tracker-table.styles.scss"
+import "./nutrition-tracker-table.styles.jsx"
+import { FilterNutritionTrackerTableContainer, FilterButtonsContainer } from "./nutrition-tracker-table.styles.jsx";
 import { useContext, useState, useRef } from "react"
 
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
@@ -11,6 +12,15 @@ import { selectNutritionTrackedDaysView, selectNutritionTrackedDays } from "../.
 import { removeDayTracked, clearDayTrackedFilter } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
 
 import Button from "../../../shared/button/button.component";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js";
+import { Typography } from "@mui/material";
+import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
+
+const paperStyles = {
+  backgroundColor: COLOR_CODES.general["8"],
+  margin: "0% 2% 0% 2%",
+  height: COMMON_SPACING.filterTable.height
+}
 
 const NutritionTrackerTable = () => {
   const gridRef = useRef()
@@ -62,17 +72,29 @@ const NutritionTrackerTable = () => {
 
   return (
     // wrapping container with theme & size
-    <div className="ag-theme-quartz-dark filter-nutrition-tracker-table-container" // applying the grid theme
-      style={{ height: 700, width: '85%' }} // the grid will fill the size of the parent container
-      >
-      <h3>Filter or remove tracked date</h3>
+    <SimplePaper styles={ paperStyles }>
+      <Typography sx={{ color: COLOR_CODES.general["5"] }} variant="h6">Filter or remove tracked date</Typography>
+      <FilterNutritionTrackerTableContainer>
+        <div className="ag-theme-quartz-dark" // applying the grid theme
+          style={{ height: 475, width: COMMON_SPACING.table.width }} // the grid will fill the size of the parent container
+          >
 
-      <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
-      <div className="remove-tracked-date-selected-button">
-        <Button onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
-        <Button type="button" onClick={ onClearFilter }>Clear Filter</Button>
-      </div>
-    </div>
+          <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
+          <FilterButtonsContainer>
+            <div className="container">
+              <div className="row justify-content-left align-items-center">
+                <div className="col-sm-12 col-md-6 col-lg-6">
+                  <Button onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
+                </div>
+                <div className="col-sm-12 col-md-6 col-lg-6">
+                  <Button type="button" onClick={ onClearFilter }>Clear Filter</Button>
+                </div>
+              </div>
+            </div>
+          </FilterButtonsContainer>
+        </div>
+      </FilterNutritionTrackerTableContainer>
+    </SimplePaper>
   )
 }
 
