@@ -11,6 +11,7 @@ import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shar
 const outlinedCardStyles = {
   backgroundColor: COLOR_CODES.general["1"],
   width: COMMON_SPACING.exercisesInfoCard.width,
+  margin: "1%"
 }
 
 const UpcomingExercises = () => {
