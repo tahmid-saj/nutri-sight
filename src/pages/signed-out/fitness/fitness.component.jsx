@@ -7,9 +7,10 @@ import SearchExerciseResults from "../../../components/signed-out/fitness/search
 import "./fitness.styles.scss"
 import { useContext, Fragment } from "react"
 import { FitnessContext } from "../../../contexts/signed-out/fitness/fitness.context"
+import UpcomingExercises from "../../../components/signed-out/fitness/upcoming-exercises/upcoming-exercises.component"
 
 const Fitness = () => {
-  const { exercises, exercisesSearchResults } = useContext(FitnessContext)
+  const { exercises, exercisesSearchResults, upcomingExercisesView } = useContext(FitnessContext)
 
   console.log(exercises, exercisesSearchResults)
 
@@ -24,6 +25,11 @@ const Fitness = () => {
 
         <ScheduleDayInfo></ScheduleDayInfo>
       </div>
+
+      {
+        upcomingExercisesView.length !== 0 ?
+        <UpcomingExercises></UpcomingExercises> : null
+      }
 
       <br/>
       <Divider/>

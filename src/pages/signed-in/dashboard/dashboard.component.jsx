@@ -20,6 +20,7 @@ import ScheduleCalendarCaloriesBurned from "../../../components/signed-in/dashbo
 import ScheduleDayInfoCaloriesBurned from "../../../components/signed-in/dashboard/calories-burned/schedule/schedule-day-info/schedule-day-info.component"
 import ScheduleCalendarFitness from "../../../components/signed-in/dashboard/fitness/schedule/schedule-calendar/schedule-calendar.component"
 import ScheduleDayInfoFitness from "../../../components/signed-in/dashboard/fitness/schedule/schedule-day-info/schedule-day-info.component"
+import UpcomingExercises from "../../../components/signed-in/dashboard/fitness/upcoming-exercises/upcoming-exercises.component"
 import ItemTabs from "../../../components/shared/mui/tabs/tabs.component"
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -30,7 +31,7 @@ import { COMMON_SPACING } from "../../../utils/constants/shared.constants"
 const Dashboard = () => {
   const { nutritionTrackedDays, scheduledNutritionTrackedDaysView } = useContext(NutritionTrackerContext)
   const { trackedCaloriesBurned, scheduledTrackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
-  const { exercises, selectedSearchedExercise } = useContext(FitnessContext)
+  const { exercises, selectedSearchedExercise, upcomingExercisesView } = useContext(FitnessContext)
 
   let tabList = [
     {
@@ -110,6 +111,15 @@ const Dashboard = () => {
           <br/>
 
           <ScheduleDayInfoFitness></ScheduleDayInfoFitness>
+
+          <br/>
+          <Divider/>
+          <br/>
+
+          {
+            upcomingExercisesView.length !== 0 ?
+            <UpcomingExercises></UpcomingExercises> : null
+          }
         </Fragment>
       )
     })

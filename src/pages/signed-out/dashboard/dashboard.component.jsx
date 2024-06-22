@@ -25,6 +25,7 @@ import ScheduleCalendarCaloriesBurned from "../../../components/signed-out/dashb
 import ScheduleDayInfoCaloriesBurned from "../../../components/signed-out/dashboard/calories-burned/schedule/schedule-day-info/schedule-day-info.component"
 import ScheduleCalendarFitness from "../../../components/signed-out/dashboard/fitness/schedule/schedule-calendar/schedule-calendar.component"
 import ScheduleDayInfoFitness from "../../../components/signed-out/dashboard/fitness/schedule/schedule-day-info/schedule-day-info.component"
+import UpcomingExercises from "../../../components/signed-out/dashboard/fitness/upcoming-exercises/upcoming-exercises.component"
 import ItemTabs from "../../../components/shared/mui/tabs/tabs.component"
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -39,7 +40,7 @@ const Dashboard = () => {
   const selectedNutritionTrackedDay = useSelector(selectSelectedNutritionTrackedDay)
 
   const { trackedCaloriesBurned, scheduledTrackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
-  const { exercises } = useContext(FitnessContext)
+  const { exercises, upcomingExercisesView } = useContext(FitnessContext)
 
   // update scheduledNutritionTrackedDaysView when nutritionTrackedDays or selectedNutritionTrackedDay change
   useEffect(() => {
@@ -120,6 +121,15 @@ const Dashboard = () => {
           <br/>
 
           <ScheduleDayInfoFitness></ScheduleDayInfoFitness>
+
+          <br/>
+          <Divider/>
+          <br/>
+
+          {
+            upcomingExercisesView.length !== 0 ?
+            <UpcomingExercises></UpcomingExercises> : null
+          }
         </Fragment>
       )
     })
@@ -136,19 +146,19 @@ const Dashboard = () => {
       value: "calories-burned",
       children: (
         <Fragment>
-            <ScheduleCalendarCaloriesBurned></ScheduleCalendarCaloriesBurned>
-            {
-              scheduledTrackedCaloriesBurnedView ?
-              <ScheduleDayInfoCaloriesBurned></ScheduleDayInfoCaloriesBurned> : null
-            }
+          <ScheduleCalendarCaloriesBurned></ScheduleCalendarCaloriesBurned>
+          {
+            scheduledTrackedCaloriesBurnedView ?
+            <ScheduleDayInfoCaloriesBurned></ScheduleDayInfoCaloriesBurned> : null
+          }
 
-            <br/>
-            <Divider/>
-            <br/>
+          <br/>
+          <Divider/>
+          <br/>
 
-            <CaloriesBurnedSummary></CaloriesBurnedSummary>
-            <CaloriesBurnedGraphPie></CaloriesBurnedGraphPie>
-            <CaloriesBurnedGraph></CaloriesBurnedGraph>
+          <CaloriesBurnedSummary></CaloriesBurnedSummary>
+          <CaloriesBurnedGraphPie></CaloriesBurnedGraphPie>
+          <CaloriesBurnedGraph></CaloriesBurnedGraph>
         </Fragment>
       )
     })

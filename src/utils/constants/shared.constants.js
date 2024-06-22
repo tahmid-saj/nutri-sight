@@ -240,5 +240,8 @@ export const COMMON_SPACING = {
   },
   filterTable: {
     height: 650
+  },
+  exercisesInfoCard: {
+    width: 325
   }
 }

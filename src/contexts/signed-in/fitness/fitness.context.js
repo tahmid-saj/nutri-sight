@@ -95,6 +95,9 @@ export const FitnessContext = createContext({
   // exercisesView is the filtered version of exercises
   exercisesView: [],
 
+  // upcomingExercisesView is a list of all exercises in the next scheduled date from the current date
+  upcomingExercisesView: [],
+
   searchExercise: () => {},
   addExercise: () => {},
 
@@ -124,6 +127,7 @@ export const FitnessProvider = ({ children }) => {
   const [exercisesSearchResults, setExercisesSearchResults] = useState([])
   const [selectedSearchedExercise, setSelectedSearchedExercise] = useState(null)
   const [exercisesView, setExercisesView] = useState(exercises)
+  const [upcomingExercisesView, setUpcomingExercisesView] = useState([])
 
   const currentUser = useSelector(selectCurrentUser)
 
@@ -144,10 +148,29 @@ export const FitnessProvider = ({ children }) => {
     fetchExercisesData()
   }, [currentUser])
 
-  // update exercisesTagLimit when exercises change
+  // update exercisesTagLimit when exercises change and also update upcomingExercisesView
   // TODO: need to better manage tags
   useEffect(() => {
     setExercisesTagLimit(exercises.length)
+
+    let today = new Date()
+    today = today.toISOString().split('T')[0]
+
+    let firstScheduledNextDate;
+    exercises.map((exercise) => {
+      if (exercise.exerciseDate >= today) {
+        firstScheduledNextDate = exercise.exerciseDate
+      }
+    })
+
+    let newUpcomingExercises = []
+    exercises.map((exercise) => {
+      if (exercise.exerciseDate === firstScheduledNextDate) {
+        newUpcomingExercises.push(exercise)
+      }
+    })
+
+    setUpcomingExercisesView(newUpcomingExercises)
   }, [exercises])
 
   // update exercisesView when exercises or selectedScheduledExerciseDate change
@@ -209,7 +232,7 @@ export const FitnessProvider = ({ children }) => {
     putExercises(currentUser.uid, currentUser.email, exercises)
   }
 
-  const value = { exercises, exercisesSearchResults, exercisesView, selectedSearchedExercise,
+  const value = { exercises, exercisesSearchResults, exercisesView, selectedSearchedExercise, upcomingExercisesView,
     searchExercise, addExercise, 
     selectScheduledExercise, unselectScheduledExercise, selectSearchedExercises,
     removeExercise,
