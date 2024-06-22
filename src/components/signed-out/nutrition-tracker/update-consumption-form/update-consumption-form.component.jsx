@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 
-import "./update-consumption-form.styles.scss";
+import "./update-consumption-form.styles.jsx";
+import { UpdateConsumptionFormContainer, ConsumptionFormButtonContainer } from "./update-consumption-form.styles.jsx";
 
 import FormInput from "../../../shared/form-input/form-input.component";
 import Button from "../../../shared/button/button.component";
@@ -10,6 +11,9 @@ import AddMicronutrients from "../add-micronutrients/add-micronutrients.componen
 import { useDispatch, useSelector } from "react-redux"
 import { selectNutritionTrackedDays, selectFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector"
 import { addDayTracked, updateDayTracked, setFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
+import { Typography } from "@mui/material";
+import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js";
 
 const defaultFormFields = {
   dateTracked: "",
@@ -24,8 +28,15 @@ const UpdateConsumptionForm = () => {
   const dispatch = useDispatch()
   const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
   const formInputMicronutrients = useSelector(selectFormInputMicronutrients)
-
+  
   const [formFields, setFormFields] = useState(defaultFormFields);
+  
+  const paperStyles = {
+    backgroundColor: COLOR_CODES.general["1"],
+    display: "block",
+    justifyContent: "center",
+    alignItems: "center"
+  }
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -76,42 +87,51 @@ const UpdateConsumptionForm = () => {
   };
 
   return (
-    <div className="update-consumption-form-container">
-      <h2>Track some consumption</h2>
+    <UpdateConsumptionFormContainer micronutrientsAdded={ formInputMicronutrients.length !== 0 }>
+      <SimplePaper styles={ paperStyles }>
+        <Typography variant="h6">Track some consumption</Typography>
 
-      <form>
-        <h5>Date tracked</h5>
-        <FormInput type="date" required onChange={ handleChange }
-                    name="dateTracked" value={ formFields.dateTracked }></FormInput>
+        <form>
+          <Typography variant="body1">Date tracked</Typography>
+          <FormInput type="date" required onChange={ handleChange }
+                      name="dateTracked" value={ formFields.dateTracked }></FormInput>
 
-        <FormInput label="Total calories" type="text" required onChange={ handleChange }
-                            name="calories" value={ formFields.calories }></FormInput>
-        
-        <FormInput label="Total carbohydrates (g)" type="text" required onChange={ handleChange }
-                            name="carbohydrates" value={ formFields.carbohydrates }></FormInput>
-        
-        <FormInput label="Total protein (g)" type="text" required onChange={ handleChange }
-                            name="protein" value={ formFields.protein }></FormInput>
-        
-        <FormInput label="Total fat (g)" type="text" required onChange={ handleChange }
-                            name="fat" value={ formFields.fat }></FormInput>
-                            
-        <AddMicronutrients></AddMicronutrients>
+          <FormInput label="Total calories" type="text" required onChange={ handleChange }
+                              name="calories" value={ formFields.calories }></FormInput>
+          
+          <FormInput label="Total carbohydrates (g)" type="text" required onChange={ handleChange }
+                              name="carbohydrates" value={ formFields.carbohydrates }></FormInput>
+          
+          <FormInput label="Total protein (g)" type="text" required onChange={ handleChange }
+                              name="protein" value={ formFields.protein }></FormInput>
+          
+          <FormInput label="Total fat (g)" type="text" required onChange={ handleChange }
+                              name="fat" value={ formFields.fat }></FormInput>
+                              
+          <AddMicronutrients></AddMicronutrients>
 
-        <div className="tracked-day-buttons-container">
-          <button className="tracked-day-button" type="button"
-                  onClick={ handleAddTrackedDay }>Add Day</button>
-          {
-            nutritionTrackedDays.length !== 0 &&
-            <button className="tracked-day-button" type="submit"
-                    onClick={ handleUpdateTrackedDay }>Update</button>
-          }
-        </div>
+            <div className="container">
+              <div className="row justify-content-evenly align-items-center">
+                <div className="col-sm-12 col-md-12 col-lg-12">
+                  <ConsumptionFormButtonContainer>
+                    <Button type="button" onClick={ handleAddTrackedDay }>Add Day</Button>
+                  </ConsumptionFormButtonContainer>
+                </div>
 
-      </form>
-
+                <div className="col-sm-12 col-md-12 col-lg-12">
+                  {
+                    nutritionTrackedDays.length !== 0 &&
+                    <ConsumptionFormButtonContainer>
+                      <Button type="submit" onClick={ handleUpdateTrackedDay }>Update Day</Button>
+                    </ConsumptionFormButtonContainer>
+                  }
+                </div>
+              </div>
+            </div>
+        </form>
+      </SimplePaper>
       
-    </div>
+    </UpdateConsumptionFormContainer>
   );
 };
 
