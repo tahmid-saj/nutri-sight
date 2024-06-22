@@ -73,7 +73,7 @@ export default function HiddenDrawer() {
   };
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 250, marginTop: "40px" }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         { navLinksHeaders.section1.map(({ header, path }, index) => (
           <Link to={ `${path}` }>
@@ -152,13 +152,13 @@ export default function HiddenDrawer() {
 
   return (
     <div className="nutrition-tracker-app-bar">
-      <Button sx={{ position: "fixed", top: "0", width: "100%", justifyContent: "left", 
-        backgroundColor: COLOR_CODES.general["9"] 
-        }}
+      <Button sx={{ position: "fixed", width: "100%", justifyContent: "left", top: "0", zIndex: "9999", overflow: "hidden",
+        backgroundColor: COLOR_CODES.general["9"] }}
         onClick={toggleDrawer(true)}>
         <div className='nutrition-tracker-title'>
           <MenuIcon/>
-          <Typography sx={{ marginLeft: "10px", color: COLOR_CODES.general["0"] }} variant="h6">
+          <Typography sx={{ marginLeft: "10px", color: COLOR_CODES.general["0"], textTransform: "capitalize" }} 
+            variant="h6">
             Nutrition Tracker
           </Typography>
           {

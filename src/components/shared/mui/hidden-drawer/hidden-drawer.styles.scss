@@ -10,4 +10,6 @@ ion-icon {
 
 .nutrition-tracker-app-bar {
   cursor: pointer;
+  z-index: 9999;
+  overflow: "hidden";
 }

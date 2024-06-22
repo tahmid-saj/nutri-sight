@@ -1,4 +1,5 @@
-import "./schedule-calendar.styles.scss"
+import "./schedule-calendar.styles.jsx"
+import { CalendarTodoList, FitnessScheduleCalendarContainer } from "./schedule-calendar.styles.jsx";
 import 'rsuite/Calendar/styles/index.css';
 import { Fragment, useContext, useState } from "react";
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
@@ -7,7 +8,6 @@ import { FitnessContext } from "../../../../../../contexts/signed-in/fitness/fit
 import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants";
 
 function getScheduledData(date, exercises) {
-  // const day = date.getDate();
   date = date.toISOString().split('T')[0]
 
   let scheduledExercisesForDate = []
@@ -35,14 +35,14 @@ const ScheduleCalendar = () => {
 
       return (
         <Fragment>
-          <ul className="calendar-todo-list">
+          <CalendarTodoList>
             {displayList.map((item, index) => (
               <li key={index}>
                 <Badge /> <b>{item.type}</b> - {item.name}
               </li>
             ))}
             {moreCount ? `${moreCount} more` : null}
-          </ul>
+          </CalendarTodoList>
           {/* {moreCount} more */}
         </Fragment>
       );
@@ -58,11 +58,11 @@ const ScheduleCalendar = () => {
   }
 
   return (
-    <div className="fitness-schedule-calendar-container" style={{ backgroundColor: COLOR_CODES.general["0"] }}>
+    <FitnessScheduleCalendarContainer>
       <Typography sx={{ display: "flex", marginLeft: "1%" }} 
         variant="h6">{`Exercises calendar`}</Typography>
       <Calendar bordered renderCell={ renderCell } onSelect={ onSelectDate } style={{ backgroundColor: COLOR_CODES.general["0"] }}/>
-    </div>
+    </FitnessScheduleCalendarContainer>
   )
 }
 

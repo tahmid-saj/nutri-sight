@@ -1,4 +1,5 @@
-import "./schedule-day-info.styles.scss"
+import "./schedule-day-info.styles.jsx"
+import { NutritionTrackerScheduleDayInfo } from "./schedule-day-info.styles.jsx"
 import { useSelector } from "react-redux"
 import { selectScheduledNutritionTrackedDaysView } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector"
 import { Typography, Divider } from "@mui/material"
@@ -15,7 +16,7 @@ const ScheduleDayInfo = () => {
   const scheduledNutritionTrackedDaysView = useSelector(selectScheduledNutritionTrackedDaysView)
 
   return (
-    <div className="nutrition-tracker-schedule-day-info">
+    <NutritionTrackerScheduleDayInfo>
       <SimplePaper styles={ paperStyles }>
         <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">{`${scheduledNutritionTrackedDaysView.dateTracked}`}</Typography>
         <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Calories - ${scheduledNutritionTrackedDaysView.calories}`}</Typography>
@@ -48,7 +49,7 @@ const ScheduleDayInfo = () => {
           </Fragment> : null
         }
       </SimplePaper>
-    </div>
+    </NutritionTrackerScheduleDayInfo>
   )
 }
 

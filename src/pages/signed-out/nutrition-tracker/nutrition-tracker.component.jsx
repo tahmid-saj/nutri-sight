@@ -2,7 +2,8 @@ import React, { Component, useEffect, Fragment } from "react";
 
 import Summary from "../../../components/signed-out/nutrition-tracker/summary/summary.component";
 
-import "./nutrition-tracker.styles.scss";
+import "./nutrition-tracker.styles.jsx";
+import { NutritionTrackerContainer, UpdateConsumptionContainer } from "./nutrition-tracker.styles";
 import SearchDays from "../../../components/signed-out/nutrition-tracker/search-days/search-days.component";
 import UpdateConsumptionForm from "../../../components/signed-out/nutrition-tracker/update-consumption-form/update-consumption-form.component";
 import ConsumptionInfo from "../../../components/signed-out/nutrition-tracker/consumption-info/consumption-info.component";
@@ -21,6 +22,13 @@ import { calculateSummary } from "../../../utils/calculations/nutrition-tracker.
 import ScheduleCalendar from "../../../components/signed-out/nutrition-tracker/schedule/schedule-calendar/schedule-calendar.component";
 import { Divider } from "rsuite";
 import ScheduleDayInfo from "../../../components/signed-out/nutrition-tracker/schedule/schedule-day-info/schedule-day-info.component";
+import { Typography } from "@mui/material";
+
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import EditIcon from '@mui/icons-material/Edit';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import ItemTabs from "../../../components/shared/mui/tabs/tabs.component";
+
 
 const NutritionTracker = () => {
   // const { nutritionTrackedDays } = useContext(NutritionTrackerContext);
@@ -68,8 +76,48 @@ const NutritionTracker = () => {
     }
   }, [nutritionTrackedDays, selectedNutritionTrackedDay, dispatch])
 
+  let tabList = []
+  let panelList = []
+  
+  if (nutritionTrackedDays && nutritionTrackedDays.length !== 0) {
+    tabList.push({
+      value: "summary",
+      icon: <SummarizeIcon/>,
+      label: "Summary"
+    })
+    tabList.push({
+      value: "filter",
+      icon: <FilterAltIcon/>,
+      label: "Filter"
+    })
+    
+    panelList.push({
+      value: "summary",
+      children: <Summary/>
+    })
+    panelList.push({
+      value: "filter",
+      children: <TopSearch/>
+    })
+  }
+
+  tabList.push({
+    value: "edit",
+    icon: <EditIcon/>,
+    label: "Edit"
+  })
+
+  panelList.push({
+    value: "edit",
+    children: (
+      <UpdateConsumptionContainer>
+        <UpdateConsumptionForm></UpdateConsumptionForm>
+      </UpdateConsumptionContainer>
+    )
+  })
+
   return (
-    <div className="nutrition-tracker-container">
+    <NutritionTrackerContainer>
       <ScheduleCalendar></ScheduleCalendar>
       {
         scheduledNutritionTrackedDaysView ?
@@ -77,28 +125,36 @@ const NutritionTracker = () => {
       }
 
       <br/>
-      <Divider/>
-      <br/>
 
-      {
-        nutritionTrackedDays && nutritionTrackedDays.length !== 0 &&
-        <Fragment>
-        <h2 className="nutrition-tracker-summary-header">Summary</h2>
-          <TopSearch></TopSearch>
+      <ItemTabs tabList={ tabList } panelList={ panelList }></ItemTabs>
+    </NutritionTrackerContainer>
+  )
 
-          <div className="form-view-separator-container">
-            <hr className="rounded"/>
-          </div>
-        </Fragment>
-      }
+  // return (
+  //   <NutritionTrackerContainer>
+  //     <ScheduleCalendar></ScheduleCalendar>
+  //     {
+  //       scheduledNutritionTrackedDaysView ?
+  //       <ScheduleDayInfo></ScheduleDayInfo> : null
+  //     }
 
-      <div className="update-consumption-container">
-        <UpdateConsumptionForm></UpdateConsumptionForm>
-      </div>
+  //     <br/>
+  //     <Divider/>
+  //     <br/>
 
-    </div>
-  );
-  // };
+  //     {
+  //       nutritionTrackedDays && nutritionTrackedDays.length !== 0 &&
+  //       <Fragment>
+  //         <TopSearch></TopSearch>
+  //       </Fragment>
+  //     }
+
+  //     <UpdateConsumptionContainer>
+  //       <UpdateConsumptionForm></UpdateConsumptionForm>
+  //     </UpdateConsumptionContainer>
+
+  //   </NutritionTrackerContainer>
+  // );
 };
 
 export default NutritionTracker;
