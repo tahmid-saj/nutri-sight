@@ -1,12 +1,13 @@
 import OutlinedCard from "../../../shared/mui/card/card.component"
 import { Typography } from "@mui/material"
-import "./search-exercise-result.styles.scss"
+import "./search-exercise-result.styles.jsx"
+import { FitnessSearchResultInfo } from "./search-exercise-result.styles.jsx"
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants"
 import { useContext } from "react"
 import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context"
 
 const outlinedCardStyles = {
-  backgroundColor: COLOR_CODES.general["5"]
+  backgroundColor: COLOR_CODES.general["0"]
 }
 
 const SearchExerciseResult = ({ exerciseSearchResult }) => {
@@ -20,7 +21,7 @@ const SearchExerciseResult = ({ exerciseSearchResult }) => {
 
   return (
     <OutlinedCard styles={ outlinedCardStyles }>
-      <div className="fitness-search-result-info" onClick={ handleClick }>
+      <FitnessSearchResultInfo onClick={ handleClick }>
         <Typography sx={{ display: "flex" }} 
           variant="body1">{`${exerciseSearchResult.exerciseName}`}</Typography>
 
@@ -35,7 +36,7 @@ const SearchExerciseResult = ({ exerciseSearchResult }) => {
 
         <Typography sx={{ display: "flex" }} 
           variant="body2">{`Difficulty: ${exerciseSearchResult.exerciseDifficulty}`}</Typography>
-      </div>
+      </FitnessSearchResultInfo>
     </OutlinedCard>
   )
 }

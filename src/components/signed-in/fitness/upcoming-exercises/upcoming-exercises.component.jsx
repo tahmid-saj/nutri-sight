@@ -3,7 +3,7 @@ import { UpcomingExercisesContainer, UpcomingExercisesScheduled,
   UpcomingExerciseContainer 
 } from "./upcoming-exercises.styles.jsx"
 import { Fragment, useContext } from "react"
-import { FitnessContext } from "../../../../contexts/signed-out/fitness/fitness.context.js"
+import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context.js"
 import OutlinedCard from "../../../shared/mui/card/card.component.jsx"
 import { Divider, Typography } from "@mui/material"
 import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js"
