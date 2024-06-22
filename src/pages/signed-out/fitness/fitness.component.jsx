@@ -14,6 +14,8 @@ import UpcomingExercises from "../../../components/signed-out/fitness/upcoming-e
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import AddIcon from '@mui/icons-material/Add';
 import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.jsx"
+import { Typography } from "@mui/material"
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.js"
 
 const Fitness = () => {
   const { exercises, exercisesSearchResults, upcomingExercisesView } = useContext(FitnessContext)
@@ -37,15 +39,22 @@ const Fitness = () => {
         <Divider/>
         <br/>
 
-        <FitnessSearchAddContainer>
-          {
-            exercisesSearchResults.length !== 0 ?
-            <Fragment>
-              <SearchExerciseResults></SearchExerciseResults>
-              <AddExerciseForm></AddExerciseForm>
-            </Fragment> : null
-          }
-        </FitnessSearchAddContainer>
+        {
+          exercisesSearchResults.length !== 0 ?
+          <FitnessSearchAddContainer>
+            <div className="container">
+              <Typography sx={{ display: "flex", justifyContent: "left", color: COLOR_CODES.general["0"] }} variant="h6">Search results</Typography>
+              <div className="row">
+                <div className="col-sm-12 col-md-6 col-lg-6">
+                  <SearchExerciseResults></SearchExerciseResults>
+                </div>
+                <div className="col-sm-12 col-md-6 col-lg-6">
+                  <AddExerciseForm></AddExerciseForm>
+                </div>
+              </div>
+            </div>
+          </FitnessSearchAddContainer> : null
+        }
       </Fragment>
     )
   })

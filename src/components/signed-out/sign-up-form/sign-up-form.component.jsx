@@ -68,7 +68,7 @@ const SignUpForm = () => {
 
   return (
     <SignUpContainer>
-      <Typography sx={{ color: COLOR_CODES.general["6"] }} variant="h6">Sign up</Typography>
+      <Typography sx={{ color: COLOR_CODES.general["0"] }} variant="h6">Sign up</Typography>
 
       <form onSubmit={ handleSubmit }>
         <FormInput label="Display name" type="text" required onChange={ handleChange }

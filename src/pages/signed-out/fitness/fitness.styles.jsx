@@ -14,6 +14,7 @@ export const FitnessScheduleContainer = styled.div`
 
 export const FitnessSearchAddContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: top;
+  margin-top: 1%;
 `
