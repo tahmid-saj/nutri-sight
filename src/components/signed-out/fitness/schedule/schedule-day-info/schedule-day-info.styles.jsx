@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FitnessScheduleDayInfoContainer = styled.div`
-  margin: 0% 0% 2% 0%;
+  margin: 0% 1% 2% 1%;
 `
 
 export const FitnessScheduleDayInfo = styled.div`

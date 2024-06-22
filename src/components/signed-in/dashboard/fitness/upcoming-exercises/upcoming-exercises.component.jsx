@@ -10,7 +10,7 @@ import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shar
 
 const outlinedCardStyles = {
   backgroundColor: COLOR_CODES.general["1"],
-  width: COMMON_SPACING.summaryInfoCard.width,
+  width: COMMON_SPACING.exercisesInfoCard.width,
 }
 
 const UpcomingExercises = () => {
@@ -29,7 +29,7 @@ const UpcomingExercises = () => {
             {
               upcomingExercisesView.map((upcomingExercise, index) => {
                 return (
-                  <div className="col-sm-12 col-md-4 col-lg-3">
+                  <div className="col-sm-12 col-md-4 col-lg-4">
                     <OutlinedCard styles={ outlinedCardStyles }>
                       <UpcomingExerciseContainer key={ index }>
                         <Typography sx={{ display: "flex", justifyContent: "center" }} 

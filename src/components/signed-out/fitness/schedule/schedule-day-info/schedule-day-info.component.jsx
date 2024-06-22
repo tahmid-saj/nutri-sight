@@ -1,4 +1,7 @@
-import "./schedule-day-info.styles.scss"
+import "./schedule-day-info.styles.jsx"
+import { FitnessScheduleDayInfoContainer,
+  FitnessScheduleDayInfo
+} from "./schedule-day-info.styles.jsx";
 import { useState, useContext, useRef, Fragment } from "react"
 import { Typography } from "@mui/material";
 
@@ -9,12 +12,12 @@ import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied
 import Button from "../../../../shared/button/button.component";
 import { ButtonsContainer } from "../../../../shared/button/button.styles";
 import SimplePaper from "../../../../shared/mui/paper/paper.component";
-import { COLOR_CODES } from "../../../../../utils/constants/shared.constants";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants";
 import { FitnessContext } from "../../../../../contexts/signed-out/fitness/fitness.context";
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["8"],
-  height: 600
+  height: COMMON_SPACING.calendarDayInfo.height,
 }
 
 const ScheduleDayInfo = () => {
@@ -71,28 +74,26 @@ const ScheduleDayInfo = () => {
   }
 
   return (
-    <div className="fitness-schedule-day-info-container">
-      <Typography sx={{ display: "flex", marginLeft: "2%" }} 
+    <FitnessScheduleDayInfoContainer>
+      <Typography sx={{ display: "flex", marginLeft: "2%", color: COLOR_CODES.general["0"] }} 
         variant="h6">{`Exercises planned`}</Typography>
 
       <SimplePaper styles={ paperStyles }>
-        <div className="ag-theme-quartz-dark fitness-schedule-day-info" // applying the grid theme
-          style={{ height: 500, width: '100%' }} // the grid will fill the size of the parent container
-          >
-          <AgGridReact 
-            rowData={ rowData } 
-            columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "multiple" }/>
-            <ButtonsContainer>
-              <div className="remove-exercise-selected-button">
-                <Button type="button" onClick={ (e) => onRemoveSelected(e) }>Remove</Button>
-              </div>
-              <div className="unselect-exercise-button">
-                <Button type="button" onClick={ (e) => handleUnselect(e) }>Unselect</Button>
-              </div>
-            </ButtonsContainer>
-        </div>
+        <FitnessScheduleDayInfo>
+          <div className="ag-theme-quartz-dark" // applying the grid theme
+            style={{ height: 475, width: '100%' }} // the grid will fill the size of the parent container
+            >
+            <AgGridReact 
+              rowData={ rowData } 
+              columnDefs={ columnDefs } rowSelection={ "multiple" }/>
+          </div>
+        </FitnessScheduleDayInfo>
+
+        <ButtonsContainer>
+          <Button type="button" onClick={ (e) => handleUnselect(e) }>Unselect</Button>
+        </ButtonsContainer>
       </SimplePaper>
-    </div>
+    </FitnessScheduleDayInfoContainer>
   )
 }
 
