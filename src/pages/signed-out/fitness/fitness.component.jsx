@@ -4,19 +4,68 @@ import ScheduleCalendar from "../../../components/signed-out/fitness/schedule/sc
 import ScheduleDayInfo from "../../../components/signed-out/fitness/schedule/schedule-day-info/schedule-day-info.component"
 import SearchExerciseForm from "../../../components/signed-out/fitness/search-exercise-form/search-exercise-form.component"
 import SearchExerciseResults from "../../../components/signed-out/fitness/search-exercise-results/search-exercise-results.component"
-import "./fitness.styles.scss"
+import "./fitness.styles.jsx"
+import { FitnessContainer, FitnessScheduleContainer,
+  FitnessSearchAddContainer
+} from "./fitness.styles.jsx"
 import { useContext, Fragment } from "react"
 import { FitnessContext } from "../../../contexts/signed-out/fitness/fitness.context"
 import UpcomingExercises from "../../../components/signed-out/fitness/upcoming-exercises/upcoming-exercises.component"
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import AddIcon from '@mui/icons-material/Add';
+import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.jsx"
 
 const Fitness = () => {
   const { exercises, exercisesSearchResults, upcomingExercisesView } = useContext(FitnessContext)
 
-  console.log(exercises, exercisesSearchResults)
+  let tabList = []
+  let panelList = []
+
+  tabList.push({
+    value: "add-exercise",
+    icon: <AddIcon/>,
+    label: "Add Exercise"
+  })
+
+  panelList.push({
+    value: "add-exercise",
+    children: (
+      <Fragment>
+        <SearchExerciseForm></SearchExerciseForm>
+
+        <br/>
+        <Divider/>
+        <br/>
+
+        <FitnessSearchAddContainer>
+          {
+            exercisesSearchResults.length !== 0 ?
+            <Fragment>
+              <SearchExerciseResults></SearchExerciseResults>
+              <AddExerciseForm></AddExerciseForm>
+            </Fragment> : null
+          }
+        </FitnessSearchAddContainer>
+      </Fragment>
+    )
+  })
+
+  if (upcomingExercisesView.length !== 0) {
+    tabList.push({
+      value: "upcoming-exercises",
+      icon: <NotificationsActiveIcon/>,
+      label: "Upcoming Exercises"
+    })
+
+    panelList.push({
+      value: "upcoming-exercises",
+      children: <UpcomingExercises/>
+    })
+  }
 
   return (
-    <div className="fitness-container">
-      <div className="fitness-schedule-container">
+    <FitnessContainer>
+      <FitnessScheduleContainer>
         <ScheduleCalendar></ScheduleCalendar>
 
         <br/>
@@ -24,34 +73,50 @@ const Fitness = () => {
         <br/>
 
         <ScheduleDayInfo></ScheduleDayInfo>
-      </div>
+      </FitnessScheduleContainer>
 
-      {
-        upcomingExercisesView.length !== 0 ?
-        <UpcomingExercises></UpcomingExercises> : null
-      }
-
-      <br/>
-      <Divider/>
-      <br/>
-
-      <SearchExerciseForm></SearchExerciseForm>
-
-      <br/>
-      <Divider/>
-      <br/>
-
-      <div className="fitness-search-add-container">
-        {
-          exercisesSearchResults.length !== 0 ?
-          <Fragment>
-            <SearchExerciseResults></SearchExerciseResults>
-            <AddExerciseForm></AddExerciseForm>
-          </Fragment> : null
-        }
-      </div>
-    </div>
+      <ItemTabs tabList={ tabList } panelList={ panelList }></ItemTabs>
+    </FitnessContainer>
   )
+
+  // return (
+  //   <FitnessContainer>
+  //     <FitnessScheduleContainer>
+  //       <ScheduleCalendar></ScheduleCalendar>
+
+  //       <br/>
+  //       <Divider/>
+  //       <br/>
+
+  //       <ScheduleDayInfo></ScheduleDayInfo>
+  //     </FitnessScheduleContainer>
+
+  //     {
+  //       upcomingExercisesView.length !== 0 ?
+  //       <UpcomingExercises></UpcomingExercises> : null
+  //     }
+
+  //     <br/>
+  //     <Divider/>
+  //     <br/>
+
+  //     <SearchExerciseForm></SearchExerciseForm>
+
+  //     <br/>
+  //     <Divider/>
+  //     <br/>
+
+  //     <FitnessSearchAddContainer>
+  //       {
+  //         exercisesSearchResults.length !== 0 ?
+  //         <Fragment>
+  //           <SearchExerciseResults></SearchExerciseResults>
+  //           <AddExerciseForm></AddExerciseForm>
+  //         </Fragment> : null
+  //       }
+  //     </FitnessSearchAddContainer>
+  //   </FitnessContainer>
+  // )
 }
 
 export default Fitness

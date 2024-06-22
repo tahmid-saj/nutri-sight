@@ -29,7 +29,7 @@ const UpcomingExercises = () => {
             {
               upcomingExercisesView.map((upcomingExercise, index) => {
                 return (
-                  <div className="col-sm-12 col-md-4 col-lg-3">
+                  <div className="col-sm-12 col-md-4 col-lg-4">
                     <OutlinedCard styles={ outlinedCardStyles }>
                       <UpcomingExerciseContainer key={ index }>
                         <Typography sx={{ display: "flex", justifyContent: "center" }} 

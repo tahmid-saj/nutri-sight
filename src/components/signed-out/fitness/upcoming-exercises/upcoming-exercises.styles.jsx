@@ -16,5 +16,4 @@ export const UpcomingExerciseContainer = styled.div`
   display: block;
   align-items: center;
   justify-content: center;
-  padding: 2%;
 `
