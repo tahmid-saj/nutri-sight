@@ -4,7 +4,7 @@ export const FilterNutritionTrackerTableContainer = styled.div`
   display: block;
   justify-content: center;
   align-items: center;
-  margin: 0% 0% 3% 0%;
+  margin: 0% 0% 4% 0%;
   padding: 2%;
 `
 
