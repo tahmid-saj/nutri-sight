@@ -1,9 +1,17 @@
-import "./calories-burned-graph-line.styles.scss"
+import "./calories-burned-graph-line.styles.jsx"
+import { CaloriesBurnedLineGraphContainer } from "./calories-burned-graph-line.styles.jsx"
 import ReactApexChart from "react-apexcharts"
 import { useContext } from "react"
 import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context"
 
 import { GRAPH_FIELDS } from "../../../../../utils/constants/calories-burned.constants"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx"
+import { Typography } from "@mui/material"
+
+const paperStyles = {
+  backgroundColor: COLOR_CODES.general["1"]
+}
 
 const CaloriesBurnedGraphLine = () => {
   const { trackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
@@ -25,7 +33,7 @@ const CaloriesBurnedGraphLine = () => {
   const options = {
     chart: {
       type: 'area',
-      height: 500,
+      height: COMMON_SPACING.lineChart.height,
       zoom: {
         enabled: true
       }
@@ -57,9 +65,14 @@ const CaloriesBurnedGraphLine = () => {
   };
 
   return (
-    <div className="calories-burned-graph-line-container">
-      <ReactApexChart options={ options } series={ series } type="area" height={ 500 } width={ 800 }/>
-    </div>
+    <CaloriesBurnedLineGraphContainer>
+      <Typography sx={{ display: "flex", justifyContent: "center", color: COLOR_CODES.general["0"], marginBottom: "2%" }} 
+        variant="h6">Filtered results</Typography>
+      <SimplePaper styles={ paperStyles }>
+        <ReactApexChart options={ options } series={ series } type="area" 
+          height={ COMMON_SPACING.lineChart.height } width={ COMMON_SPACING.lineChart.width }/>
+      </SimplePaper>
+    </CaloriesBurnedLineGraphContainer>
   )
 }
 

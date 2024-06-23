@@ -1,4 +1,5 @@
-import "./calories-burned-table.styles.scss"
+import "./calories-burned-table.styles.jsx"
+import { FilterCaloriesBurnedActivitiesTableContainer, FilterCaloriesBurnedActivitiesTable } from "./calories-burned-table.styles.jsx";
 import { useContext, useState, useRef } from "react"
 
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
@@ -7,6 +8,15 @@ import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied
 
 import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context";
 import Button from "../../../../shared/button/button.component";
+
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js";
+import { Typography } from "@mui/material";
+import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx";
+
+const paperStyles = {
+  backgroundColor: COLOR_CODES.general["8"],
+  padding: "2%",
+}
 
 const CaloriesBurnedTable = () => {
   const gridRef = useRef()
@@ -47,17 +57,28 @@ const CaloriesBurnedTable = () => {
 
   return (
     // wrapping container with theme & size
-    <div className="ag-theme-quartz-dark filter-calories-burned-activities-table-container" // applying the grid theme
-      style={{ height: 700, width: '65%' }} // the grid will fill the size of the parent container
-      >
-      <h3>Filter or remove activity</h3>
+    <FilterCaloriesBurnedActivitiesTableContainer>
+      <Typography sx={{ color: COLOR_CODES.general["0"], marginLeft: "2%" }} variant="h6">Filter or remove activity</Typography>
+      <SimplePaper styles={ paperStyles }>
+        <FilterCaloriesBurnedActivitiesTable>
+          <div className="ag-theme-quartz-dark"
+            style={{ height: COMMON_SPACING.table.height, width: COMMON_SPACING.table.width }}>
+            <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
+          </div>
+        </FilterCaloriesBurnedActivitiesTable>
 
-      <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
-      <div className="remove-activity-selected-button">
-        <Button onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
-        <Button type="button" onClick={ clearActivityDatesFilter }>Clear Filter</Button>
-      </div>
-    </div>
+        <div className="container">
+          <div className="row justify-content-evenly align-items-center">
+            <div className="col-sm-12 col-md-6 col-lg-6">
+              <Button onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-6">
+              <Button type="button" onClick={ clearActivityDatesFilter }>Clear Filter</Button>
+            </div>
+          </div>
+        </div>
+      </SimplePaper>
+    </FilterCaloriesBurnedActivitiesTableContainer>
   )
 }
 

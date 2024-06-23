@@ -1,7 +1,16 @@
-import "./calories-burned-graph-pie.styles.scss"
+import "./calories-burned-graph-pie.styles.jsx"
+import { CaloriesBurnedPieGraphContainer } from "./calories-burned-graph-pie.styles.jsx"
 import { useContext } from "react"
 import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context"
 import ReactApexChart from 'react-apexcharts'
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx"
+import { Typography } from "@mui/material"
+
+const paperStyles = {
+  backgroundColor: COLOR_CODES.general["1"],
+  margin: "2%",
+}
 
 const CaloriesBurnedGraphPie = () => {
   const { trackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
@@ -20,15 +29,11 @@ const CaloriesBurnedGraphPie = () => {
   const options = {
     chart: {
       type: 'donut',
-      height: 600,
     },
     labels: [ ...trackedCalories.keys() ],
     responsive: [{
       breakpoint: 50,
       options: {
-        chart: {
-          height: 600
-        },
         legend: {
           position: 'bottom'
         }
@@ -37,9 +42,13 @@ const CaloriesBurnedGraphPie = () => {
   }
   
   return (
-    <div className="calories-burned-graph-pie-container">
-      <ReactApexChart options={ options } series={ series } type="donut" height={ 600 } width={ 500 }/>
-    </div>
+    <CaloriesBurnedPieGraphContainer>
+      <SimplePaper styles={ paperStyles }>
+        <Typography sx={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "4%" }} variant="h6">Tracked activities</Typography>
+        <ReactApexChart options={ options } series={ series } type="donut" 
+          height={ COMMON_SPACING.pieChart.height } width={ COMMON_SPACING.pieChart.width }/>
+      </SimplePaper>
+    </CaloriesBurnedPieGraphContainer>
   )
 }
 
