@@ -236,7 +236,8 @@ export const COMMON_SPACING = {
     height: 400
   },
   table: {
-    width: "100%"
+    width: "100%",
+    height: 400
   },
   filterTable: {
     height: 650

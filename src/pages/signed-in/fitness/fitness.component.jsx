@@ -84,6 +84,8 @@ const Fitness = () => {
         <ScheduleDayInfo></ScheduleDayInfo>
       </FitnessScheduleContainer>
 
+      <br/>
+
       <ItemTabs tabList={ tabList } panelList={ panelList }></ItemTabs>
     </FitnessContainer>
   )

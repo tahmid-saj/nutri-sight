@@ -82,7 +82,8 @@ const UpdateConsumptionForm = () => {
     <UpdateConsumptionFormContainer micronutrientsAdded={ formInputMicronutrients.length !== 0 }>
       <SimplePaper styles={ paperStyles }>
         <Typography variant="h6">Track some consumption</Typography>
-
+        <Typography sx={{ marginBottom: "6%" }} 
+          variant="body1">Start by adding the consumption of calories, carbohydrates, protein and fat for a specific day</Typography>
         <form>
           <Typography variant="body1">Date tracked</Typography>
           <FormInput type="date" required onChange={ handleChange }

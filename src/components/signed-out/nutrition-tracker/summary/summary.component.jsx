@@ -6,7 +6,7 @@ import { NutritionTrackerSummary } from "./summary.styles.jsx";
 // import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import { useSelector } from "react-redux"
 import { selectNutritionTrackedDaysSummary } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
-import { Typography } from "@mui/material";
+import { Typography, Divider } from "@mui/material";
 
 import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
 import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js";
@@ -30,6 +30,10 @@ const Summary = () => {
     <NutritionTrackerSummary>
       <SimplePaper styles={ paperStyles }>
         <Typography variant="h6">{`As of ${currentDate}`}</Typography>
+
+        <br/>
+        <Divider/>
+        <br/>
 
         <Typography variant="body1">{`Average daily calories : ${nutritionTrackedDaysSummary.averageDailyCaloriesConsumption.toFixed(2)}`}</Typography>
         <Typography variant="body1">{`Average daily carbohydrates : ${nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption.toFixed(2)} g`}</Typography>
