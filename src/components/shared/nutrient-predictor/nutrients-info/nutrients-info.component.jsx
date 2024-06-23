@@ -85,7 +85,7 @@ const NutrientsInfo = () => {
           return (
             <NutrientsInfoContainer key={ index }>
               <OutlinedCard styles={ outlinedCardStyles }>
-                <strong><Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">{`${prediction.name.toUpperCase()}`}</Typography></strong>
+                <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h5">{`${prediction.name.toUpperCase()}`}</Typography>
                 <br></br>
     
                 <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Calories - ${prediction.calories}`}</Typography>
@@ -95,7 +95,7 @@ const NutrientsInfo = () => {
                 <Divider/>
                 <br></br>
     
-                <strong><h4>Macronutrients</h4></strong>
+                <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">Macronutrients</Typography>
                 <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Carbohydrates - ${prediction.macronutrients.carbohydratesTotalG} g`}</Typography>
                 <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Protein - ${prediction.macronutrients.proteinG} g`}</Typography>
                 <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Fat - ${prediction.macronutrients.fatTotalG} g`}</Typography>
@@ -105,7 +105,7 @@ const NutrientsInfo = () => {
                 <Divider/>
                 <br></br>
     
-                <strong><h4>Micronutrients</h4></strong>
+                <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">Micronutrients</Typography>
                 <Fragment key={ index }>
                   <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Sodium - ${prediction.micronutrients.sodiumMG} mg`}</Typography>
                   <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Potassium - ${prediction.micronutrients.potassiumMG} mg`}</Typography>
