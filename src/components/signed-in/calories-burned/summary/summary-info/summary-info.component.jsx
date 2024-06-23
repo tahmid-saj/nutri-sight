@@ -1,23 +1,42 @@
-import "./summary-info.styles.scss"
+import "./summary-info.styles.jsx"
+import { CaloriesBurnedSummaryInfoContainer } from "./summary-info.styles.jsx"
 import { useContext } from "react"
 import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
+import { Typography, Divider } from "@mui/material"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx"
+
+const paperStyles = {
+  backgroundColor: COLOR_CODES.general["1"],
+  width: COMMON_SPACING.summaryInfoCard.width
+}
 
 const SummaryInfo = () => {
   const { trackedCaloriesBurnedSummary } = useContext(CaloriesBurnedContext)
 
   // TODO: round displayed numbers via a helper function under utils
   return (
-    <div className="calories-burned-summary-info-container">
-      <h3>{ `Daily average calories burned : ${trackedCaloriesBurnedSummary.dailyAverageCaloriesBurned}` }</h3>
-      <br></br>
-      <h3>Most calories burned</h3>
-      <h4>{ `Date : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.date}` }</h4>
-      <h4>{ `Calories burned : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.caloriesBurned}` }</h4>
-      <h4>{ `Activity : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.activity}` }</h4>
-      <br></br>
-      <h3>{ `Number of tracked days : ${trackedCaloriesBurnedSummary.totalTrackedDays.size}` }</h3>
-      <h3>{ `Number of activities : ${trackedCaloriesBurnedSummary.totalTrackedActivities.size}` }</h3>
-    </div>
+    <CaloriesBurnedSummaryInfoContainer>
+      <SimplePaper styles={ paperStyles }>
+        <Typography variant="h6">{ `Daily average calories burned : ${trackedCaloriesBurnedSummary.dailyAverageCaloriesBurned.toFixed(2)}` }</Typography>
+
+        <br/>
+        <Divider/>
+        <br/>
+
+        <Typography variant="h6">Most calories burned</Typography>
+        <Typography variant="body1">{ `Date : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.date}` }</Typography>
+        <Typography variant="body1">{ `Calories burned : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.caloriesBurned.toFixed(2)}` }</Typography>
+        <Typography variant="body1">{ `Activity : ${trackedCaloriesBurnedSummary.mostCaloriesBurned.activity}` }</Typography>
+
+        <br/>
+        <Divider/>
+        <br/>
+
+        <Typography variant="body1">{ `Number of tracked days : ${trackedCaloriesBurnedSummary.totalTrackedDays.size}` }</Typography>
+        <Typography variant="body1">{ `Number of activities : ${trackedCaloriesBurnedSummary.totalTrackedActivities.size}` }</Typography>
+      </SimplePaper>
+    </CaloriesBurnedSummaryInfoContainer>
   )
 }
 

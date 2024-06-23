@@ -20,10 +20,7 @@ import ScheduleCalendar from "../../../components/signed-out/calories-burned/sch
 import ScheduleDayInfo from "../../../components/signed-out/calories-burned/schedule/schedule-day-info/schedule-day-info.component"
 import { Typography } from "@mui/material"
 
-import SummarizeIcon from '@mui/icons-material/Summarize';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import AddIcon from '@mui/icons-material/Add';
-import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.jsx"
+
 
 const CaloriesBurned = () => {
   const { trackedCaloriesBurned, scheduledTrackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
