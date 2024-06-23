@@ -9,4 +9,3 @@ export const UpdateConsumptionContainer = styled.div`
   justify-content: space-around;
   width: 100%;
 `
-

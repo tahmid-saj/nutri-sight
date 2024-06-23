@@ -1,4 +1,7 @@
-import "./activity-date-table.styles.scss"
+import "./activity-date-table.styles.jsx"
+import { SearchedCaloriesBurnedActivitiesTableContainer,
+  SearchedCaloriesBurnedActivitiesTable
+} from "./activity-date-table.styles.jsx";
 import { useState, useContext, useRef } from "react"
 
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
@@ -7,6 +10,15 @@ import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied
 
 import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context";
 import Button from "../../../../shared/button/button.component";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js";
+import { Typography } from "@mui/material";
+import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx";
+import { ButtonsContainer } from "../../../../shared/button/button.styles.jsx";
+
+const paperStyles = {
+  backgroundColor: COLOR_CODES.general["8"],
+  padding: "2%",
+}
 
 const ActivityDateTable = () => {
   const gridRef = useRef()
@@ -53,15 +65,21 @@ const ActivityDateTable = () => {
 
   return (
     // wrapping container with theme & size
-    <div className="ag-theme-quartz-dark searched-calories-burned-activities-table-container" // applying the grid theme
-      style={{ height: 700, width: '65%' }} // the grid will fill the size of the parent container
-      >
-      <h3>Select the searched activities to track</h3>
-      <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
-      <div className="add-activity-selected-button buttons-container">
-        <Button onClick={ (e) => onAddSelected(e) }>Add Selected</Button>
-      </div>
-    </div>
+    <SearchedCaloriesBurnedActivitiesTableContainer>
+      <Typography sx={{ color: COLOR_CODES.general["0"], marginLeft: "2%" }} variant="h6">Select the searched activities to track</Typography>
+      <SimplePaper styles={ paperStyles }>
+        <SearchedCaloriesBurnedActivitiesTable>
+          <div className="ag-theme-quartz-dark"
+            style={{ height: COMMON_SPACING.table.height, width: COMMON_SPACING.table.width }}>
+            <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
+          </div>
+        </SearchedCaloriesBurnedActivitiesTable>
+
+        <ButtonsContainer>
+          <Button onClick={ (e) => onAddSelected(e) }>Add Selected</Button>
+        </ButtonsContainer>
+      </SimplePaper>
+    </SearchedCaloriesBurnedActivitiesTableContainer>
   )
 }
 

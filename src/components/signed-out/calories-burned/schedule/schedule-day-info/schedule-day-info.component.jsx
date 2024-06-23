@@ -1,13 +1,14 @@
-import "./schedule-day-info.styles.scss"
+import "./schedule-day-info.styles.jsx"
+import { CaloriesBurnedScheduleDayInfo } from "./schedule-day-info.styles.jsx"
 import { Typography, Divider } from "@mui/material"
 import { Fragment, useContext } from "react"
 import SimplePaper from "../../../../shared/mui/paper/paper.component"
-import { COLOR_CODES } from "../../../../../utils/constants/shared.constants"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants"
 import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context"
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"],
-  width: 400,
+  width: COMMON_SPACING.calendarDayInfo.width
 }
 
 const ScheduleDayInfo = () => {
@@ -16,7 +17,7 @@ const ScheduleDayInfo = () => {
   if (!scheduledTrackedCaloriesBurnedView.length) return <Fragment/>
 
   return (
-    <div className="calories-burned-schedule-day-info">
+    <CaloriesBurnedScheduleDayInfo>
     {
       scheduledTrackedCaloriesBurnedView.map((trackedCaloriesBurned) => {
         return (
@@ -35,7 +36,7 @@ const ScheduleDayInfo = () => {
         )
       })
     }
-    </div>
+    </CaloriesBurnedScheduleDayInfo>
   )
 }
 

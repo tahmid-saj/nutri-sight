@@ -16,5 +16,4 @@ export const FitnessSearchAddContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: top;
-  margin-top: 1%;
 `
