@@ -15,7 +15,6 @@ import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["8"],
   margin: "0% 2% 0% 2%",
-  height: COMMON_SPACING.filterTable.height
 }
 
 const NutritionTrackerTable = () => {
@@ -65,29 +64,29 @@ const NutritionTrackerTable = () => {
 
   return (
     // wrapping container with theme & size
-    <SimplePaper styles={ paperStyles }>
-      <Typography sx={{ color: COLOR_CODES.general["5"] }} variant="h6">Filter or remove tracked date</Typography>
-      <FilterNutritionTrackerTableContainer>
-        <div className="ag-theme-quartz-dark" // applying the grid theme
-          style={{ height: 475, width: COMMON_SPACING.table.width }} // the grid will fill the size of the parent container
-          >
+    <div className="container">
+      <SimplePaper styles={ paperStyles }>
+        <Typography sx={{ color: COLOR_CODES.general["5"] }} variant="h6">Filter or remove tracked date</Typography>
+        <FilterNutritionTrackerTableContainer>
+          <div className="ag-theme-quartz-dark" // applying the grid theme
+            style={{ height: 500, width: COMMON_SPACING.table.width }} // the grid will fill the size of the parent container
+            >
+              <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
+          </div>
 
-          <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
-          <FilterButtonsContainer>
-            <div className="container">
-              <div className="row justify-content-left align-items-center">
-                <div className="col-sm-12 col-md-6 col-lg-6">
-                  <Button onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
-                </div>
-                <div className="col-sm-12 col-md-6 col-lg-6">
-                  <Button type="button" onClick={ onClearFilter }>Clear Filter</Button>
-                </div>
+        <FilterButtonsContainer>
+          <div className="row">
+            <div className="col-12">
+              <div className="btn-group flex-wrap" role="group">
+                <Button onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
+                <Button type="button" onClick={ onClearFilter }>Clear Filter</Button>
               </div>
             </div>
-          </FilterButtonsContainer>
-        </div>
-      </FilterNutritionTrackerTableContainer>
-    </SimplePaper>
+          </div>
+        </FilterButtonsContainer>
+        </FilterNutritionTrackerTableContainer>
+      </SimplePaper>
+    </div>
   )
 }
 

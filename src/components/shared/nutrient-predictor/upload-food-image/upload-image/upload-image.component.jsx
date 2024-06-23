@@ -89,27 +89,28 @@ const UploadImage = () => {
     <UploadImageContainer>
       <div className="container">
         <div className="row">
-          <div className="col">
-            <SimplePaper styles={ paperStyles }>
-              <UploadImageForm onSubmit={ handleSubmit }>
-                <Typography variant="h6">Upload a food image or enter a meal description</Typography>
-                <Typography paragraph>Example: 1 pound of steak with mashed potatoes and a can of sprite</Typography>
-                <FormInput label="Meal description" type="text" onChange={ handleChange }
-                                    name="mealDescription" value={ formFields.mealDescription }></FormInput>
+          <SimplePaper styles={ paperStyles }>
+            <UploadImageForm onSubmit={ handleSubmit }>
+              <Typography variant="h6">Upload a food image or enter a meal description</Typography>
+              <Typography paragraph>Example: 1 pound of steak with mashed potatoes and a can of sprite</Typography>
+              <FormInput label="Meal description" type="text" onChange={ handleChange }
+                                  name="mealDescription" value={ formFields.mealDescription }></FormInput>
 
-                <FormInput label="Image URL" type="url" id="imageUrl" name="imageUrl" 
-                          onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.url) } value={ formFields.imageUrl }></FormInput>
+              <FormInput label="Image URL" type="url" id="imageUrl" name="imageUrl" 
+                        onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.url) } value={ formFields.imageUrl }></FormInput>
 
-                <FormInput disabled type="file" id="uploadedImagePath" name="uploadedImagePath" 
-                          onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.image) } value={ formFields.uploadedImagePath } accept="image/*"></FormInput>
+              <FormInput disabled type="file" id="uploadedImagePath" name="uploadedImagePath" 
+                        onChange={ (e) => handleChange(e, NUTRIENT_PREDICTOR_ENUMS.image) } value={ formFields.uploadedImagePath } accept="image/*"></FormInput>
 
-                <ButtonsContainer>
+              <div className="col-12">
+                <div className="btn-group flex-wrap" role="group">
                   <Button buttonType="regular-button" type="submit">Predict</Button>
                   <Button buttonType="regular-button" type="button" onClick={ resetFormFields }>Clear</Button>
-                </ButtonsContainer>
-              </UploadImageForm>
-            </SimplePaper>
-          </div>
+                </div>
+              </div>
+            </UploadImageForm>
+          </SimplePaper>
+
 
           <div className="col" visible>
             <UploadedImageContainer

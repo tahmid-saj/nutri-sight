@@ -17,7 +17,7 @@ const defaultFormFields = {
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"],
-  width: COMMON_SPACING.filter.width
+  // width: COMMON_SPACING.filter.width
 }
 
 const ActivityDateFilter = () => {
@@ -55,24 +55,30 @@ const ActivityDateFilter = () => {
 
   return (
     <ActivityDateFilterContainer>
-      <SimplePaper styles={ paperStyles }>
-        <form onSubmit={ handleSubmit }>
-          <Typography variant="h6">Filter activities</Typography>
-          <FormInput type="date" onChange={ handleChange }
-                      name="dateTracked" value={ formFields.dateTracked }></FormInput>
-          
-          <FormInput label="Activity" type="text" onChange={ handleChange }
-                              name="activity" value={ formFields.activity }></FormInput>
+      <div className="container">
+        <SimplePaper styles={ paperStyles }>
+          <form onSubmit={ handleSubmit }>
+            <Typography variant="h6">Filter activities</Typography>
+            <FormInput type="date" onChange={ handleChange }
+                        name="dateTracked" value={ formFields.dateTracked }></FormInput>
+            
+            <FormInput label="Activity" type="text" onChange={ handleChange }
+                                name="activity" value={ formFields.activity }></FormInput>
 
-          <FormInput label="Duration (minutes)" type="text" onChange={ handleChange }
-                      name="durationMinutes" value={ formFields.durationMinutes }></FormInput>
+            <FormInput label="Duration (minutes)" type="text" onChange={ handleChange }
+                        name="durationMinutes" value={ formFields.durationMinutes }></FormInput>
 
-          <FilterButtonsContainer>
-            <Button type="submit">Filter</Button>
-            <Button type="button" onClick={ handleClearFilter }>Clear</Button>
-          </FilterButtonsContainer>
-        </form>
-      </SimplePaper>
+            <div className="row">
+              <div className="col-12">
+                <div className="btn-group flex-wrap">
+                  <Button type="submit">Filter</Button>
+                  <Button type="button" onClick={ handleClearFilter }>Clear</Button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </SimplePaper>
+      </div>
     </ActivityDateFilterContainer>
   )
 }

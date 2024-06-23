@@ -88,6 +88,7 @@ const UpdateConsumptionForm = () => {
 
   return (
     <UpdateConsumptionFormContainer micronutrientsAdded={ formInputMicronutrients.length !== 0 }>
+      <div className="container">
       <SimplePaper styles={ paperStyles }>
         <Typography variant="h6">Track some consumption</Typography>
         <Typography sx={{ marginBottom: "6%" }} 
@@ -112,27 +113,21 @@ const UpdateConsumptionForm = () => {
                               
           <AddMicronutrients></AddMicronutrients>
 
-            <div className="container">
-              <div className="row justify-content-evenly align-items-center">
-                <div className="col-sm-12 col-md-12 col-lg-12">
-                  <ConsumptionFormButtonContainer>
-                    <Button type="button" onClick={ handleAddTrackedDay }>Add Day</Button>
-                  </ConsumptionFormButtonContainer>
-                </div>
-
-                <div className="col-sm-12 col-md-12 col-lg-12">
-                  {
-                    nutritionTrackedDays.length !== 0 &&
-                    <ConsumptionFormButtonContainer>
-                      <Button type="submit" onClick={ handleUpdateTrackedDay }>Update Day</Button>
-                    </ConsumptionFormButtonContainer>
-                  }
-                </div>
+          <div className="row">
+            <div className="col-12">
+              <div className="btn-group flex-wrap" role="group">
+                <Button type="button" onClick={ handleAddTrackedDay }>Add Day</Button>
+                {
+                  nutritionTrackedDays.length !== 0 &&
+                  <Button type="submit" onClick={ handleUpdateTrackedDay }>Update Day</Button>
+                }
               </div>
             </div>
+          </div>
         </form>
       </SimplePaper>
       
+      </div>
     </UpdateConsumptionFormContainer>
   );
 };

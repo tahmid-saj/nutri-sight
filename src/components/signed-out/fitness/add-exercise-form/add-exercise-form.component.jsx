@@ -69,12 +69,12 @@ const AddExerciseForm = () => {
               name="exerciseReps" value={ formFields.exerciseReps }></FormInput>
 
           <div className="container">
-            <div className="row justify-content-evenly align-items-center">
-              <div className="col-sm-12 col-md-12 col-lg-12">
-                <Button type="submit">Add</Button>
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-12">
-                <Button type="button" onClick={ resetFormFields }>Clear</Button>
+            <div className="row">
+              <div className="col-12">
+                <div className="btn-group flex-wrap">
+                  <Button type="submit">Add</Button>
+                  <Button type="button" onClick={ resetFormFields }>Clear</Button>
+                </div>
               </div>
             </div>
           </div>

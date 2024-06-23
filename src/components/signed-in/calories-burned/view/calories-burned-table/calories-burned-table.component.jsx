@@ -58,26 +58,26 @@ const CaloriesBurnedTable = () => {
   return (
     // wrapping container with theme & size
     <FilterCaloriesBurnedActivitiesTableContainer>
-      <Typography sx={{ color: COLOR_CODES.general["0"], marginLeft: "2%" }} variant="h6">Filter or remove activity</Typography>
-      <SimplePaper styles={ paperStyles }>
-        <FilterCaloriesBurnedActivitiesTable>
-          <div className="ag-theme-quartz-dark"
-            style={{ height: COMMON_SPACING.table.height, width: COMMON_SPACING.table.width }}>
-            <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
-          </div>
-        </FilterCaloriesBurnedActivitiesTable>
+      <div className="container">
+        <Typography sx={{ color: COLOR_CODES.general["0"], marginLeft: "2%" }} variant="h6">Filter or remove activity</Typography>
+        <SimplePaper styles={ paperStyles }>
+          <FilterCaloriesBurnedActivitiesTable>
+            <div className="ag-theme-quartz-dark"
+              style={{ height: COMMON_SPACING.table.height, width: COMMON_SPACING.table.width }}>
+              <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
+            </div>
+          </FilterCaloriesBurnedActivitiesTable>
 
-        <div className="container">
-          <div className="row justify-content-evenly align-items-center">
-            <div className="col-sm-12 col-md-6 col-lg-6">
-              <Button onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
+            <div className="row">
+              <div className="col-12">
+                <div className="btn-group flex-wrap">
+                  <Button onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
+                  <Button type="button" onClick={ clearActivityDatesFilter }>Clear Filter</Button>
+                </div>
+              </div>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-6">
-              <Button type="button" onClick={ clearActivityDatesFilter }>Clear Filter</Button>
-            </div>
-          </div>
-        </div>
-      </SimplePaper>
+        </SimplePaper>
+      </div>
     </FilterCaloriesBurnedActivitiesTableContainer>
   )
 }

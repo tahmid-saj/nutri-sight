@@ -66,19 +66,25 @@ const ActivityDateTable = () => {
   return (
     // wrapping container with theme & size
     <SearchedCaloriesBurnedActivitiesTableContainer>
-      <Typography sx={{ color: COLOR_CODES.general["0"], marginLeft: "2%" }} variant="h6">Select the searched activities to track</Typography>
-      <SimplePaper styles={ paperStyles }>
-        <SearchedCaloriesBurnedActivitiesTable>
-          <div className="ag-theme-quartz-dark"
-            style={{ height: COMMON_SPACING.table.height, width: COMMON_SPACING.table.width }}>
-            <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
-          </div>
-        </SearchedCaloriesBurnedActivitiesTable>
+      <div className="container">
+        <Typography sx={{ color: COLOR_CODES.general["0"], marginLeft: "2%" }} variant="h6">Select the searched activities to track</Typography>
+        <SimplePaper styles={ paperStyles }>
+          <SearchedCaloriesBurnedActivitiesTable>
+            <div className="ag-theme-quartz-dark"
+              style={{ height: COMMON_SPACING.table.height, width: COMMON_SPACING.table.width }}>
+              <AgGridReact rowData={ rowData } columnDefs={ columnDefs } ref={ gridRef } rowSelection={ "single" }/>
+            </div>
+          </SearchedCaloriesBurnedActivitiesTable>
 
-        <ButtonsContainer>
-          <Button onClick={ (e) => onAddSelected(e) }>Add Selected</Button>
-        </ButtonsContainer>
-      </SimplePaper>
+          <div className="row">
+            <div className="col-12">
+              <div className="btn-group flex-wrap">
+                <Button onClick={ (e) => onAddSelected(e) }>Add Selected</Button>
+              </div>
+            </div>
+          </div>
+        </SimplePaper>
+      </div>
     </SearchedCaloriesBurnedActivitiesTableContainer>
   )
 }

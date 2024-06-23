@@ -52,21 +52,27 @@ const NutritionTrackerFilter = () => {
 
   return (
     <NutritionTrackerFilterContainer>
-      <SimplePaper styles={ paperStyles }>
-        <form onSubmit={ handleSubmit }>
-          <Typography variant="h6">Filter by date range</Typography>
-          <FormInput type="date" onChange={ handleChange }
-                      name="filterStartDate" value={ formFields.filterStartDate }></FormInput>
-          
-          <FormInput type="date" onChange={ handleChange }
-                      name="filterEndDate" value={ formFields.filterEndDate }></FormInput>
-          
-          <FilterButtonsContainer>
-            <Button type="submit">Filter</Button>
-            <Button type="button" onClick={ handleClearFilter }>Clear</Button>
-          </FilterButtonsContainer>
-        </form>
-      </SimplePaper>
+      <div className="container">
+        <SimplePaper styles={ paperStyles }>
+          <form onSubmit={ handleSubmit }>
+            <Typography variant="h6">Filter by date range</Typography>
+            <FormInput type="date" onChange={ handleChange }
+                        name="filterStartDate" value={ formFields.filterStartDate }></FormInput>
+            
+            <FormInput type="date" onChange={ handleChange }
+                        name="filterEndDate" value={ formFields.filterEndDate }></FormInput>
+
+            <div className="row">
+              <div className="col-12">
+                <div className="btn-group flex-wrap" role="group">
+                  <Button type="submit">Filter</Button>
+                  <Button type="button" onClick={ handleClearFilter }>Clear</Button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </SimplePaper>
+      </div>
     </NutritionTrackerFilterContainer>
   )
 }

@@ -64,32 +64,31 @@ const SignInForm = () => {
 
   return (
     <SignInContainer>
-      <Typography sx={{ color: COLOR_CODES.general["0"] }} variant="h6">Log back in</Typography>
-      
-      <form onSubmit={ handleSubmit }>
-        <FormInput label="Email" type="email" required onChange={ handleChange }
-                  name="email" value={ email }/>
+      <div className="container">
+        <Typography sx={{ color: COLOR_CODES.general["0"] }} variant="h6">Log back in</Typography>
+        
+        <form onSubmit={ handleSubmit }>
+          <FormInput label="Email" type="email" required onChange={ handleChange }
+                    name="email" value={ email }/>
 
-        <FormInput label="Password" type="password" required onChange={ handleChange }
-                  name="password" value={ password }/>
+          <FormInput label="Password" type="password" required onChange={ handleChange }
+                    name="password" value={ password }/>
 
-        <div className="container">
-          <div className="row justify-content-evenly align-items-center">
-            <div className="col-sm-12 col-md-2">
-              <ButtonContainer>
-                <Button type="submit">Sign In</Button>
-              </ButtonContainer>
+            <div className="row">
+              <div className="col-12">
+                <div className="btn-group flex-wrap">
+                  <ButtonContainer>
+                    <Button type="submit">Sign In</Button>
+                  </ButtonContainer>
+                  <ButtonContainer>
+                    <Button buttonType="google-sign-in" type="button"
+                            onClick={ signInWithGoogle }>Google Sign In</Button>
+                  </ButtonContainer>
+                </div>
+              </div>
             </div>
-
-            <div className="col-sm-12 col-md-2">
-              <ButtonContainer>
-                <Button buttonType="google-sign-in" type="button"
-                        onClick={ signInWithGoogle }>Google Sign In</Button>
-              </ButtonContainer>
-            </div>
-          </div>
-        </div>                  
-      </form>
+        </form>
+      </div>                  
     </SignInContainer>
   );
 };
