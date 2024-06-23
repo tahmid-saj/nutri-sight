@@ -21,7 +21,7 @@ const Search = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(formFields.searchedRecipe);
+    
 
     displaySearchedRecipes(formFields.searchedRecipe);
 
@@ -34,7 +34,7 @@ const Search = () => {
 
     setFormFields({ [name]: value })
 
-    console.log(formFields.searchedRecipe);
+    
   };
 
   return (

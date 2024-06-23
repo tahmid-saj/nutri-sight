@@ -13,7 +13,7 @@ export const validateImgPath = (imgPath) => {
   // if (!(imgType === "image/png" || imgType === "png" || 
   //       imgType === "image/jpeg" || imgType === "jpeg" || 
   //       imgType === "image/jpg" || imgType === "jpg")) {
-  //   console.log("Invalid image type", imgPath.type);
+  //   
   //   return true;
   // }
 

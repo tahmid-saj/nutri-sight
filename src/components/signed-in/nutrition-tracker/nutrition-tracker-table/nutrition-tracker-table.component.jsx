@@ -53,7 +53,7 @@ const NutritionTrackerTable = () => {
       return
     }
 
-    console.log(selectedData[0])
+    
 
     await removeDayTracked(selectedData[0].DateTracked)
   }

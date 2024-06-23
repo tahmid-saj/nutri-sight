@@ -4,7 +4,7 @@ import { errorOnDisplaySearchedRecipes } from "../errors/recipes.errors";
 
 export const getRecipes = async (recipe) => {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_RECIPES_RECIPES}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_RECIPES_RECIPES}`, {
       method: "POST",
       headers: {
@@ -16,14 +16,14 @@ export const getRecipes = async (recipe) => {
 
     return resJSON.recipes
   } catch (error) {
-    console.log(error)
+    
     errorOnDisplaySearchedRecipes()
   }
 };
 
 export const getRecipe = async (recipe) => {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_RECIPES_RECIPE}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_RECIPES_RECIPE}`, {
       method: "POST",
       headers: {
@@ -35,7 +35,7 @@ export const getRecipe = async (recipe) => {
 
     return resJSON.recipe
   } catch (error) {
-    console.log(error)
+    
     errorOnDisplaySearchedRecipes()
   }
 };

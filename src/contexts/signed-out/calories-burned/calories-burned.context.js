@@ -28,7 +28,7 @@ const addTrackedActivityDateHelper = (trackedCaloriesBurned, trackedDayInfo, act
 }
 
 const filterActivityDatesHelper = (trackedCaloriesBurned, filterConditions) => {
-  console.log(filterConditions)
+  
 
   let filteredTrackedCaloriesBurned = []
   trackedCaloriesBurned.map((trackedActivity) => {
@@ -51,7 +51,7 @@ const removeActivityDateHelper = (trackedCaloriesBurned, activityId) => {
 }
 
 const selectScheduledTrackedCaloriesBurnedHelper = (trackedCaloriesBurned, trackedDay) => {
-  console.log(trackedDay)
+  
 
   const filteredTrackedCaloriesBurned = trackedCaloriesBurned.filter((caloriesTrackedDay) => {
     return caloriesTrackedDay.dateTracked === trackedDay
@@ -185,18 +185,18 @@ export const CaloriesBurnedProvider = ({ children }) => {
     } else {
       setTrackedCaloriesBurned(addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo, trackedCaloriesBurnedLength + 1))
       // setTrackedCaloriesBurnedLength(trackedCaloriesBurnedLength + 1)
-      console.log("created")
+      
     }
   }
 
   const filterActivityDates = (filterConditions) => {
     if (validateFilterActivityDates(filterConditions)) {
-      console.log("invalid")
+      
       return
     } else {
       setFilterConditions(filterConditions)
       setTrackedCaloriesBurnedView(filterActivityDatesHelper(trackedCaloriesBurned, filterConditions))
-      console.log("set")
+      
     }
   }
 

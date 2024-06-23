@@ -43,7 +43,7 @@ const NutritionTracker = () => {
   useEffect(() => {
     if (nutritionTrackedDays && nutritionTrackedDays.length) {
       // update nutritionTrackedDaysSummary with average consumptions
-      console.log(nutritionTrackedDays);
+      
   
       const summary = calculateSummary(nutritionTrackedDays);
   
@@ -69,7 +69,7 @@ const NutritionTracker = () => {
   // update scheduledNutritionTrackedDaysView when nutritionTrackedDays or selectedNutritionTrackedDay change
   useEffect(() => {
     if (selectedNutritionTrackedDay) {
-      console.log(nutritionTrackedDays, selectedNutritionTrackedDay)
+      
       dispatch(setScheduledNutritionTrackedDaysView(selectScheduledNutritionTrackedDayHelper(nutritionTrackedDays, selectedNutritionTrackedDay)))
     } else {
       dispatch(setScheduledNutritionTrackedDaysView(null))

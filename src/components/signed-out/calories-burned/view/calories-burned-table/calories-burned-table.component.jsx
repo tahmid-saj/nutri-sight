@@ -50,7 +50,7 @@ const CaloriesBurnedTable = () => {
         return
       }
   
-      console.log(selectedData[0])
+      
   
       removeActivityDate(selectedData[0].Tag)
     }

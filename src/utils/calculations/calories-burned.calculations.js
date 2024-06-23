@@ -1,7 +1,7 @@
 // calories burned calculations
 
 export const calculateSummary = (trackedCaloriesBurned) => {
-  console.log(trackedCaloriesBurned)
+  
 
   let dailyAverageCaloriesBurned = 0
   let mostBurned = {

@@ -27,7 +27,7 @@ function getScheduledData(date, nutritionTrackedDays) {
 const ScheduleCalendar = () => {
   const { nutritionTrackedDays, selectScheduledNutritionTrackedDay } = useContext(NutritionTrackerContext)
 
-  // console.log(nutritionTrackedDays)
+  // 
 
   function renderCell(date) {
     const list = getScheduledData(date, nutritionTrackedDays);
@@ -56,7 +56,7 @@ const ScheduleCalendar = () => {
 
   const onSelectDate = (date) => {
     const selectedDate = date.toISOString().split('T')[0]
-    console.log(selectedDate)
+    
     selectScheduledNutritionTrackedDay(selectedDate)
   }
 

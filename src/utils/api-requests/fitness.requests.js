@@ -7,7 +7,7 @@ import { errorOnGetSearchExercise,
 // search exercise
 export async function getSearchedExercise(exerciseQuery) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_FITNESS_SEARCH_EXERCISE}`)
+    
 
     const response = await fetch(`${process.env.REACT_APP_API_URL_FITNESS_SEARCH_EXERCISE}`, {
       method: "POST",
@@ -25,7 +25,7 @@ export async function getSearchedExercise(exerciseQuery) {
 
     return resJSON.searchedExercises
   } catch (error) {
-    console.log(error)
+    
     errorOnGetSearchExercise()
   }
 }
@@ -33,12 +33,12 @@ export async function getSearchedExercise(exerciseQuery) {
 // user sign in
 export async function getExercises(userId, email) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`)
 
     return response.json()
   } catch (error) {
-    console.log(error)
+    
     errorOnGetExercises()
   }
 }
@@ -46,7 +46,7 @@ export async function getExercises(userId, email) {
 // fitness operations
 export async function postAddExercise(userId, email, exercise, exerciseTag, selectedSearchedExercise) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`, {
       method: "POST",
       headers: {
@@ -66,18 +66,18 @@ export async function postAddExercise(userId, email, exercise, exerciseTag, sele
       })
     })
 
-    // console.log("resp")
+    // 
 
     // return response.status
   } catch (error) {
-    console.log(error)
+    
     errorOnPostAddExercise()
   }
 }
 
 export async function deleteRemoveExercise(userId, email, exerciseTag) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`, {
       method: "DELETE",
       headers: {
@@ -86,11 +86,11 @@ export async function deleteRemoveExercise(userId, email, exerciseTag) {
       body: String(exerciseTag)
     })
 
-    // console.log("removed")
+    // 
 
     // return response.status
   } catch (error) {
-    console.log(error)
+    
     errorOnDeleteRemoveExercise()
   }
 }
@@ -98,7 +98,7 @@ export async function deleteRemoveExercise(userId, email, exerciseTag) {
 // user sign out
 export async function putExercises(userId, email, exercises) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`, {
       method: "PUT",
       headers: {
@@ -111,7 +111,7 @@ export async function putExercises(userId, email, exercises) {
 
     // return response.status
   } catch (error) {
-    console.log(error)
+    
     errorOnPutExercises()
   }
 }

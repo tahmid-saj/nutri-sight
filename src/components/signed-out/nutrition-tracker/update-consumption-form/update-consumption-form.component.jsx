@@ -45,7 +45,7 @@ const UpdateConsumptionForm = () => {
   const handleAddTrackedDay = (event) => {
     event.preventDefault();
 
-    console.log(formFields);
+    
 
     dispatch(addDayTracked(nutritionTrackedDays, formInputMicronutrients, {
       dateTracked: formFields.dateTracked,
@@ -64,7 +64,7 @@ const UpdateConsumptionForm = () => {
   const handleUpdateTrackedDay = (event) => {
     event.preventDefault();
 
-    console.log(formFields);
+    
 
     dispatch(updateDayTracked(nutritionTrackedDays, formInputMicronutrients, {
       dateTracked: formFields.dateTracked,

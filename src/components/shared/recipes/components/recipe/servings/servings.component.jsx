@@ -19,7 +19,7 @@ const Servings = () => {
   const handleDecreaseServings = (event) => {
     event.preventDefault();
 
-    console.log("decrease servings");
+    
 
     if (displayedRecipe.updatedServings > 0) {
       decreaseServings(displayedRecipe);
@@ -29,7 +29,7 @@ const Servings = () => {
   const handleIncreaseServings = (event) => {
     event.preventDefault();
 
-    console.log("increase servings");
+    
     increaseServings(displayedRecipe);
   };
 

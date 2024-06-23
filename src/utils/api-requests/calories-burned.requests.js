@@ -9,7 +9,7 @@ import { errorOnGetSearchActivity,
 // searching activity
 export async function getSearchActivity(trackedDayInfo) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_CALORIES_BURNED_SEARCH_ACTIVITY}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_CALORIES_BURNED_SEARCH_ACTIVITY}`, {
       method: "POST",
       headers: {
@@ -21,7 +21,7 @@ export async function getSearchActivity(trackedDayInfo) {
 
     return resJSON.searchedActivities
   } catch (error) {
-    console.log(error)
+    
     errorOnGetSearchActivity()
   }
 }
@@ -29,12 +29,12 @@ export async function getSearchActivity(trackedDayInfo) {
 // signing in
 export async function getTrackedCaloriesBurned(userId, email) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
 
     return response.json()
   } catch (error) {
-    console.log(error)
+    
     errorOnGetTrackedCaloriesBurned()
   }
 }
@@ -42,7 +42,7 @@ export async function getTrackedCaloriesBurned(userId, email) {
 // calories burned operations
 export async function postAddActivity(userId, email, trackedDayInfo, activityId) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`, {
       method: "POST",
       headers: {
@@ -58,18 +58,18 @@ export async function postAddActivity(userId, email, trackedDayInfo, activityId)
       })
     })
 
-    console.log("resp")
+    
 
     return response.status
   } catch (error) {
-    console.log(error)
+    
     errorOnPostAddActivity()
   }
 }
 
 export async function deleteRemoveActivity(userId, email, activityId) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`, {
       method: "DELETE",
       headers: {
@@ -78,11 +78,11 @@ export async function deleteRemoveActivity(userId, email, activityId) {
       body: String(activityId)
     })
 
-    console.log("removed")
+    
 
     return response.status
   } catch (error) {
-    console.log(error)
+    
     errorOnDeleteRemoveActivity()
   }
 }
@@ -90,7 +90,7 @@ export async function deleteRemoveActivity(userId, email, activityId) {
 // signing out
 export async function putTrackedCaloriesBurned(userId, email, trackedCaloriesBurned) {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`, {
       method: "PUT",
       headers: {
@@ -103,7 +103,7 @@ export async function putTrackedCaloriesBurned(userId, email, trackedCaloriesBur
 
     return response.status
   } catch (error) {
-    console.log(error)
+    
     errorOnPutTrackedCaloriesBurned()
   }
 }

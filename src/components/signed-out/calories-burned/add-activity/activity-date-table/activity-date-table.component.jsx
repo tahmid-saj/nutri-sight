@@ -52,7 +52,7 @@ const ActivityDateTable = () => {
       return
     }
 
-    console.log(selectedData[0])
+    
 
     addTrackedActivityDate({
       dateTracked: selectedData[0].DateTracked,

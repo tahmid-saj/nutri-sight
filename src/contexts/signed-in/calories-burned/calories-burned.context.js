@@ -26,7 +26,7 @@ const searchActivityHelper = async (trackedDayInfo) => {
 
 const addTrackedActivityDateHelper = async (trackedCaloriesBurned, trackedDayInfo, activityId, userId, email) => {
   postAddActivity(userId, email, trackedDayInfo, activityId)
-  console.log("added")
+  
 
   return [ ...trackedCaloriesBurned,
     {
@@ -41,7 +41,7 @@ const addTrackedActivityDateHelper = async (trackedCaloriesBurned, trackedDayInf
 }
 
 const filterActivityDatesHelper = (trackedCaloriesBurned, filterConditions) => {
-  console.log(filterConditions)
+  
 
   let filteredTrackedCaloriesBurned = []
   trackedCaloriesBurned.map((trackedActivity) => {
@@ -61,7 +61,7 @@ const removeActivityDateHelper = async (trackedCaloriesBurned, activityId, userI
   if (validateRemoveActivityDate(activityId)) return trackedCaloriesBurned
    
   deleteRemoveActivity(userId, email, activityId)
-  console.log("removed")
+  
 
   return trackedCaloriesBurned.filter(trackedActivity => trackedActivity.activityId !== activityId)
 }
@@ -75,7 +75,7 @@ const setDefaultTrackedCaloriesBurnedSummaryValuesHelper = () => {
 }
 
 const selectScheduledTrackedCaloriesBurnedHelper = (trackedCaloriesBurned, trackedDay) => {
-  console.log(trackedDay)
+  
 
   const filteredTrackedCaloriesBurned = trackedCaloriesBurned.filter((caloriesTrackedDay) => {
     return caloriesTrackedDay.dateTracked === trackedDay
@@ -233,18 +233,18 @@ export const CaloriesBurnedProvider = ({ children }) => {
       const resAddTrackedActivity = await addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo, trackedCaloriesBurnedLength + 1, currentUser.uid, currentUser.email)
       setTrackedCaloriesBurned(resAddTrackedActivity)
       // setTrackedCaloriesBurnedLength(trackedCaloriesBurnedLength + 1)
-      console.log("created")
+      
     }
   }
 
   const filterActivityDates = (filterConditions) => {
     if (validateFilterActivityDates(filterConditions)) {
-      console.log("invalid")
+      
       return
     } else {
       setFilterConditions(filterConditions)
       setTrackedCaloriesBurnedView(filterActivityDatesHelper(trackedCaloriesBurned, filterConditions))
-      console.log("set")
+      
     }
   }
 
