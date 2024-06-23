@@ -42,27 +42,35 @@ const ActivityDateForm = () => {
 
   return (
     <ActivityDateFormContainer>
-      <SimplePaper styles={ paperStyles }>
-        <form onSubmit={ handleSubmit }>
-          <Typography variant="h6">Track the calories of an activity</Typography>
-          <Typography variant="body1">Start by searching and adding an activity you did like running, along with a date</Typography>
+      <div className="container">
+        <SimplePaper styles={ paperStyles }>
+          <form onSubmit={ handleSubmit }>
+            <Typography variant="h6">Track the calories of an activity</Typography>
+            <Typography variant="body1">Start by searching and adding an activity you did like running, along with a date</Typography>
 
-          <FormInput type="date" required onChange={ handleChange }
-                      name="dateTracked" value={ formFields.dateTracked }></FormInput>
-          
-          <FormInput label="Activity" type="text" required onChange={ handleChange }
-                              name="activity" value={ formFields.activity }></FormInput>
-          
-          <Typography paragraph>Optional:</Typography>
-          <FormInput label="Weight (pounds)" type="text" onChange={ handleChange }
-                              name="weightPounds" value={ formFields.weightPounds }></FormInput>
+            <FormInput type="date" required onChange={ handleChange }
+                        name="dateTracked" value={ formFields.dateTracked }></FormInput>
+            
+            <FormInput label="Activity" type="text" required onChange={ handleChange }
+                                name="activity" value={ formFields.activity }></FormInput>
+            
+            <Typography paragraph>Optional:</Typography>
+            <FormInput label="Weight (pounds)" type="text" onChange={ handleChange }
+                                name="weightPounds" value={ formFields.weightPounds }></FormInput>
 
-          <FormInput label="Duration (minutes)" type="text" onChange={ handleChange }
-                      name="durationMinutes" value={ formFields.durationMinutes }></FormInput>
+            <FormInput label="Duration (minutes)" type="text" onChange={ handleChange }
+                        name="durationMinutes" value={ formFields.durationMinutes }></FormInput>
 
-          <Button type="submit">Search Activity</Button>
-        </form>
-      </SimplePaper>
+            <div className="row">
+              <div className="col-12">
+                <div className="btn-group flex-wrap">
+                  <Button type="submit">Search Activity</Button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </SimplePaper>
+      </div>
     </ActivityDateFormContainer>
   )
 }

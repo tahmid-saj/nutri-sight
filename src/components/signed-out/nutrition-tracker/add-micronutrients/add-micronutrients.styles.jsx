@@ -17,7 +17,7 @@ export const MicronutrientContainer = styled.div`
   display: block;
   justify-content: center;
   align-items: center;
-  margin-bottom: 2%;
+  margin-bottom: 6%;
 
   .remove-micronutrients-button {
     justify-content: center;

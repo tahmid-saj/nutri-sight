@@ -111,14 +111,13 @@ const SearchExerciseForm = () => {
             <FormInput label="Name of exercise" type="text" onChange={ handleChange }
               name="exerciseName" value={ formFields.exerciseName }></FormInput>
 
-            <div className="row justify-content-between align-items-center">
-                <div className="col-sm-12 col-md-12 col-lg-12">
+            <div className="row">
+              <div className="col-12">
+                <div className="btn-group flex-wrap">
                   <Button type="submit">Search</Button>
-                </div>
-
-                <div className="col-sm-12 col-md-12 col-lg-12">
                   <Button type="button" onClick={ resetFormFields }>Clear</Button>
                 </div>
+              </div>
             </div>
           </FitnessSearchExerciseForm>
       </SimplePaper>

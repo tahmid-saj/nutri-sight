@@ -50,7 +50,7 @@ const SignUpForm = () => {
       dispatch(signUpStart(email, password, displayName))
 
       resetFormFields();
-      navigate("/nutrient-predictor");
+      // navigate("/nutrient-predictor");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         errorOnEmailAlreadyInUse();
@@ -68,23 +68,31 @@ const SignUpForm = () => {
 
   return (
     <SignUpContainer>
-      <Typography sx={{ color: COLOR_CODES.general["0"] }} variant="h6">Sign up</Typography>
+      <div className="container">
+        <Typography sx={{ color: COLOR_CODES.general["0"] }} variant="h6">Sign up</Typography>
 
-      <form onSubmit={ handleSubmit }>
-        <FormInput label="Display name" type="text" required onChange={ handleChange }
-                  name="displayName" value={ displayName }></FormInput>
+        <form onSubmit={ handleSubmit }>
+          <FormInput label="Display name" type="text" required onChange={ handleChange }
+                    name="displayName" value={ displayName }></FormInput>
 
-        <FormInput label="Email" type="email" required onChange={ handleChange }
-                  name="email" value={ email }></FormInput>
+          <FormInput label="Email" type="email" required onChange={ handleChange }
+                    name="email" value={ email }></FormInput>
 
-        <FormInput label="Password" type="password" required onChange={ handleChange }
-                  name="password" value={ password }></FormInput>
+          <FormInput label="Password" type="password" required onChange={ handleChange }
+                    name="password" value={ password }></FormInput>
 
-        <FormInput label="Confirm password" type="password" required onChange={ handleChange }
-                  name="confirmPassword" value={ confirmPassword }></FormInput>
-        
-        <Button type="submit">Sign Up</Button>
-      </form>
+          <FormInput label="Confirm password" type="password" required onChange={ handleChange }
+                    name="confirmPassword" value={ confirmPassword }></FormInput>
+          
+          <div className="row">
+            <div className="col-12">
+              <div className="btn-group flex-wrap">
+                <Button type="submit">Sign Up</Button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </SignUpContainer>
   );
 };

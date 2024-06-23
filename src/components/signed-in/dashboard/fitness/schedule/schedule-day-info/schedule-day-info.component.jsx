@@ -75,9 +75,15 @@ const ScheduleDayInfo = () => {
           </div>
         </FitnessScheduleDayInfo>
 
-        <ButtonsContainer>
-          <Button type="button" onClick={ (e) => handleUnselect(e) }>Unselect</Button>
-        </ButtonsContainer>
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="btn-group flex-wrap" role="group">
+                <Button type="button" onClick={ (e) => handleUnselect(e) }>Unselect</Button>
+              </div>
+            </div>
+          </div>
+        </div>
       </SimplePaper>
     </FitnessScheduleDayInfoContainer>
   )

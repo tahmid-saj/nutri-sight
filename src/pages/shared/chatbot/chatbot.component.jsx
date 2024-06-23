@@ -43,16 +43,17 @@ const ChatBot = () => {
         <ChatBotInputMessage onSubmit={ handleSubmit }>
           <FormInput label="Message chatbot" type="text" required onChange={ handleChange }
                     name="messageInput" value={ formFields.messageInput }/>
-            <div className="row justify-content-evenly align-items-center">
-              <div className="col-sm-12 col-md-2">
-                <Button type="submit">Send</Button>
-              </div>
-              <div className="col-sm-12 col-md-2">
-                <Button type="button" onClick={ resetFormFields }>Clear</Button>
+
+            <div className="row">
+              <div className="col-12">
+                <div className="btn-group flex-wrap" role="group">
+                  <Button type="submit">Send</Button>
+                  <Button type="button" onClick={ resetFormFields }>Clear</Button>
+                </div>
               </div>
             </div>
-        </ChatBotInputMessage>
 
+        </ChatBotInputMessage>
         {
           chatbotResponse !== "" && chatbotResponse !== undefined &&
           <ChatBotResponse></ChatBotResponse>
