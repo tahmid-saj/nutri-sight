@@ -60,7 +60,7 @@ const NutritionTrackerTable = () => {
       return
     }
 
-    console.log(selectedData[0])
+    
 
     dispatch(removeDayTracked(nutritionTrackedDays, selectedData[0].DateTracked))
   }

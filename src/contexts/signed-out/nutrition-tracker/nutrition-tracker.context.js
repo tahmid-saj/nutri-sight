@@ -245,7 +245,7 @@ export const NutritionTrackerProvider = ({ children }) => {
 
   useEffect(() => {
     // update nutritionTrackedDaysSummary with average consumptions
-    console.log(nutritionTrackedDays);
+    
 
     const summary = calculateSummary(nutritionTrackedDays);
 
@@ -303,12 +303,12 @@ export const NutritionTrackerProvider = ({ children }) => {
 
   const filterDayTracked = (filterConditions) => {
     if (validateFilterNutritionTrackedDays(filterConditions)) {
-      console.log("invalid")
+      
       return
     } else {
       setFilterConditions(filterConditions)
       setNutritionTrackedDaysView(filterDayTrackedHelper(nutritionTrackedDays, filterConditions))
-      console.log("set")
+      
     }
   }
 

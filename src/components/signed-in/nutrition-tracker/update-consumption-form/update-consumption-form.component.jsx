@@ -39,7 +39,7 @@ const UpdateConsumptionForm = () => {
   const handleAddTrackedDay = async (event) => {
     event.preventDefault();
 
-    console.log(formFields);
+    
 
     await addDayTracked({
       dateTracked: formFields.dateTracked,
@@ -57,7 +57,7 @@ const UpdateConsumptionForm = () => {
   const handleUpdateTrackedDay = async (event) => {
     event.preventDefault();
 
-    console.log(formFields);
+    
 
     await updateDayTracked({
       dateTracked: formFields.dateTracked,

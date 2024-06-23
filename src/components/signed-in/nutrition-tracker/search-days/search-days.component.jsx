@@ -27,7 +27,7 @@ const SearchDays = () => {
     setSearchClicked(true)
     event.preventDefault();
 
-    console.log(event.target.value);
+    
     // resetFormFields();
     getDayTracked(formFields.dateTracked)
   };
@@ -35,7 +35,7 @@ const SearchDays = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    console.log(name, value);
+    
 
     setFormFields({ [name]: value })
   };

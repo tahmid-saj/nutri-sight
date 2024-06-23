@@ -8,7 +8,7 @@ import { getSearchedExercise } from "../../../utils/api-requests/fitness.request
 const searchExerciseHelper = async (exerciseQuery) => {
   const resSearchedExerciseResults = await getSearchedExercise(exerciseQuery)
 
-  console.log(resSearchedExerciseResults)
+  
 
   return resSearchedExerciseResults
 }
@@ -36,7 +36,7 @@ const selectScheduledExerciseHelper = (exercises, exerciseDate) => {
   
   exercises.map((exercise) => {
     if (exercise.exerciseDate === exerciseDate) {
-      console.log(exerciseDate)
+      
       selectedScheduledExercises.push(exercise)
     }
   })
@@ -151,7 +151,7 @@ export const FitnessProvider = ({ children }) => {
     } else {
       const resSearchedExercises = await searchExerciseHelper(exerciseQuery)
       setExercisesSearchResults(resSearchedExercises)
-      console.log(resSearchedExercises)
+      
     }
   }
 

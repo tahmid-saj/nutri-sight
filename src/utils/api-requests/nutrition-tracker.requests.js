@@ -7,24 +7,24 @@ import { errorOnGetNutritionTrackedDaysData, errorOnGetNutritionTrackedDaysSumma
 // sign in
 export const getNutritionTrackedDaysData = async (userId, email) => {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`);
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`);
 
     return response.json();
   } catch (error) {
-    console.log(error);
+    
     errorOnGetNutritionTrackedDaysData();
   }
 };
 
 export const getNutritionTrackedDaysSummaryData = async (userId, email) => {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS_SUMMARY}/${userId}/${email}`);
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS_SUMMARY}/${userId}/${email}`);
 
     return response.json();
   } catch (error) {
-    console.log(error);
+    
     errorOnGetNutritionTrackedDaysSummaryData();
   }
 };
@@ -32,7 +32,7 @@ export const getNutritionTrackedDaysSummaryData = async (userId, email) => {
 // nutrition tracked days operations
 export const postNutritionTrackedDay = async (userId, email, nutritionTrackedDay) => {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`);
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`, {
       method: 'POST',
       headers: {
@@ -43,14 +43,14 @@ export const postNutritionTrackedDay = async (userId, email, nutritionTrackedDay
 
     return response.status;
   } catch (error) {
-    console.log(error);
+    
     errorOnPostNutritionTrackedDay();
   }
 };
 
 export const deleteNutritionTrackedDay = async (userId, email, trackedDay) => {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`, {
       method: "DELETE",
       headers: {
@@ -59,11 +59,11 @@ export const deleteNutritionTrackedDay = async (userId, email, trackedDay) => {
       body: String(trackedDay)
     })
 
-    console.log("removed")
+    
 
     return response.status
   } catch (error) {
-    console.log(error)
+    
     errorOnDeleteNutritionTrackedDay()
   }
 }
@@ -75,7 +75,7 @@ export const putNutritionTrackedDay = async (userId, email, originalNutritionTra
       updatedNutritionTrackedDay: updatedNutritionTrackedDay,
     }
 
-    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`);
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`, {
       method: 'PUT',
       headers: {
@@ -86,7 +86,7 @@ export const putNutritionTrackedDay = async (userId, email, originalNutritionTra
 
     return response.status;
   } catch (error) {
-    console.log(error);
+    
     errorOnPutNutritionTrackedDay();
   }
 };
@@ -94,7 +94,7 @@ export const putNutritionTrackedDay = async (userId, email, originalNutritionTra
 // sign out
 export const putNutritionTrackedDays = async (userId, email, nutritionTrackedDays) => {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`);
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`, {
       method: "PUT",
       headers: {
@@ -107,14 +107,14 @@ export const putNutritionTrackedDays = async (userId, email, nutritionTrackedDay
 
     return response.status;
   } catch (error) {
-    console.log(error);
+    
     errorOnPutNutritionTrackedDays();
   }
 };
 
 export const putNutritionTrackedDaysSummary = async (userId, email, nutritionTrackedDaysSummary) => {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS_SUMMARY}/${userId}/${email}`);
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS_SUMMARY}/${userId}/${email}`, {
       method: "PUT",
       headers: {
@@ -127,7 +127,7 @@ export const putNutritionTrackedDaysSummary = async (userId, email, nutritionTra
 
     return response.status;
   } catch (error) {
-    console.log(error);
+    
     errorOnPutNutritionTrackedDaysSummary();
   }
 };

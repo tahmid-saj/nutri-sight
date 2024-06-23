@@ -31,7 +31,7 @@ const NutritionTrackerFilter = () => {
     event.preventDefault()
 
     if (formFields.filterStartDate === "" && formFields.filterEndDate === "" && !formFields.filterStartDate && !formFields.filterEndDate) {
-      console.log("please fill out all info")
+      
       return
     }
     

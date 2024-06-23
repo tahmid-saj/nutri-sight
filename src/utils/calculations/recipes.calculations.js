@@ -8,7 +8,7 @@ export const calculateIngredientsAfterServingsUpdate = (recipeToUpdate, updatedS
       return ingredient;
     }
 
-    console.log(updatedServings / originalServings);
+    
 
     return {
       ...ingredient,

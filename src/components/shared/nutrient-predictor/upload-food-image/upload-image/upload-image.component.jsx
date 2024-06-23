@@ -37,12 +37,12 @@ const UploadImage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(formFields.uploadedImagePath);
+    
 
     if (formFields.mealDescription !== "") {
       // use the meal description to predict
       await detectNutrients(formFields.mealDescription)
-      console.log("meal hit")
+      
     } else {
       // use the uploaded image to predict
       if (formFields.imageUrl && formFields.imageUrl !== "") {
@@ -59,7 +59,7 @@ const UploadImage = () => {
   const handleChange = (event, type) => {
     event.preventDefault();
     const { name, value } = event.target
-    console.log(name, value)
+    
 
     setFormFields({ 
       ...formFields,
@@ -77,7 +77,7 @@ const UploadImage = () => {
           imageEl.src = URL.createObjectURL(event.target.files[0]);
           // setFormFields({ ...formFields, uploadedImage: URL.createObjectURL(event.target.files[0]) }) set the actual image
         
-          console.log(URL.createObjectURL(event.target.files[0]))
+          
         } else if (type === NUTRIENT_PREDICTOR_ENUMS.url) {
           imageEl.src = event.target.value;
         }

@@ -25,7 +25,7 @@ export const getMealPredictions = async (imageUrl) => {
 
 export const getNutrientPredictions = async (mealDescription) => {
   try {
-    console.log(`${process.env.REACT_APP_API_URL_NUTRIENT_PREDICTOR_PREDICT_NUTRIENTS}`)
+    
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRIENT_PREDICTOR_PREDICT_NUTRIENTS}`, {
       method: "POST",
       headers: {
@@ -37,15 +37,15 @@ export const getNutrientPredictions = async (mealDescription) => {
 
     return resJSON.predictionResults
   } catch (error) {
-    console.log(error)
+    
     errorOnGetNutrientPredictions()
   }
 }
 
 export const getFoodObjectDetection = async (uploadedImage) => {
   try {
-    console.log(uploadedImage)
-    console.log(`${process.env.REACT_APP_API_URL_OBJECT_DETECTOR}${process.env.REACT_APP_API_URL_FOOD_OBJECT_DETECTION}`)
+    
+    
 
     let formData = new FormData();
     formData.append('image', uploadedImage);
@@ -60,7 +60,7 @@ export const getFoodObjectDetection = async (uploadedImage) => {
     const { foodObject } = resFoodObjectDetection.json()
     return foodObject
   } catch (error) {
-    console.log(error)
+    
     errorOnGetNutrientPredictions()
   }
 }

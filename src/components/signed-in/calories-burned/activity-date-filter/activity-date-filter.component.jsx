@@ -34,7 +34,7 @@ const ActivityDateFilter = () => {
     if (formFields.activity === "" && formFields.dateTracked === "" &&
       !formFields.activity && !formFields.dateTracked &&
       !formFields.durationMinutes && !formFields.durationMinutes) {
-        console.log("please fill out all info")
+        
         return
     }
      

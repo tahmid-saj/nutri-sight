@@ -22,7 +22,7 @@ const paperStyles = {
 
 const ScheduleDayInfo = () => {
   const { exercisesView, removeExercise, unselectScheduledExercise } = useContext(FitnessContext)
-  console.log(exercisesView)
+  
 
   const rowData = exercisesView.map((exercise) => {
     return {

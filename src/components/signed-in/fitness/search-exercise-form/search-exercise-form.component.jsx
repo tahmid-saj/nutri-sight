@@ -35,7 +35,7 @@ const SearchExerciseForm = () => {
     event.preventDefault()
 
     if (!formFields.exerciseMuscle || formFields.exerciseMuscle === "") {
-      console.log("please fill in all info")
+      
       return
     }
 

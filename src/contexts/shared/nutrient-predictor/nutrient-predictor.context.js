@@ -13,7 +13,7 @@ const updateImageHelper = (imageAndPrediction, imgPath) => {
     return imageAndPrediction
   }
 
-  console.log(imgPath);
+  
 
   return {
     ...imageAndPrediction,
@@ -22,8 +22,8 @@ const updateImageHelper = (imageAndPrediction, imgPath) => {
 };
 
 const updateImageAndPredictionHelper = async (imageAndPrediction, imgPath, imageInputType, uploadedImage) => {
-  console.log(imgPath);
-  console.log(uploadedImage)
+  
+  
 
   // TODO: need validation to check if imgPath and img are valid and an image
   if (validateImgPath(imgPath) === true) {
@@ -38,7 +38,7 @@ const updateImageAndPredictionHelper = async (imageAndPrediction, imgPath, image
     predictionResponse = await getMealPredictions(imgPath);
   }
 
-  console.log(predictionResponse)
+  
 
   return {
     imagePath: String(imgPath),
@@ -94,7 +94,7 @@ export const NutrientPredictorProvider = ({ children }) => {
   const [nutrientPredictions, setNutrientPredictions] = useState([])
 
   // useEffect(() => {
-  //   console.log(imageAndPrediction);
+  //   
   // }, [imageAndPrediction]);
 
   const updateImage = (imgPath) => {

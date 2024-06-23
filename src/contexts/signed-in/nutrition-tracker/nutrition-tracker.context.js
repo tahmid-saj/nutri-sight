@@ -50,7 +50,7 @@ const addDayTrackedHelper = async (nutritionTrackedDays, formInputMicronutrients
 
   if (validateAddDayTracked(nutritionTrackedDays, trackedDayWithMicronutrients)) return nutritionTrackedDays;
 
-  console.log(formInputMicronutrients)
+  
   postNutritionTrackedDay(userId, email, trackedDayWithMicronutrients);
 
   return [
@@ -111,7 +111,7 @@ const getDayTrackedHelper = (nutritionTrackedDays, trackedDay) => {
   });
 
   if (!trackedDayInfo) {
-    console.log(`No tracked info found for ${trackedDay.dateTracked}`);
+    
     return undefined;
   }
   
@@ -168,7 +168,7 @@ const removeDayTrackedHelper = async (nutritionTrackedDays, trackedDay, userId, 
   if (validateRemoveNutritionTrackedDay(trackedDay)) return nutritionTrackedDays
 
   deleteNutritionTrackedDay(userId, email, trackedDay)
-  console.log("removed")
+  
 
   return nutritionTrackedDays.filter(nutritionTrackedDay => nutritionTrackedDay.dateTracked !== trackedDay)
 }
@@ -286,7 +286,7 @@ export const NutritionTrackerProvider = ({ children }) => {
 
   // update nutritionTrackedDaysSummary with average consumptions
   useEffect(() => {
-    console.log(nutritionTrackedDays);
+    
 
     const summary = calculateSummary(nutritionTrackedDays);
 
@@ -359,27 +359,27 @@ export const NutritionTrackerProvider = ({ children }) => {
 
   const addFormInputMicronutrients = () => {
     setFormInputMicronutrients(addFormInputMicronutrientsHelper(formInputMicronutrients));
-    console.log(formInputMicronutrients)
+    
   };
 
   const updateFormInputMicronutrients = (micronutrient, micronutrientIndex) => {
     setFormInputMicronutrients(updateFormInputMicronutrientsHelper(formInputMicronutrients, micronutrient, micronutrientIndex));
-    console.log(formInputMicronutrients)
+    
   };
 
   const deleteFormInputMicronutrients = (micronutrientIndex) => {
     setFormInputMicronutrients(deleteFormInputMicronutrientsHelper(formInputMicronutrients, micronutrientIndex));
-    console.log(formInputMicronutrients)
+    
   };
 
   const filterDayTracked = (filterConditions) => {
     if (validateFilterNutritionTrackedDays(filterConditions)) {
-      console.log("invalid")
+      
       return
     } else {
       setFilterConditions(filterConditions)
       setNutritionTrackedDaysView(filterDayTrackedHelper(nutritionTrackedDays, filterConditions))
-      console.log("set")
+      
     }
   }
 

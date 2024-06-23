@@ -282,7 +282,7 @@ SimpleImage.prototype = {
           this.imageData = this.context.getImageData(0, 0, this.width, this.height);
       }
       catch (err) {
-          console.log(err);
+          
           __SimpleImageUtilities.throwError('The name you used to create a SimpleImage was not correct: ' + img.id);
       }
   },
@@ -307,7 +307,7 @@ var __SimpleImageUtilities = (function () {
       if (loadFunc == null) {
           loadFunc = function() {
               simpleImage.__init(this);
-              console.log('loaded image: ' + simpleImage.id);
+              
           }
       }
       var img = new Image();
@@ -335,7 +335,7 @@ var __SimpleImageUtilities = (function () {
 
       // get image from uploaded file input
       makeHTMLImageFromInput: function (file, simpleImage) {
-          console.log('creating image: ' + file.name);
+          
           var reader = new FileReader();
           reader.onload = function() {
               makeHTMLImage(this.result, file.name.substr(file.name.lastIndexOf('/') + 1), simpleImage);
@@ -347,7 +347,7 @@ var __SimpleImageUtilities = (function () {
       // get image from a relative URL
       makeHTMLImageFromURL: function (url, simpleImage) {
           var name = url.substr(0, url.indexOf(';'));
-          console.log('creating image: ' + name);
+          
           if (url.substr(0, 4) != 'http') {
               return makeHTMLImage(url, name, simpleImage);
           }
@@ -359,7 +359,7 @@ var __SimpleImageUtilities = (function () {
 
       // create an empty image of the given size
       makeHTMLImageFromSize: function (width, height) {
-          console.log('creating image: ' + width + 'x' + height);
+          
           var img = __SimpleImageUtilities.EMPTY_IMAGE.cloneNode(true);
           img.width = width;
           img.height = height;

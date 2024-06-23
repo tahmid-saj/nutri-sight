@@ -38,7 +38,7 @@ const AddExerciseForm = () => {
     event.preventDefault()
 
     if (!formFields.exerciseDate || formFields.exerciseDate === "") {
-      console.log("please fill in all info")
+      
       return
     }
 

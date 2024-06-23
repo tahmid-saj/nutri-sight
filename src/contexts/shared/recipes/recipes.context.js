@@ -189,7 +189,7 @@ export const RecipesProvider = ({ children }) => {
     setLastPageNumber(Math.floor(searchedRecipes.length / RECIPES_PER_PAGE) + 1);
 
     // pagination logic
-    console.log(searchedRecipes);
+    
     if (searchedRecipes.length !== 0) {
       paginationUpdate();
     }
