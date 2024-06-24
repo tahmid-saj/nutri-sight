@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { googleSignInStart, emailSignInStart } from "../../../store/shared/user/user.action";
 import { Typography } from "@mui/material";
 import { COLOR_CODES } from "../../../utils/constants/shared.constants.js";
+import GoogleIcon from '@mui/icons-material/Google';
 
 const defaultFormFields = {
   email: "",
@@ -81,8 +82,8 @@ const SignInForm = () => {
                     <Button type="submit">Sign In</Button>
                   </ButtonContainer>
                   <ButtonContainer>
-                    <Button buttonType="google-sign-in" type="button"
-                            onClick={ signInWithGoogle }>Google Sign In</Button>
+                    <Button buttonType="google-sign-in" type="button" onClick={ signInWithGoogle } 
+                      style={{ width: "250px" }}><GoogleIcon sx={{ margin: "7% 4% 0% 0%" }}/>Google Sign In</Button>
                   </ButtonContainer>
                 </div>
               </div>
