@@ -93,6 +93,7 @@ const ScheduleDayInfo = () => {
             <div className="row">
               <div className="col-12">
                 <div className="btn-group flex-wrap" role="group">
+                  <Button type="button" onClick={ (e) => onRemoveSelected(e) }>Remove Selected</Button>
                   <Button type="button" onClick={ (e) => handleUnselect(e) }>Unselect</Button>
                 </div>
               </div>

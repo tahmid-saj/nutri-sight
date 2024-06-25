@@ -196,10 +196,6 @@ export const COLOR_CODES = {
   background: "#a8afb8"
 }
 
-export const TAB_HEADERS = {
-
-}
-
 export const COMMON_SPACING = {
   screenWidthOnDrawerClose: 500,
   navBarWidth: 225,
