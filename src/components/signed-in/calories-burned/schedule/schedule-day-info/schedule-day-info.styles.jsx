@@ -3,7 +3,8 @@ import { COLOR_CODES } from "../../../../../utils/constants/shared.constants";
 
 export const CaloriesBurnedScheduleDayInfo = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: left;
+  /* align-items: center; */
   padding: 2% 2% 0.5% 2%;
 
   overflow: auto;
