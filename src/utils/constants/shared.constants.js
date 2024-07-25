@@ -159,7 +159,7 @@ export const NAV_LINKS = {
       },
       {
         header: "Medium",
-        url: "http://tahmidsajin.com/"
+        url: "https://medium.com/@tahmid.saj/designing-a-nutrition-tracker-application-b4ad7ce3289c"
       },
       {
         header: "LinkedIn",
