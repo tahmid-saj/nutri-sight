@@ -24,38 +24,47 @@ import { Provider } from "react-redux"
 import { persistor, store } from "./store/store"
 import { PersistGate } from "redux-persist/integration/react"
 
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
+
+const client = new ApolloClient({
+  uri: "http://localhost:8000/graphql",
+  cache: new InMemoryCache()
+})
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ResponsiveStylingProvider>
-      <Provider store={ store }>
-        {/* <PersistGate loading={ null } persistor={ persistor }> */}
-          <BrowserRouter>
-            <ChatBotProvider>
-              <NutrientPredictorProvider>
-                <FitnessProvider>
-                  {/* <NutritionTrackerProviderSignedOut> */}
-                    <CaloriesBurnedProvider>
-                      <RecipesProvider>
-                        {/* <UserProvider> */}
-                          <NutritionTrackerProviderSignedIn>
-                            <FitnessProviderSignedIn>
-                              <CaloriesBurnedProviderSignedIn>
-                                <App />
-                              </CaloriesBurnedProviderSignedIn>
-                            </FitnessProviderSignedIn>
-                          </NutritionTrackerProviderSignedIn>
-                        {/* </UserProvider> */}
-                      </RecipesProvider>
-                    </CaloriesBurnedProvider>
-                  {/* </NutritionTrackerProviderSignedOut> */}
-                </FitnessProvider>
-              </NutrientPredictorProvider>
-            </ChatBotProvider>
-          </BrowserRouter>
-        {/* </PersistGate> */}
-      </Provider>
-    </ResponsiveStylingProvider>
+    <ApolloProvider client={ client }>
+      <ResponsiveStylingProvider>
+        <Provider store={ store }>
+          {/* <PersistGate loading={ null } persistor={ persistor }> */}
+            <BrowserRouter>
+              <ChatBotProvider>
+                <NutrientPredictorProvider>
+                  <FitnessProvider>
+                    {/* <NutritionTrackerProviderSignedOut> */}
+                      <CaloriesBurnedProvider>
+                        <RecipesProvider>
+                          {/* <UserProvider> */}
+                            <NutritionTrackerProviderSignedIn>
+                              <FitnessProviderSignedIn>
+                                <CaloriesBurnedProviderSignedIn>
+                                  <App />
+                                </CaloriesBurnedProviderSignedIn>
+                              </FitnessProviderSignedIn>
+                            </NutritionTrackerProviderSignedIn>
+                          {/* </UserProvider> */}
+                        </RecipesProvider>
+                      </CaloriesBurnedProvider>
+                    {/* </NutritionTrackerProviderSignedOut> */}
+                  </FitnessProvider>
+                </NutrientPredictorProvider>
+              </ChatBotProvider>
+            </BrowserRouter>
+          {/* </PersistGate> */}
+        </Provider>
+      </ResponsiveStylingProvider>
+    </ApolloProvider>
   </React.StrictMode>
 );
 
