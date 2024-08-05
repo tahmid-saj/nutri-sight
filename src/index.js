@@ -26,15 +26,15 @@ import { PersistGate } from "redux-persist/integration/react"
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
 
-const client = new ApolloClient({
-  uri: "http://localhost:8000/graphql",
-  cache: new InMemoryCache()
-})
+// const client = new ApolloClient({
+//   uri: "http://localhost:8000/graphql",
+//   cache: new InMemoryCache()
+// })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={ client }>
+    {/* <ApolloProvider client={ client }> */}
       <ResponsiveStylingProvider>
         <Provider store={ store }>
           {/* <PersistGate loading={ null } persistor={ persistor }> */}
@@ -64,7 +64,7 @@ root.render(
           {/* </PersistGate> */}
         </Provider>
       </ResponsiveStylingProvider>
-    </ApolloProvider>
+    {/* </ApolloProvider> */}
   </React.StrictMode>
 );
 
