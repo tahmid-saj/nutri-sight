@@ -1,6 +1,8 @@
 import { createSelector } from "reselect"
+import { NutritionTrackerState } from "./nutrition-tracker.reducer"
+import { RootState } from "../../store"
 
-const selectNutritionTrackerReducer = state => state.nutritionTracker
+const selectNutritionTrackerReducer = (state: RootState): NutritionTrackerState => state.nutritionTracker
 
 export const selectNutritionTrackedDays = createSelector(
   [selectNutritionTrackerReducer],

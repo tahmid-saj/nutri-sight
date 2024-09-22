@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { NutritionTrackerState } from "./nutrition-tracker.reducer"
 
-export const NUTRITION_TRACKER_INITIAL_STATE = {
+export const NUTRITION_TRACKER_INITIAL_STATE: NutritionTrackerState = {
   nutritionTrackedDays: [],
   formInputMicronutrients: [],
   filterConditions: null,
