@@ -1,4 +1,4 @@
-import { compose, createStore, applyMiddleware } from "redux"
+import { compose, createStore, applyMiddleware, Middleware } from "redux"
 import logger from "redux-logger"
 import { persistStore, persistReducer } from "redux-persist"
 import storage from "redux-persist/lib/storage"
@@ -25,7 +25,7 @@ const middlewares = [
   process.env.NODE_ENV !== "production" && logger,
   // thunk,
   sagaMiddleware
-].filter(Boolean)
+].filter((middleware): middleware is Middleware => Boolean(middlewares))
 
 const composeEnhancer = (
   process.env.NODE_ENV !== "production" && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

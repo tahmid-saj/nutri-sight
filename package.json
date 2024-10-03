@@ -23,6 +23,7 @@
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.8",
     "@types/react-dom": "^18.3.0",
+    "@types/redux-logger": "^3.0.13",
     "ag-grid-react": "^31.3.1",
     "apexcharts": "^3.44.0",
     "dayjs": "^1.11.11",
@@ -48,6 +49,7 @@
     "rsuite": "^5.64.1",
     "sass": "^1.66.1",
     "styled-components": "^6.1.11",
+    "typed-redux-saga": "^1.5.0",
     "typescript": "^5.6.2",
     "web-vitals": "^2.1.4"
   },
