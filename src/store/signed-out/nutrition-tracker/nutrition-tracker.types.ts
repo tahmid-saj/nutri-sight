@@ -45,7 +45,7 @@ export type FilterConditions = {
 
 export type NutritionTrackedDaysView = NutritionTrackedDay[];
 
-export type ScheduledNutritionTrackedDaysView = NutritionTrackedDay
+export type ScheduledNutritionTrackedDaysView = NutritionTrackedDay | undefined
 
 export type DayTrackedSearchResult = NutritionTrackedDay | undefined;
 
