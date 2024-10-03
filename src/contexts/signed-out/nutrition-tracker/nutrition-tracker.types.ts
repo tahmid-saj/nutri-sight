@@ -2,11 +2,11 @@ import { ReactNode } from "react";
 
 // nutrition tracker types
 
-export interface NutritionTrackedDayContextType {
+export interface NutritionTrackerContextType {
   nutritionTrackedDays: NutritionTrackedDay[];
   formInputMicronutrients: FormInputMicronutrient[];
   selectedNutritionTrackedDay: SelectedNutritionTrackedDay;
-  filterConditions: FilterConditions;
+  filterConditions: FilterConditions | undefined;
   nutritionTrackedDaysView: NutritionTrackedDaysView;
   scheduledNutritionTrackedDaysView: ScheduledNutritionTrackedDaysView;
 
@@ -14,9 +14,9 @@ export interface NutritionTrackedDayContextType {
   updateDayTracked: (updatedTrackedDayInfo: NutritionTrackedDay) => void;
   getDayTracked: (trackedDay: string | Date) => void;
 
-  selectedScheduledNutritionTrackedDay: (trackedDay: string | Date) => void;
+  selectScheduledNutritionTrackedDay: (trackedDay: string | Date) => void;
 
-  dayTrackedSearchResult: NutritionTrackedDay;
+  dayTrackedSearchResult: NutritionTrackedDay | undefined;
 
   addFormInputMicronutrients: () => void;
   updateFormInputMicronutrients: (micronutrient: Micronutrient, micronutrientIndex: number) => void;
@@ -24,21 +24,21 @@ export interface NutritionTrackedDayContextType {
 
   addDayTrackedFromPrediction: (predictionNutritionInfo: PredictionNutritionInfo) => void;
 
-  nutritionTrackedDaysSummary: NutritionTrackedDaysSummary;
+  nutritionTrackedDaysSummary: NutritionTrackedDaysSummary | undefined;
 
   filterDayTracked: (filterConditions: FilterConditions) => void;
   removeDayTracked: (trackedDay: string | Date) => void;
   clearDayTrackedFilter: () => void;
 }
 
-export interface NutritionTrackedDayProviderProps {
+export interface NutritionTrackerProviderProps {
   children: ReactNode
 }
 
 export type NutritionTrackedDay = {
   dateTracked: string;
   calories: number;
-  macronutrients: Macronutrient[];
+  macronutrients: Macronutrient;
   micronutrients: Micronutrient[];
 }
 
@@ -56,11 +56,11 @@ export type Micronutrient = {
 
 export type FormInputMicronutrient = {
   name: string;
-  amount: number;
+  amount: string;
   unit: string;
 }
 
-export type SelectedNutritionTrackedDay = string | Date | null;
+export type SelectedNutritionTrackedDay = string | Date | undefined;
 
 export type FilterConditions = {
   filterStartDate?: string;
@@ -69,20 +69,20 @@ export type FilterConditions = {
 
 export type NutritionTrackedDaysView = NutritionTrackedDay[];
 
-export type ScheduledNutritionTrackedDaysView = NutritionTrackedDay
+export type ScheduledNutritionTrackedDaysView = NutritionTrackedDay | undefined
 
-export type DayTrackedSearchResult = NutritionTrackedDay;
+export type DayTrackedSearchResult = NutritionTrackedDay | undefined;
 
 export type NutritionTrackedDaysSummary = {
-  averageDailyCaloriesConsumption: number;
-  averageDailyCarbohydratesConsumption: number;
-  averageDailyProteinConsumption: number;
-  averageDailyFatConsumption: number;
+  averageDailyCaloriesConsumption?: number;
+  averageDailyCarbohydratesConsumption?: number;
+  averageDailyProteinConsumption?: number;
+  averageDailyFatConsumption?: number;
 }
 
 export type PredictionNutritionInfo = {
   dateTracked: string | Date;
   calories: number;
-  macronutrients: Macronutrient[];
+  macronutrients: Macronutrient;
   micronutrients: Micronutrient[];
 }
