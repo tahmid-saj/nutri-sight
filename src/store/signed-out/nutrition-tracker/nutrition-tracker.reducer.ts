@@ -1,4 +1,3 @@
-import { PayloadAction } from "@reduxjs/toolkit";
 import { DayTrackedSearchResult, FilterConditions, FormInputMicronutrient, 
   NutritionTrackedDay, NutritionTrackedDaysSummary, NutritionTrackedDaysView, 
   ScheduledNutritionTrackedDaysView, SelectedNutritionTrackedDay } 
@@ -7,6 +6,8 @@ import { addDayTracked, addDayTrackedFromPrediction, addFormInputMicronutrients,
   deleteFormInputMicronutrients, filterDayTracked, getDayTracked, removeDayTracked, selectScheduledNutritionTrackedDay, 
   setFormInputMicronutrients, setNutritionTrackedDaysSummary, setNutritionTrackedDaysView, 
   setScheduledNutritionTrackedDaysView, updateDayTracked, updateFormInputMicronutrients } from "./nutrition-tracker.action";
+import { AnyAction } from "redux";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit"; // Import from Redux Toolkit for type safety
 
 export type NutritionTrackerState = {
   readonly nutritionTrackedDays: NutritionTrackedDay[] | null | undefined;
@@ -36,60 +37,65 @@ export const NUTRITION_TRACKER_INITIAL_STATE: NutritionTrackerState = {
 
 export const nutritionTrackerReducer = (
   state = NUTRITION_TRACKER_INITIAL_STATE, 
-  action: PayloadAction<any>
+  action: AnyAction
 ): NutritionTrackerState => {
-  if (addDayTracked.match(action) || updateDayTracked.match(action) 
-    || removeDayTracked.match(action) || addDayTrackedFromPrediction.match(action)) {
+  const isPayloadAction = (a: AnyAction): a is { payload: any } => 'payload' in a;
+
+  if ((addDayTracked.match(action) || updateDayTracked.match(action) 
+    || removeDayTracked.match(action) || addDayTrackedFromPrediction.match(action))
+    && isPayloadAction(action)) {
     return {
       ...state,
       nutritionTrackedDays: action.payload
     };
   }
 
-  if (addFormInputMicronutrients.match(action) || updateFormInputMicronutrients.match(action)
-    || deleteFormInputMicronutrients.match(action) || setFormInputMicronutrients.match(action)) {
+  if ((addFormInputMicronutrients.match(action) || updateFormInputMicronutrients.match(action)
+    || deleteFormInputMicronutrients.match(action) || setFormInputMicronutrients.match(action))
+    && isPayloadAction(action)) {
     return {
       ...state,
       formInputMicronutrients: action.payload
     };
   }
 
-  if (filterDayTracked.match(action) || clearDayTrackedFilter.match(action)) {
+  if ((filterDayTracked.match(action) || clearDayTrackedFilter.match(action))
+    && isPayloadAction(action)) {
     return {
       ...state,
       filterConditions: action.payload
     };
   }
 
-  if (selectScheduledNutritionTrackedDay.match(action)) {
+  if (selectScheduledNutritionTrackedDay.match(action) && isPayloadAction(action)) {
     return {
       ...state,
       selectedNutritionTrackedDay: action.payload
     };
   }
 
-  if (setScheduledNutritionTrackedDaysView.match(action)) {
+  if (setScheduledNutritionTrackedDaysView.match(action) && isPayloadAction(action)) {
     return {
       ...state,
       scheduledNutritionTrackedDaysView: action.payload
     };
   }
 
-  if (setNutritionTrackedDaysView.match(action)) {
+  if (setNutritionTrackedDaysView.match(action) && isPayloadAction(action)) {
     return {
       ...state,
       nutritionTrackedDaysView: action.payload
     };
   }
 
-  if (getDayTracked.match(action)) {
+  if (getDayTracked.match(action) && isPayloadAction(action)) {
     return {
       ...state,
       dayTrackedSearchResult: action.payload
     };
   }
 
-  if (setNutritionTrackedDaysSummary.match(action)) {
+  if (setNutritionTrackedDaysSummary.match(action) && isPayloadAction(action)) {
     return {
       ...state,
       nutritionTrackedDaysSummary: action.payload
@@ -97,51 +103,4 @@ export const nutritionTrackerReducer = (
   }
 
   return state;
-  
-  // const { type, payload } = action
-
-  // switch(type) {
-  //   case NUTRITION_TRACKER_ACTION_TYPES.SET_NUTRITION_TRACKED_DAYS:
-  //     return {
-  //       ...state,
-  //       nutritionTrackedDays: payload
-  //     }
-  //   case NUTRITION_TRACKER_ACTION_TYPES.SET_FORM_INPUT_MICRONUTRIENTS:
-  //     return {
-  //       ...state,
-  //       formInputMicronutrients: payload
-  //     }
-  //   case NUTRITION_TRACKER_ACTION_TYPES.SET_FILTER_CONDITIONS:
-  //     return {
-  //       ...state,
-  //       filterConditions: payload
-  //     }
-  //   case NUTRITION_TRACKER_ACTION_TYPES.SET_SELECTED_NUTRITION_TRACKED_DAY:
-  //     return {
-  //       ...state,
-  //       selectedNutritionTrackedDay: payload
-  //     }
-  //   case NUTRITION_TRACKER_ACTION_TYPES.SET_SCHEDULED_NUTRITION_TRACKED_DAYS_VIEW:
-  //     return {
-  //       ...state,
-  //       scheduledNutritionTrackedDaysView: payload
-  //     }
-  //   case NUTRITION_TRACKER_ACTION_TYPES.SET_NUTRITION_TRACKED_DAYS_VIEW:
-  //     return {
-  //       ...state,
-  //       nutritionTrackedDaysView: payload
-  //     }
-  //   case NUTRITION_TRACKER_ACTION_TYPES.SET_DAY_TRACKED_SEARCH_RESULT:
-  //     return {
-  //       ...state,
-  //       dayTrackedSearchResult: payload
-  //     }
-  //   case NUTRITION_TRACKER_ACTION_TYPES.SET_NUTRITION_TRACKED_DAYS_SUMMARY:
-  //     return {
-  //       ...state,
-  //       nutritionTrackedDaysSummary: payload
-  //     }
-  //   default:
-  //     return state
-  // }
 }
