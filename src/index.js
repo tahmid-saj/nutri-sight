@@ -7,7 +7,6 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { ResponsiveStylingProvider } from './contexts/shared/responsive-styling/responsive-styling.context';
 import { UserProvider } from './contexts/shared/user/user.context';
 import { ChatBotProvider } from './contexts/shared/chatbot/chatbot.context';
 import { NutrientPredictorProvider } from './contexts/shared/nutrient-predictor/nutrient-predictor.context';
@@ -35,7 +34,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <ApolloProvider client={ client }> */}
-      <ResponsiveStylingProvider>
         <Provider store={ store }>
           {/* <PersistGate loading={ null } persistor={ persistor }> */}
             <BrowserRouter>
@@ -63,7 +61,6 @@ root.render(
             </BrowserRouter>
           {/* </PersistGate> */}
         </Provider>
-      </ResponsiveStylingProvider>
     {/* </ApolloProvider> */}
   </React.StrictMode>
 );
