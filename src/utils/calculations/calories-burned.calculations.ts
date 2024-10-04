@@ -1,16 +1,16 @@
 // calories burned calculations
 
-export const calculateSummary = (trackedCaloriesBurned) => {
-  
+import { TrackedCaloriesBurned } from "../../contexts/signed-out/calories-burned/calories-burned.types"
 
+export const calculateSummary = (trackedCaloriesBurned: TrackedCaloriesBurned[]) => {
   let dailyAverageCaloriesBurned = 0
   let mostBurned = {
     date: "",
     caloriesBurned: 0,
     activity: "",
   }
-  let totalTrackedDays = new Set()
-  let totalTrackedActivities = new Set()
+  let totalTrackedDays: Set<string | Date> = new Set()
+  let totalTrackedActivities: Set<string> = new Set()
 
   trackedCaloriesBurned.map((trackedActivity) => {
     dailyAverageCaloriesBurned += trackedActivity.totalCaloriesBurned
