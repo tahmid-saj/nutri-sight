@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, FC } from "react";
 
 import { getRecipes, getRecipe } from "../../../utils/api-requests/recipes.requests";
 
@@ -8,9 +8,11 @@ import { validateRecipeNameSearched } from "../../../utils/validations/recipes.v
 import { RECIPES_PER_PAGE, PAGINATION_BUTTONS } from "../../../utils/constants/recipes.constants";
 import { getNutrientPredictions } from "../../../utils/api-requests/nutrient-predictor.requests";
 
+import { RecipesContextType, RecipesProviderProps, RecipeInfo, Ingredient } from "./recipes.types"
+
 // helper functions
 
-const displaySearchedRecipesHelper = async (searchedRecipes, recipeNameSearched) => {
+const displaySearchedRecipesHelper = async (searchedRecipes: any, recipeNameSearched: string): Promise<any> => {
   if (validateRecipeNameSearched(recipeNameSearched) === true) return searchedRecipes;
 
   const recipes = await getRecipes(recipeNameSearched);
@@ -18,7 +20,7 @@ const displaySearchedRecipesHelper = async (searchedRecipes, recipeNameSearched)
   // placing page numbers in recipes
   let recipeNumber = 0;
 
-  const updatedRecipes = recipes.map(recipe => {
+  const updatedRecipes = recipes.map((recipe: any) => {
     const pageNumber = Math.floor(recipeNumber / RECIPES_PER_PAGE) + 1;
     recipeNumber += 1;
 
@@ -32,13 +34,13 @@ const displaySearchedRecipesHelper = async (searchedRecipes, recipeNameSearched)
   return updatedRecipes;
 };
 
-const displaySearchedRecipesOnPageHelper = (searchedRecipes, currentPageNumber) => {
-  const recipesOnPage = searchedRecipes.filter(recipe => recipe.pageNumber === currentPageNumber);
+const displaySearchedRecipesOnPageHelper = (searchedRecipes: any, currentPageNumber: number): any => {
+  const recipesOnPage = searchedRecipes.filter((recipe: any) => recipe.pageNumber === currentPageNumber);
 
   return recipesOnPage;
 };
 
-const displayRecipeHelper = async (searchedRecipes, clickedRecipe) => {
+const displayRecipeHelper = async (searchedRecipes: any, clickedRecipe: any): Promise<RecipeInfo> => {
   const recipe = await getRecipe(clickedRecipe);
   const nutrientPredictions = await getNutrientPredictions(clickedRecipe.title)
 
@@ -55,7 +57,7 @@ const displayRecipeHelper = async (searchedRecipes, clickedRecipe) => {
   };
 };
 
-const updateServingsHelper = (recipeToUpdate, updatedServings) => {
+const updateServingsHelper = (recipeToUpdate: RecipeInfo, updatedServings: number): RecipeInfo => {
   const updatedIngredients = calculateIngredientsAfterServingsUpdate(recipeToUpdate, updatedServings);
 
   return {
@@ -70,7 +72,7 @@ const updateServingsHelper = (recipeToUpdate, updatedServings) => {
   };
 };
 
-const decreaseServingsHelper = (recipeToDecreaseServings) => {
+const decreaseServingsHelper = (recipeToDecreaseServings: RecipeInfo): RecipeInfo => {
   const updatedIngredients = calculateIngredientsAfterServingsUpdate(recipeToDecreaseServings, recipeToDecreaseServings.updatedServings - 1);
 
   return {
@@ -85,7 +87,7 @@ const decreaseServingsHelper = (recipeToDecreaseServings) => {
   };
 };
 
-const increaseServingsHelper = (recipeToIncreaseServings) => {
+const increaseServingsHelper = (recipeToIncreaseServings: RecipeInfo): RecipeInfo => {
   const updatedIngredients = calculateIngredientsAfterServingsUpdate(recipeToIncreaseServings, recipeToIncreaseServings.updatedServings + 1);
   
   return {
@@ -100,7 +102,7 @@ const increaseServingsHelper = (recipeToIncreaseServings) => {
   };
 };
 
-export const RecipesContext = createContext({
+export const RecipesContext = createContext<RecipesContextType>({
   searchedRecipes: [],
   // TODO: may need to place page numbers here
 
@@ -115,7 +117,7 @@ export const RecipesContext = createContext({
   displayedRecipesOnPage: [],
   // takes portion of recipeSearched for specific page number
 
-  displayedRecipe: {},
+  displayedRecipe: undefined,
   // displayedRecipe structure:
   // {
   //   title: "spicy chicken and pepper jack pizza",
@@ -149,17 +151,17 @@ export const RecipesContext = createContext({
   displayPaginationButtons: () => {},
 });
 
-export const RecipesProvider = ({ children }) => {
-  const [searchedRecipes, setSearchedRecipes] = useState([]);
-  const [currentPageNumber, setCurrentPageNumber] = useState(1);
-  const [previousPageNumber, setPreviousPageNumber] = useState(0);
-  const [nextPageNumber, setNextPageNumber] = useState(2);
-  const [lastPageNumber, setLastPageNumber] = useState(0);
-  const [displayPreviousPage, setDisplayPreviousPage] = useState(false);
-  const [displayNextPage, setDisplayNextPage] = useState(false);
+export const RecipesProvider: FC<RecipesProviderProps> = ({ children }) => {
+  const [searchedRecipes, setSearchedRecipes] = useState<any>([]);
+  const [currentPageNumber, setCurrentPageNumber] = useState<number>(1);
+  const [previousPageNumber, setPreviousPageNumber] = useState<number>(0);
+  const [nextPageNumber, setNextPageNumber] = useState<number>(2);
+  const [lastPageNumber, setLastPageNumber] = useState<number>(0);
+  const [displayPreviousPage, setDisplayPreviousPage] = useState<boolean>(false);
+  const [displayNextPage, setDisplayNextPage] = useState<boolean>(false);
 
-  const [displayedRecipesOnPage, setDisplayedRecipesOnPage] = useState([]);
-  const [displayedRecipe, setDisplayedRecipe] = useState({});
+  const [displayedRecipesOnPage, setDisplayedRecipesOnPage] = useState<any>([]);
+  const [displayedRecipe, setDisplayedRecipe] = useState<RecipeInfo | undefined>(undefined);
 
   // pagination logic included here
   const paginationUpdate = () => {
@@ -195,46 +197,46 @@ export const RecipesProvider = ({ children }) => {
     }
   }, [currentPageNumber, searchedRecipes]);
 
-  const displaySearchedRecipes = async (recipeNameSearched) => {
+  const displaySearchedRecipes = async (recipeNameSearched: string): Promise<void> => {
     // full recipes list
     const returnedRecipes = await displaySearchedRecipesHelper(searchedRecipes, recipeNameSearched);
     setSearchedRecipes(returnedRecipes);
 
     // first displayed recipe
     const displayRecipe = {
-      id: returnedRecipes[0].id,
-      title: returnedRecipes[0].title
+      id: returnedRecipes[0].id as string,
+      title: returnedRecipes[0].title as string
     };
 
     const firstDisplayedRecipe = await displayRecipeHelper(searchedRecipes, displayRecipe);
     setDisplayedRecipe(firstDisplayedRecipe);
   };
 
-  const displaySearchedRecipesOnPage = (pageNumber) => {
+  const displaySearchedRecipesOnPage = (pageNumber: number): void => {
     // display recipe for page number 1
     setCurrentPageNumber(1);
     setDisplayedRecipesOnPage(displaySearchedRecipesOnPageHelper(searchedRecipes, pageNumber));
   };
 
-  const displayRecipe = async (clickedRecipe) => {
+  const displayRecipe = async (clickedRecipe: RecipeInfo): Promise<void> => {
     const recipe = await displayRecipeHelper(searchedRecipes, clickedRecipe);
 
     setDisplayedRecipe(recipe);
   };
 
-  const updateServings = (recipeToUpdate, updatedServings) => {
+  const updateServings = (recipeToUpdate: RecipeInfo, updatedServings: number): void => {
     setDisplayedRecipe(updateServingsHelper(recipeToUpdate, updatedServings));
   };
 
-  const decreaseServings = (recipeToDecreaseServings) => {
+  const decreaseServings = (recipeToDecreaseServings: RecipeInfo): void => {
     setDisplayedRecipe(decreaseServingsHelper(recipeToDecreaseServings));
   };
 
-  const increaseServings = (recipeToIncreaseServings) => {
+  const increaseServings = (recipeToIncreaseServings: RecipeInfo): void => {
     setDisplayedRecipe(increaseServingsHelper(recipeToIncreaseServings));
   };
 
-  const displayPaginationButtons = (nextOrPrevious) => {
+  const displayPaginationButtons = (nextOrPrevious: string): void => {
     if (nextOrPrevious === PAGINATION_BUTTONS.next) {
       setPreviousPageNumber(previousPageNumber + 1);
       setCurrentPageNumber(currentPageNumber + 1);
