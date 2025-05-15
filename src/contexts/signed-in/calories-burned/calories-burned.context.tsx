@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useEffect, useState, useContext, FC } from "react";
 // import { UserContext } from "../../shared/user/user.context";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../store/shared/user/user.selector";
@@ -15,16 +15,18 @@ import { getSearchActivity,
 } from "../../../utils/api-requests/calories-burned.requests"
 
 import { DEFAULT_TRACKED_CALORIES_BURNED, DEFAULT_TRACKED_CALORIES_BURNED_SUMMARY } from "../../../utils/constants/calories-burned.constants" 
+import { TrackedCaloriesBurned, FilterConditions, TrackedCaloriesBurnedSummary, SearchActivityInput, SearchActivityResult, AddTrackedActivityInput, CaloriesBurnedContextType, CaloriesBurnedProviderProps } from "./calories-burned.types"
 
 // TODO: sort the records by date
 // helper functions
-const searchActivityHelper = async (trackedDayInfo) => {
+const searchActivityHelper = async (trackedDayInfo: SearchActivityInput): Promise<SearchActivityResult[]> => {
   const resActivityResults = await getSearchActivity(trackedDayInfo)
 
   return resActivityResults
 }
 
-const addTrackedActivityDateHelper = async (trackedCaloriesBurned, trackedDayInfo, activityId, userId, email) => {
+const addTrackedActivityDateHelper = async (trackedCaloriesBurned: TrackedCaloriesBurned[], 
+  trackedDayInfo: AddTrackedActivityInput, activityId: number, userId: string, email: string): Promise<TrackedCaloriesBurned[]> => {
   postAddActivity(userId, email, trackedDayInfo, activityId)
   
 
@@ -40,10 +42,10 @@ const addTrackedActivityDateHelper = async (trackedCaloriesBurned, trackedDayInf
   ]
 }
 
-const filterActivityDatesHelper = (trackedCaloriesBurned, filterConditions) => {
-  
+const filterActivityDatesHelper = (trackedCaloriesBurned: TrackedCaloriesBurned[], 
+    filterConditions: FilterConditions): TrackedCaloriesBurned[] => {
 
-  let filteredTrackedCaloriesBurned = []
+  let filteredTrackedCaloriesBurned: TrackedCaloriesBurned[] = []
   trackedCaloriesBurned.map((trackedActivity) => {
     if (filterConditions.activity === "" || (trackedActivity.activity.toLowerCase().includes(filterConditions.activity.toLowerCase()))) {
       if (filterConditions.dateTracked === "" || (filterConditions.dateTracked === trackedActivity.dateTracked)) {
@@ -57,37 +59,37 @@ const filterActivityDatesHelper = (trackedCaloriesBurned, filterConditions) => {
   return filteredTrackedCaloriesBurned
 }
 
-const removeActivityDateHelper = async (trackedCaloriesBurned, activityId, userId, email) => {
+const removeActivityDateHelper = async (trackedCaloriesBurned: TrackedCaloriesBurned[], 
+    activityId: number, userId: string, email: string): Promise<TrackedCaloriesBurned[]> => {
   if (validateRemoveActivityDate(activityId)) return trackedCaloriesBurned
    
   deleteRemoveActivity(userId, email, activityId)
-  
 
   return trackedCaloriesBurned.filter(trackedActivity => trackedActivity.activityId !== activityId)
 }
 
-const setDefaultTrackedCaloriesBurnedValuesHelper = () => {
+const setDefaultTrackedCaloriesBurnedValuesHelper = (): TrackedCaloriesBurned[] => {
   return DEFAULT_TRACKED_CALORIES_BURNED
 }
 
-const setDefaultTrackedCaloriesBurnedSummaryValuesHelper = () => {
+const setDefaultTrackedCaloriesBurnedSummaryValuesHelper = (): TrackedCaloriesBurnedSummary => {
   return DEFAULT_TRACKED_CALORIES_BURNED_SUMMARY
 }
 
-const selectScheduledTrackedCaloriesBurnedHelper = (trackedCaloriesBurned, trackedDay) => {
-  
+const selectScheduledTrackedCaloriesBurnedHelper = (trackedCaloriesBurned: TrackedCaloriesBurned[], 
+  trackedDay: string | Date): TrackedCaloriesBurned[] | undefined => {
 
   const filteredTrackedCaloriesBurned = trackedCaloriesBurned.filter((caloriesTrackedDay) => {
     return caloriesTrackedDay.dateTracked === trackedDay
   })
 
-  if (!filteredTrackedCaloriesBurned) return null
+  if (!filteredTrackedCaloriesBurned) return undefined
 
   return filteredTrackedCaloriesBurned
 }
 
 // initial state
-export const CaloriesBurnedContext = createContext({
+export const CaloriesBurnedContext = createContext<CaloriesBurnedContextType>({
   trackedCaloriesBurned: [],
   // trackedCaloriesBurned and trackedCaloriesBurnedView structure:
   // [
@@ -103,9 +105,9 @@ export const CaloriesBurnedContext = createContext({
   trackedCaloriesBurnedLength: 0,
 
   // selectedTrackedCaloriesBurned is the selected date from the calendar component
-  selectedTrackedCaloriesBurned: null,
+  selectedTrackedCaloriesBurned: undefined,
 
-  filterConditions: {},
+  filterConditions: undefined,
   // filterConditions structure:
   // {
   //   dateTracked: "",
@@ -114,8 +116,9 @@ export const CaloriesBurnedContext = createContext({
   
   trackedCaloriesBurnedView: [],
 
-  // scheduledTrackedCaloriesBurnedView is the selected selectedTrackedCaloriesBurned info from the calendar component
-  scheduledTrackedCaloriesBurnedView: null,
+  // scheduledTrackedCaloriesBurnedView is the selected selectedTrackedCaloriesBurned info from the 
+  // calendar component
+  scheduledTrackedCaloriesBurnedView: undefined,
 
   searchActivity: () => {},
   addTrackedActivityDate: () => {},
@@ -131,7 +134,7 @@ export const CaloriesBurnedContext = createContext({
   //   from api
   // ]
 
-  trackedCaloriesBurnedSummary: {},
+  trackedCaloriesBurnedSummary: undefined,
   // trackedCaloriesBurnedSummary structure:
   // {
   //   dailyAverageCaloriesBurned: 300,
@@ -151,15 +154,15 @@ export const CaloriesBurnedContext = createContext({
 
 // context provider
 // TODO: manage length state better everywhere via backend as well (it currently is not pulled on sign in)
-export const CaloriesBurnedProvider = ({ children }) => {
-  const [trackedCaloriesBurned, setTrackedCaloriesBurned] = useState([])
-  const [trackedCaloriesBurnedLength, setTrackedCaloriesBurnedLength] = useState(0)
-  const [filterConditions, setFilterConditions] = useState(null)
-  const [selectedTrackedCaloriesBurned, setSelectedTrackedCaloriesBurned] = useState(null)
-  const [scheduledTrackedCaloriesBurnedView, setScheduledTrackedCaloriesBurnedView] = useState(null)
-  const [searchActivityResults, setSearchActivityResults] = useState([])
-  const [trackedCaloriesBurnedView, setTrackedCaloriesBurnedView] = useState(trackedCaloriesBurned)
-  const [trackedCaloriesBurnedSummary, setTrackedCaloriesBurnedSummary] = useState({})
+export const CaloriesBurnedProvider: FC<CaloriesBurnedProviderProps> = ({ children }) => {
+  const [trackedCaloriesBurned, setTrackedCaloriesBurned] = useState<TrackedCaloriesBurned[]>([])
+  const [trackedCaloriesBurnedLength, setTrackedCaloriesBurnedLength] = useState<number>(0)
+  const [filterConditions, setFilterConditions] = useState<FilterConditions | undefined>(undefined)
+  const [selectedTrackedCaloriesBurned, setSelectedTrackedCaloriesBurned] = useState<string | Date | undefined>(undefined)
+  const [scheduledTrackedCaloriesBurnedView, setScheduledTrackedCaloriesBurnedView] = useState<TrackedCaloriesBurned[] | undefined>(undefined)
+  const [searchActivityResults, setSearchActivityResults] = useState<SearchActivityResult[]>([])
+  const [trackedCaloriesBurnedView, setTrackedCaloriesBurnedView] = useState<TrackedCaloriesBurned[]>(trackedCaloriesBurned)
+  const [trackedCaloriesBurnedSummary, setTrackedCaloriesBurnedSummary] = useState<TrackedCaloriesBurnedSummary | undefined>({})
 
   // const { currentUser } = useContext(UserContext)
   const currentUser = useSelector(selectCurrentUser)
@@ -201,7 +204,7 @@ export const CaloriesBurnedProvider = ({ children }) => {
 
   // update trackedCaloriesBurnedView when trackedCaloriesBurned or filterConditions change
   useEffect(() => {
-    if (filterConditions !== null) {
+    if (filterConditions) {
       setTrackedCaloriesBurnedView(filterActivityDatesHelper(trackedCaloriesBurned, filterConditions))
     } else {
       setTrackedCaloriesBurnedView(trackedCaloriesBurned)
@@ -213,11 +216,11 @@ export const CaloriesBurnedProvider = ({ children }) => {
     if (selectedTrackedCaloriesBurned) {
       setScheduledTrackedCaloriesBurnedView(selectScheduledTrackedCaloriesBurnedHelper(trackedCaloriesBurned, selectedTrackedCaloriesBurned))
     } else {
-      setScheduledTrackedCaloriesBurnedView(null)
+      setScheduledTrackedCaloriesBurnedView(undefined)
     }
   }, [trackedCaloriesBurned, selectedTrackedCaloriesBurned])
 
-  const searchActivity = async (trackedDayInfo) => {
+  const searchActivity = async (trackedDayInfo: SearchActivityInput): Promise<void> => {
     if (validateSearchActivity(trackedDayInfo)) {
       return
     } else {
@@ -226,18 +229,18 @@ export const CaloriesBurnedProvider = ({ children }) => {
     }
   }
 
-  const addTrackedActivityDate = async (trackedDayInfo) => {
+  const addTrackedActivityDate = async (trackedDayInfo: AddTrackedActivityInput): Promise<void> => {
     if (validateAddTrackedActivityDate(trackedDayInfo)) {
       return
     } else {
-      const resAddTrackedActivity = await addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo, trackedCaloriesBurnedLength + 1, currentUser.uid, currentUser.email)
+      const resAddTrackedActivity = await addTrackedActivityDateHelper(trackedCaloriesBurned, trackedDayInfo, trackedCaloriesBurnedLength + 1, currentUser?.uid!, currentUser?.email!)
       setTrackedCaloriesBurned(resAddTrackedActivity)
       // setTrackedCaloriesBurnedLength(trackedCaloriesBurnedLength + 1)
       
     }
   }
 
-  const filterActivityDates = (filterConditions) => {
+  const filterActivityDates = (filterConditions: FilterConditions): void => {
     if (validateFilterActivityDates(filterConditions)) {
       
       return
@@ -248,36 +251,36 @@ export const CaloriesBurnedProvider = ({ children }) => {
     }
   }
 
-  const removeActivityDate = async (activityId) => {
-    const resRemoveActivityDate = await removeActivityDateHelper(trackedCaloriesBurned, activityId, currentUser.uid, currentUser.email)
+  const removeActivityDate = async (activityId: number): Promise<void> => {
+    const resRemoveActivityDate = await removeActivityDateHelper(trackedCaloriesBurned, activityId, currentUser?.uid!, currentUser?.email!)
     setTrackedCaloriesBurned(resRemoveActivityDate)
   }
 
   const clearActivityDatesFilter = () => {
-    setFilterConditions(null)
+    setFilterConditions(undefined)
     setTrackedCaloriesBurnedView(trackedCaloriesBurned)
   }
 
-  const setDefaultTrackedCaloriesBurnedValues = () => {
+  const setDefaultTrackedCaloriesBurnedValues = (): void => {
     setTrackedCaloriesBurned(setDefaultTrackedCaloriesBurnedValuesHelper())
   }
   
-  const setDefaultTrackedCaloriesBurnedSummaryValues = () => {
+  const setDefaultTrackedCaloriesBurnedSummaryValues = (): void => {
     setTrackedCaloriesBurnedSummary(setDefaultTrackedCaloriesBurnedSummaryValuesHelper())
   }
 
   // update trackedCaloriesBurned on sign out
-  const updateTrackedCaloriesBurned = () => {
-    putTrackedCaloriesBurned(currentUser.uid, currentUser.email, trackedCaloriesBurned)
+  const updateTrackedCaloriesBurned = (): void => {
+    putTrackedCaloriesBurned(currentUser?.uid, currentUser?.email, trackedCaloriesBurned)
   }
 
-  const selectScheduledTrackedCaloriesBurned = (dayTracked) => {
+  const selectScheduledTrackedCaloriesBurned = (dayTracked: string | Date): void => {
     setSelectedTrackedCaloriesBurned(dayTracked)
     setScheduledTrackedCaloriesBurnedView(selectScheduledTrackedCaloriesBurnedHelper(trackedCaloriesBurned, dayTracked))
   }
 
   const value = { trackedCaloriesBurned, trackedCaloriesBurnedView, filterConditions, searchActivityResults,
-    scheduledTrackedCaloriesBurnedView,
+    scheduledTrackedCaloriesBurnedView, trackedCaloriesBurnedLength, selectedTrackedCaloriesBurned,
     searchActivity, addTrackedActivityDate, filterActivityDates, removeActivityDate, clearActivityDatesFilter,
     trackedCaloriesBurnedSummary,
     setDefaultTrackedCaloriesBurnedValues, setDefaultTrackedCaloriesBurnedSummaryValues, updateTrackedCaloriesBurned,

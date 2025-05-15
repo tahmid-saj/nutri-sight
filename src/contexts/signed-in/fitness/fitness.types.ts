@@ -19,6 +19,9 @@ export interface FitnessContextType {
   selectSearchedExercises: (exercise: ExerciseSearchResult) => void;
 
   removeExercise: (exerciseTag: number) => void;
+
+  setDefaultExercisesValues: () => void;
+  updateExercises: () => void;
 }
 
 export interface FitnessProviderProps {

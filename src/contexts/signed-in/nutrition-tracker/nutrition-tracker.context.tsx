@@ -14,11 +14,27 @@ import { getNutritionTrackedDaysData, getNutritionTrackedDaysSummaryData,
   postNutritionTrackedDay, deleteNutritionTrackedDay, putNutritionTrackedDay,
   putNutritionTrackedDays, putNutritionTrackedDaysSummary } from "../../../utils/api-requests/nutrition-tracker.requests";
 
+import { NutritionTrackedDay, PrefictionNutritionInfo, NutritionTrackedDay, Micronutrient } from "./nutrition-tracker.types";
+import { FormInputMicronutrient } from "./nutrition-tracker.types";
+import { FilterConditions } from "./nutrition-tracker.types";
+import { NutritionTrackedDaysSummary } from "./nutrition-tracker.types";
+import { FC } from "react";
+
 // TODO: sort the records by date
 // helper functions
 
-const addDayTrackedFromPredictionHelper = (nutritionTrackedDays, predictionNutritionInfo) => {
+const addDayTrackedFromPredictionHelper = (nutritionTrackedDays: NutritionTrackedDay[], 
+  predictionNutritionInfo: PrefictionNutritionInfo): NutritionTrackedDay[] => {
   if (validatePredictionInfo(nutritionTrackedDays, predictionNutritionInfo)) return nutritionTrackedDays
+
+  let micronutrients: Micronutrient[] = []
+  predictionNutritionInfo.micronutrients.map((micronutrient) => {
+    micronutrients.push({
+      name: String(micronutrient.name),
+      amount: Number(micronutrient.amount),
+      unit: String(micronutrient.unit)
+    })
+  })
 
   return [
     ...nutritionTrackedDays,
@@ -30,19 +46,31 @@ const addDayTrackedFromPredictionHelper = (nutritionTrackedDays, predictionNutri
         protein: Number(predictionNutritionInfo.macronutrients.protein),
         fat: Number(predictionNutritionInfo.macronutrients.fat),
       },
-      micronutrients: predictionNutritionInfo.micronutrients
+      micronutrients: micronutrients
     }
   ]
 }
 
-const addMicronutrientsToTrackedDayInfoHelper = (formInputMicronutrients, trackedDayInfo) => {
+const addMicronutrientsToTrackedDayInfoHelper = (formInputMicronutrients: FormInputMicronutrient[], 
+  trackedDayInfo: NutritionTrackedDay): NutritionTrackedDay => {
+  
+    let micronutrients: Micronutrient[] = []
+  formInputMicronutrients.map((micronutrient) => {
+    micronutrients.push({
+      name: String(micronutrient.name),
+      amount: Number(micronutrient.amount),
+      unit: String(micronutrient.unit)
+    })
+  })
+
   return {
     ...trackedDayInfo,
     micronutrients: formInputMicronutrients
   }
 };
 
-const addDayTrackedHelper = async (nutritionTrackedDays, formInputMicronutrients, trackedDayInfo, userId, email) => {
+const addDayTrackedHelper = async (nutritionTrackedDays: NutritionTrackedDay[], 
+  formInputMicronutrients: FormInputMicronutrient[], trackedDayInfo: NutritionTrackedDay, userId: string, email: string): Promise<NutritionTrackedDay[]> => {
   // add formInputMicronutrients to trackedDayInfo
   const trackedDayWithMicronutrients = addMicronutrientsToTrackedDayInfoHelper(formInputMicronutrients, trackedDayInfo);
 
@@ -69,7 +97,9 @@ const addDayTrackedHelper = async (nutritionTrackedDays, formInputMicronutrients
   ];
 };
 
-const updateDayTrackedHelper = async (nutritionTrackedDays, formInputMicronutrients, updatedTrackedDayInfo, userId, email) => {
+const updateDayTrackedHelper = async (nutritionTrackedDays: NutritionTrackedDay[], 
+  formInputMicronutrients: FormInputMicronutrient[], 
+  updatedTrackedDayInfo: NutritionTrackedDay, userId: string, email: string): Promise<NutritionTrackedDay[]> => {
   // add formInputMicronutrients to trackedDayInfo
   const trackedDayWithMicronutrients = addMicronutrientsToTrackedDayInfoHelper(formInputMicronutrients, updatedTrackedDayInfo);
 
@@ -98,12 +128,12 @@ const updateDayTrackedHelper = async (nutritionTrackedDays, formInputMicronutrie
     return nutritionTrackedDay;
   })
 
-  putNutritionTrackedDay(userId, email, originalNutritionTrackedDay, trackedDayWithMicronutrients);
+  await putNutritionTrackedDay(userId, email, originalNutritionTrackedDay, trackedDayWithMicronutrients);
 
   return updatedNutritionTrackedDays;
 };
 
-const getDayTrackedHelper = (nutritionTrackedDays, trackedDay) => {
+const getDayTrackedHelper = (nutritionTrackedDays: NutritionTrackedDay[], trackedDay: string | Date): DayTrackedSearchResult => {
   // return trackedDay info where nutritionTrackedDays's dateTracked is equal to trackedDay.dateTracked
 
   const trackedDayInfo = nutritionTrackedDays.find((nutritionTrackedDay) => {
@@ -118,13 +148,14 @@ const getDayTrackedHelper = (nutritionTrackedDays, trackedDay) => {
   return trackedDayInfo;
 };
 
-const addFormInputMicronutrientsHelper = (formInputMicronutrients) => {
+const addFormInputMicronutrientsHelper = (formInputMicronutrients: FormInputMicronutrient[]): FormInputMicronutrient[] => {
   // add default micronutrient to formInputMicronutrients
 
   return [ ...formInputMicronutrients, DEFAULT_MICRONUTRIENT ];
 };
 
-const updateFormInputMicronutrientsHelper = (formInputMicronutrients, micronutrient, micronutrientIndex) => {
+const updateFormInputMicronutrientsHelper = (formInputMicronutrients: FormInputMicronutrient[], 
+  micronutrient: FormInputMicronutrient, micronutrientIndex: number): FormInputMicronutrient[] => {
   // update formInputMicronutrients on micronutrientIndex with micronutrient
 
   const updatedFormInputMicronutrients = formInputMicronutrients.map((micront, index) => {
@@ -142,7 +173,8 @@ const updateFormInputMicronutrientsHelper = (formInputMicronutrients, micronutri
   return updatedFormInputMicronutrients;;
 };
 
-const deleteFormInputMicronutrientsHelper = (formInputMicronutrients, micronutrientIndex) => {
+const deleteFormInputMicronutrientsHelper = (formInputMicronutrients: FormInputMicronutrient[], 
+  micronutrientIndex: number): FormInputMicronutrient[] => {
   // remove micronutrient from formInputMicronutrients on index with micronutrientIndex
 
   const deleteMicronutrients = [ ...formInputMicronutrients ];
@@ -151,8 +183,9 @@ const deleteFormInputMicronutrientsHelper = (formInputMicronutrients, micronutri
   return deleteMicronutrients;
 };
 
-const filterDayTrackedHelper = (nutritionTrackedDays, filterConditions) => {
-  let filteredNutritionTrackedDays = []
+const filterDayTrackedHelper = (nutritionTrackedDays: NutritionTrackedDay[], 
+  filterConditions: FilterConditions): NutritionTrackedDay[] => {
+  let filteredNutritionTrackedDays: NutritionTrackedDay[] = []
   nutritionTrackedDays.map((trackedDay) => {
     if (filterConditions.filterStartDate === "" || (filterConditions.filterStartDate <= trackedDay.dateTracked)) {
       if (filterConditions.filterEndDate === "" || (trackedDay.dateTracked <= filterConditions.filterEndDate)) {
@@ -164,7 +197,8 @@ const filterDayTrackedHelper = (nutritionTrackedDays, filterConditions) => {
   return filteredNutritionTrackedDays
 }
 
-const removeDayTrackedHelper = async (nutritionTrackedDays, trackedDay, userId, email) => {
+const removeDayTrackedHelper = async (nutritionTrackedDays: NutritionTrackedDay[], trackedDay: string | Date, 
+  userId: string, email: string): NutritionTrackedDay[] => {
   if (validateRemoveNutritionTrackedDay(trackedDay)) return nutritionTrackedDays
 
   deleteNutritionTrackedDay(userId, email, trackedDay)
@@ -173,25 +207,26 @@ const removeDayTrackedHelper = async (nutritionTrackedDays, trackedDay, userId, 
   return nutritionTrackedDays.filter(nutritionTrackedDay => nutritionTrackedDay.dateTracked !== trackedDay)
 }
 
-const setDefaultNutritionTrackedDaysValuesHelper = () => {
+const setDefaultNutritionTrackedDaysValuesHelper = (): NutritionTrackedDay[] => {
   return DEFAULT_NUTRITION_TRACKED_DAYS;
 };
 
-const setDefaultNutritionTrackedDaysSummaryValuesHelper = () => {
+const setDefaultNutritionTrackedDaysSummaryValuesHelper = (): NutritionTrackedDaysSummary => {
   return DEFAULT_NUTRITION_TRACKED_DAYS_SUMMARY;
 };
 
-const selectScheduledNutritionTrackedDayHelper = (nutritionTrackedDays, trackedDay) => {
+const selectScheduledNutritionTrackedDayHelper = (nutritionTrackedDays: NutritionTrackedDay[], 
+  trackedDay: string | Date): NutritionTrackedDay | undefined => {
   const filteredNutritionTrackedDay = nutritionTrackedDays.find((nutritionTrackedDay) => {
     return nutritionTrackedDay.dateTracked === trackedDay
   })
 
-  if (!filteredNutritionTrackedDay) return null
+  if (!filteredNutritionTrackedDay) return undefined
 
   return filteredNutritionTrackedDay
 }
 
-export const NutritionTrackerContext = createContext({
+export const NutritionTrackerContext = createContext<NutritionTrackerContextType>({
   nutritionTrackedDays: [],
   // nutritionTrackedDays structure:
   // [
@@ -224,9 +259,9 @@ export const NutritionTrackerContext = createContext({
   // ]
 
   // selectedNutritionTrackedDay is the selected date from the calendar component
-  selectedNutritionTrackedDay: null,
+  selectedNutritionTrackedDay: undefined,
 
-  filterConditions: {},
+  filterConditions: undefined,
   // filterConditions structure:
   // {
   //   filterStartDate: "",
@@ -236,7 +271,7 @@ export const NutritionTrackerContext = createContext({
   nutritionTrackedDaysView: [],
 
   // scheduledNutritionTrackedDaysView is the selected selectedNutritionTrackedDay info from the calendar component
-  scheduledNutritionTrackedDaysView: null,
+  scheduledNutritionTrackedDaysView: undefined,
 
   addDayTracked: () => {},
   updateDayTracked: () => {},
@@ -271,15 +306,15 @@ export const NutritionTrackerContext = createContext({
   clearDayTrackedFilter: () => {},
 });
 
-export const NutritionTrackerProvider = ({ children }) => {
-  const [nutritionTrackedDays, setNutritionTrackedDays] = useState([]);
-  const [formInputMicronutrients, setFormInputMicronutrients] = useState([]);
-  const [filterConditions, setFilterConditions] = useState(null)
-  const [selectedNutritionTrackedDay, setSelectedNutritionTrackedDay] = useState(null)
-  const [scheduledNutritionTrackedDaysView, setScheduledNutritionTrackedDaysView] = useState(null)
-  const [nutritionTrackedDaysView, setNutritionTrackedDaysView] = useState(nutritionTrackedDays)
-  const [dayTrackedSearchResult, setDayTrackedSearchResult] = useState(undefined)
-  const [nutritionTrackedDaysSummary, setNutritionTrackedDaysSummary] = useState({});
+export const NutritionTrackerProvider: FC<NutritionTrackerProviderProps> = ({ children }) => {
+  const [nutritionTrackedDays, setNutritionTrackedDays] = useState<NutritionTrackedDay[]>([]);
+  const [formInputMicronutrients, setFormInputMicronutrients] = useState<FormInputMicronutrient[]>([]);
+  const [filterConditions, setFilterConditions] = useState<FilterConditions | undefined>(undefined)
+  const [selectedNutritionTrackedDay, setSelectedNutritionTrackedDay] = useState<string | Date | undefined>(undefined)
+  const [scheduledNutritionTrackedDaysView, setScheduledNutritionTrackedDaysView] = useState<NutritionTrackedDay | undefined>(undefined)
+  const [nutritionTrackedDaysView, setNutritionTrackedDaysView] = useState<NutritionTrackedDay[]>(nutritionTrackedDays)
+  const [dayTrackedSearchResult, setDayTrackedSearchResult] = useState<NutritionTrackedDay | undefined>(undefined)
+  const [nutritionTrackedDaysSummary, setNutritionTrackedDaysSummary] = useState<NutritionTrackedDaysSummary | undefined>({});
 
   // const { currentUser } = useContext(UserContext);
   const currentUser = useSelector(selectCurrentUser)
@@ -339,82 +374,83 @@ export const NutritionTrackerProvider = ({ children }) => {
     fetchNutritionTrackedDaysData();
   }, [currentUser]);
 
-  const addDayTracked = async (trackedDayInfo) => {
-    const res = await addDayTrackedHelper(nutritionTrackedDays, formInputMicronutrients, trackedDayInfo, currentUser.uid, currentUser.email);
+  const addDayTracked = async (trackedDayInfo: NutritionTrackedDay): Promise<void> => {
+    const res = await addDayTrackedHelper(nutritionTrackedDays, formInputMicronutrients, 
+      trackedDayInfo, currentUser?.uid!, currentUser?.email!);
 
     setNutritionTrackedDays(res);
     setFormInputMicronutrients([]);
   };
 
-  const updateDayTracked = async (updatedTrackedDayInfo) => {
-    const res = await updateDayTrackedHelper(nutritionTrackedDays, formInputMicronutrients, updatedTrackedDayInfo, currentUser.uid, currentUser.email);
+  const updateDayTracked = async (updatedTrackedDayInfo: NutritionTrackedDay): Promise<void> => {
+    const res = await updateDayTrackedHelper(nutritionTrackedDays, formInputMicronutrients, 
+      updatedTrackedDayInfo, currentUser?.uid!, currentUser?.email!);
 
     setNutritionTrackedDays(res);
     setFormInputMicronutrients([]);
   };
 
-  const getDayTracked = (trackedDay) => {
+  const getDayTracked = (trackedDay: string | Date): void => {
     setDayTrackedSearchResult(getDayTrackedHelper(nutritionTrackedDays, trackedDay))
   };
 
-  const addFormInputMicronutrients = () => {
+  const addFormInputMicronutrients = (): void => {
     setFormInputMicronutrients(addFormInputMicronutrientsHelper(formInputMicronutrients));
     
   };
 
-  const updateFormInputMicronutrients = (micronutrient, micronutrientIndex) => {
+  const updateFormInputMicronutrients = (micronutrient: FormInputMicronutrient, micronutrientIndex: number): void => {
     setFormInputMicronutrients(updateFormInputMicronutrientsHelper(formInputMicronutrients, micronutrient, micronutrientIndex));
     
   };
 
-  const deleteFormInputMicronutrients = (micronutrientIndex) => {
+  const deleteFormInputMicronutrients = (micronutrientIndex: number): void => {
     setFormInputMicronutrients(deleteFormInputMicronutrientsHelper(formInputMicronutrients, micronutrientIndex));
     
   };
 
-  const filterDayTracked = (filterConditions) => {
+  const filterDayTracked = (filterConditions: FilterConditions): void => {
     if (validateFilterNutritionTrackedDays(filterConditions)) {
       
       return
     } else {
       setFilterConditions(filterConditions)
       setNutritionTrackedDaysView(filterDayTrackedHelper(nutritionTrackedDays, filterConditions))
-      
     }
   }
 
-  const removeDayTracked = async (trackedDay) => {
-    const res = await removeDayTrackedHelper(nutritionTrackedDays, trackedDay, currentUser.uid, currentUser.email)
+  const removeDayTracked = async (trackedDay: string | Date): void => {
+    const res = await removeDayTrackedHelper(nutritionTrackedDays, trackedDay, currentUser?.uid!, currentUser?.email!)
     setNutritionTrackedDays(res)
   }
 
-  const clearDayTrackedFilter = () => {
+  const clearDayTrackedFilter = (): void => {
     setFilterConditions(null)
     setNutritionTrackedDaysView(nutritionTrackedDays)
   }
 
   // set default nutrition tracked days
-  const setDefaultNutritionTrackedDaysValues = () => {
+  const setDefaultNutritionTrackedDaysValues = (): void => {
     setNutritionTrackedDays(setDefaultNutritionTrackedDaysValuesHelper());
   };
 
   // set default nutrition tracked days summary
-  const setDefaultNutritionTrackedDaysSummaryValues = () => {
+  const setDefaultNutritionTrackedDaysSummaryValues = (): void => {
     setNutritionTrackedDaysSummary(setDefaultNutritionTrackedDaysSummaryValuesHelper());
   };
 
   // update nutrition tracked days and summary on sign out
-  const updateNutritionTrackedDaysAndSummary = () => {
+  const updateNutritionTrackedDaysAndSummary = (): void => {
     putNutritionTrackedDays(currentUser.uid, currentUser.email, nutritionTrackedDays);
     putNutritionTrackedDaysSummary(currentUser.uid, currentUser.email, nutritionTrackedDaysSummary);
   };
 
-  const addDayTrackedFromPrediction = (predictionNutritionInfo) => {
+  const addDayTrackedFromPrediction = (predictionNutritionInfo: PrefictionNutritionInfo): void => {
     setNutritionTrackedDays(addDayTrackedFromPredictionHelper(nutritionTrackedDays, predictionNutritionInfo))
     setFormInputMicronutrients([]);
   }
 
-  const selectScheduledNutritionTrackedDay = (dayTracked) => {
+  const selectScheduledNutritionTrackedDay = (dayTracked: string | Date): void => {
     setSelectedNutritionTrackedDay(dayTracked)
     setScheduledNutritionTrackedDaysView(selectScheduledNutritionTrackedDayHelper(nutritionTrackedDays, dayTracked))
   }

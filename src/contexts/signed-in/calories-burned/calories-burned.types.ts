@@ -1,31 +1,33 @@
+import { ReactNode } from "react";
 
 // calories burned types
 
-import { ReactNode } from "react";
-
 export interface CaloriesBurnedContextType {
-  trackedCaloriesBurned: TrackedCaloriesBurned[];
-  trackedCaloriesBurnedLength: number;
-  selectedTrackedCaloriesBurned: string | Date | undefined;
-  filterConditions: FilterConditions | undefined;
-  trackedCaloriesBurnedView: TrackedCaloriesBurned[];
-  scheduledTrackedCaloriesBurnedView: TrackedCaloriesBurned[] | undefined;
+  trackedCaloriesBurned: TrackedCaloriesBurned[],
+  trackedCaloriesBurnedLength: number,
+  selectedTrackedCaloriesBurned: string | Date | undefined,
+  filterConditions: FilterConditions | undefined,
+  trackedCaloriesBurnedView: TrackedCaloriesBurned[],
+  scheduledTrackedCaloriesBurnedView: TrackedCaloriesBurned[] | undefined,
 
-  searchActivity: (trackedDayInfo: SearchActivityInput) => void;
-  addTrackedActivityDate: (trackedDayInfo: AddTrackedActivityInput) => void;
-  filterActivityDates: (filterConditions: FilterConditions) => void;
-  removeActivityDate: (activityId: number) => void;
-  clearActivityDatesFilter: () => void;
+  searchActivity: (trackedDayInfo: SearchActivityInput) => void,
+  addTrackedActivityDate: (trackedDayInfo: AddTrackedActivityInput) => void,
+  filterActivityDates: (filterConditions: FilterConditions) => void,
+  removeActivityDate: (activityId: number) => void,
+  clearActivityDatesFilter: () => void,
 
-  selectScheduledTrackedCaloriesBurned: (dayTracked: string | Date) => void;
+  selectScheduledTrackedCaloriesBurned: (dayTracked: Date | string) => void,
 
-  searchActivityResults: SearchActivityResult[]
-  
-  trackedCaloriesBurnedSummary: TrackedCaloriesBurnedSummary | undefined;
+  searchActivityResults: SearchActivityResult[],
+  trackedCaloriesBurnedSummary: TrackedCaloriesBurnedSummary | undefined,
+
+  setDefaultTrackedCaloriesBurnedValues: () => void,
+  setDefaultTrackedCaloriesBurnedSummaryValues: () => void,
+  updateTrackedCaloriesBurned: () => void
 }
 
 export interface CaloriesBurnedProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export type TrackedCaloriesBurned = {
