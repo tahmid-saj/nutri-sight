@@ -7,8 +7,10 @@ export interface NutrientPredictorContextType {
   imageAndPrediction: ImageWithPrediction | undefined;
   nutrientPredictions: NutrientPrediction[];
 
+  detectNutrients: (mealDescription: string, inputType: string) => Promise<void> | undefined,
+
   updateImage: (mealDescription: string, inputType: string) => void;
-  updateImageAndPrediction: (imgPath: string, imageInputType: string, uploadedImage: string) => void;
+  updateImageAndPrediction: (imgPath: string, imageInputType: string, uploadedImage?: string) => void;
 }
 
 export interface NutrientPredictorProviderProps {
@@ -26,7 +28,7 @@ export type NutrientPrediction = {
   servingSizeG: number;
   calories: number;
   macronutrients: Macronutrients;
-  miicronutrients: Micronutrients;
+  micronutrients: Micronutrients;
 }
 
 export type Macronutrients = {
