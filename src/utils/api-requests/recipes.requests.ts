@@ -2,7 +2,7 @@ import { errorOnDisplaySearchedRecipes } from "../errors/recipes.errors";
 
 // API requests for recipes
 
-export const getRecipes = async (recipe) => {
+export const getRecipes = async (recipe: string): Promise<any> => {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_RECIPES_RECIPES}`, {
@@ -17,11 +17,11 @@ export const getRecipes = async (recipe) => {
     return resJSON.recipes
   } catch (error) {
     
-    errorOnDisplaySearchedRecipes()
+    errorOnDisplaySearchedRecipes(recipe)
   }
 };
 
-export const getRecipe = async (recipe) => {
+export const getRecipe = async (recipe: any): Promise<any> => {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_RECIPES_RECIPE}`, {
@@ -36,7 +36,7 @@ export const getRecipe = async (recipe) => {
     return resJSON.recipe
   } catch (error) {
     
-    errorOnDisplaySearchedRecipes()
+    errorOnDisplaySearchedRecipes(recipe)
   }
 };
 

@@ -230,7 +230,7 @@ export const FitnessProvider: FC<FitnessProviderProps> = ({ children }) => {
   }
 
   const updateExercises = (): void => {
-    putExercises(currentUser?.uid, currentUser?.email, exercises)
+    putExercises(currentUser?.uid!, currentUser?.email!, exercises)
   }
 
   const value = { exercises, exercisesSearchResults, exercisesView, selectedSearchedExercise, upcomingExercisesView,

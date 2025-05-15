@@ -1,3 +1,4 @@
+import { AddExerciseInput, ExerciseQueryInput } from "../../contexts/signed-out/fitness/fitness.types";
 import { errorOnInvalidSearchedExerciseName, errorOnInvalidExerciseSetsReps } from "../errors/fitness.errors";
 import { REGEX_PATTERNS } from "./regex.constants";
 
@@ -5,7 +6,7 @@ import { REGEX_PATTERNS } from "./regex.constants";
 
 // context
 
-export const validateSearchedExercise = (exerciseQuery) => {
+export const validateSearchedExercise = (exerciseQuery: ExerciseQueryInput) => {
   // if (!REGEX_PATTERNS.search.test(String(exerciseQuery.exerciseName))) {
 
   //   errorOnInvalidSearchedExerciseName();
@@ -15,7 +16,7 @@ export const validateSearchedExercise = (exerciseQuery) => {
   return false
 }
 
-export const validateAddExercise = (exercise) => {
+export const validateAddExercise = (exercise: AddExerciseInput) => {
   // number
   if ((exercise.exerciseSets && (!(REGEX_PATTERNS.integerNumbers.test(String(exercise.exerciseSets))) || Number(exercise.exerciseSets) < 0)) ||
     (exercise.exerciseReps && (!(REGEX_PATTERNS.integerNumbers.test(String(exercise.exerciseReps))) || Number(exercise.exerciseReps) < 0))) {
@@ -26,6 +27,6 @@ export const validateAddExercise = (exercise) => {
   return false
 }
 
-export const validateRemoveExercise = (exerciseTag) => {
+export const validateRemoveExercise = (exerciseTag: number) => {
   return false
 }

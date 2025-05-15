@@ -1,3 +1,4 @@
+import { AddExerciseInput, Exercise, ExerciseQueryInput, ExerciseSearchResult } from "../../contexts/signed-in/fitness/fitness.types"
 import { errorOnGetSearchExercise,
   errorOnGetExercises, errorOnPostAddExercise, errorOnDeleteRemoveExercise, errorOnPutExercises
 } from "../errors/fitness.errors"
@@ -5,7 +6,7 @@ import { errorOnGetSearchExercise,
 // fitness api requests
 
 // search exercise
-export async function getSearchedExercise(exerciseQuery) {
+export async function getSearchedExercise(exerciseQuery: ExerciseQueryInput): Promise<any> {
   try {
     
 
@@ -31,7 +32,7 @@ export async function getSearchedExercise(exerciseQuery) {
 }
 
 // user sign in
-export async function getExercises(userId, email) {
+export async function getExercises(userId: string, email: string): Promise<any> {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`)
@@ -44,7 +45,8 @@ export async function getExercises(userId, email) {
 }
 
 // fitness operations
-export async function postAddExercise(userId, email, exercise, exerciseTag, selectedSearchedExercise) {
+export async function postAddExercise(userId: string, email: string, exercise: AddExerciseInput, 
+    exerciseTag: number, selectedSearchedExercise: ExerciseSearchResult): Promise<any> {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`, {
@@ -75,7 +77,7 @@ export async function postAddExercise(userId, email, exercise, exerciseTag, sele
   }
 }
 
-export async function deleteRemoveExercise(userId, email, exerciseTag) {
+export async function deleteRemoveExercise(userId: string, email: string, exerciseTag: number): Promise<any> {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`, {
@@ -96,7 +98,7 @@ export async function deleteRemoveExercise(userId, email, exerciseTag) {
 }
 
 // user sign out
-export async function putExercises(userId, email, exercises) {
+export async function putExercises(userId: string, email: string, exercises: Exercise[]): Promise<any> {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_FITNESS_EXERCISES}/${userId}/${email}`, {

@@ -124,7 +124,7 @@ export const NutrientPredictorProvider: FC<NutrientPredictorProviderProps> = ({ 
     setNutrientPredictions(resNutrientPredictions)
   }
 
-  const value = { imageAndPrediction, nutrientPredictions,
+  const value = { imageAndPrediction, nutrientPredictions, predictionInputType,
     updateImage, updateImageAndPrediction, detectNutrients };
 
   return (
