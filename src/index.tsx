@@ -20,7 +20,7 @@ import { FitnessProvider as FitnessProviderSignedIn } from './contexts/signed-in
 import { CaloriesBurnedProvider as CaloriesBurnedProviderSignedIn } from './contexts/signed-in/calories-burned/calories-burned.context';
 
 import { Provider } from "react-redux"
-import { persistor, store } from "./store/store"
+import { store } from "./store/store"
 import { PersistGate } from "redux-persist/integration/react"
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
@@ -30,7 +30,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
 //   cache: new InMemoryCache()
 // })
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <React.StrictMode>
     {/* <ApolloProvider client={ client }> */}
