@@ -1,14 +1,19 @@
 import React from "react";
-
+import FloatingActionButtonExtendedSize from "../mui/floating-action-button/floating-action-button.component";
 import "./about-links.styles.scss";
+
+import LanguageIcon from '@mui/icons-material/Language';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import ArticleIcon from '@mui/icons-material/Article';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const AboutLinks = () => {
   return (
     <div className="about-links-container">
-      <button className="about-icons"><h1>Medium </h1><ion-icon name="logo-medium"></ion-icon></button>
-      <button className="about-icons"><h1>GitHub </h1><ion-icon name="logo-github"></ion-icon></button>
-      <button className="about-icons"><h1>Site </h1><ion-icon name="globe-outline"></ion-icon></button>
-      <button className="about-icons"><h1>LinkedIn </h1><ion-icon name="logo-linkedin"></ion-icon></button>
+      <FloatingActionButtonExtendedSize content={ "tahmidsajin.com" }><LanguageIcon/></FloatingActionButtonExtendedSize>
+      <FloatingActionButtonExtendedSize content={ "GitHub" }><GitHubIcon/></FloatingActionButtonExtendedSize>
+      <FloatingActionButtonExtendedSize content={ "Medium" }><ArticleIcon/></FloatingActionButtonExtendedSize>
+      <FloatingActionButtonExtendedSize content={ "Linkedin" }><LinkedInIcon/></FloatingActionButtonExtendedSize>
     </div>
   );
 };

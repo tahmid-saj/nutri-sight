@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name: string;
-  value: string;
+  value?: string;
 }
 
 const FormInput = ({ label, ...otherProps }: FormInputProps) => {

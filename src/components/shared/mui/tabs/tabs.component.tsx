@@ -35,7 +35,7 @@ export default function ItemTabs({ outerBoxStyles, innerBoxStyles, tabList, pane
 
   return (
     <Box sx={{ width: "100%", typography: "body1", ...outerBoxStyles }}>
-      <TabContext value={ value } variant="scrollable" scrollButtons="auto">
+      <TabContext value={ value }>
         <Box sx={{ borderBottom: 1, borderColor: 'divider', 
           display: "flex", justifyContent: "center", alignItems: "center", ...innerBoxStyles }}>
           <Tabs value={ value } onChange={ handleChange }
@@ -80,9 +80,9 @@ export default function ItemTabs({ outerBoxStyles, innerBoxStyles, tabList, pane
 }
 
 function ItemTabsExample() {
-  const [value, setValue] = useState("active2");
+  const [value, setValue] = useState<string>("active2");
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 

@@ -2,17 +2,18 @@ import "./nutrients-info.styles.jsx";
 import { NutrientsInfoContainer } from "./nutrients-info.styles.jsx";
 
 import React, { useContext, Fragment } from "react";
-import { NutrientPredictorContext } from "../../../../contexts/shared/nutrient-predictor/nutrient-predictor.context";
+import { NutrientPredictorContext } from "../../../../contexts/shared/nutrient-predictor/nutrient-predictor.context.js";
 import { Divider, Typography } from "@mui/material";
-import OutlinedCard from "../../mui/card/card.component.jsx";
+import OutlinedCard from "../../mui/card/card.component.js";
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js";
-import Button from "../../button/button.component.jsx";
-import { ButtonsContainer } from "../../button/button.styles.jsx";
+import Button from "../../button/button.component.js";
+import { ButtonsContainer } from "../../button/button.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../../store/shared/user/user.selector.js"
 import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
 import { addDayTrackedFromPrediction, setFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action.js";
 import { selectNutritionTrackedDays } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js";
+import { NutrientPrediction } from "../../../../contexts/shared/nutrient-predictor/nutrient-predictor.types.js";
 
 const outlinedCardStyles = {
   backgroundColor: COLOR_CODES.general["1"]
@@ -28,7 +29,7 @@ const NutrientsInfo = () => {
   const dispatch = useDispatch()
   const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
   
-  const handleAddToTracker = (prediction) => {
+  const handleAddToTracker = (prediction: NutrientPrediction) => {
     const currentDate = new Date()
     const predictionNutritionInfo = {
       dateTracked: currentDate.toISOString().split('T')[0],
@@ -41,12 +42,12 @@ const NutrientsInfo = () => {
       micronutrients: [
         {
           name: "Sodium",
-          amount: Number(prediction.micronutrients.sodiumMG),
+          amount: Number(prediction.micronutrients.sodiumG),
           unit: "mg"
         },
         {
           name: "Potassium",
-          amount: Number(prediction.micronutrients.potassiumMG),
+          amount: Number(prediction.micronutrients.potassiumG),
           unit: "mg"
         },
         {
@@ -73,7 +74,7 @@ const NutrientsInfo = () => {
 
     // signed out
     } else {
-      dispatch(addDayTrackedFromPrediction(nutritionTrackedDays, predictionNutritionInfo))
+      dispatch(addDayTrackedFromPrediction(nutritionTrackedDays!, predictionNutritionInfo))
       dispatch(setFormInputMicronutrients([]))
     }
   }
@@ -107,8 +108,8 @@ const NutrientsInfo = () => {
     
                 <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">Micronutrients</Typography>
                 <Fragment key={ index }>
-                  <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Sodium - ${prediction.micronutrients.sodiumMG} mg`}</Typography>
-                  <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Potassium - ${prediction.micronutrients.potassiumMG} mg`}</Typography>
+                  <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Sodium - ${prediction.micronutrients.sodiumG} mg`}</Typography>
+                  <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Potassium - ${prediction.micronutrients.potassiumG} mg`}</Typography>
                   <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Cholesterol - ${prediction.micronutrients.cholesterolMg} mg`}</Typography>
                   <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Fiber - ${prediction.micronutrients.fiberG} g`}</Typography>
                   <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Sugar - ${prediction.micronutrients.sugarG} g`}</Typography>
