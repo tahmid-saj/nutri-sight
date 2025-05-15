@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext, FC } from "react";
 import { validateSearchedExercise, validateAddExercise,
   validateRemoveExercise
 } from "../../../utils/validations/fitness.validations"
@@ -10,17 +10,18 @@ import { DEFAULT_EXERCISES } from "../../../utils/constants/fitness.constants";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../store/shared/user/user.selector";
 
-// helper functions
-const searchExerciseHelper = async (exerciseQuery) => {
-  const resSearchedExerciseResults = await getSearchedExercise(exerciseQuery)
+import { ExerciseQueryInput, ExerciseSearchResult, AddExerciseInput, Exercise, FitnessContextType, FitnessProviderProps } from "./fitness.types"
 
-  
+// helper functions
+const searchExerciseHelper = async (exerciseQuery: ExerciseQueryInput): Promise<ExerciseSearchResult[]> => {
+  const resSearchedExerciseResults = await getSearchedExercise(exerciseQuery)
 
   return resSearchedExerciseResults
 }
 
-const addExerciseHelper = async (exercises, exercisesTagLimit, exercise, selectedSearchedExercise, userId, email) => {
-  postAddExercise(userId, email, exercise, exercisesTagLimit, selectedSearchedExercise)
+const addExerciseHelper = async (exercises: Exercise[], exercisesTagLimit: number, 
+  exercise: AddExerciseInput, selectedSearchedExercise: ExerciseSearchResult, userId: string, email: string): Promise<Exercise[]> => {
+  await postAddExercise(userId, email, exercise, exercisesTagLimit, selectedSearchedExercise)
 
   return [
     ...exercises,
@@ -39,8 +40,8 @@ const addExerciseHelper = async (exercises, exercisesTagLimit, exercise, selecte
   ]
 }
 
-const selectScheduledExerciseHelper = (exercises, exerciseDate) => {
-  let selectedScheduledExercises = []
+const selectScheduledExerciseHelper = (exercises: Exercise[], exerciseDate: string | Date): Exercise[] => {
+  let selectedScheduledExercises: Exercise[] = []
   
   exercises.map((exercise) => {
     if (exercise.exerciseDate === exerciseDate) {
@@ -52,19 +53,19 @@ const selectScheduledExerciseHelper = (exercises, exerciseDate) => {
   return selectedScheduledExercises
 }
 
-const removeExerciseHelper = async (exercises, exerciseTag, userId, email) => {
-  deleteRemoveExercise(userId, email, exerciseTag)
+const removeExerciseHelper = async (exercises: Exercise[], exerciseTag: number, userId: string, email: string): Promise<Exercise[]> => {
+  await deleteRemoveExercise(userId, email, exerciseTag)
 
   return exercises.filter(exercise => exercise.exerciseTag !== exerciseTag)
 }
 
-const setDefaultExercisesValuesHelper = () => {
+const setDefaultExercisesValuesHelper = (): Exercise[] => {
   return DEFAULT_EXERCISES
 }
 
 
 // initial state
-export const FitnessContext = createContext({
+export const FitnessContext = createContext<FitnessContextType>({
   exercises: [],
   // exercises structure:
   // [
@@ -84,13 +85,13 @@ export const FitnessContext = createContext({
 
   exercisesTagLimit: 0,
 
-  selectedScheduledExerciseDate: null,
+  selectedScheduledExerciseDate: undefined,
 
   // exercisesSearchResults is a list of exercises from the API
   exercisesSearchResults: [],
 
   // selectedSearchedExercise is the exercise clicked on in the search results
-  selectedSearchedExercise: null,
+  selectedSearchedExercise: undefined,
 
   // exercisesView is the filtered version of exercises
   exercisesView: [],
@@ -120,14 +121,14 @@ export const FitnessContext = createContext({
 })
 
 // actual context
-export const FitnessProvider = ({ children }) => {
-  const [exercises, setExercises] = useState([])
-  const [exercisesTagLimit, setExercisesTagLimit] = useState(0)
-  const [selectedScheduledExerciseDate, setSelectedScheduledExerciseDate] = useState(null)
-  const [exercisesSearchResults, setExercisesSearchResults] = useState([])
-  const [selectedSearchedExercise, setSelectedSearchedExercise] = useState(null)
-  const [exercisesView, setExercisesView] = useState(exercises)
-  const [upcomingExercisesView, setUpcomingExercisesView] = useState([])
+export const FitnessProvider: FC<FitnessProviderProps> = ({ children }) => {
+  const [exercises, setExercises] = useState<Exercise[]>([])
+  const [exercisesTagLimit, setExercisesTagLimit] = useState<number>(0)
+  const [selectedScheduledExerciseDate, setSelectedScheduledExerciseDate] = useState<string | Date | undefined>(undefined)
+  const [exercisesSearchResults, setExercisesSearchResults] = useState<ExerciseSearchResult[]>([])
+  const [selectedSearchedExercise, setSelectedSearchedExercise] = useState<ExerciseSearchResult | undefined>(undefined)
+  const [exercisesView, setExercisesView] = useState<Exercise[]>(exercises)
+  const [upcomingExercisesView, setUpcomingExercisesView] = useState<Exercise[]>([])
 
   const currentUser = useSelector(selectCurrentUser)
 
@@ -153,17 +154,17 @@ export const FitnessProvider = ({ children }) => {
   useEffect(() => {
     setExercisesTagLimit(exercises.length)
 
-    let today = new Date()
-    today = today.toISOString().split('T')[0]
+    const today = new Date()
+    const todayStr = today.toISOString().split('T')[0]
 
-    let firstScheduledNextDate;
+    let firstScheduledNextDate: string | Date;
     exercises.map((exercise) => {
-      if (exercise.exerciseDate >= today) {
+      if (exercise.exerciseDate! >= todayStr) {
         firstScheduledNextDate = exercise.exerciseDate
       }
     })
 
-    let newUpcomingExercises = []
+    let newUpcomingExercises: Exercise[] = []
     exercises.map((exercise) => {
       if (exercise.exerciseDate === firstScheduledNextDate) {
         newUpcomingExercises.push(exercise)
@@ -182,7 +183,7 @@ export const FitnessProvider = ({ children }) => {
     }
   }, [exercises, selectedScheduledExerciseDate])
 
-  const searchExercise = async (exerciseQuery) => {
+  const searchExercise = async (exerciseQuery: ExerciseQueryInput): Promise<void> => {
     if (validateSearchedExercise(exerciseQuery)) {
       return
     } else {
@@ -192,49 +193,49 @@ export const FitnessProvider = ({ children }) => {
     }
   }
 
-  const addExercise = async (exercise) => {
+  const addExercise = async (exercise: AddExerciseInput): Promise<void> => {
     if (validateAddExercise(exercise)) {
       return
     } else {
-      const resAddExercise = await addExerciseHelper(exercises, exercisesTagLimit + 1, exercise, selectedSearchedExercise, currentUser.uid, currentUser.email)
+      const resAddExercise = await addExerciseHelper(exercises, exercisesTagLimit + 1, exercise, selectedSearchedExercise!, currentUser?.uid!, currentUser?.email!)
       setExercises(resAddExercise)
     }
   }
 
-  const selectScheduledExercise = (exerciseDate) => {
+  const selectScheduledExercise = (exerciseDate: string | Date): void => {
     setSelectedScheduledExerciseDate(exerciseDate)
     setExercisesView(selectScheduledExerciseHelper(exercises, exerciseDate))
   }
 
-  const unselectScheduledExercise = () => {
-    setSelectedScheduledExerciseDate(null)
+  const unselectScheduledExercise = (): void => {
+    setSelectedScheduledExerciseDate(undefined)
     setExercisesView(exercises)
   }
   
-  const selectSearchedExercises = (exercise) => {
+  const selectSearchedExercises = (exercise: ExerciseSearchResult): void => {
     setSelectedSearchedExercise(exercise)
   }
 
-  const removeExercise = async (exerciseTag) => {
+  const removeExercise = async (exerciseTag: number): Promise<void> => {
     if (validateRemoveExercise(exerciseTag)) {
       return
     } else {
-      const resRemoveExercise = await removeExerciseHelper(exercises, exerciseTag, currentUser.uid, currentUser.email)
+      const resRemoveExercise = await removeExerciseHelper(exercises, exerciseTag, currentUser?.uid!, currentUser?.email!)
       setExercises(resRemoveExercise)
     }
   }
 
-  const setDefaultExercisesValues = () => {
+  const setDefaultExercisesValues = (): void => {
     setExercises(setDefaultExercisesValuesHelper())
   }
 
-  const updateExercises = () => {
-    putExercises(currentUser.uid, currentUser.email, exercises)
+  const updateExercises = (): void => {
+    putExercises(currentUser?.uid, currentUser?.email, exercises)
   }
 
   const value = { exercises, exercisesSearchResults, exercisesView, selectedSearchedExercise, upcomingExercisesView,
-    searchExercise, addExercise, 
-    selectScheduledExercise, unselectScheduledExercise, selectSearchedExercises,
+    searchExercise, addExercise, exercisesTagLimit, selectedScheduledExerciseDate, 
+    selectScheduledExercise, unselectScheduledExercise, selectSearchedExercises, setDefaultExercisesValues,
     removeExercise,
     updateExercises }
 

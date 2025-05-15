@@ -10,8 +10,6 @@ import { FitnessContextType, FitnessProviderProps, Exercise, ExerciseQueryInput,
 const searchExerciseHelper = async (exerciseQuery: ExerciseQueryInput): Promise<ExerciseSearchResult[]> => {
   const resSearchedExerciseResults = await getSearchedExercise(exerciseQuery)
 
-  
-
   return resSearchedExerciseResults
 }
 
@@ -119,12 +117,12 @@ export const FitnessProvider: FC<FitnessProviderProps> = ({ children }) => {
   useEffect(() => {
     setExercisesTagLimit(exercises.length)
 
-    let today = new Date()
-    today = today.toISOString().split('T')[0]
+    const today = new Date()
+    const todayStr = today.toISOString().split('T')[0]
 
-    let firstScheduledNextDate;
+    let firstScheduledNextDate: string | Date;
     exercises.map((exercise) => {
-      if (exercise.exerciseDate >= today) {
+      if (exercise.exerciseDate >= todayStr) {
         firstScheduledNextDate = exercise.exerciseDate
       }
     })
@@ -189,7 +187,7 @@ export const FitnessProvider: FC<FitnessProviderProps> = ({ children }) => {
   }
 
   const value = { exercises, exercisesSearchResults, exercisesView, selectedSearchedExercise, upcomingExercisesView,
-    searchExercise, addExercise, 
+    searchExercise, addExercise, exercisesTagLimit, selectedScheduledExerciseDate,
     selectScheduledExercise, unselectScheduledExercise, selectSearchedExercises,
     removeExercise }
 

@@ -30,7 +30,8 @@ const addTrackedActivityDateHelper = (trackedCaloriesBurned: TrackedCaloriesBurn
   ]
 }
 
-const filterActivityDatesHelper = (trackedCaloriesBurned: TrackedCaloriesBurned[], filterConditions: FilterConditions): TrackedCaloriesBurned[] => {
+const filterActivityDatesHelper = (trackedCaloriesBurned: TrackedCaloriesBurned[], 
+  filterConditions: FilterConditions): TrackedCaloriesBurned[] => {
   
 
   let filteredTrackedCaloriesBurned: TrackedCaloriesBurned[] = []
@@ -53,7 +54,8 @@ const removeActivityDateHelper = (trackedCaloriesBurned: TrackedCaloriesBurned[]
   return trackedCaloriesBurned.filter(trackedActivity => trackedActivity.activityId !== activityId)
 }
 
-const selectScheduledTrackedCaloriesBurnedHelper = (trackedCaloriesBurned: TrackedCaloriesBurned[], trackedDay: string | Date): TrackedCaloriesBurned[] | undefined => {
+const selectScheduledTrackedCaloriesBurnedHelper = (trackedCaloriesBurned: TrackedCaloriesBurned[], 
+  trackedDay: string | Date): TrackedCaloriesBurned[] | undefined => {
   const filteredTrackedCaloriesBurned = trackedCaloriesBurned.filter((caloriesTrackedDay) => {
     return caloriesTrackedDay.dateTracked === trackedDay
   })
@@ -205,7 +207,7 @@ export const CaloriesBurnedProvider: FC<CaloriesBurnedProviderProps> = ({ childr
     setTrackedCaloriesBurned(removeActivityDateHelper(trackedCaloriesBurned, activityId))
   }
 
-  const clearActivityDatesFilter = () => {
+  const clearActivityDatesFilter = (): void => {
     setFilterConditions(undefined)
     setTrackedCaloriesBurnedView(trackedCaloriesBurned)
   }
@@ -216,7 +218,7 @@ export const CaloriesBurnedProvider: FC<CaloriesBurnedProviderProps> = ({ childr
   }
 
   const value = { trackedCaloriesBurned, trackedCaloriesBurnedView, filterConditions, searchActivityResults,
-    scheduledTrackedCaloriesBurnedView,
+    scheduledTrackedCaloriesBurnedView, trackedCaloriesBurnedLength, selectedTrackedCaloriesBurned,
     searchActivity, addTrackedActivityDate, filterActivityDates, removeActivityDate, clearActivityDatesFilter,
     trackedCaloriesBurnedSummary, selectScheduledTrackedCaloriesBurned }
   
