@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useState, useContext, FormEvent, ChangeEvent } from "react"
 import FormInput from "../../../components/shared/form-input/form-input.component.jsx"
 import Button from "../../../components/shared/button/button.component.jsx"
 import "./chatbot.styles.jsx"
@@ -9,26 +9,30 @@ import { Divider, Typography } from "@mui/material"
 import { ButtonsContainer } from "../../../components/shared/button/button.styles.jsx"
 import { COLOR_CODES } from "../../../utils/constants/shared.constants.js"
 
+type FormFields = {
+  messageInput: string
+}
+
 const defaultFormFields = {
   messageInput: ""
 }
 
 const ChatBot = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields)
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormFields)
   const { getChatbotResponse, chatbotResponse } = useContext(ChatBotContext)
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
   }
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     await getChatbotResponse(formFields.messageInput)
     resetFormFields()
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
 
     setFormFields({ ...formFields, [name]: value })

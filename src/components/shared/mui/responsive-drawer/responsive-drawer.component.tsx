@@ -28,6 +28,7 @@ import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ArticleIcon from '@mui/icons-material/Article';
 
 import LanguageIcon from '@mui/icons-material/Language';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -161,7 +162,7 @@ function ResponsiveDrawer(props) {
                 <ListItemIcon>
                   { header === NAV_LINKS.headers.website ? <LanguageIcon/> : null }
                   { header === NAV_LINKS.headers.github ? <GitHubIcon/> : null }
-                  { header === NAV_LINKS.headers.medium ? <ion-icon name="logo-medium"></ion-icon> : null }
+                  { header === NAV_LINKS.headers.medium ? <ArticleIcon/> : null }
                   { header === NAV_LINKS.headers.linkedin ? <LinkedInIcon/> : null }
                 </ListItemIcon>
                 <ListItemText primary={ header } />

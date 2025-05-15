@@ -8,10 +8,28 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
-export default function ItemTabs({ outerBoxStyles, innerBoxStyles, tabList, panelList }) {
-  const [value, setValue] = useState(tabList[0].value);
+interface TabItem {
+  value: string;
+  label: string;
+  icon?: JSX.Element;
+}
 
-  const handleChange = (event, newValue) => {
+interface PanelItem {
+  value: string;
+  children: React.ReactNode;
+}
+
+interface ItemTabsProps {
+  outerBoxStyles?: object;
+  innerBoxStyles?: object;
+  tabList: TabItem[];
+  panelList: PanelItem[];
+}
+
+export default function ItemTabs({ outerBoxStyles, innerBoxStyles, tabList, panelList }: ItemTabsProps) {
+  const [value, setValue] = useState<string>(tabList[0].value);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
