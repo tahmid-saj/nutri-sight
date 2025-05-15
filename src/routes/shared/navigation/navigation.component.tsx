@@ -4,12 +4,12 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 import "./navigation.styles.jsx";
 import { DrawerContainer } from "./navigation.styles.jsx";
 
-import { signOutUser } from "../../../utils/firebase/firebase.utils";
+import { signOutUser } from "../../../utils/firebase/firebase.utils.js";
 import MiniDrawer from "../../../components/shared/mui/drawer/drawer.component.jsx";
 
 // import { UserContext } from "../../../contexts/shared/user/user.context";
-import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
-import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context";
+import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
+import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context.js";
 
 import { NAV_LINKS } from "../../../utils/constants/shared.constants.js";
 
