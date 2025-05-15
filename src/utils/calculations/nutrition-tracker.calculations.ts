@@ -1,6 +1,8 @@
 // nutrition tracker calculations
 
-export const calculateSummary = (nutritionTrackedDays) => {
+import { NutritionTrackedDay } from "../../contexts/signed-out/nutrition-tracker/nutrition-tracker.types";
+
+export const calculateSummary = (nutritionTrackedDays: NutritionTrackedDay[]) => {
   const trackedDays = nutritionTrackedDays.length;
 
   const averageDailyCalories = (nutritionTrackedDays.reduce((totalCalories, { calories }) => {

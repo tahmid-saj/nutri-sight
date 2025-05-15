@@ -2,7 +2,7 @@ import { errorOnGetNutrientPredictions } from "../errors/nutrient-predictor.erro
 
 // nutrient predictor api requests
 
-export const getMealPredictions = async (imageUrl) => {
+export const getMealPredictions = async (imageUrl: string): Promise<any> => {
   try {
     const resNutrientPrediction = await fetch(`${process.env.REACT_APP_API_URL_NUTRIENT_PREDICTOR}${process.env.REACT_APP_API_URL_NUTRIENT_PREDICTION}`, {
       method: "POST",
@@ -23,7 +23,7 @@ export const getMealPredictions = async (imageUrl) => {
   }
 };
 
-export const getNutrientPredictions = async (mealDescription) => {
+export const getNutrientPredictions = async (mealDescription: string): Promise<any> => {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRIENT_PREDICTOR_PREDICT_NUTRIENTS}`, {
@@ -42,7 +42,7 @@ export const getNutrientPredictions = async (mealDescription) => {
   }
 }
 
-export const getFoodObjectDetection = async (uploadedImage) => {
+export const getFoodObjectDetection = async (uploadedImage: string): Promise<any> => {
   try {
     
     
@@ -57,7 +57,7 @@ export const getFoodObjectDetection = async (uploadedImage) => {
       },
       body: formData
     })
-    const { foodObject } = resFoodObjectDetection.json()
+    const { foodObject } = await resFoodObjectDetection.json()
     return foodObject
   } catch (error) {
     

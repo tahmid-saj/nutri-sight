@@ -1,3 +1,4 @@
+import { NutritionTrackedDay, NutritionTrackedDaysSummary } from "../../contexts/signed-in/nutrition-tracker/nutrition-tracker.types";
 import { errorOnGetNutritionTrackedDaysData, errorOnGetNutritionTrackedDaysSummaryData,
   errorOnPostNutritionTrackedDay, errorOnDeleteNutritionTrackedDay, errorOnPutNutritionTrackedDay,
   errorOnPutNutritionTrackedDays, errorOnPutNutritionTrackedDaysSummary } from "../errors/nutrition-tracker.errors";
@@ -5,7 +6,7 @@ import { errorOnGetNutritionTrackedDaysData, errorOnGetNutritionTrackedDaysSumma
 // nutrition tracker api requests
 
 // sign in
-export const getNutritionTrackedDaysData = async (userId, email) => {
+export const getNutritionTrackedDaysData = async (userId: string, email: string): Promise<any> => {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`);
@@ -17,7 +18,7 @@ export const getNutritionTrackedDaysData = async (userId, email) => {
   }
 };
 
-export const getNutritionTrackedDaysSummaryData = async (userId, email) => {
+export const getNutritionTrackedDaysSummaryData = async (userId: string, email: string): Promise<any> => {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS_SUMMARY}/${userId}/${email}`);
@@ -30,7 +31,7 @@ export const getNutritionTrackedDaysSummaryData = async (userId, email) => {
 };
 
 // nutrition tracked days operations
-export const postNutritionTrackedDay = async (userId, email, nutritionTrackedDay) => {
+export const postNutritionTrackedDay = async (userId: string, email: string, nutritionTrackedDay: NutritionTrackedDay): Promise<any> => {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`, {
@@ -48,7 +49,7 @@ export const postNutritionTrackedDay = async (userId, email, nutritionTrackedDay
   }
 };
 
-export const deleteNutritionTrackedDay = async (userId, email, trackedDay) => {
+export const deleteNutritionTrackedDay = async (userId: string, email: string, trackedDay: string | Date): Promise<any> => {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`, {
@@ -68,7 +69,8 @@ export const deleteNutritionTrackedDay = async (userId, email, trackedDay) => {
   }
 }
 
-export const putNutritionTrackedDay = async (userId, email, originalNutritionTrackedDay, updatedNutritionTrackedDay) => {
+export const putNutritionTrackedDay = async (userId: string, email: string, 
+  originalNutritionTrackedDay: NutritionTrackedDay, updatedNutritionTrackedDay: NutritionTrackedDay): Promise<any> => {
   try {
     const nutritionTrackedDayInfo = {
       originalNutritionTrackedDay: originalNutritionTrackedDay,
@@ -92,7 +94,8 @@ export const putNutritionTrackedDay = async (userId, email, originalNutritionTra
 };
 
 // sign out
-export const putNutritionTrackedDays = async (userId, email, nutritionTrackedDays) => {
+export const putNutritionTrackedDays = async (userId: string, email: string, 
+    nutritionTrackedDays: NutritionTrackedDay[]): Promise<any> => {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`, {
@@ -112,7 +115,8 @@ export const putNutritionTrackedDays = async (userId, email, nutritionTrackedDay
   }
 };
 
-export const putNutritionTrackedDaysSummary = async (userId, email, nutritionTrackedDaysSummary) => {
+export const putNutritionTrackedDaysSummary = async (userId: string, email: string, 
+    nutritionTrackedDaysSummary: NutritionTrackedDaysSummary): Promise<any> => {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS_SUMMARY}/${userId}/${email}`, {

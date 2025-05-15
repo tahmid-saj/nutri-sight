@@ -1,3 +1,4 @@
+import { AddTrackedActivityInput, SearchActivityInput, TrackedCaloriesBurned } from "../../contexts/signed-in/calories-burned/calories-burned.types"
 import { errorOnGetSearchActivity,
   errorOnGetTrackedCaloriesBurned,
   errorOnPostAddActivity, errorOnDeleteRemoveActivity,
@@ -7,7 +8,7 @@ import { errorOnGetSearchActivity,
 // calories burned api requests
 
 // searching activity
-export async function getSearchActivity(trackedDayInfo) {
+export async function getSearchActivity(trackedDayInfo: SearchActivityInput): Promise<any> {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_CALORIES_BURNED_SEARCH_ACTIVITY}`, {
@@ -27,7 +28,7 @@ export async function getSearchActivity(trackedDayInfo) {
 }
 
 // signing in
-export async function getTrackedCaloriesBurned(userId, email) {
+export async function getTrackedCaloriesBurned(userId: string, email: string): Promise<any> {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`)
@@ -40,7 +41,7 @@ export async function getTrackedCaloriesBurned(userId, email) {
 }
 
 // calories burned operations
-export async function postAddActivity(userId, email, trackedDayInfo, activityId) {
+export async function postAddActivity(userId: string, email: string, trackedDayInfo: AddTrackedActivityInput, activityId: number): Promise<any> {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`, {
@@ -67,7 +68,7 @@ export async function postAddActivity(userId, email, trackedDayInfo, activityId)
   }
 }
 
-export async function deleteRemoveActivity(userId, email, activityId) {
+export async function deleteRemoveActivity(userId: string, email: string, activityId: number): Promise<any> {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`, {
@@ -88,7 +89,7 @@ export async function deleteRemoveActivity(userId, email, activityId) {
 }
 
 // signing out
-export async function putTrackedCaloriesBurned(userId, email, trackedCaloriesBurned) {
+export async function putTrackedCaloriesBurned(userId: string, email: string, trackedCaloriesBurned: TrackedCaloriesBurned[]): Promise<any> {
   try {
     
     const response = await fetch(`${process.env.REACT_APP_API_URL_TRACKED_CALORIES_BURNED}/${userId}/${email}`, {

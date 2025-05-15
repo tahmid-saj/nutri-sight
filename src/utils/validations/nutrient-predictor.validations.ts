@@ -6,7 +6,7 @@ import { errorOnInvalidImageType } from "../errors/nutrient-predictor.errors";
 
 // validation functions
 
-export const validateImgPath = (imgPath) => {
+export const validateImgPath = (imgPath: string) => {
   // const buffer = await readChunk(imgPath, { length: minimumBytes });
   // const imgType = await imageType(buffer);
 

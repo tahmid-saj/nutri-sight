@@ -1,3 +1,4 @@
+import { AddTrackedActivityInput, SearchActivityInput, FilterConditions } from "../../contexts/signed-out/calories-burned/calories-burned.types"
 import { errorOnInvalidTrackedDate } from "../errors/calories-burned.errors"
 import { REGEX_PATTERNS } from "./regex.constants"
 
@@ -5,7 +6,7 @@ import { REGEX_PATTERNS } from "./regex.constants"
 
 // context
 
-export const validateSearchActivity = (trackedDayInfo) => {
+export const validateSearchActivity = (trackedDayInfo: SearchActivityInput) => {
   // number
   if (!(REGEX_PATTERNS.floatNumbers.test(String(trackedDayInfo.weightPounds))) || Number(trackedDayInfo.weightPounds) < 0 ||
     !(REGEX_PATTERNS.floatNumbers.test(String(trackedDayInfo.durationMinutes))) || Number(trackedDayInfo.durationMinutes) < 0) {
@@ -15,7 +16,7 @@ export const validateSearchActivity = (trackedDayInfo) => {
   return false
 }
 
-export const validateAddTrackedActivityDate = (trackedDayInfo) => {
+export const validateAddTrackedActivityDate = (trackedDayInfo: AddTrackedActivityInput) => {
   const today = new Date()
 
   if (trackedDayInfo.dateTracked && trackedDayInfo.dateTracked > today) {
@@ -26,7 +27,7 @@ export const validateAddTrackedActivityDate = (trackedDayInfo) => {
   return false
 }
 
-export const validateFilterActivityDates = (filterConditions) => {
+export const validateFilterActivityDates = (filterConditions: FilterConditions) => {
   const today = new Date()
 
   // number
@@ -42,6 +43,6 @@ export const validateFilterActivityDates = (filterConditions) => {
   return false
 }
 
-export const validateRemoveActivityDate = (activityId) => {
+export const validateRemoveActivityDate = (activityId: number) => {
   return false
 }

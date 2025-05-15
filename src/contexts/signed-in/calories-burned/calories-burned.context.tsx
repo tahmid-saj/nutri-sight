@@ -271,7 +271,7 @@ export const CaloriesBurnedProvider: FC<CaloriesBurnedProviderProps> = ({ childr
 
   // update trackedCaloriesBurned on sign out
   const updateTrackedCaloriesBurned = (): void => {
-    putTrackedCaloriesBurned(currentUser?.uid, currentUser?.email, trackedCaloriesBurned)
+    putTrackedCaloriesBurned(currentUser?.uid!, currentUser?.email!, trackedCaloriesBurned)
   }
 
   const selectScheduledTrackedCaloriesBurned = (dayTracked: string | Date): void => {

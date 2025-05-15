@@ -14,7 +14,7 @@ import { getNutritionTrackedDaysData, getNutritionTrackedDaysSummaryData,
   postNutritionTrackedDay, deleteNutritionTrackedDay, putNutritionTrackedDay,
   putNutritionTrackedDays, putNutritionTrackedDaysSummary } from "../../../utils/api-requests/nutrition-tracker.requests";
 
-import { NutritionTrackedDay, PrefictionNutritionInfo, NutritionTrackedDay, Micronutrient } from "./nutrition-tracker.types";
+import { NutritionTrackedDay, PredictionNutritionInfo, NutritionTrackedDay, Micronutrient } from "./nutrition-tracker.types";
 import { FormInputMicronutrient } from "./nutrition-tracker.types";
 import { FilterConditions } from "./nutrition-tracker.types";
 import { NutritionTrackedDaysSummary } from "./nutrition-tracker.types";
@@ -24,7 +24,7 @@ import { FC } from "react";
 // helper functions
 
 const addDayTrackedFromPredictionHelper = (nutritionTrackedDays: NutritionTrackedDay[], 
-  predictionNutritionInfo: PrefictionNutritionInfo): NutritionTrackedDay[] => {
+  predictionNutritionInfo: PredictionNutritionInfo): NutritionTrackedDay[] => {
   if (validatePredictionInfo(nutritionTrackedDays, predictionNutritionInfo)) return nutritionTrackedDays
 
   let micronutrients: Micronutrient[] = []

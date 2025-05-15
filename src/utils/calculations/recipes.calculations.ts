@@ -1,6 +1,8 @@
 // recipes calculations
 
-export const calculateIngredientsAfterServingsUpdate = (recipeToUpdate, updatedServings) => {
+import { RecipeInfo } from "../../contexts/shared/recipes/recipes.types";
+
+export const calculateIngredientsAfterServingsUpdate = (recipeToUpdate: RecipeInfo, updatedServings: number) => {
   const originalServings = recipeToUpdate.servings;
 
   const updatedIngredients = recipeToUpdate.ingredients.map((ingredient) => {
@@ -13,7 +15,7 @@ export const calculateIngredientsAfterServingsUpdate = (recipeToUpdate, updatedS
     return {
       ...ingredient,
 
-      quantity: (ingredient.quantity * (updatedServings / originalServings)),
+      quantity: (ingredient.quantity * (updatedServings / originalServings!)),
     }
   });
 

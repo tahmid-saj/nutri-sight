@@ -1,3 +1,4 @@
+import { NutritionTrackedDay, PredictionNutritionInfo, Micronutrient, FilterConditions } from "../../contexts/signed-out/nutrition-tracker/nutrition-tracker.types";
 import { errorOnTrackedDayExists, errorOnInvalidMacronutrientInputs, 
         errorOnInvalidMicronutrientInput, errorOnEmptyMicronutrients,
         errorOnDayNotTracked, errorOnStartDateBeforeEndDate } from "../errors/nutrition-tracker.errors";
@@ -5,7 +6,8 @@ import { REGEX_PATTERNS } from "./regex.constants";
 
 // nutrition tracker validation functions
 
-export const validatePredictionInfo = (nutritionTrackedDays, predictionNutritionInfo) => {
+export const validatePredictionInfo = (nutritionTrackedDays: NutritionTrackedDay[], 
+  predictionNutritionInfo: PredictionNutritionInfo) => {
   // check that trackedDayInfo's day doesn't exist in nutritionTrackedDays
   const trackedDayExists = nutritionTrackedDays.find((nutritionTrackedDay) => {
     return nutritionTrackedDay.dateTracked === predictionNutritionInfo.dateTracked;
@@ -34,7 +36,7 @@ export const validatePredictionInfo = (nutritionTrackedDays, predictionNutrition
 
   // check if micronutrients are valid
   // check if micronutrients data types are valid
-  const invalidMicronutrients = predictionNutritionInfo.micronutrients.find(micronutrient => {
+  const invalidMicronutrients = predictionNutritionInfo.micronutrients.find((micronutrient: Micronutrient) => {
     if (String(micronutrient.name).length > 50 || String(micronutrient.unit).length > 5 ) {
 
       errorOnInvalidMicronutrientInput();
@@ -73,7 +75,8 @@ export const validatePredictionInfo = (nutritionTrackedDays, predictionNutrition
   return false;
 }
 
-export const validateAddDayTracked = (nutritionTrackedDays, trackedDayInfo) => {
+export const validateAddDayTracked = (nutritionTrackedDays: NutritionTrackedDay[], 
+  trackedDayInfo: NutritionTrackedDay) => {
   // check that trackedDayInfo's day doesn't exist in nutritionTrackedDays
   const trackedDayExists = nutritionTrackedDays.find((nutritionTrackedDay) => {
     return nutritionTrackedDay.dateTracked === trackedDayInfo.dateTracked;
@@ -141,7 +144,8 @@ export const validateAddDayTracked = (nutritionTrackedDays, trackedDayInfo) => {
   return false;
 }
 
-export const validateUpdateDayTracked = (nutritionTrackedDays, updatedTrackedDayInfo) => {
+export const validateUpdateDayTracked = (nutritionTrackedDays: NutritionTrackedDay[], 
+  updatedTrackedDayInfo: NutritionTrackedDay) => {
   // check that updatedTrackedDayInfo exists in nutritionTrackedDays
   const updatedTrackedDayExists = nutritionTrackedDays.find(nutritionTrackedDay => {
     return nutritionTrackedDay.dateTracked === updatedTrackedDayInfo.dateTracked;
@@ -210,7 +214,7 @@ export const validateUpdateDayTracked = (nutritionTrackedDays, updatedTrackedDay
   return false;
 };
 
-export const validateFilterNutritionTrackedDays = (filterConditions) => {
+export const validateFilterNutritionTrackedDays = (filterConditions: FilterConditions) => {
   // validating if startDate > endDate
   if (filterConditions.filterStartDate && filterConditions.filterEndDate && filterConditions.filterStartDate > filterConditions.filterEndDate) {
     errorOnStartDateBeforeEndDate()
@@ -220,6 +224,6 @@ export const validateFilterNutritionTrackedDays = (filterConditions) => {
   return false
 }
 
-export const validateRemoveNutritionTrackedDay = (trackedDay) => {
+export const validateRemoveNutritionTrackedDay = (trackedDay: number) => {
   return false
 }

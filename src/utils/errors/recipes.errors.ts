@@ -1,6 +1,6 @@
 // errors on recipes
 
-export const errorOnDisplaySearchedRecipes = (recipeNameSearched) => {
+export const errorOnDisplaySearchedRecipes = (recipeNameSearched: string) => {
   alert(`${recipeNameSearched} could not be found`);
 };
 
