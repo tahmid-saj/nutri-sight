@@ -1,19 +1,31 @@
-import "./activity-date-table.styles.jsx"
+import "./activity-date-table.styles.js"
 import { SearchedCaloriesBurnedActivitiesTableContainer,
   SearchedCaloriesBurnedActivitiesTable
-} from "./activity-date-table.styles.jsx";
-import { useState, useContext, useRef } from "react"
+} from "./activity-date-table.styles.js";
+import { useState, useContext, useRef, MouseEvent } from "react"
 
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context";
-import Button from "../../../../shared/button/button.component";
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.js";
+import Button from "../../../../shared/button/button.component.js";
 import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx";
-import { ButtonsContainer } from "../../../../shared/button/button.styles.jsx";
+import SimplePaper from "../../../../shared/mui/paper/paper.component.js";
+import { ButtonsContainer } from "../../../../shared/button/button.styles.js";
+
+import { ColDef } from "ag-grid-community";
+import { AgGridReact as AgGridReactType } from "ag-grid-react"; // Needed for typing
+
+type CaloriesBurnedData = {
+  Activity: string,
+  CaloriesBurnedPerHour: string,
+  SearchedActivity: string,
+  DurationMinutes: string,
+  TotalCaloriesBurned: string,
+  DateTracked: string
+}
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["8"],
@@ -21,45 +33,44 @@ const paperStyles = {
 }
 
 const ActivityDateTable = () => {
-  const gridRef = useRef()
+  const gridRef = useRef<AgGridReactType<CaloriesBurnedData>>(null)
   const { searchActivityResults, addTrackedActivityDate } = useContext(CaloriesBurnedContext)
   
-  const rowData = searchActivityResults.map((activityResult) => {
+  const rowData: CaloriesBurnedData[] = searchActivityResults.map((activityResult) => {
     return {
       Activity: activityResult.activity,
       SearchedActivity: activityResult.searchedActivity,
-      DateTracked: activityResult.dateTracked,
-      CaloriesBurnedPerHour: activityResult.caloriesBurnedPerHour,
-      DurationMinutes: activityResult.durationMinutes,
-      TotalCaloriesBurned: activityResult.totalCaloriesBurned
-    }
-  })
+      DateTracked: activityResult.dateTracked.toString(), // if it's a Date, convert to string
+      CaloriesBurnedPerHour: activityResult.caloriesBurnedPerHour.toString(),
+      DurationMinutes: activityResult.durationMinutes.toString(),
+      TotalCaloriesBurned: activityResult.totalCaloriesBurned.toString()
+    };
+  });
 
   // column definitions
-  const [columnDefs, setColumnDefs] = useState([
+  const columnDefs: ColDef<CaloriesBurnedData>[] = [
     { field: "Activity" },
     { field: "CaloriesBurnedPerHour" },
     { field: "DurationMinutes" },
     { field: "TotalCaloriesBurned" },
     { field: "DateTracked" }
-  ])
+  ]
 
-  const onAddSelected = (event) => {
+  const onAddSelected = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    const selectedData = gridRef.current.api.getSelectedRows()
+    const selectedData = gridRef?.current?.api.getSelectedRows()
     // TODO: better manage selectedData[0] without the 0 in index
-    if (!selectedData[0] || selectedData[0] === null || !selectedData[0].Activity || selectedData[0] === undefined) {
-      return
+    if (!selectedData || !selectedData[0] || selectedData[0].Activity === undefined) {
+      return;
     }
-
-    
-
+     
     addTrackedActivityDate({
-      dateTracked: selectedData[0].DateTracked,
-      activity: selectedData[0].SearchedActivity,
-      durationMinutes: selectedData[0].DurationMinutes,
-      caloriesBurnedPerHour: selectedData[0].CaloriesBurnedPerHour,
-      totalCaloriesBurned: selectedData[0].TotalCaloriesBurned
+      dateTracked: selectedData[0]?.DateTracked,
+      activity: selectedData[0]?.SearchedActivity,
+      durationMinutes: selectedData[0]?.DurationMinutes,
+      caloriesBurnedPerHour: selectedData[0]?.CaloriesBurnedPerHour,
+      totalCaloriesBurned: selectedData[0]?.TotalCaloriesBurned,
+      searchActivity: selectedData[0]?.SearchedActivity
     })
   }
 

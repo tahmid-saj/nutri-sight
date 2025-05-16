@@ -1,11 +1,12 @@
-import "./calories-burned-graph-pie.styles.jsx"
-import { CaloriesBurnedPieGraphContainer } from "./calories-burned-graph-pie.styles.jsx"
+import "./calories-burned-graph-pie.styles.js"
+import { CaloriesBurnedPieGraphContainer } from "./calories-burned-graph-pie.styles.js"
 import { useContext } from "react"
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context"
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.js"
 import ReactApexChart from 'react-apexcharts'
 import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
 import { Typography } from "@mui/material"
+import { ApexOptions } from "apexcharts"
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"],
@@ -24,9 +25,9 @@ const CaloriesBurnedGraphPie = () => {
     }
   })
 
-  const series = [ ...trackedCalories.values() ]
+  const series: ApexAxisChartSeries = [ ...trackedCalories.values() ]
 
-  const options = {
+  const options: ApexOptions = {
     chart: {
       type: 'donut',
     },

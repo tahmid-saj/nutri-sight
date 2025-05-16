@@ -1,13 +1,19 @@
-import Button from "../../../shared/button/button.component"
-import FormInput from "../../../shared/form-input/form-input.component"
-import "./activity-date-filter.styles.jsx"
-import { ActivityDateFilterContainer, FilterButtonsContainer } from "./activity-date-filter.styles.jsx"
+import Button from "../../../shared/button/button.component.js"
+import FormInput from "../../../shared/form-input/form-input.component.js"
+import "./activity-date-filter.styles.js"
+import { ActivityDateFilterContainer, FilterButtonsContainer } from "./activity-date-filter.styles.js"
 
-import { useState, useContext } from "react"
-import { CaloriesBurnedContext } from "../../../../contexts/signed-out/calories-burned/calories-burned.context"
+import { useState, useContext, FormEvent, ChangeEvent, MouseEvent } from "react"
+import { CaloriesBurnedContext } from "../../../../contexts/signed-out/calories-burned/calories-burned.context.js"
 import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js"
 import { Typography } from "@mui/material"
-import SimplePaper from "../../../shared/mui/paper/paper.component.jsx"
+import SimplePaper from "../../../shared/mui/paper/paper.component.js"
+
+type FormFields = {
+  activity: string,
+  dateTracked: string,
+  durationMinutes: string
+}
 
 const defaultFormFields = {
   activity: "",
@@ -21,14 +27,14 @@ const paperStyles = {
 }
 
 const ActivityDateFilter = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields)
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormFields)
   const { filterActivityDates, clearActivityDatesFilter } = useContext(CaloriesBurnedContext)
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (formFields.activity === "" && formFields.dateTracked === "" &&
@@ -41,12 +47,12 @@ const ActivityDateFilter = () => {
     filterActivityDates(formFields)
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setFormFields({ ...formFields, [name]: value })
   }
 
-  const handleClearFilter = (event) => {
+  const handleClearFilter = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
     resetFormFields()

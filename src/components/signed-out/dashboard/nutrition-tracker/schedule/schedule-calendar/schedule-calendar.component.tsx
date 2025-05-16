@@ -1,20 +1,21 @@
-import "./schedule-calendar.styles.jsx"
-import { CalendarTodoList, NutritionTrackerCalendarContainer } from "./schedule-calendar.styles.jsx";
+import "./schedule-calendar.styles.js"
+import { CalendarTodoList, NutritionTrackerCalendarContainer } from "./schedule-calendar.styles.js";
 import 'rsuite/Calendar/styles/index.css';
 import { Fragment, useState } from "react";
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
 import { Typography } from "@mui/material";
-import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants";
+import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants.js";
 import { useDispatch, useSelector } from "react-redux";
-import { selectNutritionTrackedDays } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
-import { selectScheduledNutritionTrackedDay } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
+import { selectNutritionTrackedDays } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js";
+import { selectScheduledNutritionTrackedDay } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action.js";
+import { NutritionTrackedDay } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.types.js";
 
-function getScheduledData(date, nutritionTrackedDays) {
-  date = date.toISOString().split('T')[0]
+function getScheduledData(date: Date, nutritionTrackedDays: NutritionTrackedDay[]) {
+  const dateStr = date.toISOString().split('T')[0]
 
-  let scheduledNutritionTrackedDaysForDate = []
+  let scheduledNutritionTrackedDaysForDate: { calories: number }[] = []
   nutritionTrackedDays.map((nutritionTrackedDay) => {
-    if (nutritionTrackedDay.dateTracked === date) {
+    if (nutritionTrackedDay.dateTracked === dateStr) {
       scheduledNutritionTrackedDaysForDate.push({
         calories: nutritionTrackedDay.calories
       })
@@ -30,8 +31,8 @@ const ScheduleCalendar = () => {
 
   // 
 
-  function renderCell(date) {
-    const list = getScheduledData(date, nutritionTrackedDays);
+  function renderCell(date: Date) {
+    const list = getScheduledData(date, nutritionTrackedDays!);
     const displayList = list.filter((item, index) => index < 1);
 
     if (list.length) {
@@ -55,7 +56,7 @@ const ScheduleCalendar = () => {
     return null;
   }
 
-  const onSelectDate = (date) => {
+  const onSelectDate = (date: Date) => {
     const selectedDate = date.toISOString().split('T')[0]
     
     dispatch(selectScheduledNutritionTrackedDay(selectedDate))
