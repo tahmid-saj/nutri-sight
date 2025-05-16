@@ -1,23 +1,23 @@
-import "./pagination.styles.jsx";
-import { PaginationButtonsContainer, PaginationContainer } from "./pagination.styles.jsx";
+import "./pagination.styles.js";
+import { PaginationButtonsContainer, PaginationContainer } from "./pagination.styles.js";
 
-import React, { Component, useContext } from "react";
-import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
+import React, { Component, MouseEvent, useContext } from "react";
+import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context.js";
 
-import { PAGINATION_BUTTONS } from "../../../../../utils/constants/recipes.constants";
-import Button from "../../../button/button.component.jsx";
+import { PAGINATION_BUTTONS } from "../../../../../utils/constants/recipes.constants.js";
+import Button from "../../../button/button.component.js";
 
 const Pagination = () => {
   const { previousPageNumber, nextPageNumber, 
           displayPreviousPage, displayNextPage, displayPaginationButtons } = useContext(RecipesContext);
 
-  const handlePreviousPage = (event) => {
+  const handlePreviousPage = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     
     displayPaginationButtons(PAGINATION_BUTTONS.previous);
   };
 
-  const handleNextPage = (event) => {
+  const handleNextPage = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     displayPaginationButtons(PAGINATION_BUTTONS.next);
@@ -30,14 +30,14 @@ const Pagination = () => {
           <PaginationButtonsContainer>
             <div className="col-sm-12 col-md-6 col-lg-6">
               <Button type="button" onClick={ handlePreviousPage }
-                style={{ visibility: `${displayPreviousPage === false ? "hidden" : ""}` }}>
+                style={{ visibility: `${displayPreviousPage === false ? "hidden" : "visible"}` }}>
                 {`< Page ${previousPageNumber}`}
               </Button>
             </div>
 
             <div className="col-sm-12 col-md-6 col-lg-6">
               <Button type="button" onClick={ handleNextPage }
-                style={{ visibility: `${displayNextPage === false ? "hidden" : ""}` }}>
+                style={{ visibility: `${displayNextPage === false ? "hidden" : "visible"}` }}>
                 {`Page ${nextPageNumber} >`}
               </Button>
             </div>

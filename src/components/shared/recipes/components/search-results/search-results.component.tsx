@@ -1,17 +1,17 @@
-import "./search-results.styles"
+import "./search-results.styles.tsx"
 import { SearchResultsContainer, SearchResultContainer,
   PaginationContainer 
-} from "./search-results.styles";
+} from "./search-results.styles.tsx";
 
 import React, { Component, useState, useContext, Fragment } from "react";
-import Pagination from "../pagination/pagination.component";
-import SearchResult from "../search-result/search-result.component";
+import Pagination from "../pagination/pagination.component.tsx";
+import SearchResult from "../search-result/search-result.component.tsx";
 
-import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
-import SimplePaper from "../../../mui/paper/paper.component";
+import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context.tsx";
+import SimplePaper from "../../../mui/paper/paper.component.tsx";
 
-import { RECIPES_PER_PAGE } from "../../../../../utils/constants/recipes.constants";
-import { COLOR_CODES } from "../../../../../utils/constants/shared.constants";
+import { RECIPES_PER_PAGE } from "../../../../../utils/constants/recipes.constants.ts";
+import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.ts";
 import { Paper } from "@mui/material";
 
 const paperStyles = {

@@ -1,14 +1,14 @@
-import "./recipe.styles.jsx";
-import { RecipeContainer } from "./recipe.styles.jsx";
+import "./recipe.styles.js";
+import { RecipeContainer } from "./recipe.styles.js";
 
 import { Component, useState, useContext } from "react";
-import Servings from "./servings/servings.component";
-import Ingredients from "./ingredients/ingredients.component";
-import NutrientPrediction from "./nutrient-prediction/nutrient-prediction.component.jsx";
+import Servings from "./servings/servings.component.js";
+import Ingredients from "./ingredients/ingredients.component.js";
+import NutrientPrediction from "./nutrient-prediction/nutrient-prediction.component.js";
 
-import SimplePaper from "../../../mui/paper/paper.component.jsx";
+import SimplePaper from "../../../mui/paper/paper.component.js";
 import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js";
-import OutlinedCard from "../../../mui/card/card.component.jsx";
+import OutlinedCard from "../../../mui/card/card.component.js";
 
 import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context.js";
 
@@ -44,7 +44,7 @@ const Recipe = () => {
       </OutlinedCard>
 
       {
-        displayedRecipe.nutrientPredictions !== undefined && displayedRecipe.nutrientPredictions.length !== 0 ? (
+        displayedRecipe?.nutrientPredictions !== undefined && displayedRecipe?.nutrientPredictions.length !== 0 ? (
         <OutlinedCard styles={ nutrientPredictionCardStyles }>
           <NutrientPrediction></NutrientPrediction>
         </OutlinedCard>) : null

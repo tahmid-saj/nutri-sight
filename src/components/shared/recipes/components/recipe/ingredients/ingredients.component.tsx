@@ -1,8 +1,8 @@
-import "./ingredients.styles.jsx";
-import { IngredientsContainer, IngredientQuantitiesContainer } from "./ingredients.styles.jsx";
+import "./ingredients.styles.js";
+import { IngredientsContainer, IngredientQuantitiesContainer } from "./ingredients.styles.js";
 
 import { useContext } from "react";
-import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context";
+import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context.js";
 import { Typography } from "@mui/material";
 
 const Ingredients = () => {
@@ -11,7 +11,7 @@ const Ingredients = () => {
   return (
     <IngredientsContainer>
       <Typography variant="h5">Recipe Ingredients</Typography>
-      <Typography variant="h6">{`${displayedRecipe.title}`}</Typography>
+      <Typography variant="h6">{`${displayedRecipe?.title}`}</Typography>
 
       <IngredientQuantitiesContainer>
         {

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, FormEvent, ChangeEvent } from "react";
 
 import FormInput from "../../../form-input/form-input.component";
 import Button from "../../../button/button.component";
@@ -6,35 +6,35 @@ import Button from "../../../button/button.component";
 import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context";
 import { ButtonsContainer } from "../../../button/button.styles";
 
+type FormFields = {
+  searchedRecipe: string
+}
+
 const defaultFormFields = {
   searchedRecipe: ""
 };
 
 const Search = () => {
   const { displaySearchedRecipes } = useContext(RecipesContext);
-  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormFields);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    
 
     displaySearchedRecipes(formFields.searchedRecipe);
 
     resetFormFields();
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const { name, value } = event.target;
 
-    setFormFields({ [name]: value })
-
-    
+    setFormFields({ ...formFields, [name]: value })
   };
 
   return (
