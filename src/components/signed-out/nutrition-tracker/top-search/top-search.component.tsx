@@ -1,17 +1,17 @@
 import React from "react";
 
-import "./top-search.styles.jsx";
+import "./top-search.styles.js";
 import { NutritionTrackerSummaryFilterContainer,
   SearchDaysSummaryContainer, NutritionTrackerSummaryGraphTableContainer
-} from "./top-search.styles.jsx";
+} from "./top-search.styles.js";
 
-import SearchDays from "../search-days/search-days.component";
-import ConsumptionInfo from "../consumption-info/consumption-info.component";
+import SearchDays from "../search-days/search-days.component.js";
+import ConsumptionInfo from "../consumption-info/consumption-info.component.js";
 
-import NutritionTrackerFilter from "../nutrition-tracker-filter/nutrition-tracker-filter.component";
-import SummaryGraph from "../summary-graph/summary-graph.component";
-import CaloriesGraph from "../calories-graph/calories-graph.component";
-import NutritionTrackerTable from "../nutrition-tracker-table/nutrition-tracker-table.component";
+import NutritionTrackerFilter from "../nutrition-tracker-filter/nutrition-tracker-filter.component.js";
+import SummaryGraph from "../summary-graph/summary-graph.component.js";
+import CaloriesGraph from "../calories-graph/calories-graph.component.js";
+import NutritionTrackerTable from "../nutrition-tracker-table/nutrition-tracker-table.component.js";
 import { Typography } from "@mui/material";
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js";
   

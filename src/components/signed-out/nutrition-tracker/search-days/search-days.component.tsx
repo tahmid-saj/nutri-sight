@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 
 import "./search-days.styles.scss";
 
@@ -12,12 +12,16 @@ import { useDispatch, useSelector } from "react-redux"
 import { selectNutritionTrackedDays } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
 import { getDayTracked } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
 
+type FormFields = {
+  dateTracked: string
+}
+
 const defaultFormFields = {
   dateTracked: ""
 };
 
 const SearchDays = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormFields);
   const [searchedClicked, setSearchClicked] = useState(false)
 
   // const { getDayTracked } = useContext(NutritionTrackerContext)
@@ -28,21 +32,21 @@ const SearchDays = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     setSearchClicked(true)
     event.preventDefault();
 
     
     // resetFormFields();
-    dispatch(getDayTracked(nutritionTrackedDays, formFields.dateTracked))
+    dispatch(getDayTracked(nutritionTrackedDays!, formFields.dateTracked))
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     
 
-    setFormFields({ [name]: value })
+    setFormFields({ ...formFields, [name]: value })
   };
 
   return (

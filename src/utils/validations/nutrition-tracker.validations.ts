@@ -224,6 +224,6 @@ export const validateFilterNutritionTrackedDays = (filterConditions: FilterCondi
   return false
 }
 
-export const validateRemoveNutritionTrackedDay = (trackedDay: number) => {
+export const validateRemoveNutritionTrackedDay = (trackedDay: string | Date) => {
   return false
 }

@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 import { selectDayTrackedSearchResult } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
 
 import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants";
+import { ApexOptions } from "apexcharts";
 
 const ConsumptionInfo = () => {
   // const { dayTrackedSearchResult } = useContext(NutritionTrackerContext);
@@ -26,9 +27,9 @@ const ConsumptionInfo = () => {
     [GRAPH_FIELDS.fat, dayTrackedSearchResult.macronutrients.fat !== 0 ? dayTrackedSearchResult.macronutrients.fat : 0]
   ])
   
-  const series = [ ...trackedMacronutrients.values() ]
+  const series: number[] = [ ...trackedMacronutrients.values() ]
 
-  const options = {
+  const options: ApexOptions = {
     chart: {
       type: 'donut',
       height: 400,

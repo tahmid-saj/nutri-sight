@@ -1,19 +1,27 @@
-import { useState, useContext } from "react";
+import { useState, useContext, MouseEvent, ChangeEvent } from "react";
 
-import "./update-consumption-form.styles.jsx";
-import { UpdateConsumptionFormContainer, ConsumptionFormButtonContainer } from "./update-consumption-form.styles.jsx";
+import "./update-consumption-form.styles.js";
+import { UpdateConsumptionFormContainer, ConsumptionFormButtonContainer } from "./update-consumption-form.styles.js";
 
-import FormInput from "../../../shared/form-input/form-input.component";
-import Button from "../../../shared/button/button.component";
-import AddMicronutrients from "../add-micronutrients/add-micronutrients.component";
+import FormInput from "../../../shared/form-input/form-input.component.js";
+import Button from "../../../shared/button/button.component.js";
+import AddMicronutrients from "../add-micronutrients/add-micronutrients.component.js";
 
 // import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import { useDispatch, useSelector } from "react-redux"
-import { selectNutritionTrackedDays, selectFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector"
-import { addDayTracked, updateDayTracked, setFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
+import { selectNutritionTrackedDays, selectFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js"
+import { addDayTracked, updateDayTracked, setFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action.js";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
+import SimplePaper from "../../../shared/mui/paper/paper.component.js";
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js";
+
+type FormFields = {
+  dateTracked: string,
+  calories: string,
+  carbohydrates: string,
+  protein: string,
+  fat: string
+}
 
 const defaultFormFields = {
   dateTracked: "",
@@ -29,7 +37,7 @@ const UpdateConsumptionForm = () => {
   const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
   const formInputMicronutrients = useSelector(selectFormInputMicronutrients)
   
-  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormFields);
   
   const paperStyles = {
     backgroundColor: COLOR_CODES.general["1"],
@@ -42,52 +50,56 @@ const UpdateConsumptionForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleAddTrackedDay = (event) => {
+  const handleAddTrackedDay = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     
 
-    dispatch(addDayTracked(nutritionTrackedDays, formInputMicronutrients, {
+    dispatch(addDayTracked(nutritionTrackedDays!, formInputMicronutrients!, {
       dateTracked: formFields.dateTracked,
-      calories: formFields.calories,
+      calories: Number(formFields.calories),
       macronutrients: {
-        carbohydrates: formFields.carbohydrates,
-        protein: formFields.protein,
-        fat: formFields.fat,
-      }
+        carbohydrates: Number(formFields.carbohydrates),
+        protein: Number(formFields.protein),
+        fat: Number(formFields.fat),
+      },
+      micronutrients: []
     }))
     dispatch(setFormInputMicronutrients([]))
 
     resetFormFields(); 
   };
 
-  const handleUpdateTrackedDay = (event) => {
+  const handleUpdateTrackedDay = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     
 
-    dispatch(updateDayTracked(nutritionTrackedDays, formInputMicronutrients, {
+    dispatch(updateDayTracked(nutritionTrackedDays!, formInputMicronutrients!, {
       dateTracked: formFields.dateTracked,
-      calories: formFields.calories,
+      calories: Number(formFields.calories),
       macronutrients: {
-        carbohydrates: formFields.carbohydrates,
-        protein: formFields.protein,
-        fat: formFields.fat,
-      }
+        carbohydrates: Number(formFields.carbohydrates),
+        protein:  Number(formFields.protein),
+        fat:  Number(formFields.fat),
+      },
+      micronutrients: []
     }))
     dispatch(setFormInputMicronutrients([]))
 
     resetFormFields(); 
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     setFormFields({ ...formFields, [name]: value })
   };
 
   return (
-    <UpdateConsumptionFormContainer micronutrientsAdded={ formInputMicronutrients.length !== 0 }>
+    <UpdateConsumptionFormContainer 
+      // micronutrientsAdded={ formInputMicronutrients.length !== 0 }
+      >
       <div className="container">
       <SimplePaper styles={ paperStyles }>
         <Typography variant="h6">Track some consumption</Typography>
@@ -118,7 +130,7 @@ const UpdateConsumptionForm = () => {
               <div className="btn-group flex-wrap" role="group">
                 <Button type="button" onClick={ handleAddTrackedDay }>Add Day</Button>
                 {
-                  nutritionTrackedDays.length !== 0 &&
+                  nutritionTrackedDays?.length !== 0 &&
                   <Button type="submit" onClick={ handleUpdateTrackedDay }>Update Day</Button>
                 }
               </div>
