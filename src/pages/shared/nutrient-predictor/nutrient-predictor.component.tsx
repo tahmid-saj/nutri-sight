@@ -1,13 +1,13 @@
-import "./nutrient-predictor.styles.js";
-import { NutrientPredictorContainer, NutrientPredictionInfo } from "./nutrient-predictor.styles.js"
+import "./nutrient-predictor.styles.tsx";
+import { NutrientPredictorContainer, NutrientPredictionInfo } from "./nutrient-predictor.styles.tsx"
 
 import React, { Component, useContext } from "react";
-import UploadFoodImage from "../../../components/shared/nutrient-predictor/upload-food-image/upload-food-image.component.js";
-import NutrientsInfo from "../../../components/shared/nutrient-predictor/nutrients-info/nutrients-info.component.js";
+import UploadFoodImage from "../../../components/shared/nutrient-predictor/upload-food-image/upload-food-image.component.tsx";
+import NutrientsInfo from "../../../components/shared/nutrient-predictor/nutrients-info/nutrients-info.component.tsx";
 
-import { NutrientPredictorContext } from "../../../contexts/shared/nutrient-predictor/nutrient-predictor.context.js";
+import { NutrientPredictorContext } from "../../../contexts/shared/nutrient-predictor/nutrient-predictor.context.tsx";
 import { Divider, Typography } from "@mui/material";
-import { COLOR_CODES } from "../../../utils/constants/shared.constants.js";
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.ts";
 
 const NutrientPredictor = () => {
   const { nutrientPredictions } = useContext(NutrientPredictorContext);

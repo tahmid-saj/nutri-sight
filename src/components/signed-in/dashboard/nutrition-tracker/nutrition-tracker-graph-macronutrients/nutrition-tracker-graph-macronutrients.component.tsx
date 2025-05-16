@@ -1,13 +1,13 @@
-import "./nutrition-tracker-graph-macronutrients.styles.js"
-import { NutritionTrackerDashboardGraphNutrientsContainer } from "./nutrition-tracker-graph-macronutrients.styles.js";
+import "./nutrition-tracker-graph-macronutrients.styles.tsx"
+import { NutritionTrackerDashboardGraphNutrientsContainer } from "./nutrition-tracker-graph-macronutrients.styles.tsx";
 import { Fragment, useContext, useState, Component } from "react";
 import ReactApexChart from 'react-apexcharts'
 
-import { NutritionTrackerContext } from "../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
-import { GRAPH_FIELDS } from "../../../../../utils/constants/nutrition-tracker.constants.js";
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js";
+import { NutritionTrackerContext } from "../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.tsx";
+import { GRAPH_FIELDS } from "../../../../../utils/constants/nutrition-tracker.constants.ts";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.ts";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../../shared/mui/paper/paper.component.js";
+import SimplePaper from "../../../../shared/mui/paper/paper.component.tsx";
 import { NutritionTrackedDay } from "../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.types.js";
 import { ApexOptions } from "apexcharts";
 

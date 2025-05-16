@@ -1,16 +1,16 @@
-import "./nutrition-tracker-table.styles.js"
-import { FilterNutritionTrackerTableContainer, FilterButtonsContainer } from "./nutrition-tracker-table.styles.js";
+import "./nutrition-tracker-table.styles.tsx"
+import { FilterNutritionTrackerTableContainer, FilterButtonsContainer } from "./nutrition-tracker-table.styles.tsx";
 import { useContext, useState, useRef, MouseEvent } from "react"
 
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
-import Button from "../../../shared/button/button.component.js";
-import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js";
+import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.tsx";
+import Button from "../../../shared/button/button.component.tsx";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.ts";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../shared/mui/paper/paper.component.js";
+import SimplePaper from "../../../shared/mui/paper/paper.component.tsx";
 import { NutritionTrackedDay } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.types.js";
 
 import { ColDef } from "ag-grid-community";

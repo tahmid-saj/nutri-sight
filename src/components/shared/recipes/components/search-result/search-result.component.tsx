@@ -1,8 +1,8 @@
-import "./search-result.styles.js";
-import { RecipeResult } from "./search-result.styles.js";
+import "./search-result.styles.tsx";
+import { RecipeResult } from "./search-result.styles.tsx";
 
 import { MouseEvent, useContext } from "react";
-import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context.js";
+import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context.tsx";
 import { Typography } from "@mui/material";
 import { RecipePartialInfo } from "../../../../../contexts/shared/recipes/recipes.types.js";
 

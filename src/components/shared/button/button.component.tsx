@@ -1,5 +1,5 @@
-import "./button.styles.jsx";
-import { BaseButton, GoogleSignInButton, InvertedButton } from "./button.styles.jsx";
+import "./button.styles.tsx";
+import { BaseButton, GoogleSignInButton, InvertedButton } from "./button.styles.tsx";
 import { BUTTON_TYPE_CLASSES } from "../../../utils/constants/shared.constants.ts";
 import { ReactNode } from "react";
 

@@ -1,13 +1,13 @@
 import { useState, useContext, FormEvent, ChangeEvent } from "react"
-import FormInput from "../../../components/shared/form-input/form-input.component.jsx"
-import Button from "../../../components/shared/button/button.component.jsx"
-import "./chatbot.styles.jsx"
-import { ChatBotContainer, ChatBotInputMessage } from "./chatbot.styles.jsx"
-import ChatBotResponse from "../../../components/shared/chatbot/chatbot-response/chatbot-response.component.jsx"
-import { ChatBotContext } from "../../../contexts/shared/chatbot/chatbot.context.js"
+import FormInput from "../../../components/shared/form-input/form-input.component.tsx"
+import Button from "../../../components/shared/button/button.component.tsx"
+import "./chatbot.styles.tsx"
+import { ChatBotContainer, ChatBotInputMessage } from "./chatbot.styles.tsx"
+import ChatBotResponse from "../../../components/shared/chatbot/chatbot-response/chatbot-response.component.tsx"
+import { ChatBotContext } from "../../../contexts/shared/chatbot/chatbot.context.tsx"
 import { Divider, Typography } from "@mui/material"
-import { ButtonsContainer } from "../../../components/shared/button/button.styles.jsx"
-import { COLOR_CODES } from "../../../utils/constants/shared.constants.js"
+import { ButtonsContainer } from "../../../components/shared/button/button.styles.tsx"
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.ts"
 
 type FormFields = {
   messageInput: string

@@ -4,18 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { createAuthUserWithEmailAndPassword,
         createUserDocumentFromAuth } from "../../../utils/firebase/firebase.utils.js";
 
-import FormInput from "../../shared/form-input/form-input.component.js";
-import Button from "../../shared/button/button.component.js";
+import FormInput from "../../shared/form-input/form-input.component.tsx";
+import Button from "../../shared/button/button.component.tsx";
 
-import "./sign-up-form.styles.js";
-import { SignUpContainer } from "./sign-up-form.styles.js";
+import "./sign-up-form.styles.tsx";
+import { SignUpContainer } from "./sign-up-form.styles.tsx";
 
-import { errorOnEmailAlreadyInUse, errorOnUserCreation } from "../../../utils/errors/user.errors.js";
+import { errorOnEmailAlreadyInUse, errorOnUserCreation } from "../../../utils/errors/user.errors.ts";
 
 import { useDispatch } from "react-redux";
-import { signUpStart } from "../../../store/shared/user/user.action.js";
+import { signUpStart } from "../../../store/shared/user/user.action.ts";
 import { Typography } from "@mui/material";
-import { COLOR_CODES } from "../../../utils/constants/shared.constants.js";
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.ts";
 
 type FormFields = {
   displayName: string,

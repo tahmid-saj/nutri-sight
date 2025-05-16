@@ -1,13 +1,13 @@
-import Button from "../../../shared/button/button.component.js";
-import FormInput from "../../../shared/form-input/form-input.component.js";
-import "./nutrition-tracker-filter.styles.js"
-import { NutritionTrackerFilterContainer, FilterButtonsContainer } from "./nutrition-tracker-filter.styles.js"
+import Button from "../../../shared/button/button.component.tsx";
+import FormInput from "../../../shared/form-input/form-input.component.tsx";
+import "./nutrition-tracker-filter.styles.tsx"
+import { NutritionTrackerFilterContainer, FilterButtonsContainer } from "./nutrition-tracker-filter.styles.tsx"
 
 import { useState, useContext, FormEvent, ChangeEvent, MouseEvent } from "react"
-import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
+import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.tsx";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../shared/mui/paper/paper.component.js";
-import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js";
+import SimplePaper from "../../../shared/mui/paper/paper.component.tsx";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.ts";
 
 type FormFields = {
   filterStartDate: string,

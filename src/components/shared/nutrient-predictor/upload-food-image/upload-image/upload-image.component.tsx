@@ -1,10 +1,10 @@
-import "./upload-image.styles.jsx";
+import "./upload-image.styles.tsx";
 import {
   UploadImageContainer,
   UploadImageForm,
   UploadedImage,
   UploadedImageContainer,
-} from "./upload-image.styles.jsx";
+} from "./upload-image.styles.tsx";
 
 import React, {
   useState,
@@ -13,16 +13,16 @@ import React, {
   FormEvent,
   ChangeEvent,
 } from "react";
-import FormInput from "../../../form-input/form-input.component.js";
-import Button from "../../../button/button.component.js";
+import FormInput from "../../../form-input/form-input.component.tsx";
+import Button from "../../../button/button.component.tsx";
 
 import { NutrientPredictorContext } from "../../../../../contexts/shared/nutrient-predictor/nutrient-predictor.context.tsx";
 
-import { NUTRIENT_PREDICTOR_ENUMS } from "../../../../../utils/constants/nutrient-predictor.constants.js";
-import { ButtonsContainer } from "../../../button/button.styles.js";
+import { NUTRIENT_PREDICTOR_ENUMS } from "../../../../../utils/constants/nutrient-predictor.constants.ts";
+import { ButtonsContainer } from "../../../button/button.styles.tsx";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../mui/paper/paper.component.js";
-import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js";
+import SimplePaper from "../../../mui/paper/paper.component.tsx";
+import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.ts";
 
 type FormFields = {
   mealDescription: string;

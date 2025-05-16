@@ -1,11 +1,11 @@
-import "./nutrition-tracker-graph-calories.styles.js"
-import { NutritionTrackerDashboardGraphCalories } from "./nutrition-tracker-graph-calories.styles.js"
+import "./nutrition-tracker-graph-calories.styles.tsx"
+import { NutritionTrackerDashboardGraphCalories } from "./nutrition-tracker-graph-calories.styles.tsx"
 import ReactApexChart from "react-apexcharts"
 import { useSelector } from "react-redux"
-import { selectNutritionTrackedDays } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js"
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
-import { GRAPH_FIELDS } from "../../../../../utils/constants/nutrition-tracker.constants.js"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
+import { selectNutritionTrackedDays } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.ts"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.ts"
+import { GRAPH_FIELDS } from "../../../../../utils/constants/nutrition-tracker.constants.ts"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.tsx"
 import { ApexOptions } from "apexcharts"
 
 const paperStyles = {

@@ -1,12 +1,12 @@
-import "./schedule-calendar.styles.js"
-import { CalendarTodoList, CaloriesBurnedCalendarContainer } from "./schedule-calendar.styles.js";
+import "./schedule-calendar.styles.tsx"
+import { CalendarTodoList, CaloriesBurnedCalendarContainer } from "./schedule-calendar.styles.tsx";
 import 'rsuite/Calendar/styles/index.css';
 import { Fragment, useContext, useState } from "react";
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
 import { Typography } from "@mui/material";
-import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants.js";
+import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants.ts";
 
-import { CaloriesBurnedContext } from "../../../../../../contexts/signed-in/calories-burned/calories-burned.context.js";
+import { CaloriesBurnedContext } from "../../../../../../contexts/signed-in/calories-burned/calories-burned.context.tsx";
 import { TrackedCaloriesBurned } from "../../../../../../contexts/signed-in/calories-burned/calories-burned.types.js";
 
 function getScheduledData(date: Date, trackedCaloriesBurned: TrackedCaloriesBurned[]) {

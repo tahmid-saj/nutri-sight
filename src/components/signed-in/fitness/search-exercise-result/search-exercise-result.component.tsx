@@ -1,10 +1,10 @@
-import OutlinedCard from "../../../shared/mui/card/card.component.js"
+import OutlinedCard from "../../../shared/mui/card/card.component.tsx"
 import { Typography } from "@mui/material"
-import "./search-exercise-result.styles.js"
-import { FitnessSearchResultInfo } from "./search-exercise-result.styles.js"
-import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js"
+import "./search-exercise-result.styles.tsx"
+import { FitnessSearchResultInfo } from "./search-exercise-result.styles.tsx"
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.ts"
 import { MouseEvent, useContext } from "react"
-import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context.js"
+import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context.tsx"
 import { ExerciseSearchResult } from "../../../../contexts/signed-in/fitness/fitness.types.js"
 
 const outlinedCardStyles = {

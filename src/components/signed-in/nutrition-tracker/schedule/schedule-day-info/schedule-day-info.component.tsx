@@ -1,10 +1,10 @@
-import "./schedule-day-info.styles.js"
-import { NutritionTrackerScheduleDayInfo } from "./schedule-day-info.styles.js"
+import "./schedule-day-info.styles.tsx"
+import { NutritionTrackerScheduleDayInfo } from "./schedule-day-info.styles.tsx"
 import { Typography, Divider } from "@mui/material"
 import { Fragment, useContext } from "react"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
-import { NutritionTrackerContext } from "../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.tsx"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.ts"
+import { NutritionTrackerContext } from "../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.tsx"
 import { Micronutrient } from "../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.types.js"
 
 const paperStyles = {

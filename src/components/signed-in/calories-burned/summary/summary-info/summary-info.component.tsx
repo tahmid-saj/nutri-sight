@@ -1,10 +1,10 @@
-import "./summary-info.styles.js"
-import { CaloriesBurnedSummaryInfoContainer } from "./summary-info.styles.js"
+import "./summary-info.styles.tsx"
+import { CaloriesBurnedSummaryInfoContainer } from "./summary-info.styles.tsx"
 import { useContext } from "react"
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context.js"
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context.tsx"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.ts"
 import { Typography, Divider } from "@mui/material"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.tsx"
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"],

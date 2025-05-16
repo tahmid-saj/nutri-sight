@@ -1,11 +1,11 @@
-import "./schedule-calendar.styles.js"
-import { CalendarTodoList, FitnessScheduleCalendarContainer } from "./schedule-calendar.styles.js";
+import "./schedule-calendar.styles.tsx"
+import { CalendarTodoList, FitnessScheduleCalendarContainer } from "./schedule-calendar.styles.tsx";
 import 'rsuite/Calendar/styles/index.css';
 import { Fragment, useContext, useState } from "react";
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
 import { Typography } from "@mui/material";
-import { FitnessContext } from "../../../../../contexts/signed-in/fitness/fitness.context.js";
-import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js";
+import { FitnessContext } from "../../../../../contexts/signed-in/fitness/fitness.context.tsx";
+import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.ts";
 import { Exercise } from "../../../../../contexts/signed-in/fitness/fitness.types.js";
 
 function getScheduledData(date: Date, exercises: Exercise[]) {

@@ -14,7 +14,7 @@ import { getNutritionTrackedDaysData, getNutritionTrackedDaysSummaryData,
   postNutritionTrackedDay, deleteNutritionTrackedDay, putNutritionTrackedDay,
   putNutritionTrackedDays, putNutritionTrackedDaysSummary } from "../../../utils/api-requests/nutrition-tracker.requests";
 
-import { NutritionTrackedDay, PredictionNutritionInfo, NutritionTrackedDay, Micronutrient } from "./nutrition-tracker.types";
+import { NutritionTrackedDay, PredictionNutritionInfo, Micronutrient } from "./nutrition-tracker.types";
 import { FormInputMicronutrient } from "./nutrition-tracker.types";
 import { FilterConditions } from "./nutrition-tracker.types";
 import { NutritionTrackedDaysSummary } from "./nutrition-tracker.types";

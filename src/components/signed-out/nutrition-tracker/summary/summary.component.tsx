@@ -1,15 +1,15 @@
 import { useContext } from "react";
 
-import "./summary.styles.js";
-import { NutritionTrackerSummary } from "./summary.styles.js";
+import "./summary.styles.tsx";
+import { NutritionTrackerSummary } from "./summary.styles.tsx";
 
 // import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import { useSelector } from "react-redux"
-import { selectNutritionTrackedDaysSummary } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js";
+import { selectNutritionTrackedDaysSummary } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.ts";
 import { Typography, Divider } from "@mui/material";
 
-import SimplePaper from "../../../shared/mui/paper/paper.component.js";
-import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js";
+import SimplePaper from "../../../shared/mui/paper/paper.component.tsx";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.ts";
 
 const date = new Date();
 let currentDay= String(date.getDate()).padStart(2, '0');

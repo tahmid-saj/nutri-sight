@@ -4,18 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { signInWithGooglePopup,
         signInAuthUserWithEmailAndPassword } from "../../../utils/firebase/firebase.utils.js";
 
-import FormInput from "../../shared/form-input/form-input.component.js";
-import Button from "../../shared/button/button.component.js";
+import FormInput from "../../shared/form-input/form-input.component.tsx";
+import Button from "../../shared/button/button.component.tsx";
 
-import "./sign-in-form.styles.js";
-import { SignInContainer, ButtonContainer } from "./sign-in-form.styles.js";
+import "./sign-in-form.styles.tsx";
+import { SignInContainer, ButtonContainer } from "./sign-in-form.styles.tsx";
 
-import { errorOnSignIn } from "../../../utils/errors/user.errors.js";
+import { errorOnSignIn } from "../../../utils/errors/user.errors.ts";
 
 import { useDispatch } from "react-redux";
-import { googleSignInStart, emailSignInStart } from "../../../store/shared/user/user.action.js";
+import { googleSignInStart, emailSignInStart } from "../../../store/shared/user/user.action.ts";
 import { Typography } from "@mui/material";
-import { COLOR_CODES } from "../../../utils/constants/shared.constants.js";
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.ts";
 import GoogleIcon from '@mui/icons-material/Google';
 import { FormEvent, ChangeEvent } from "react";
 

@@ -1,11 +1,11 @@
-import "./pagination.styles.js";
-import { PaginationButtonsContainer, PaginationContainer } from "./pagination.styles.js";
+import "./pagination.styles.tsx";
+import { PaginationButtonsContainer, PaginationContainer } from "./pagination.styles.tsx";
 
 import React, { Component, MouseEvent, useContext } from "react";
-import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context.js";
+import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context.tsx";
 
-import { PAGINATION_BUTTONS } from "../../../../../utils/constants/recipes.constants.js";
-import Button from "../../../button/button.component.js";
+import { PAGINATION_BUTTONS } from "../../../../../utils/constants/recipes.constants.ts";
+import Button from "../../../button/button.component.tsx";
 
 const Pagination = () => {
   const { previousPageNumber, nextPageNumber, 

@@ -3,17 +3,17 @@ import React, { Fragment, useContext, useState } from "react";
 import { ReactComponent as AddMicronutrientsButton } from "../../../../assets/add-micronutrients.svg";
 import { ReactComponent as RemoveMicronutrientsButton } from "../../../../assets/close-button.svg";
 
-import FormInput from "../../../shared/form-input/form-input.component.js";
+import FormInput from "../../../shared/form-input/form-input.component.tsx";
 
-import "./add-micronutrients.styles.js";
+import "./add-micronutrients.styles.tsx";
 import { AddMicronutrientsButtonContainer,
   MicronutrientContainer
-} from "./add-micronutrients.styles.js";
+} from "./add-micronutrients.styles.tsx";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
+import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.tsx";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../shared/mui/paper/paper.component.js";
-import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js";
+import SimplePaper from "../../../shared/mui/paper/paper.component.tsx";
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.ts";
 
 const paperStyles = {
   display: "flex",

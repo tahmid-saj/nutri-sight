@@ -1,32 +1,32 @@
-import CaloriesBurnedGraphPie from "../../../components/signed-in/dashboard/calories-burned/calories-burned-graph/calories-burned-graph-pie.component.jsx"
-import CaloriesBurnedGraph from "../../../components/signed-in/dashboard/calories-burned/calories-burned-graph/calories-burned-graph.component.jsx"
-import CaloriesBurnedSummary from "../../../components/signed-in/dashboard/calories-burned/calories-burned-summary/calories-burned-summary.component.jsx"
-import "./dashboard.styles.js"
-import { DashboardContainer } from "./dashboard.styles.js"
-import NutritionTrackerGraphCalories from "../../../components/signed-in/dashboard/nutrition-tracker/nutrition-tracker-graph-calories/nutrition-tracker-graph-calories.component.jsx"
-import NutritionTrackerGraphMacronutrients from "../../../components/signed-in/dashboard/nutrition-tracker/nutrition-tracker-graph-macronutrients/nutrition-tracker-graph-macronutrients.component.jsx"
-import NutritionTrackerSummary from "../../../components/signed-in/dashboard/nutrition-tracker/nutrition-tracker-summary/nutrition-tracker-summary.component.jsx"
+import CaloriesBurnedGraphPie from "../../../components/signed-in/dashboard/calories-burned/calories-burned-graph/calories-burned-graph-pie.component.tsx"
+import CaloriesBurnedGraph from "../../../components/signed-in/dashboard/calories-burned/calories-burned-graph/calories-burned-graph.component.tsx"
+import CaloriesBurnedSummary from "../../../components/signed-in/dashboard/calories-burned/calories-burned-summary/calories-burned-summary.component.tsx"
+import "./dashboard.styles.tsx"
+import { DashboardContainer } from "./dashboard.styles.tsx"
+import NutritionTrackerGraphCalories from "../../../components/signed-in/dashboard/nutrition-tracker/nutrition-tracker-graph-calories/nutrition-tracker-graph-calories.component.tsx"
+import NutritionTrackerGraphMacronutrients from "../../../components/signed-in/dashboard/nutrition-tracker/nutrition-tracker-graph-macronutrients/nutrition-tracker-graph-macronutrients.component.tsx"
+import NutritionTrackerSummary from "../../../components/signed-in/dashboard/nutrition-tracker/nutrition-tracker-summary/nutrition-tracker-summary.component.tsx"
 
 import { useContext, Fragment } from "react"
-import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js"
-import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context.js"
-import { FitnessContext } from "../../../contexts/signed-in/fitness/fitness.context.js"
-import ChatBot from "../../shared/chatbot/chatbot.component.js"
+import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.tsx"
+import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context.tsx"
+import { FitnessContext } from "../../../contexts/signed-in/fitness/fitness.context.tsx"
+import ChatBot from "../../shared/chatbot/chatbot.component.tsx"
 import { Divider } from "@mui/material"
 
-import ScheduleCalendarNutritionTracker from "../../../components/signed-in/dashboard/nutrition-tracker/schedule/schedule-calendar/schedule-calendar.component.jsx"
-import ScheduleDayInfoNutritionTracker from "../../../components/signed-in/dashboard/nutrition-tracker/schedule/schedule-day-info/schedule-day-info.component.jsx"
-import ScheduleCalendarCaloriesBurned from "../../../components/signed-in/dashboard/calories-burned/schedule/schedule-calendar/schedule-calendar.component.jsx"
-import ScheduleDayInfoCaloriesBurned from "../../../components/signed-in/dashboard/calories-burned/schedule/schedule-day-info/schedule-day-info.component.jsx"
-import ScheduleCalendarFitness from "../../../components/signed-in/dashboard/fitness/schedule/schedule-calendar/schedule-calendar.component.jsx"
-import ScheduleDayInfoFitness from "../../../components/signed-in/dashboard/fitness/schedule/schedule-day-info/schedule-day-info.component.jsx"
-import UpcomingExercises from "../../../components/signed-in/dashboard/fitness/upcoming-exercises/upcoming-exercises.component.jsx"
-import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.js"
+import ScheduleCalendarNutritionTracker from "../../../components/signed-in/dashboard/nutrition-tracker/schedule/schedule-calendar/schedule-calendar.component.tsx"
+import ScheduleDayInfoNutritionTracker from "../../../components/signed-in/dashboard/nutrition-tracker/schedule/schedule-day-info/schedule-day-info.component.tsx"
+import ScheduleCalendarCaloriesBurned from "../../../components/signed-in/dashboard/calories-burned/schedule/schedule-calendar/schedule-calendar.component.tsx"
+import ScheduleDayInfoCaloriesBurned from "../../../components/signed-in/dashboard/calories-burned/schedule/schedule-day-info/schedule-day-info.component.tsx"
+import ScheduleCalendarFitness from "../../../components/signed-in/dashboard/fitness/schedule/schedule-calendar/schedule-calendar.component.tsx"
+import ScheduleDayInfoFitness from "../../../components/signed-in/dashboard/fitness/schedule/schedule-day-info/schedule-day-info.component.tsx"
+import UpcomingExercises from "../../../components/signed-in/dashboard/fitness/upcoming-exercises/upcoming-exercises.component.tsx"
+import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.tsx"
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
-import { COMMON_SPACING } from "../../../utils/constants/shared.constants.js"
+import { COMMON_SPACING } from "../../../utils/constants/shared.constants.ts"
 
 const Dashboard = () => {
   const { nutritionTrackedDays, scheduledNutritionTrackedDaysView } = useContext(NutritionTrackerContext)

@@ -1,13 +1,13 @@
-import "./nutrition-tracker-summary.styles.js"
+import "./nutrition-tracker-summary.styles.tsx"
 import { NutritionTrackerDashboardSummaryContainer,
   NutritionTrackerDashboardSummaryInfoContainer
-} from "./nutrition-tracker-summary.styles.js";
-import NutritionTrackerGraphPie from "./nutrition-tracker-graph-pie/nutrition-tracker-graph-pie.component.js";
+} from "./nutrition-tracker-summary.styles.tsx";
+import NutritionTrackerGraphPie from "./nutrition-tracker-graph-pie/nutrition-tracker-graph-pie.component.tsx";
 import { useSelector } from "react-redux";
-import { selectNutritionTrackedDaysSummary } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js";
+import { selectNutritionTrackedDaysSummary } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.ts";
 import { Divider, Typography, backdropClasses } from "@mui/material";
-import SimplePaper from "../../../../shared/mui/paper/paper.component.js";
-import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js";
+import SimplePaper from "../../../../shared/mui/paper/paper.component.tsx";
+import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.ts";
 
 const date = new Date();
 let currentDay= String(date.getDate()).padStart(2, '0');
