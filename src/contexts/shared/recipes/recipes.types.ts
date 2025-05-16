@@ -18,7 +18,7 @@ export interface RecipesContextType {
 
   displaySearchedRecipes: (recipeNameSearched: string) => void;
   displaySearchedRecipesOnPage: (pageNumber: number) => void;
-  displayRecipe: (clickedRecipe: RecipeInfo) => void
+  displayRecipe: (clickedRecipe: RecipeInfo | RecipePartialInfo) => void
 
   updateServings: (recipeToUpdate: RecipeInfo, updatedServings: number) => void;
   decreaseServings: (recipeToDecreaseServings: RecipeInfo) => void;
@@ -47,4 +47,9 @@ export type Ingredient = {
   quantity: number;
   unit: string;
   description: string;
+}
+
+export type RecipePartialInfo = {
+  title: string;
+  id: string;
 }

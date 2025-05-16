@@ -8,7 +8,7 @@ import { validateRecipeNameSearched } from "../../../utils/validations/recipes.v
 import { RECIPES_PER_PAGE, PAGINATION_BUTTONS } from "../../../utils/constants/recipes.constants";
 import { getNutrientPredictions } from "../../../utils/api-requests/nutrient-predictor.requests";
 
-import { RecipesContextType, RecipesProviderProps, RecipeInfo, Ingredient } from "./recipes.types"
+import { RecipesContextType, RecipesProviderProps, RecipeInfo, Ingredient, RecipePartialInfo } from "./recipes.types"
 
 // helper functions
 
@@ -218,7 +218,7 @@ export const RecipesProvider: FC<RecipesProviderProps> = ({ children }) => {
     setDisplayedRecipesOnPage(displaySearchedRecipesOnPageHelper(searchedRecipes, pageNumber));
   };
 
-  const displayRecipe = async (clickedRecipe: RecipeInfo): Promise<void> => {
+  const displayRecipe = async (clickedRecipe: RecipeInfo | RecipePartialInfo): Promise<void> => {
     const recipe = await displayRecipeHelper(searchedRecipes, clickedRecipe);
 
     setDisplayedRecipe(recipe);
