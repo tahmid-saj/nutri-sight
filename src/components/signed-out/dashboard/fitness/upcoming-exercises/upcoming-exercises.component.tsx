@@ -1,12 +1,12 @@
-import "./upcoming-exercises.styles.js"
+import "./upcoming-exercises.styles.tsx"
 import { UpcomingExercisesContainer, UpcomingExercisesScheduled,
   UpcomingExerciseContainer 
-} from "./upcoming-exercises.styles.js"
+} from "./upcoming-exercises.styles.tsx"
 import { Fragment, useContext } from "react"
-import { FitnessContext } from "../../../../../contexts/signed-out/fitness/fitness.context.js"
-import OutlinedCard from "../../../../shared/mui/card/card.component.js"
+import { FitnessContext } from "../../../../../contexts/signed-out/fitness/fitness.context.tsx"
+import OutlinedCard from "../../../../shared/mui/card/card.component.tsx"
 import { Divider, Typography } from "@mui/material"
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.ts"
 
 const outlinedCardStyles = {
   backgroundColor: COLOR_CODES.general["1"],

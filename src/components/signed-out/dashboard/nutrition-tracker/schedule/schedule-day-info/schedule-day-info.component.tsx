@@ -1,11 +1,11 @@
-import "./schedule-day-info.styles.js"
-import { NutritionTrackerScheduleDayInfo } from "./schedule-day-info.styles.js"
+import "./schedule-day-info.styles.tsx"
+import { NutritionTrackerScheduleDayInfo } from "./schedule-day-info.styles.tsx"
 import { useSelector } from "react-redux"
-import { selectScheduledNutritionTrackedDaysView } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js"
+import { selectScheduledNutritionTrackedDaysView } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.ts"
 import { Typography, Divider } from "@mui/material"
 import { Fragment } from "react"
-import SimplePaper from "../../../../../shared/mui/paper/paper.component.js"
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../../utils/constants/shared.constants.js"
+import SimplePaper from "../../../../../shared/mui/paper/paper.component.tsx"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../../utils/constants/shared.constants.ts"
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"],

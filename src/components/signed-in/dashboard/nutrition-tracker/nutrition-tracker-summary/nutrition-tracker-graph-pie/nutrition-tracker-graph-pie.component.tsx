@@ -1,12 +1,12 @@
-import "./nutrition-tracker-graph-pie.styles.js"
-import { NutritionTrackerDashboardGraphPieContainer } from "./nutrition-tracker-graph-pie.styles.js";
+import "./nutrition-tracker-graph-pie.styles.tsx"
+import { NutritionTrackerDashboardGraphPieContainer } from "./nutrition-tracker-graph-pie.styles.tsx";
 import ReactApexChart from "react-apexcharts";
 import { useContext, Fragment } from "react"
-import { NutritionTrackerContext } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js"
-import SimplePaper from "../../../../../shared/mui/paper/paper.component.js";
+import { NutritionTrackerContext } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.tsx"
+import SimplePaper from "../../../../../shared/mui/paper/paper.component.tsx";
 
-import { GRAPH_FIELDS } from "../../../../../../utils/constants/nutrition-tracker.constants.js";
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../../utils/constants/shared.constants.js";
+import { GRAPH_FIELDS } from "../../../../../../utils/constants/nutrition-tracker.constants.ts";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../../utils/constants/shared.constants.ts";
 import { ApexOptions } from "apexcharts";
 
 const paperStyles = {

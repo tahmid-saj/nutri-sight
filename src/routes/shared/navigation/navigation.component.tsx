@@ -1,21 +1,21 @@
 import { Fragment, useContext, useState } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 
-import "./navigation.styles.jsx";
-import { DrawerContainer } from "./navigation.styles.jsx";
+import "./navigation.styles.tsx";
+import { DrawerContainer } from "./navigation.styles.tsx";
 
 import { signOutUser } from "../../../utils/firebase/firebase.utils.js";
-import MiniDrawer from "../../../components/shared/mui/drawer/drawer.component.jsx";
+import MiniDrawer from "../../../components/shared/mui/drawer/drawer.component.tsx";
 
 // import { UserContext } from "../../../contexts/shared/user/user.context";
-import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
-import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context.js";
+import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.tsx";
+import { CaloriesBurnedContext } from "../../../contexts/signed-in/calories-burned/calories-burned.context.tsx";
 
-import { NAV_LINKS } from "../../../utils/constants/shared.constants.js";
+import { NAV_LINKS } from "../../../utils/constants/shared.constants.ts";
 
 import { useSelector } from "react-redux"
-import { selectCurrentUser } from "../../../store/shared/user/user.selector.js";
-import HiddenDrawer from "../../../components/shared/mui/hidden-drawer/hidden-drawer.component.jsx";
+import { selectCurrentUser } from "../../../store/shared/user/user.selector.ts";
+import HiddenDrawer from "../../../components/shared/mui/hidden-drawer/hidden-drawer.component.tsx";
 
 const Navigation = () => {
   // const { currentUser } = useContext(UserContext);

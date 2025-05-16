@@ -1,16 +1,16 @@
-import "./recipes.styles.js"
-import { SearchResultsRecipeContainer, SearchResultsMainContainer } from "./recipes.styles.js";
+import "./recipes.styles.tsx"
+import { SearchResultsRecipeContainer, SearchResultsMainContainer } from "./recipes.styles.tsx";
 
 import React, { Fragment, Component, useEffect, useContext } from "react";
 
-import Header from "../../../components/shared/recipes/components/header/header.component.js";
-import SearchResults from "../../../components/shared/recipes/components/search-results/search-results.component.js";
-import Recipe from "../../../components/shared/recipes/components/recipe/recipe.component.js";
-import RecipesView from "../../../components/shared/recipes/components/recipes-view/recipes-view.component.js";
+import Header from "../../../components/shared/recipes/components/header/header.component.tsx";
+import SearchResults from "../../../components/shared/recipes/components/search-results/search-results.component.tsx";
+import Recipe from "../../../components/shared/recipes/components/recipe/recipe.component.tsx";
+import RecipesView from "../../../components/shared/recipes/components/recipes-view/recipes-view.component.tsx";
 
-import { RecipesContext } from "../../../contexts/shared/recipes/recipes.context.js";
+import { RecipesContext } from "../../../contexts/shared/recipes/recipes.context.tsx";
 import { Divider, Typography } from "@mui/material";
-import { COLOR_CODES } from "../../../utils/constants/shared.constants.js";
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.ts";
 
 const Recipes = () => {
   const { displayedRecipe, displayedRecipesOnPage } = useContext(RecipesContext);

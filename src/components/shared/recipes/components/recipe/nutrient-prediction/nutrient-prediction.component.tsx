@@ -1,20 +1,20 @@
 import { Fragment, useContext } from "react"
-import "./nutrient-prediction.styles.js"
-import { NutrientsInfoContainer } from "./nutrient-prediction.styles.js"
+import "./nutrient-prediction.styles.tsx"
+import { NutrientsInfoContainer } from "./nutrient-prediction.styles.tsx"
 
-import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context.js"
+import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context.tsx"
 import { Typography } from "@mui/material"
-import OutlinedCard from "../../../../mui/card/card.component.js"
+import OutlinedCard from "../../../../mui/card/card.component.tsx"
 import { Divider } from "@mui/material"
-import Button from "../../../../button/button.component.js"
-import { ButtonsContainer } from "../../../../button/button.styles.js"
+import Button from "../../../../button/button.component.tsx"
+import { ButtonsContainer } from "../../../../button/button.styles.tsx"
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentUser } from "../../../../../../store/shared/user/user.selector.js"
-import { NutritionTrackerContext } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js"
-import { addDayTrackedFromPrediction, setFormInputMicronutrients } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action.js";
-import { selectNutritionTrackedDays } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js";
+import { selectCurrentUser } from "../../../../../../store/shared/user/user.selector.ts"
+import { NutritionTrackerContext } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.tsx"
+import { addDayTrackedFromPrediction, setFormInputMicronutrients } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action.ts";
+import { selectNutritionTrackedDays } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.ts";
 
-import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants.js"
+import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants.ts"
 
 const outlinedCardStyles = {
   backgroundColor: COLOR_CODES.general["0"]

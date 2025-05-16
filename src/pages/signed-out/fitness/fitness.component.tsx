@@ -1,21 +1,21 @@
 import { Divider } from "@mui/material"
-import AddExerciseForm from "../../../components/signed-out/fitness/add-exercise-form/add-exercise-form.component.jsx"
-import ScheduleCalendar from "../../../components/signed-out/fitness/schedule/schedule-calendar/schedule-calendar.component.jsx"
-import ScheduleDayInfo from "../../../components/signed-out/fitness/schedule/schedule-day-info/schedule-day-info.component.jsx"
-import SearchExerciseForm from "../../../components/signed-out/fitness/search-exercise-form/search-exercise-form.component.jsx"
-import SearchExerciseResults from "../../../components/signed-out/fitness/search-exercise-results/search-exercise-results.component.jsx"
-import "./fitness.styles.js"
+import AddExerciseForm from "../../../components/signed-out/fitness/add-exercise-form/add-exercise-form.component.tsx"
+import ScheduleCalendar from "../../../components/signed-out/fitness/schedule/schedule-calendar/schedule-calendar.component.tsx"
+import ScheduleDayInfo from "../../../components/signed-out/fitness/schedule/schedule-day-info/schedule-day-info.component.tsx"
+import SearchExerciseForm from "../../../components/signed-out/fitness/search-exercise-form/search-exercise-form.component.tsx"
+import SearchExerciseResults from "../../../components/signed-out/fitness/search-exercise-results/search-exercise-results.component.tsx"
+import "./fitness.styles.tsx"
 import { FitnessContainer, FitnessScheduleContainer,
   FitnessSearchAddContainer
-} from "./fitness.styles.js"
+} from "./fitness.styles.tsx"
 import { useContext, Fragment } from "react"
-import { FitnessContext } from "../../../contexts/signed-out/fitness/fitness.context.js"
-import UpcomingExercises from "../../../components/signed-out/fitness/upcoming-exercises/upcoming-exercises.component.jsx"
+import { FitnessContext } from "../../../contexts/signed-out/fitness/fitness.context.tsx"
+import UpcomingExercises from "../../../components/signed-out/fitness/upcoming-exercises/upcoming-exercises.component.tsx"
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import AddIcon from '@mui/icons-material/Add';
-import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.js"
+import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.tsx"
 import { Typography } from "@mui/material"
-import { COLOR_CODES } from "../../../utils/constants/shared.constants.js"
+import { COLOR_CODES } from "../../../utils/constants/shared.constants.ts"
 
 const Fitness = () => {
   const { exercises, exercisesSearchResults, upcomingExercisesView } = useContext(FitnessContext)

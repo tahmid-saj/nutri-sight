@@ -1,16 +1,16 @@
 import { useState, useContext, MouseEvent, ChangeEvent } from "react";
 
-import "./update-consumption-form.styles.js";
-import { UpdateConsumptionFormContainer, ConsumptionFormButtonContainer } from "./update-consumption-form.styles.js";
+import "./update-consumption-form.styles.tsx";
+import { UpdateConsumptionFormContainer, ConsumptionFormButtonContainer } from "./update-consumption-form.styles.tsx";
 
-import FormInput from "../../../shared/form-input/form-input.component.js";
-import Button from "../../../shared/button/button.component.js";
-import AddMicronutrients from "../add-micronutrients/add-micronutrients.component.js";
+import FormInput from "../../../shared/form-input/form-input.component.tsx";
+import Button from "../../../shared/button/button.component.tsx";
+import AddMicronutrients from "../add-micronutrients/add-micronutrients.component.tsx";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
+import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.tsx";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../shared/mui/paper/paper.component.js";
-import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js";
+import SimplePaper from "../../../shared/mui/paper/paper.component.tsx";
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.ts";
 
 type FormFields = {
   dateTracked: string,

@@ -1,13 +1,13 @@
-import Button from "../../../shared/button/button.component.js"
-import FormInput from "../../../shared/form-input/form-input.component.js"
-import "./activity-date-filter.styles.js"
-import { ActivityDateFilterContainer, FilterButtonsContainer } from "./activity-date-filter.styles.js"
+import Button from "../../../shared/button/button.component.tsx"
+import FormInput from "../../../shared/form-input/form-input.component.tsx"
+import "./activity-date-filter.styles.tsx"
+import { ActivityDateFilterContainer, FilterButtonsContainer } from "./activity-date-filter.styles.tsx"
 
 import { useState, useContext, ChangeEvent, MouseEvent } from "react"
-import { CaloriesBurnedContext } from "../../../../contexts/signed-in/calories-burned/calories-burned.context.js"
-import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js"
+import { CaloriesBurnedContext } from "../../../../contexts/signed-in/calories-burned/calories-burned.context.tsx"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.ts"
 import { Typography } from "@mui/material"
-import SimplePaper from "../../../shared/mui/paper/paper.component.js"
+import SimplePaper from "../../../shared/mui/paper/paper.component.tsx"
 import { FormEvent } from "react"
 
 type FormFields = {

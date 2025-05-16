@@ -1,13 +1,13 @@
-import Button from "../../../../shared/button/button.component.js"
-import "./activity-date-form.styles.js"
-import { ActivityDateFormContainer } from "./activity-date-form.styles.js"
+import Button from "../../../../shared/button/button.component.tsx"
+import "./activity-date-form.styles.tsx"
+import { ActivityDateFormContainer } from "./activity-date-form.styles.tsx"
 import { useState, useContext, FormEvent, ChangeEvent } from "react"
-import FormInput from "../../../../shared/form-input/form-input.component.js"
+import FormInput from "../../../../shared/form-input/form-input.component.tsx"
 
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.js"
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.tsx"
 import { Typography } from "@mui/material"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
-import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.tsx"
+import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.ts"
 
 type FormFields = {
   activity: string,

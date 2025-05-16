@@ -1,11 +1,11 @@
-import OutlinedCard from "../../../shared/mui/card/card.component.js"
-import SimplePaper from "../../../shared/mui/paper/paper.component.js"
-import "./search-exercise-results.styles.js"
-import { FitnessSearchExerciseResults } from "./search-exercise-results.styles.js"
-import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js"
+import OutlinedCard from "../../../shared/mui/card/card.component.tsx"
+import SimplePaper from "../../../shared/mui/paper/paper.component.tsx"
+import "./search-exercise-results.styles.tsx"
+import { FitnessSearchExerciseResults } from "./search-exercise-results.styles.tsx"
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.ts"
 import { Typography } from "@mui/material"
-import SearchExerciseResult from "../search-exercise-result/search-exercise-result.component.js"
-import { FitnessContext } from "../../../../contexts/signed-out/fitness/fitness.context.js"
+import SearchExerciseResult from "../search-exercise-result/search-exercise-result.component.tsx"
+import { FitnessContext } from "../../../../contexts/signed-out/fitness/fitness.context.tsx"
 import { useContext } from "react"
 
 const paperStyles = {

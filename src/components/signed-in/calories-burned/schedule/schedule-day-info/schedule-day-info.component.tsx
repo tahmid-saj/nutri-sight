@@ -1,10 +1,10 @@
-import "./schedule-day-info.styles.js"
-import { CaloriesBurnedScheduleDayInfo } from "./schedule-day-info.styles.js"
+import "./schedule-day-info.styles.tsx"
+import { CaloriesBurnedScheduleDayInfo } from "./schedule-day-info.styles.tsx"
 import { Typography, Divider } from "@mui/material"
 import { Fragment, useContext } from "react"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context.js"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.tsx"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.ts"
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context.tsx"
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"],

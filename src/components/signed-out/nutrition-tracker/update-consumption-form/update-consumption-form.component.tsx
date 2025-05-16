@@ -1,19 +1,19 @@
 import { useState, useContext, MouseEvent, ChangeEvent } from "react";
 
-import "./update-consumption-form.styles.js";
-import { UpdateConsumptionFormContainer, ConsumptionFormButtonContainer } from "./update-consumption-form.styles.js";
+import "./update-consumption-form.styles.tsx";
+import { UpdateConsumptionFormContainer, ConsumptionFormButtonContainer } from "./update-consumption-form.styles.tsx";
 
-import FormInput from "../../../shared/form-input/form-input.component.js";
-import Button from "../../../shared/button/button.component.js";
-import AddMicronutrients from "../add-micronutrients/add-micronutrients.component.js";
+import FormInput from "../../../shared/form-input/form-input.component.tsx";
+import Button from "../../../shared/button/button.component.tsx";
+import AddMicronutrients from "../add-micronutrients/add-micronutrients.component.tsx";
 
 // import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import { useDispatch, useSelector } from "react-redux"
-import { selectNutritionTrackedDays, selectFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js"
-import { addDayTracked, updateDayTracked, setFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action.js";
+import { selectNutritionTrackedDays, selectFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.ts"
+import { addDayTracked, updateDayTracked, setFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action.ts";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../shared/mui/paper/paper.component.js";
-import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js";
+import SimplePaper from "../../../shared/mui/paper/paper.component.tsx";
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.ts";
 
 type FormFields = {
   dateTracked: string,

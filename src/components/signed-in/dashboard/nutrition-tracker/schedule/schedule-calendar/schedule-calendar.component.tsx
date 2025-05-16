@@ -1,13 +1,13 @@
-import "./schedule-calendar.styles.js"
-import { CalendarTodoList, NutritionTrackerCalendarContainer } from "./schedule-calendar.styles.js";
+import "./schedule-calendar.styles.tsx"
+import { CalendarTodoList, NutritionTrackerCalendarContainer } from "./schedule-calendar.styles.tsx";
 import 'rsuite/Calendar/styles/index.css';
 import 'rsuite/Calendar/styles/index.css';
 import { Fragment, useContext, useState } from "react";
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
 import { Typography } from "@mui/material";
-import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants.js";
+import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants.ts";
 
-import { NutritionTrackerContext } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
+import { NutritionTrackerContext } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.tsx";
 import { NutritionTrackedDay } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.types.js";
 
 function getScheduledData(date: Date, nutritionTrackedDays: NutritionTrackedDay[]) {

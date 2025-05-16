@@ -1,15 +1,15 @@
-import Button from "../../../shared/button/button.component.js";
-import FormInput from "../../../shared/form-input/form-input.component.js";
-import "./nutrition-tracker-filter.styles.js"
-import { NutritionTrackerFilterContainer, FilterButtonsContainer } from "./nutrition-tracker-filter.styles.js"
+import Button from "../../../shared/button/button.component.tsx";
+import FormInput from "../../../shared/form-input/form-input.component.tsx";
+import "./nutrition-tracker-filter.styles.tsx"
+import { NutritionTrackerFilterContainer, FilterButtonsContainer } from "./nutrition-tracker-filter.styles.tsx"
 
 import { useState, useContext, FormEvent, ChangeEvent, MouseEvent } from "react"
 // import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import { useDispatch } from "react-redux"
-import { filterDayTracked, clearDayTrackedFilter } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action.js";
+import { filterDayTracked, clearDayTrackedFilter } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action.ts";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../shared/mui/paper/paper.component.js";
-import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js";
+import SimplePaper from "../../../shared/mui/paper/paper.component.tsx";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.ts";
 
 const defaultFormFields = {
   filterStartDate: "",

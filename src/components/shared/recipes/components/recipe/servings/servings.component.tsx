@@ -1,8 +1,8 @@
-import "./servings.styles.js";
+import "./servings.styles.tsx";
 import { ServingsContainer, TimeContainer,
   ServingsQuantityContainer, ServingsButtonsContainer, 
   DecreasingServings, IncreaseServings
-} from "./servings.styles.js";
+} from "./servings.styles.tsx";
 
 import { Component, useState, useContext, MouseEvent } from "react";
 
@@ -10,7 +10,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context.js";
+import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context.tsx";
 import { Typography } from "@mui/material";
 
 const Servings = () => {

@@ -1,11 +1,11 @@
-import "./header.styles.jsx";
-import { HeaderContainer } from "./header.styles.jsx";
+import "./header.styles.tsx";
+import { HeaderContainer } from "./header.styles.tsx";
 
 import React from "react";
 // import "../recipes.styles.scss";
 
-import Search from "../search/search.component.jsx";
-import Navigation from "../navigation/navigation.component.jsx";
+import Search from "../search/search.component.tsx";
+import Navigation from "../navigation/navigation.component.tsx";
 
 const Header = (
   // { displayRecipeViewHandler, updateSearchResults, handleSearchChange }

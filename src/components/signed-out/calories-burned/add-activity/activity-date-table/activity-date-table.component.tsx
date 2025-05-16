@@ -1,19 +1,19 @@
-import "./activity-date-table.styles.js"
+import "./activity-date-table.styles.tsx"
 import { SearchedCaloriesBurnedActivitiesTableContainer,
   SearchedCaloriesBurnedActivitiesTable
-} from "./activity-date-table.styles.js";
+} from "./activity-date-table.styles.tsx";
 import { useState, useContext, useRef, MouseEvent } from "react"
 
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.js";
-import Button from "../../../../shared/button/button.component.js";
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js";
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.tsx";
+import Button from "../../../../shared/button/button.component.tsx";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.ts";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../../shared/mui/paper/paper.component.js";
-import { ButtonsContainer } from "../../../../shared/button/button.styles.js";
+import SimplePaper from "../../../../shared/mui/paper/paper.component.tsx";
+import { ButtonsContainer } from "../../../../shared/button/button.styles.tsx";
 
 import { ColDef } from "ag-grid-community";
 import { AgGridReact as AgGridReactType } from "ag-grid-react"; // Needed for typing

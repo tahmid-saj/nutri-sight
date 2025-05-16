@@ -1,12 +1,12 @@
-import "./calories-burned-graph-line.styles.js"
-import { CaloriesBurnedLineGraphContainer } from "./calories-burned-graph-line.styles.js"
+import "./calories-burned-graph-line.styles.tsx"
+import { CaloriesBurnedLineGraphContainer } from "./calories-burned-graph-line.styles.tsx"
 import ReactApexChart from "react-apexcharts"
 import { useContext } from "react"
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.js"
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.tsx"
 
-import { GRAPH_FIELDS } from "../../../../../utils/constants/calories-burned.constants.js"
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
+import { GRAPH_FIELDS } from "../../../../../utils/constants/calories-burned.constants.ts"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.ts"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.tsx"
 import { Typography } from "@mui/material"
 import { ApexOptions } from "apexcharts"
 

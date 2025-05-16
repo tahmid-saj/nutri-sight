@@ -1,8 +1,8 @@
-import "./ingredients.styles.js";
-import { IngredientsContainer, IngredientQuantitiesContainer } from "./ingredients.styles.js";
+import "./ingredients.styles.tsx";
+import { IngredientsContainer, IngredientQuantitiesContainer } from "./ingredients.styles.tsx";
 
 import { useContext } from "react";
-import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context.js";
+import { RecipesContext } from "../../../../../../contexts/shared/recipes/recipes.context.tsx";
 import { Typography } from "@mui/material";
 
 const Ingredients = () => {

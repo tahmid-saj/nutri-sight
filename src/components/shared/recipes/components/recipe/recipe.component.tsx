@@ -1,16 +1,16 @@
-import "./recipe.styles.js";
-import { RecipeContainer } from "./recipe.styles.js";
+import "./recipe.styles.tsx";
+import { RecipeContainer } from "./recipe.styles.tsx";
 
 import { Component, useState, useContext } from "react";
-import Servings from "./servings/servings.component.js";
-import Ingredients from "./ingredients/ingredients.component.js";
-import NutrientPrediction from "./nutrient-prediction/nutrient-prediction.component.js";
+import Servings from "./servings/servings.component.tsx";
+import Ingredients from "./ingredients/ingredients.component.tsx";
+import NutrientPrediction from "./nutrient-prediction/nutrient-prediction.component.tsx";
 
-import SimplePaper from "../../../mui/paper/paper.component.js";
-import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js";
-import OutlinedCard from "../../../mui/card/card.component.js";
+import SimplePaper from "../../../mui/paper/paper.component.tsx";
+import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.ts";
+import OutlinedCard from "../../../mui/card/card.component.tsx";
 
-import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context.js";
+import { RecipesContext } from "../../../../../contexts/shared/recipes/recipes.context.tsx";
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["6"]

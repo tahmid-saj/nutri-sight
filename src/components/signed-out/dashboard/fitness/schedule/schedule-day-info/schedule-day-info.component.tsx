@@ -1,7 +1,7 @@
-import "./schedule-day-info.styles.js"
+import "./schedule-day-info.styles.tsx"
 import { FitnessScheduleDayInfoContainer,
   FitnessScheduleDayInfo
-} from "./schedule-day-info.styles.js";
+} from "./schedule-day-info.styles.tsx";
 import { useState, useContext, Fragment, MouseEvent } from "react"
 import { Typography } from "@mui/material";
 
@@ -9,11 +9,11 @@ import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 
-import SimplePaper from "../../../../../shared/mui/paper/paper.component.js";
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../../utils/constants/shared.constants.js";
-import { FitnessContext } from "../../../../../../contexts/signed-out/fitness/fitness.context.js";
-import Button from "../../../../../shared/button/button.component.js";
-import { ButtonsContainer } from "../../../../../shared/button/button.styles.js";
+import SimplePaper from "../../../../../shared/mui/paper/paper.component.tsx";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../../utils/constants/shared.constants.ts";
+import { FitnessContext } from "../../../../../../contexts/signed-out/fitness/fitness.context.tsx";
+import Button from "../../../../../shared/button/button.component.tsx";
+import { ButtonsContainer } from "../../../../../shared/button/button.styles.tsx";
 import { ColDef } from "ag-grid-community";
 
 type FitnessData = {

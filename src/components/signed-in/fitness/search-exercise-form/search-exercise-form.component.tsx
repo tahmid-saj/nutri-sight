@@ -1,15 +1,15 @@
 import { ChangeEvent, FormEvent, Fragment, useContext, useState } from "react"
-import "./search-exercise-form.styles.js"
-import { FitnessSearchExerciseFormContainer, FitnessSearchExerciseForm } from "./search-exercise-form.styles.js"
+import "./search-exercise-form.styles.tsx"
+import { FitnessSearchExerciseFormContainer, FitnessSearchExerciseForm } from "./search-exercise-form.styles.tsx"
 import { Typography } from "@mui/material"
-import FormInput from "../../../shared/form-input/form-input.component.js"
-import { DropButton } from "../../../shared/drop-button/drop-button.styles.js"
-import Button from "../../../shared/button/button.component.js"
-import { ButtonsContainer } from "../../../shared/button/button.styles.js"
-import SimplePaper from "../../../shared/mui/paper/paper.component.js"
-import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js"
+import FormInput from "../../../shared/form-input/form-input.component.tsx"
+import { DropButton } from "../../../shared/drop-button/drop-button.styles.tsx"
+import Button from "../../../shared/button/button.component.tsx"
+import { ButtonsContainer } from "../../../shared/button/button.styles.tsx"
+import SimplePaper from "../../../shared/mui/paper/paper.component.tsx"
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.ts"
 
-import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context.js"
+import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context.tsx"
 
 type FormFields = {
   exerciseName: string,

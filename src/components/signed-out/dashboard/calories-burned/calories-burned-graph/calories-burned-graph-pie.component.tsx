@@ -1,11 +1,11 @@
-import "./calories-burned-graph-pie.styles.js"
-import { CaloriesBurnedDashboardGraphPieContainer } from "./calories-burned-graph-pie.styles.js"
+import "./calories-burned-graph-pie.styles.tsx"
+import { CaloriesBurnedDashboardGraphPieContainer } from "./calories-burned-graph-pie.styles.tsx"
 import ReactApexChart from 'react-apexcharts'
 import { useContext, Fragment } from "react"
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.js"
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.tsx"
 import { Typography } from "@mui/material"
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.ts"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.tsx"
 import { ApexOptions } from "apexcharts"
 
 const paperStyles = {
