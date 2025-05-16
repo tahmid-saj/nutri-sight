@@ -1,15 +1,17 @@
 import { Fragment, useContext, useState, Component } from "react";
 import ReactApexChart from 'react-apexcharts'
 
-import "./summary-graph.styles.jsx";
-import { SummaryGraphContainer } from "./summary-graph.styles.jsx";
+import "./summary-graph.styles.js";
+import { SummaryGraphContainer } from "./summary-graph.styles.js";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
+import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
 
-import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants";
+import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants.js";
 import { Typography } from "@mui/material";
 import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js";
-import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
+import SimplePaper from "../../../shared/mui/paper/paper.component.js";
+import { NutritionTrackedDay } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.types.js";
+import { ApexOptions } from "apexcharts";
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"]
@@ -18,20 +20,20 @@ const paperStyles = {
 const SummaryGraph = () => {
   const { nutritionTrackedDaysView } = useContext(NutritionTrackerContext);
 
-  const carbohydratesData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
+  const carbohydratesData = nutritionTrackedDaysView.map((nutritionTrackedDay: NutritionTrackedDay) => {
     return nutritionTrackedDay.macronutrients.carbohydrates
   });
-  const proteinData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
+  const proteinData = nutritionTrackedDaysView.map((nutritionTrackedDay: NutritionTrackedDay) => {
     return nutritionTrackedDay.macronutrients.protein
   });
-  const fatData = nutritionTrackedDaysView.map(nutritionTrackedDay => {
+  const fatData = nutritionTrackedDaysView.map((nutritionTrackedDay: NutritionTrackedDay) => {
     return nutritionTrackedDay.macronutrients.fat
   });
-  const trackedDays = nutritionTrackedDaysView.map(nutritionTrackedDay => {
+  const trackedDays = nutritionTrackedDaysView.map((nutritionTrackedDay: NutritionTrackedDay) => {
     return nutritionTrackedDay.dateTracked
   })
 
-  const series = [{
+  const series: ApexAxisChartSeries = [{
       name: GRAPH_FIELDS.carbohydrates,
       data: carbohydratesData
     }, {
@@ -42,7 +44,7 @@ const SummaryGraph = () => {
       data: fatData
     }];
   
-  const options = {
+  const options: ApexOptions = {
     chart: {
       type: 'bar',
       height: 350,
@@ -81,7 +83,6 @@ const SummaryGraph = () => {
       },
     },
     xaxis: {
-      type: 'string',
       categories: trackedDays,
     },
     legend: {

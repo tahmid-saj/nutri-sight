@@ -1,13 +1,18 @@
-import Button from "../../../shared/button/button.component";
-import FormInput from "../../../shared/form-input/form-input.component";
-import "./nutrition-tracker-filter.styles.jsx"
-import { NutritionTrackerFilterContainer, FilterButtonsContainer } from "./nutrition-tracker-filter.styles.jsx"
+import Button from "../../../shared/button/button.component.js";
+import FormInput from "../../../shared/form-input/form-input.component.js";
+import "./nutrition-tracker-filter.styles.js"
+import { NutritionTrackerFilterContainer, FilterButtonsContainer } from "./nutrition-tracker-filter.styles.js"
 
-import { useState, useContext } from "react"
-import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
+import { useState, useContext, FormEvent, ChangeEvent, MouseEvent } from "react"
+import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
+import SimplePaper from "../../../shared/mui/paper/paper.component.js";
 import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js";
+
+type FormFields = {
+  filterStartDate: string,
+  filterEndDate: string
+}
 
 const defaultFormFields = {
   filterStartDate: "",
@@ -20,14 +25,14 @@ const paperStyles = {
 }
 
 const NutritionTrackerFilter = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields)
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormFields)
   const { filterDayTracked, clearDayTrackedFilter } = useContext(NutritionTrackerContext)
   
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (formFields.filterStartDate === "" && formFields.filterEndDate === "" && !formFields.filterStartDate && !formFields.filterEndDate) {
@@ -38,12 +43,12 @@ const NutritionTrackerFilter = () => {
     filterDayTracked(formFields)
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setFormFields({ ...formFields, [name]: value })
   }
 
-  const handleClearFilter = (event) => {
+  const handleClearFilter = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
     resetFormFields()
