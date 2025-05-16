@@ -2,21 +2,27 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { signInWithGooglePopup,
-        signInAuthUserWithEmailAndPassword } from "../../../utils/firebase/firebase.utils";
+        signInAuthUserWithEmailAndPassword } from "../../../utils/firebase/firebase.utils.js";
 
-import FormInput from "../../shared/form-input/form-input.component";
-import Button from "../../shared/button/button.component";
+import FormInput from "../../shared/form-input/form-input.component.js";
+import Button from "../../shared/button/button.component.js";
 
-import "./sign-in-form.styles.jsx";
-import { SignInContainer, ButtonContainer } from "./sign-in-form.styles.jsx";
+import "./sign-in-form.styles.js";
+import { SignInContainer, ButtonContainer } from "./sign-in-form.styles.js";
 
-import { errorOnSignIn } from "../../../utils/errors/user.errors";
+import { errorOnSignIn } from "../../../utils/errors/user.errors.js";
 
 import { useDispatch } from "react-redux";
-import { googleSignInStart, emailSignInStart } from "../../../store/shared/user/user.action";
+import { googleSignInStart, emailSignInStart } from "../../../store/shared/user/user.action.js";
 import { Typography } from "@mui/material";
 import { COLOR_CODES } from "../../../utils/constants/shared.constants.js";
 import GoogleIcon from '@mui/icons-material/Google';
+import { FormEvent, ChangeEvent } from "react";
+
+type FormFields = {
+  email: string,
+  password: string
+}
 
 const defaultFormFields = {
   email: "",
@@ -24,7 +30,7 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormFields);
   const { email, password } = formFields;
 
   const navigate = useNavigate();
@@ -43,7 +49,7 @@ const SignInForm = () => {
     navigate("/nutrient-predictor");
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
@@ -57,7 +63,7 @@ const SignInForm = () => {
     }
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     setFormFields({ ...formFields, [name]: value });

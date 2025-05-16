@@ -3,19 +3,19 @@ import React, { Component, Fragment, useContext, useState } from "react";
 import { ReactComponent as AddMicronutrientsButton } from "../../../../assets/add-micronutrients.svg";
 import { ReactComponent as RemoveMicronutrientsButton } from "../../../../assets/close-button.svg";
 
-import FormInput from "../../../shared/form-input/form-input.component";
+import FormInput from "../../../shared/form-input/form-input.component.js";
 
-import "./add-micronutrients.styles.jsx";
+import "./add-micronutrients.styles.js";
 import { AddMicronutrientsButtonContainer,
   MicronutrientContainer
-} from "./add-micronutrients.styles.jsx";
+} from "./add-micronutrients.styles.js";
 
 // import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context";
 import { useDispatch, useSelector } from "react-redux"
-import { selectFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
-import { addFormInputMicronutrients, updateFormInputMicronutrients, deleteFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action";
+import { selectFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js";
+import { addFormInputMicronutrients, updateFormInputMicronutrients, deleteFormInputMicronutrients } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.action.js";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
+import SimplePaper from "../../../shared/mui/paper/paper.component.js";
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js";
 
 const paperStyles = {
