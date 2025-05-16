@@ -1,19 +1,20 @@
-import "./schedule-calendar.styles.jsx"
-import { CalendarTodoList, CaloriesBurnedCalendarContainer } from "./schedule-calendar.styles.jsx";
+import "./schedule-calendar.styles.js"
+import { CalendarTodoList, CaloriesBurnedCalendarContainer } from "./schedule-calendar.styles.js";
 import 'rsuite/Calendar/styles/index.css';
 import { Fragment, useContext, useState } from "react";
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
 import { Typography } from "@mui/material";
-import { COLOR_CODES } from "../../../../../utils/constants/shared.constants";
+import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants.js";
 
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context";
+import { CaloriesBurnedContext } from "../../../../../../contexts/signed-in/calories-burned/calories-burned.context.js";
+import { TrackedCaloriesBurned } from "../../../../../../contexts/signed-in/calories-burned/calories-burned.types.js";
 
-function getScheduledData(date, trackedCaloriesBurned) {
-  date = date.toISOString().split('T')[0]
+function getScheduledData(date: Date, trackedCaloriesBurned: TrackedCaloriesBurned[]) {
+  const dateStr = date.toISOString().split('T')[0]
 
-  let scheduledTrackedCaloriesBurnedForDate = []
+  let scheduledTrackedCaloriesBurnedForDate: { caloriesBurned: number }[] = []
   trackedCaloriesBurned.map((trackedDay) => {
-    if (trackedDay.dateTracked === date) {
+    if (trackedDay.dateTracked === dateStr) {
       scheduledTrackedCaloriesBurnedForDate.push({
         caloriesBurned: trackedDay.totalCaloriesBurned
       })
@@ -26,7 +27,7 @@ function getScheduledData(date, trackedCaloriesBurned) {
 const ScheduleCalendar = () => {
   const { trackedCaloriesBurned, selectScheduledTrackedCaloriesBurned } = useContext(CaloriesBurnedContext)
 
-  function renderCell(date) {
+  function renderCell(date: Date) {
     const list = getScheduledData(date, trackedCaloriesBurned);
     const displayList = list.filter((item, index) => index < 1);
 
@@ -51,7 +52,7 @@ const ScheduleCalendar = () => {
     return null;
   }
 
-  const onSelectDate = (date) => {
+  const onSelectDate = (date: Date) => {
     const selectedDate = date.toISOString().split('T')[0]
     
     selectScheduledTrackedCaloriesBurned(selectedDate)

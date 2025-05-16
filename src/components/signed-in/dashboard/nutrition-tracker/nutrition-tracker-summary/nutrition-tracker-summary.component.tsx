@@ -1,13 +1,13 @@
-import "./nutrition-tracker-summary.styles.jsx"
+import "./nutrition-tracker-summary.styles.js"
 import { NutritionTrackerDashboardSummaryContainer,
   NutritionTrackerDashboardSummaryInfoContainer
-} from "./nutrition-tracker-summary.styles.jsx";
+} from "./nutrition-tracker-summary.styles.js";
 import { useContext } from "react";
-import { NutritionTrackerContext } from "../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
-import NutritionTrackerGraphPie from "./nutrition-tracker-graph-pie/nutrition-tracker-graph-pie.component";
+import { NutritionTrackerContext } from "../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
+import NutritionTrackerGraphPie from "./nutrition-tracker-graph-pie/nutrition-tracker-graph-pie.component.js";
 import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js";
 import { Typography, Divider } from "@mui/material";
-import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx";
+import SimplePaper from "../../../../shared/mui/paper/paper.component.js";
 
 const date = new Date();
 let currentDay= String(date.getDate()).padStart(2, '0');

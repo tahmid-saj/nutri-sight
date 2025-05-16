@@ -1,23 +1,24 @@
-import "./calories-burned-graph-line.styles.jsx"
-import { CaloriesBurnedLineGraphContainer } from "./calories-burned-graph-line.styles.jsx"
+import "./calories-burned-graph.styles.js"
+import { CaloriesBurnedDashboardGraphLineContainer } from "./calories-burned-graph.styles.js"
 import ReactApexChart from "react-apexcharts"
 import { useContext } from "react"
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context"
-
-import { GRAPH_FIELDS } from "../../../../../utils/constants/calories-burned.constants"
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context.js"
+import { GRAPH_FIELDS } from "../../../../../utils/constants/calories-burned.constants.js"
 import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx"
-import { Typography } from "@mui/material"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
+import { ApexOptions } from "apexcharts"
 
 const paperStyles = {
-  backgroundColor: COLOR_CODES.general["1"]
+  backgroundColor: COLOR_CODES.general["0"],
+  marginLeft: "2%",
+  marginRight: "2%"
 }
 
-const CaloriesBurnedGraphLine = () => {
-  const { trackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)
+const CaloriesBurnedGraph = () => {
+  const { trackedCaloriesBurned } = useContext(CaloriesBurnedContext)
 
   let trackedCalories = new Map()
-  const trackedCaloriesBurnedActivities = trackedCaloriesBurnedView.map((trackedCaloriesBurned) => {
+  const trackedCaloriesBurnedActivities = trackedCaloriesBurned.map((trackedCaloriesBurned) => {
     if (trackedCalories.has(String(trackedCaloriesBurned.dateTracked))) {
       trackedCalories.set(String(trackedCaloriesBurned.dateTracked), Number(trackedCalories.get(trackedCaloriesBurned.dateTracked)) + Number(trackedCaloriesBurned.totalCaloriesBurned))
     } else {
@@ -25,12 +26,12 @@ const CaloriesBurnedGraphLine = () => {
     }
   })
 
-  const series = [{
+  const series: ApexAxisChartSeries = [{
     name: GRAPH_FIELDS.caloriesBurnedTitle,
     data: [ ...trackedCalories.values() ]
   }]
 
-  const options = {
+  const options: ApexOptions = {
     chart: {
       type: 'area',
       height: COMMON_SPACING.lineChart.height,
@@ -46,12 +47,11 @@ const CaloriesBurnedGraphLine = () => {
     },
     
     title: {
-      text: GRAPH_FIELDS.caloriesBurnedTitle,
+      text: GRAPH_FIELDS.dateTitle,
       align: 'left'
     },
     labels: [ ...trackedCalories.keys() ],
     xaxis: {
-      type: 'string',
       labels: {
         show: true
       }
@@ -65,15 +65,13 @@ const CaloriesBurnedGraphLine = () => {
   };
 
   return (
-    <CaloriesBurnedLineGraphContainer>
-      <Typography sx={{ display: "flex", justifyContent: "center", color: COLOR_CODES.general["0"], marginBottom: "2%" }} 
-        variant="h6">Filtered results</Typography>
-      <SimplePaper styles={ paperStyles }>
+    <SimplePaper styles={ paperStyles }>
+      <CaloriesBurnedDashboardGraphLineContainer>
         <ReactApexChart options={ options } series={ series } type="area" 
           height={ COMMON_SPACING.lineChart.height } width={ COMMON_SPACING.lineChart.width }/>
-      </SimplePaper>
-    </CaloriesBurnedLineGraphContainer>
+      </CaloriesBurnedDashboardGraphLineContainer>
+    </SimplePaper>
   )
 }
 
-export default CaloriesBurnedGraphLine
+export default CaloriesBurnedGraph

@@ -1,12 +1,13 @@
-import "./nutrition-tracker-graph-pie.styles.jsx"
-import { NutritionTrackerDashboardGraphPieContainer } from "./nutrition-tracker-graph-pie.styles.jsx";
+import "./nutrition-tracker-graph-pie.styles.js"
+import { NutritionTrackerDashboardGraphPieContainer } from "./nutrition-tracker-graph-pie.styles.js";
 import ReactApexChart from "react-apexcharts";
 import { useContext, Fragment } from "react"
-import { NutritionTrackerContext } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context"
-import SimplePaper from "../../../../../shared/mui/paper/paper.component.jsx";
+import { NutritionTrackerContext } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js"
+import SimplePaper from "../../../../../shared/mui/paper/paper.component.js";
 
-import { GRAPH_FIELDS } from "../../../../../../utils/constants/nutrition-tracker.constants";
+import { GRAPH_FIELDS } from "../../../../../../utils/constants/nutrition-tracker.constants.js";
 import { COLOR_CODES, COMMON_SPACING } from "../../../../../../utils/constants/shared.constants.js";
+import { ApexOptions } from "apexcharts";
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["0"]
@@ -21,9 +22,9 @@ const NutritionTrackerGraphPie = () => {
     [GRAPH_FIELDS.fat, nutritionTrackedDaysSummary.averageDailyFatConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyFatConsumption : 0]
   ])
 
-  const series = [ ...trackedMacronutrients.values() ]
+  const series: ApexAxisChartSeries = [ ...trackedMacronutrients.values() ]
 
-  const options = {
+  const options: ApexOptions = {
     chart: {
       type: 'donut',
     },

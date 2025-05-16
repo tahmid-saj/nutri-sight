@@ -1,20 +1,21 @@
-import "./schedule-calendar.styles.jsx"
-import { CalendarTodoList, NutritionTrackerCalendarContainer } from "./schedule-calendar.styles.jsx";
+import "./schedule-calendar.styles.js"
+import { CalendarTodoList, NutritionTrackerCalendarContainer } from "./schedule-calendar.styles.js";
 import 'rsuite/Calendar/styles/index.css';
 import 'rsuite/Calendar/styles/index.css';
 import { Fragment, useContext, useState } from "react";
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
 import { Typography } from "@mui/material";
-import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants";
+import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants.js";
 
-import { NutritionTrackerContext } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
+import { NutritionTrackerContext } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
+import { NutritionTrackedDay } from "../../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.types.js";
 
-function getScheduledData(date, nutritionTrackedDays) {
-  date = date.toISOString().split('T')[0]
+function getScheduledData(date: Date, nutritionTrackedDays: NutritionTrackedDay[]) {
+  const dateStr = date.toISOString().split('T')[0]
 
-  let scheduledNutritionTrackedDaysForDate = []
+  let scheduledNutritionTrackedDaysForDate: { calories: number }[] = []
   nutritionTrackedDays.map((nutritionTrackedDay) => {
-    if (nutritionTrackedDay.dateTracked === date) {
+    if (nutritionTrackedDay.dateTracked === dateStr) {
       scheduledNutritionTrackedDaysForDate.push({
         calories: nutritionTrackedDay.calories
       })
@@ -29,7 +30,7 @@ const ScheduleCalendar = () => {
 
   // 
 
-  function renderCell(date) {
+  function renderCell(date: Date) {
     const list = getScheduledData(date, nutritionTrackedDays);
     const displayList = list.filter((item, index) => index < 1);
 
@@ -54,7 +55,7 @@ const ScheduleCalendar = () => {
     return null;
   }
 
-  const onSelectDate = (date) => {
+  const onSelectDate = (date: Date) => {
     const selectedDate = date.toISOString().split('T')[0]
     
     selectScheduledNutritionTrackedDay(selectedDate)
