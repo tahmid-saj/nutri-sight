@@ -1,14 +1,15 @@
-import "./calories-graph.styles.jsx"
-import { NutritionTrackerCaloriesGraphContainer } from "./calories-graph.styles.jsx"
+import "./calories-graph.styles.js"
+import { NutritionTrackerCaloriesGraphContainer } from "./calories-graph.styles.js"
 import ReactApexChart from "react-apexcharts"
 import { useContext } from "react"
 // import { NutritionTrackerContext } from "../../../../contexts/signed-out/nutrition-tracker/nutrition-tracker.context"
 import { useSelector } from "react-redux"
-import { selectNutritionTrackedDaysView } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector"
+import { selectNutritionTrackedDaysView } from "../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js"
 
-import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants"
+import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants.js"
 import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js"
-import SimplePaper from "../../../shared/mui/paper/paper.component.jsx"
+import SimplePaper from "../../../shared/mui/paper/paper.component.js"
+import { ApexOptions } from "apexcharts"
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"]
@@ -19,7 +20,7 @@ const CaloriesGraph = () => {
   const nutritionTrackedDaysView = useSelector(selectNutritionTrackedDaysView)
 
   let trackedCalories = new Map()
-  const trackedDayCalories = nutritionTrackedDaysView.map((trackedDate) => {
+  const trackedDayCalories = nutritionTrackedDaysView?.map((trackedDate) => {
     if (trackedCalories.has(String(trackedDate.dateTracked))) {
       trackedCalories.set(String(trackedDate.dateTracked), Number(trackedCalories.get(trackedDate.dateTracked)) + Number(trackedDate.calories))
     } else {
@@ -27,12 +28,12 @@ const CaloriesGraph = () => {
     }
   })
 
-  const series = [{
+  const series: ApexAxisChartSeries = [{
     name: GRAPH_FIELDS.caloriesTitle,
     data: [ ...trackedCalories.values() ]
   }]
 
-  const options = {
+  const options: ApexOptions = {
     chart: {
       type: 'area',
       height: COMMON_SPACING.lineChart.height,
@@ -53,7 +54,6 @@ const CaloriesGraph = () => {
     },
     labels: [ ...trackedCalories.keys() ],
     xaxis: {
-      type: 'string',
       labels: {
         show: true
       }

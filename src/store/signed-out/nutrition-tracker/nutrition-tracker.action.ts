@@ -125,7 +125,7 @@ const updateDayTrackedHelper = (nutritionTrackedDays: NutritionTrackedDay[], for
   return updatedNutritionTrackedDays;
 };
 
-const getDayTrackedHelper = (nutritionTrackedDays: NutritionTrackedDay[], trackedDay: NutritionTrackedDay): DayTrackedSearchResult => {
+const getDayTrackedHelper = (nutritionTrackedDays: NutritionTrackedDay[], trackedDay: Date | string): DayTrackedSearchResult => {
   // return trackedDay info where nutritionTrackedDays's dateTracked is equal to trackedDay.dateTracked
 
   const trackedDayInfo = nutritionTrackedDays.find((nutritionTrackedDay) => {
@@ -212,7 +212,7 @@ export const updateDayTracked = withMatcher((nutritionTrackedDays: NutritionTrac
   return createAction(NUTRITION_TRACKER_ACTION_TYPES.SET_NUTRITION_TRACKED_DAYS, newNutritionTrackedDays)
 })
 
-export const getDayTracked = withMatcher((nutritionTrackedDays: NutritionTrackedDay[], trackedDay: NutritionTrackedDay): GetDayTracked => {
+export const getDayTracked = withMatcher((nutritionTrackedDays: NutritionTrackedDay[], trackedDay: string | Date): GetDayTracked => {
   const newDayTrackedSearchResult = getDayTrackedHelper(nutritionTrackedDays, trackedDay)
   return createAction(NUTRITION_TRACKER_ACTION_TYPES.SET_DAY_TRACKED_SEARCH_RESULT, newDayTrackedSearchResult)
 })
