@@ -44,27 +44,26 @@ const CaloriesBurnedTable = () => {
     }
   })
 
-    // column definitions
-    const columnDefs: ColDef<CaloriesBurnedData>[] = [
-      { field: "Activity" },
-      { field: "DateTracked" },
-      { field: "TotalCaloriesBurned" },
-      { field: "CaloriesBurnedPerHour" },
-      { field: "DurationMinutes" },
-      { field: "Tag" },
-    ]
-  
-    const onRemoveSelected = async (event: MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault()
-      const selectedData = gridRef?.current?.api.getSelectedRows()
-      // TODO: better manage selectedData[0] without the 0 in index
-      if (!selectedData || !selectedData[0] || selectedData[0].Activity === undefined) {
-        return;
-      }
-      
-  
-      await removeActivityDate(Number(selectedData[0].Tag))
+  // column definitions
+  const columnDefs: ColDef<CaloriesBurnedData>[] = [
+    { field: "Activity" },
+    { field: "DateTracked" },
+    { field: "TotalCaloriesBurned" },
+    { field: "CaloriesBurnedPerHour" },
+    { field: "DurationMinutes" },
+    { field: "Tag" },
+  ]
+
+  const onRemoveSelected = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    const selectedData = gridRef?.current?.api.getSelectedRows()
+    // TODO: better manage selectedData[0] without the 0 in index
+    if (!selectedData || !selectedData[0] || selectedData[0].Activity === undefined) {
+      return;
     }
+
+    await removeActivityDate(Number(selectedData[0].Tag))
+  }
 
   return (
     // wrapping container with theme & size

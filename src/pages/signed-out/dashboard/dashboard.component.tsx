@@ -1,6 +1,6 @@
 import CaloriesBurnedGraphPie from "../../../components/signed-out/dashboard/calories-burned/calories-burned-graph/calories-burned-graph-pie.component"
 import CaloriesBurnedGraph from "../../../components/signed-out/dashboard/calories-burned/calories-burned-graph/calories-burned-graph.component"
-import CaloriesBurnedSummary from "../../../components/signed-out/dashboard/calories-burned/calories-burned-summary/calories-burned-summary.component"
+import CaloriesBurnedSummary from "../../../components/signed-out/dashboard/calories-burned/calories-burned-summary/calories-burned-summary.component.tsx"
 import "./dashboard.styles"
 import { DashboardContainer } from "./dashboard.styles"
 import NutritionTrackerGraphCalories from "../../../components/signed-out/dashboard/nutrition-tracker/nutrition-tracker-graph-calories/nutrition-tracker-graph-calories.component"

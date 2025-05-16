@@ -1,13 +1,20 @@
-import Button from "../../../../shared/button/button.component"
-import "./activity-date-form.styles.jsx"
-import { ActivityDateFormContainer } from "./activity-date-form.styles.jsx"
-import { useState, useContext } from "react"
-import FormInput from "../../../../shared/form-input/form-input.component"
+import Button from "../../../../shared/button/button.component.js"
+import "./activity-date-form.styles.js"
+import { ActivityDateFormContainer } from "./activity-date-form.styles.js"
+import { useState, useContext, FormEvent, ChangeEvent } from "react"
+import FormInput from "../../../../shared/form-input/form-input.component.js"
 
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context"
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.js"
 import { Typography } from "@mui/material"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
 import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js"
+
+type FormFields = {
+  activity: string,
+  dateTracked: string,
+  weightPounds: string,
+  durationMinutes: string
+}
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"]
@@ -21,21 +28,21 @@ const defaultFormFields = {
 }
 
 const ActivityDateForm = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields)
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormFields)
   const { searchActivity } = useContext(CaloriesBurnedContext)
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
   }
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     await searchActivity(formFields)
     resetFormFields()
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setFormFields({ ...formFields, [name]: value })
   }

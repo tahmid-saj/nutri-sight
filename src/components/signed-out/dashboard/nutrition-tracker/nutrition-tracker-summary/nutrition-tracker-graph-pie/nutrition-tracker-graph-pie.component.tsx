@@ -1,13 +1,14 @@
-import "./nutrition-tracker-graph-pie.styles.jsx"
-import { NutritionTrackerDashboardGraphPieContainer } from "./nutrition-tracker-graph-pie.styles.jsx";
+import "./nutrition-tracker-graph-pie.styles.js"
+import { NutritionTrackerDashboardGraphPieContainer } from "./nutrition-tracker-graph-pie.styles.js";
 import ReactApexChart from "react-apexcharts";
 
-import { GRAPH_FIELDS } from "../../../../../../utils/constants/nutrition-tracker.constants";
+import { GRAPH_FIELDS } from "../../../../../../utils/constants/nutrition-tracker.constants.js";
 
 import { useSelector } from "react-redux";
-import { selectNutritionTrackedDaysSummary } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
-import SimplePaper from "../../../../../shared/mui/paper/paper.component.jsx";
+import { selectNutritionTrackedDaysSummary } from "../../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js";
+import SimplePaper from "../../../../../shared/mui/paper/paper.component.js";
 import { COLOR_CODES, COMMON_SPACING } from "../../../../../../utils/constants/shared.constants.js";
+import { ApexOptions } from "apexcharts";
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["0"]
@@ -17,14 +18,14 @@ const NutritionTrackerGraphPie = () => {
   const nutritionTrackedDaysSummary = useSelector(selectNutritionTrackedDaysSummary)
 
   const trackedMacronutrients = new Map([
-    [GRAPH_FIELDS.carbohydrates, nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption : 0],
-    [GRAPH_FIELDS.protein, nutritionTrackedDaysSummary.averageDailyProteinConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyProteinConsumption : 0],
-    [GRAPH_FIELDS.fat, nutritionTrackedDaysSummary.averageDailyFatConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyFatConsumption : 0]
-  ])
+    [GRAPH_FIELDS.carbohydrates, nutritionTrackedDaysSummary?.averageDailyCarbohydratesConsumption ?? 0],
+    [GRAPH_FIELDS.protein, nutritionTrackedDaysSummary?.averageDailyProteinConsumption ?? 0],
+    [GRAPH_FIELDS.fat, nutritionTrackedDaysSummary?.averageDailyFatConsumption ?? 0]
+  ]);
+  
+  const series: number[] = [...trackedMacronutrients.values()].map((val) => val ?? 0);
 
-  const series = [ ...trackedMacronutrients.values() ]
-
-  const options = {
+  const options: ApexOptions = {
     chart: {
       type: 'donut',
     },

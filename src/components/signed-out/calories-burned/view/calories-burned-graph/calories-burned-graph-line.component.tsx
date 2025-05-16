@@ -1,13 +1,14 @@
-import "./calories-burned-graph-line.styles.jsx"
-import { CaloriesBurnedLineGraphContainer } from "./calories-burned-graph-line.styles.jsx"
+import "./calories-burned-graph-line.styles.js"
+import { CaloriesBurnedLineGraphContainer } from "./calories-burned-graph-line.styles.js"
 import ReactApexChart from "react-apexcharts"
 import { useContext } from "react"
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context"
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-out/calories-burned/calories-burned.context.js"
 
-import { GRAPH_FIELDS } from "../../../../../utils/constants/calories-burned.constants"
+import { GRAPH_FIELDS } from "../../../../../utils/constants/calories-burned.constants.js"
 import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
 import { Typography } from "@mui/material"
+import { ApexOptions } from "apexcharts"
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"]
@@ -25,12 +26,12 @@ const CaloriesBurnedGraphLine = () => {
     }
   })
 
-  const series = [{
+  const series: ApexAxisChartSeries = [{
     name: GRAPH_FIELDS.caloriesBurnedTitle,
     data: [ ...trackedCalories.values() ]
   }]
 
-  const options = {
+  const options: ApexOptions = {
     chart: {
       type: 'area',
       height: COMMON_SPACING.lineChart.height,
@@ -51,7 +52,6 @@ const CaloriesBurnedGraphLine = () => {
     },
     labels: [ ...trackedCalories.keys() ],
     xaxis: {
-      type: 'string',
       labels: {
         show: true
       }

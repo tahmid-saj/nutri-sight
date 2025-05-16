@@ -1,12 +1,12 @@
-import "./nutrition-tracker-summary.styles.jsx"
+import "./nutrition-tracker-summary.styles.js"
 import { NutritionTrackerDashboardSummaryContainer,
   NutritionTrackerDashboardSummaryInfoContainer
-} from "./nutrition-tracker-summary.styles.jsx";
-import NutritionTrackerGraphPie from "./nutrition-tracker-graph-pie/nutrition-tracker-graph-pie.component";
+} from "./nutrition-tracker-summary.styles.js";
+import NutritionTrackerGraphPie from "./nutrition-tracker-graph-pie/nutrition-tracker-graph-pie.component.js";
 import { useSelector } from "react-redux";
-import { selectNutritionTrackedDaysSummary } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector";
+import { selectNutritionTrackedDaysSummary } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js";
 import { Divider, Typography, backdropClasses } from "@mui/material";
-import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx";
+import SimplePaper from "../../../../shared/mui/paper/paper.component.js";
 import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js";
 
 const date = new Date();
@@ -31,15 +31,15 @@ const NutritionTrackerSummary = () => {
               <NutritionTrackerDashboardSummaryInfoContainer>
                 <Typography variant="h6">{`As of ${currentDate}`}</Typography>
 
-                <Typography variant="body1">{`Average daily calories : ${nutritionTrackedDaysSummary.averageDailyCaloriesConsumption}`}</Typography>
+                <Typography variant="body1">{`Average daily calories : ${nutritionTrackedDaysSummary?.averageDailyCaloriesConsumption}`}</Typography>
 
                 <br/>
                 <Divider/>
                 <br/>
 
-                <Typography variant="body1">{`Average daily carbohydrates : ${nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption} g`}</Typography>
-                <Typography variant="body1">{`Average daily protein : ${nutritionTrackedDaysSummary.averageDailyProteinConsumption} g`}</Typography>
-                <Typography variant="body1">{`Average daily fat : ${nutritionTrackedDaysSummary.averageDailyFatConsumption} g`}</Typography>
+                <Typography variant="body1">{`Average daily carbohydrates : ${nutritionTrackedDaysSummary?.averageDailyCarbohydratesConsumption} g`}</Typography>
+                <Typography variant="body1">{`Average daily protein : ${nutritionTrackedDaysSummary?.averageDailyProteinConsumption} g`}</Typography>
+                <Typography variant="body1">{`Average daily fat : ${nutritionTrackedDaysSummary?.averageDailyFatConsumption} g`}</Typography>
               </NutritionTrackerDashboardSummaryInfoContainer>
             </SimplePaper>
           </div>

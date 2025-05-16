@@ -1,11 +1,12 @@
-import "./nutrition-tracker-graph-calories.styles.jsx"
-import { NutritionTrackerDashboardGraphCalories } from "./nutrition-tracker-graph-calories.styles.jsx"
+import "./nutrition-tracker-graph-calories.styles.js"
+import { NutritionTrackerDashboardGraphCalories } from "./nutrition-tracker-graph-calories.styles.js"
 import ReactApexChart from "react-apexcharts"
 import { useSelector } from "react-redux"
-import { selectNutritionTrackedDays } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector"
+import { selectNutritionTrackedDays } from "../../../../../store/signed-out/nutrition-tracker/nutrition-tracker.selector.js"
 import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
-import { GRAPH_FIELDS } from "../../../../../utils/constants/nutrition-tracker.constants"
-import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx"
+import { GRAPH_FIELDS } from "../../../../../utils/constants/nutrition-tracker.constants.js"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
+import { ApexOptions } from "apexcharts"
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"]
@@ -15,7 +16,7 @@ const NutritionTrackerGraphCalories = () => {
   const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
 
   let trackedCalories = new Map()
-  const trackedDayCalories = nutritionTrackedDays.map((trackedDate) => {
+  const trackedDayCalories = nutritionTrackedDays?.map((trackedDate) => {
     if (trackedCalories.has(String(trackedDate.dateTracked))) {
       trackedCalories.set(String(trackedDate.dateTracked), Number(trackedCalories.get(trackedDate.dateTracked)) + Number(trackedDate.calories))
     } else {
@@ -23,12 +24,12 @@ const NutritionTrackerGraphCalories = () => {
     }
   })
 
-  const series = [{
+  const series: ApexAxisChartSeries = [{
     name: GRAPH_FIELDS.caloriesTitle,
     data: [ ...trackedCalories.values() ]
   }]
 
-  const options = {
+  const options: ApexOptions = {
     chart: {
       type: 'area',
       height: COMMON_SPACING.lineChart.height,
@@ -49,7 +50,6 @@ const NutritionTrackerGraphCalories = () => {
     },
     labels: [ ...trackedCalories.keys() ],
     xaxis: {
-      type: 'string',
       labels: {
         show: true
       }
