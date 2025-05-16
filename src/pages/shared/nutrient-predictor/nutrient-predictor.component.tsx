@@ -1,9 +1,9 @@
-import "./nutrient-predictor.styles.jsx";
-import { NutrientPredictorContainer, NutrientPredictionInfo } from "./nutrient-predictor.styles"
+import "./nutrient-predictor.styles.js";
+import { NutrientPredictorContainer, NutrientPredictionInfo } from "./nutrient-predictor.styles.js"
 
 import React, { Component, useContext } from "react";
-import UploadFoodImage from "../../../components/shared/nutrient-predictor/upload-food-image/upload-food-image.component.jsx";
-import NutrientsInfo from "../../../components/shared/nutrient-predictor/nutrients-info/nutrients-info.component.jsx";
+import UploadFoodImage from "../../../components/shared/nutrient-predictor/upload-food-image/upload-food-image.component.js";
+import NutrientsInfo from "../../../components/shared/nutrient-predictor/nutrients-info/nutrients-info.component.js";
 
 import { NutrientPredictorContext } from "../../../contexts/shared/nutrient-predictor/nutrient-predictor.context.js";
 import { Divider, Typography } from "@mui/material";

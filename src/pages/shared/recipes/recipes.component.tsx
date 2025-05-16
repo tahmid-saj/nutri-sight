@@ -1,12 +1,12 @@
-import "./recipes.styles.jsx"
-import { SearchResultsRecipeContainer, SearchResultsMainContainer } from "./recipes.styles.jsx";
+import "./recipes.styles.js"
+import { SearchResultsRecipeContainer, SearchResultsMainContainer } from "./recipes.styles.js";
 
 import React, { Fragment, Component, useEffect, useContext } from "react";
 
-import Header from "../../../components/shared/recipes/components/header/header.component.jsx";
-import SearchResults from "../../../components/shared/recipes/components/search-results/search-results.component.jsx";
-import Recipe from "../../../components/shared/recipes/components/recipe/recipe.component.jsx";
-import RecipesView from "../../../components/shared/recipes/components/recipes-view/recipes-view.component.jsx";
+import Header from "../../../components/shared/recipes/components/header/header.component.js";
+import SearchResults from "../../../components/shared/recipes/components/search-results/search-results.component.js";
+import Recipe from "../../../components/shared/recipes/components/recipe/recipe.component.js";
+import RecipesView from "../../../components/shared/recipes/components/recipes-view/recipes-view.component.js";
 
 import { RecipesContext } from "../../../contexts/shared/recipes/recipes.context.js";
 import { Divider, Typography } from "@mui/material";
@@ -23,7 +23,6 @@ const Recipes = () => {
       <Header></Header>
 
       <br></br>
-
         { 
           displayedRecipesOnPage.length !== 0 &&
           <div className="container">

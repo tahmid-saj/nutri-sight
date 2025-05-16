@@ -1,29 +1,29 @@
-import "./calories-burned.styles.jsx"
+import "./calories-burned.styles.js"
 import { CaloriesBurnedContainer, CaloriesBurnedFilterContainer,
   AddActivityContainer
-} from "./calories-burned.styles.jsx"
+} from "./calories-burned.styles.js"
 
-import SummaryInfo from "../../../components/signed-out/calories-burned/summary/summary-info/summary-info.component"
+import SummaryInfo from "../../../components/signed-out/calories-burned/summary/summary-info/summary-info.component.jsx"
 import ActivityDateFilter from "../../../components/signed-out/calories-burned/activity-date-filter/activity-date-filter.component.jsx"
 
-import CaloriesBurnedGraphPie from "../../../components/signed-out/calories-burned/view/calories-burned-graph/calories-burned-graph-pie.component"
-import CaloriesBurnedGraphLine from "../../../components/signed-out/calories-burned/view/calories-burned-graph/calories-burned-graph-line.component"
-import CaloriesBurnedTable from "../../../components/signed-out/calories-burned/view/calories-burned-table/calories-burned-table.component"
+import CaloriesBurnedGraphPie from "../../../components/signed-out/calories-burned/view/calories-burned-graph/calories-burned-graph-pie.component.jsx"
+import CaloriesBurnedGraphLine from "../../../components/signed-out/calories-burned/view/calories-burned-graph/calories-burned-graph-line.component.jsx"
+import CaloriesBurnedTable from "../../../components/signed-out/calories-burned/view/calories-burned-table/calories-burned-table.component.jsx"
 
-import ActivityDateForm from "../../../components/signed-out/calories-burned/add-activity/activity-date-form/activity-date-form.component"
-import ActivityDateTable from "../../../components/signed-out/calories-burned/add-activity/activity-date-table/activity-date-table.component"
+import ActivityDateForm from "../../../components/signed-out/calories-burned/add-activity/activity-date-form/activity-date-form.component.jsx"
+import ActivityDateTable from "../../../components/signed-out/calories-burned/add-activity/activity-date-table/activity-date-table.component.jsx"
 
 import { Fragment, useContext } from "react"
-import { CaloriesBurnedContext } from "../../../contexts/signed-out/calories-burned/calories-burned.context"
+import { CaloriesBurnedContext } from "../../../contexts/signed-out/calories-burned/calories-burned.context.js"
 
-import ScheduleCalendar from "../../../components/signed-out/calories-burned/schedule/schedule-calendar/schedule-calendar.component"
-import ScheduleDayInfo from "../../../components/signed-out/calories-burned/schedule/schedule-day-info/schedule-day-info.component"
+import ScheduleCalendar from "../../../components/signed-out/calories-burned/schedule/schedule-calendar/schedule-calendar.component.jsx"
+import ScheduleDayInfo from "../../../components/signed-out/calories-burned/schedule/schedule-day-info/schedule-day-info.component.jsx"
 import { Typography } from "@mui/material"
 
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import AddIcon from '@mui/icons-material/Add';
-import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.jsx"
+import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.js"
 
 const CaloriesBurned = () => {
   const { trackedCaloriesBurned, scheduledTrackedCaloriesBurnedView } = useContext(CaloriesBurnedContext)

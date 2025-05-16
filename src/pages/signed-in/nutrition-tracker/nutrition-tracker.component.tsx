@@ -1,24 +1,24 @@
 import React, { Component, useContext, Fragment } from "react";
 
-import Summary from "../../../components/signed-in/nutrition-tracker/summary/summary.component";
+import Summary from "../../../components/signed-in/nutrition-tracker/summary/summary.component.jsx";
 
-import "./nutrition-tracker.styles.jsx";
-import { NutritionTrackerContainer, UpdateConsumptionContainer } from "./nutrition-tracker.styles";
-import SearchDays from "../../../components/signed-in/nutrition-tracker/search-days/search-days.component";
-import UpdateConsumptionForm from "../../../components/signed-in/nutrition-tracker/update-consumption-form/update-consumption-form.component";
-import ConsumptionInfo from "../../../components/signed-in/nutrition-tracker/consumption-info/consumption-info.component";
+import "./nutrition-tracker.styles.js";
+import { NutritionTrackerContainer, UpdateConsumptionContainer } from "./nutrition-tracker.styles.js";
+import SearchDays from "../../../components/signed-in/nutrition-tracker/search-days/search-days.component.jsx";
+import UpdateConsumptionForm from "../../../components/signed-in/nutrition-tracker/update-consumption-form/update-consumption-form.component.jsx";
+import ConsumptionInfo from "../../../components/signed-in/nutrition-tracker/consumption-info/consumption-info.component.jsx";
 
-import TopSearch from "../../../components/signed-in/nutrition-tracker/top-search/top-search.component";
+import TopSearch from "../../../components/signed-in/nutrition-tracker/top-search/top-search.component.jsx";
 
-import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
-import ScheduleCalendar from "../../../components/signed-in/nutrition-tracker/schedule/schedule-calendar/schedule-calendar.component";
-import ScheduleDayInfo from "../../../components/signed-in/nutrition-tracker/schedule/schedule-day-info/schedule-day-info.component";
+import { NutritionTrackerContext } from "../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
+import ScheduleCalendar from "../../../components/signed-in/nutrition-tracker/schedule/schedule-calendar/schedule-calendar.component.jsx";
+import ScheduleDayInfo from "../../../components/signed-in/nutrition-tracker/schedule/schedule-day-info/schedule-day-info.component.jsx";
 import { Divider } from "@mui/material";
 
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import EditIcon from '@mui/icons-material/Edit';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import ItemTabs from "../../../components/shared/mui/tabs/tabs.component";
+import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.js";
 
 const NutritionTracker = () => {
   const { nutritionTrackedDays, scheduledNutritionTrackedDaysView } = useContext(NutritionTrackerContext);
