@@ -75,10 +75,9 @@ const ScheduleDayInfo = () => {
   const onRemoveSelected = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     const selectedData = gridRef?.current?.api.getSelectedRows();
-      if (!selectedData || !selectedData[0] || selectedData[0].Tag === undefined) {
-        return;
-      }
-
+    if (!selectedData || !selectedData[0] || selectedData[0].Tag === undefined) {
+      return;
+    }
     
     removeExercise(Number(selectedData[0].Tag))
   }

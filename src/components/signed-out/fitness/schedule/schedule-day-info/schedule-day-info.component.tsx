@@ -1,19 +1,35 @@
-import "./schedule-day-info.styles.jsx"
+import "./schedule-day-info.styles.js"
 import { FitnessScheduleDayInfoContainer,
   FitnessScheduleDayInfo
-} from "./schedule-day-info.styles.jsx";
-import { useState, useContext, useRef, Fragment } from "react"
+} from "./schedule-day-info.styles.js";
+import { useState, useContext, useRef, Fragment, MouseEvent } from "react"
 import { Typography } from "@mui/material";
 
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 
-import Button from "../../../../shared/button/button.component";
-import { ButtonsContainer } from "../../../../shared/button/button.styles";
-import SimplePaper from "../../../../shared/mui/paper/paper.component";
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants";
-import { FitnessContext } from "../../../../../contexts/signed-out/fitness/fitness.context";
+import Button from "../../../../shared/button/button.component.js";
+import { ButtonsContainer } from "../../../../shared/button/button.styles.js";
+import SimplePaper from "../../../../shared/mui/paper/paper.component.js";
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js";
+import { FitnessContext } from "../../../../../contexts/signed-out/fitness/fitness.context.js";
+
+import { ColDef } from "ag-grid-community";
+import { AgGridReact as AgGridReactType } from "ag-grid-react"; // Needed for typing
+
+type FitnessData = {
+  Date: string,
+  Exercise: string,
+  Sets: string,
+  Reps: string,
+  Type: string,
+  Muscle: string,
+  Equipment: string,
+  Difficulty: string,
+  Instructions: string,
+  Tag: string
+}
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["8"],
@@ -24,26 +40,27 @@ const ScheduleDayInfo = () => {
   const { exercisesView, removeExercise, unselectScheduledExercise } = useContext(FitnessContext)
   
 
-  const gridRef = useRef()
+  const gridRef = useRef<AgGridReactType<FitnessData>>(null)
 
-  const rowData = exercisesView.map((exercise) => {
+  const rowData: FitnessData[] = exercisesView.map((exercise) => {
     return {
-      // AddToExpenses: "",
-      Date: exercise.exerciseDate,
+      Date: typeof exercise.exerciseDate === 'string'
+        ? exercise.exerciseDate
+        : new Date(exercise.exerciseDate).toISOString(), // or toLocaleDateString()
       Exercise: exercise.exerciseName,
-      Sets: exercise.exerciseSets,
-      Reps: exercise.exerciseReps,
+      Sets: exercise.exerciseSets.toString(),
+      Reps: exercise.exerciseReps.toString(),
       Type: exercise.exerciseType,
       Muscle: exercise.exerciseMuscle,
       Equipment: exercise.exerciseEquipment,
       Difficulty: exercise.exerciseDifficulty,
       Instructions: exercise.exerciseInstructions,
-      Tag: exercise.exerciseTag
+      Tag: exercise.exerciseTag.toString(),
     }
   })
 
   // column definitions
-  const [columnDefs, setColumnDefs] = useState([
+  const columnDefs: ColDef<FitnessData>[] = [
     { field: "Date" },
     { field: "Exercise" },
     { field: "Sets" },
@@ -54,21 +71,19 @@ const ScheduleDayInfo = () => {
     { field: "Difficulty" },
     { field: "Instructions" },
     { field: "Tag" },
-  ])
+  ]
 
-  const onRemoveSelected = (event) => {
+  const onRemoveSelected = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    const selectedData = gridRef.current.api.getSelectedRows();
+    const selectedData = gridRef?.current?.api.getSelectedRows();
     // TODO: better manage selectedData[0] without the 0 in index
-    if (!selectedData[0] || selectedData[0] === null || !selectedData[0].Tag || selectedData[0] === undefined) {
-      return
+    if (!selectedData || !selectedData[0] || selectedData[0].Tag === undefined) {
+      return;
     }
-
-    
-    removeExercise(selectedData[0].Tag)
+    removeExercise(Number(selectedData[0].Tag))
   }
 
-  const handleUnselect = (event) => {
+  const handleUnselect = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     unselectScheduledExercise()
   }
