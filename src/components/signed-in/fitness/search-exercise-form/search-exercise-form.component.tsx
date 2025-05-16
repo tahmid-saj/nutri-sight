@@ -1,15 +1,22 @@
-import { Fragment, useContext, useState } from "react"
-import "./search-exercise-form.styles.jsx"
-import { FitnessSearchExerciseFormContainer, FitnessSearchExerciseForm, SearchButtonsContainer } from "./search-exercise-form.styles.jsx"
+import { ChangeEvent, FormEvent, Fragment, useContext, useState } from "react"
+import "./search-exercise-form.styles.js"
+import { FitnessSearchExerciseFormContainer, FitnessSearchExerciseForm } from "./search-exercise-form.styles.js"
 import { Typography } from "@mui/material"
-import FormInput from "../../../shared/form-input/form-input.component"
-import { DropButton } from "../../../shared/drop-button/drop-button.styles"
-import Button from "../../../shared/button/button.component"
-import { ButtonsContainer } from "../../../shared/button/button.styles"
-import SimplePaper from "../../../shared/mui/paper/paper.component"
-import { COLOR_CODES } from "../../../../utils/constants/shared.constants"
+import FormInput from "../../../shared/form-input/form-input.component.js"
+import { DropButton } from "../../../shared/drop-button/drop-button.styles.js"
+import Button from "../../../shared/button/button.component.js"
+import { ButtonsContainer } from "../../../shared/button/button.styles.js"
+import SimplePaper from "../../../shared/mui/paper/paper.component.js"
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js"
 
-import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context"
+import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context.js"
+
+type FormFields = {
+  exerciseName: string,
+  exerciseType: string,
+  exerciseMuscle: string,
+  exerciseDifficulty: string
+}
 
 const defaultFormFields = {
   exerciseName: "",
@@ -24,14 +31,14 @@ const paperStyles = {
 }
 
 const SearchExerciseForm = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields)
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormFields)
   const { searchExercise } = useContext(FitnessContext)
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (!formFields.exerciseMuscle || formFields.exerciseMuscle === "") {
@@ -43,7 +50,7 @@ const SearchExerciseForm = () => {
     resetFormFields()
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = event.target
 
     setFormFields({ ...formFields, [name]: value })

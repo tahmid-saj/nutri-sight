@@ -1,17 +1,29 @@
-import "./calories-burned-table.styles.jsx"
-import { FilterCaloriesBurnedActivitiesTableContainer, FilterCaloriesBurnedActivitiesTable } from "./calories-burned-table.styles.jsx";
-import { useContext, useState, useRef } from "react"
+import "./calories-burned-table.styles.js"
+import { FilterCaloriesBurnedActivitiesTableContainer, FilterCaloriesBurnedActivitiesTable } from "./calories-burned-table.styles.js";
+import { useContext, useState, useRef, MouseEvent } from "react"
 
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 
-import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context";
-import Button from "../../../../shared/button/button.component";
+import { CaloriesBurnedContext } from "../../../../../contexts/signed-in/calories-burned/calories-burned.context.js";
+import Button from "../../../../shared/button/button.component.js";
 
 import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../../shared/mui/paper/paper.component.jsx";
+import SimplePaper from "../../../../shared/mui/paper/paper.component.js";
+
+import { ColDef } from "ag-grid-community";
+import { AgGridReact as AgGridReactType } from "ag-grid-react"; // Needed for typing
+
+type CaloriesBurnedData = {
+  Activity: string,
+  DateTracked: string,
+  TotalCaloriesBurned: string,
+  CaloriesBurnedPerHour: string,
+  DurationMinutes: string,
+  Tag: string,
+}
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["8"],
@@ -19,40 +31,39 @@ const paperStyles = {
 }
 
 const CaloriesBurnedTable = () => {
-  const gridRef = useRef()
+  const gridRef = useRef<AgGridReactType<CaloriesBurnedData>>(null)
   const { trackedCaloriesBurnedView, removeActivityDate, clearActivityDatesFilter } = useContext(CaloriesBurnedContext)
   const rowData = trackedCaloriesBurnedView.map((trackedCaloriesBurned) => {
     return {
       Activity: trackedCaloriesBurned.activity,
-      DateTracked: trackedCaloriesBurned.dateTracked,
-      CaloriesBurnedPerHour: trackedCaloriesBurned.caloriesBurnedPerHour,
-      DurationMinutes: trackedCaloriesBurned.durationMinutes,
-      TotalCaloriesBurned: trackedCaloriesBurned.totalCaloriesBurned,
-      Tag: trackedCaloriesBurned.activityId
+      DateTracked: trackedCaloriesBurned.dateTracked.toString(),
+      CaloriesBurnedPerHour: trackedCaloriesBurned.caloriesBurnedPerHour.toString(),
+      DurationMinutes: trackedCaloriesBurned.durationMinutes.toString(),
+      TotalCaloriesBurned: trackedCaloriesBurned.totalCaloriesBurned.toString(),
+      Tag: trackedCaloriesBurned.activityId.toString()
     }
   })
 
     // column definitions
-    const [columnDefs, setColumnDefs] = useState([
+    const columnDefs: ColDef<CaloriesBurnedData>[] = [
       { field: "Activity" },
       { field: "DateTracked" },
       { field: "TotalCaloriesBurned" },
       { field: "CaloriesBurnedPerHour" },
       { field: "DurationMinutes" },
       { field: "Tag" },
-    ])
+    ]
   
-    const onRemoveSelected = async (event) => {
+    const onRemoveSelected = async (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault()
-      const selectedData = gridRef.current.api.getSelectedRows()
+      const selectedData = gridRef?.current?.api.getSelectedRows()
       // TODO: better manage selectedData[0] without the 0 in index
-      if (!selectedData[0] || selectedData[0] === null || !selectedData[0].Activity || selectedData[0] === undefined) {
-        return
+      if (!selectedData || !selectedData[0] || selectedData[0].Activity === undefined) {
+        return;
       }
-  
       
   
-      await removeActivityDate(selectedData[0].Tag)
+      await removeActivityDate(Number(selectedData[0].Tag))
     }
 
   return (

@@ -1,19 +1,20 @@
-import OutlinedCard from "../../../shared/mui/card/card.component"
+import OutlinedCard from "../../../shared/mui/card/card.component.js"
 import { Typography } from "@mui/material"
-import "./search-exercise-result.styles.jsx"
-import { FitnessSearchResultInfo } from "./search-exercise-result.styles.jsx"
-import { COLOR_CODES } from "../../../../utils/constants/shared.constants"
-import { useContext } from "react"
-import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context"
+import "./search-exercise-result.styles.js"
+import { FitnessSearchResultInfo } from "./search-exercise-result.styles.js"
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js"
+import { MouseEvent, useContext } from "react"
+import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context.js"
+import { ExerciseSearchResult } from "../../../../contexts/signed-in/fitness/fitness.types.js"
 
 const outlinedCardStyles = {
   backgroundColor: COLOR_CODES.general["0"]
 }
 
-const SearchExerciseResult = ({ exerciseSearchResult }) => {
+const SearchExerciseResult = ({ exerciseSearchResult }: { exerciseSearchResult: ExerciseSearchResult }) => {
   const { selectSearchedExercises } = useContext(FitnessContext)
 
-  const handleClick = (event) => {
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault()
 
     selectSearchedExercises(exerciseSearchResult)

@@ -1,18 +1,19 @@
-import "./schedule-calendar.styles.jsx"
-import { CalendarTodoList, FitnessScheduleCalendarContainer } from "./schedule-calendar.styles.jsx";
+import "./schedule-calendar.styles.js"
+import { CalendarTodoList, FitnessScheduleCalendarContainer } from "./schedule-calendar.styles.js";
 import 'rsuite/Calendar/styles/index.css';
 import { Fragment, useContext, useState } from "react";
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
 import { Typography } from "@mui/material";
-import { FitnessContext } from "../../../../../../contexts/signed-in/fitness/fitness.context";
-import { COLOR_CODES } from "../../../../../../utils/constants/shared.constants";
+import { FitnessContext } from "../../../../../contexts/signed-in/fitness/fitness.context.js";
+import { COLOR_CODES } from "../../../../../utils/constants/shared.constants.js";
+import { Exercise } from "../../../../../contexts/signed-in/fitness/fitness.types.js";
 
-function getScheduledData(date, exercises) {
-  date = date.toISOString().split('T')[0]
+function getScheduledData(date: Date, exercises: Exercise[]) {
+  const dateStr: string = date.toISOString().split('T')[0]
 
-  let scheduledExercisesForDate = []
+  let scheduledExercisesForDate: { type: string, name: string }[] = []
   exercises.map((exercise) => {
-    if (exercise.exerciseDate === date) {
+    if (exercise.exerciseDate === dateStr) {
       scheduledExercisesForDate.push({
         type: exercise.exerciseType,
         name: exercise.exerciseName
@@ -26,7 +27,7 @@ function getScheduledData(date, exercises) {
 const ScheduleCalendar = () => {
   const { exercises, selectScheduledExercise } = useContext(FitnessContext)
 
-  function renderCell(date) {
+  function renderCell(date: Date) {
     const list = getScheduledData(date, exercises);
     const displayList = list.filter((item, index) => index < 1);
 
@@ -51,7 +52,7 @@ const ScheduleCalendar = () => {
     return null;
   }
 
-  const onSelectDate = (date) => {
+  const onSelectDate = (date: Date) => {
     const selectedDate = date.toISOString().split('T')[0]
     
     selectScheduledExercise(selectedDate)

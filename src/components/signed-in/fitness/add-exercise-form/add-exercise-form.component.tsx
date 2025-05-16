@@ -1,14 +1,20 @@
-import { Fragment, useContext, useState } from "react"
-import "./add-exercise-form.styles.jsx"
-import { FitnessAddExerciseFormContainer, FitnessAddExerciseForm } from "./add-exercise-form.styles.jsx"
+import { ChangeEvent, FormEvent, Fragment, useContext, useState } from "react"
+import "./add-exercise-form.styles.js"
+import { FitnessAddExerciseFormContainer, FitnessAddExerciseForm } from "./add-exercise-form.styles.js"
 import { Typography } from "@mui/material"
-import FormInput from "../../../shared/form-input/form-input.component"
-import { ButtonsContainer } from "../../../shared/button/button.styles"
-import Button from "../../../shared/button/button.component"
-import SimplePaper from "../../../shared/mui/paper/paper.component"
-import { COLOR_CODES } from "../../../../utils/constants/shared.constants"
-import AddExerciseFormInfo from "./add-exercise-form-info/add-exercise-form-info.component"
-import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context"
+import FormInput from "../../../shared/form-input/form-input.component.js"
+import { ButtonsContainer } from "../../../shared/button/button.styles.js"
+import Button from "../../../shared/button/button.component.js"
+import SimplePaper from "../../../shared/mui/paper/paper.component.js"
+import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js"
+import AddExerciseFormInfo from "./add-exercise-form-info/add-exercise-form-info.component.js"
+import { FitnessContext } from "../../../../contexts/signed-in/fitness/fitness.context.js"
+
+type FormFields = {
+  exerciseDate: string,
+  exerciseSets: string,
+  exerciseReps: string
+}
 
 const defaultFormFields = {
   exerciseDate: "",
@@ -21,7 +27,7 @@ const paperStyles = {
 }
 
 const AddExerciseForm = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields)
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormFields)
   const { addExercise, selectedSearchedExercise } = useContext(FitnessContext)
 
   if (!selectedSearchedExercise) {
@@ -34,7 +40,7 @@ const AddExerciseForm = () => {
     setFormFields(defaultFormFields)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (!formFields.exerciseDate || formFields.exerciseDate === "") {
@@ -46,7 +52,7 @@ const AddExerciseForm = () => {
     resetFormFields()
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
 
     setFormFields({ ...formFields, [name]: value })
