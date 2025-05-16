@@ -5,6 +5,8 @@ import "./consumption-info.styles.scss";
 import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
 
 import { GRAPH_FIELDS } from "../../../../utils/constants/nutrition-tracker.constants";
+import { ApexOptions } from "apexcharts";
+import { Micronutrient } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.types";
 
 const ConsumptionInfo = () => {
   const { dayTrackedSearchResult } = useContext(NutritionTrackerContext);
@@ -23,9 +25,9 @@ const ConsumptionInfo = () => {
     [GRAPH_FIELDS.fat, dayTrackedSearchResult.macronutrients.fat !== 0 ? dayTrackedSearchResult.macronutrients.fat : 0]
   ])
   
-  const series = [ ...trackedMacronutrients.values() ]
+  const series: ApexAxisChartSeries = [ ...trackedMacronutrients.values() ]
 
-  const options = {
+  const options: ApexOptions = {
     chart: {
       type: 'donut',
       height: 400,
@@ -61,7 +63,7 @@ const ConsumptionInfo = () => {
               <h3>Micronutrients</h3>
             }
             {
-              dayTrackedSearchResult.micronutrients.map((micronutrient, index) => {
+              dayTrackedSearchResult.micronutrients.map((micronutrient: Micronutrient, index: number) => {
                 return (
                     <h4 key={ index }>{`${micronutrient.name} : ${micronutrient.amount} ${micronutrient.unit}`}</h4>
                 )

@@ -1,12 +1,12 @@
 import { useContext } from "react";
 
-import "./summary.styles.jsx";
-import { NutritionTrackerSummary } from "./summary.styles.jsx";
+import "./summary.styles.js";
+import { NutritionTrackerSummary } from "./summary.styles.js";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
+import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
 import { Typography, Divider } from "@mui/material";
 
-import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
+import SimplePaper from "../../../shared/mui/paper/paper.component.js";
 import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js";
 
 const date = new Date();

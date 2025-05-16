@@ -1,16 +1,29 @@
-import "./nutrition-tracker-table.styles.jsx"
-import { FilterNutritionTrackerTableContainer, FilterButtonsContainer } from "./nutrition-tracker-table.styles.jsx";
-import { useContext, useState, useRef } from "react"
+import "./nutrition-tracker-table.styles.js"
+import { FilterNutritionTrackerTableContainer, FilterButtonsContainer } from "./nutrition-tracker-table.styles.js";
+import { useContext, useState, useRef, MouseEvent } from "react"
 
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
-import Button from "../../../shared/button/button.component";
+import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
+import Button from "../../../shared/button/button.component.js";
 import { COLOR_CODES, COMMON_SPACING } from "../../../../utils/constants/shared.constants.js";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
+import SimplePaper from "../../../shared/mui/paper/paper.component.js";
+import { NutritionTrackedDay } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.types.js";
+
+import { ColDef } from "ag-grid-community";
+import { AgGridReact as AgGridReactType } from "ag-grid-react"; // Needed for typing
+
+type NutritionTrackedDayData = {
+  DateTracked: string,
+  Calories: string,
+  Carbohydrates: string,
+  Protein: string,
+  Fat: string,
+  Micronutrients: string
+}
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["8"],
@@ -18,10 +31,10 @@ const paperStyles = {
 }
 
 const NutritionTrackerTable = () => {
-  const gridRef = useRef()
+  const gridRef = useRef<AgGridReactType<NutritionTrackedDayData>>(null)
   const { nutritionTrackedDaysView, removeDayTracked, clearDayTrackedFilter } = useContext(NutritionTrackerContext)
 
-  const rowData = nutritionTrackedDaysView.map((trackedDate) => {
+  const rowData = nutritionTrackedDaysView.map((trackedDate: NutritionTrackedDay) => {
     return {
       DateTracked: trackedDate.dateTracked,
       Calories: trackedDate.calories,
@@ -35,29 +48,27 @@ const NutritionTrackerTable = () => {
   })
 
   // column definitions
-  const [columnDefs, setColumnDefs] = useState([
+  const columnDefs: ColDef<NutritionTrackedDayData>[] = [
     { field: "DateTracked" },
     { field: "Calories" },
     { field: "Carbohydrates" },
     { field: "Protein" },
     { field: "Fat" },
     { field: "Micronutrients" }
-  ])
+  ]
 
-  const onRemoveSelected = async (event) => {
+  const onRemoveSelected = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    const selectedData = gridRef.current.api.getSelectedRows()
+    const selectedData = gridRef?.current?.api.getSelectedRows()
     // TODO: better manage selectedData[0] without the 0 in index
-    if (!selectedData[0] || selectedData[0] === null || !selectedData[0].DateTracked || selectedData[0] === undefined) {
-      return
+    if (!selectedData || !selectedData[0] || selectedData[0].DateTracked === undefined) {
+      return;
     }
-
-    
 
     await removeDayTracked(selectedData[0].DateTracked)
   }
 
-  const onClearFilter = (event) => {
+  const onClearFilter = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     clearDayTrackedFilter()
   }

@@ -1,16 +1,24 @@
-import { useState, useContext } from "react";
+import { useState, useContext, MouseEvent, ChangeEvent } from "react";
 
-import "./update-consumption-form.styles.jsx";
-import { UpdateConsumptionFormContainer, ConsumptionFormButtonContainer } from "./update-consumption-form.styles.jsx";
+import "./update-consumption-form.styles.js";
+import { UpdateConsumptionFormContainer, ConsumptionFormButtonContainer } from "./update-consumption-form.styles.js";
 
-import FormInput from "../../../shared/form-input/form-input.component";
-import Button from "../../../shared/button/button.component";
-import AddMicronutrients from "../add-micronutrients/add-micronutrients.component";
+import FormInput from "../../../shared/form-input/form-input.component.js";
+import Button from "../../../shared/button/button.component.js";
+import AddMicronutrients from "../add-micronutrients/add-micronutrients.component.js";
 
-import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context";
+import { NutritionTrackerContext } from "../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js";
 import { Typography } from "@mui/material";
-import SimplePaper from "../../../shared/mui/paper/paper.component.jsx";
+import SimplePaper from "../../../shared/mui/paper/paper.component.js";
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants.js";
+
+type FormFields = {
+  dateTracked: string,
+  calories: string,
+  carbohydrates: string,
+  protein: string,
+  fat: string
+}
 
 const defaultFormFields = {
   dateTracked: "",
@@ -23,7 +31,7 @@ const defaultFormFields = {
 const UpdateConsumptionForm = () => {
   const { nutritionTrackedDays, addDayTracked, updateDayTracked, formInputMicronutrients } = useContext(NutritionTrackerContext);
 
-  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [formFields, setFormFields] = useState<FormFields>(defaultFormFields);
 
   const paperStyles = {
     backgroundColor: COLOR_CODES.general["1"],
@@ -36,10 +44,8 @@ const UpdateConsumptionForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleAddTrackedDay = async (event) => {
+  const handleAddTrackedDay = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-
-    
 
     await addDayTracked({
       dateTracked: formFields.dateTracked,
@@ -54,7 +60,7 @@ const UpdateConsumptionForm = () => {
     resetFormFields(); 
   };
 
-  const handleUpdateTrackedDay = async (event) => {
+  const handleUpdateTrackedDay = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     
@@ -72,14 +78,16 @@ const UpdateConsumptionForm = () => {
     resetFormFields(); 
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     setFormFields({ ...formFields, [name]: value })
   };
 
   return (
-    <UpdateConsumptionFormContainer micronutrientsAdded={ formInputMicronutrients.length !== 0 }>
+    <UpdateConsumptionFormContainer 
+      // micronutrientsAdded={ formInputMicronutrients.length !== 0 }
+      >
       <div className="container">
       <SimplePaper styles={ paperStyles }>
         <Typography variant="h6">Track some consumption</Typography>

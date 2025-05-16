@@ -1,10 +1,11 @@
-import "./schedule-day-info.styles.jsx"
-import { NutritionTrackerScheduleDayInfo } from "./schedule-day-info.styles.jsx"
+import "./schedule-day-info.styles.js"
+import { NutritionTrackerScheduleDayInfo } from "./schedule-day-info.styles.js"
 import { Typography, Divider } from "@mui/material"
 import { Fragment, useContext } from "react"
-import SimplePaper from "../../../../shared/mui/paper/paper.component"
-import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants"
-import { NutritionTrackerContext } from "../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context"
+import SimplePaper from "../../../../shared/mui/paper/paper.component.js"
+import { COLOR_CODES, COMMON_SPACING } from "../../../../../utils/constants/shared.constants.js"
+import { NutritionTrackerContext } from "../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.context.js"
+import { Micronutrient } from "../../../../../contexts/signed-in/nutrition-tracker/nutrition-tracker.types.js"
 
 const paperStyles = {
   backgroundColor: COLOR_CODES.general["1"],
@@ -38,7 +39,7 @@ const ScheduleDayInfo = () => {
 
             <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">Micronutrients</Typography>
             {
-              scheduledNutritionTrackedDaysView.micronutrients.map((micronutrient) => {
+              scheduledNutritionTrackedDaysView.micronutrients.map((micronutrient: Micronutrient) => {
                 return (
                   <Typography sx={{ display: "flex", justifyContent: "center" }} 
                     variant="body1">{`${micronutrient.name} - ${micronutrient.amount} ${micronutrient.unit}`}</Typography>
