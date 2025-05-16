@@ -1,19 +1,19 @@
 import { Divider } from "@mui/material"
-import AddExerciseForm from "../../../components/signed-out/fitness/add-exercise-form/add-exercise-form.component"
-import ScheduleCalendar from "../../../components/signed-out/fitness/schedule/schedule-calendar/schedule-calendar.component"
-import ScheduleDayInfo from "../../../components/signed-out/fitness/schedule/schedule-day-info/schedule-day-info.component"
-import SearchExerciseForm from "../../../components/signed-out/fitness/search-exercise-form/search-exercise-form.component"
-import SearchExerciseResults from "../../../components/signed-out/fitness/search-exercise-results/search-exercise-results.component"
-import "./fitness.styles.jsx"
+import AddExerciseForm from "../../../components/signed-in/fitness/add-exercise-form/add-exercise-form.component.jsx"
+import ScheduleCalendar from "../../../components/signed-in/fitness/schedule/schedule-calendar/schedule-calendar.component.jsx"
+import ScheduleDayInfo from "../../../components/signed-in/fitness/schedule/schedule-day-info/schedule-day-info.component.jsx"
+import SearchExerciseForm from "../../../components/signed-in/fitness/search-exercise-form/search-exercise-form.component.jsx"
+import SearchExerciseResults from "../../../components/signed-in/fitness/search-exercise-results/search-exercise-results.component.jsx"
+import "./fitness.styles.js"
 import { FitnessContainer, FitnessScheduleContainer,
   FitnessSearchAddContainer
-} from "./fitness.styles.jsx"
+} from "./fitness.styles.js"
 import { useContext, Fragment } from "react"
-import { FitnessContext } from "../../../contexts/signed-out/fitness/fitness.context"
-import UpcomingExercises from "../../../components/signed-out/fitness/upcoming-exercises/upcoming-exercises.component"
+import { FitnessContext } from "../../../contexts/signed-in/fitness/fitness.context.js"
+import UpcomingExercises from "../../../components/signed-in/fitness/upcoming-exercises/upcoming-exercises.component.jsx"
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import AddIcon from '@mui/icons-material/Add';
-import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.jsx"
+import ItemTabs from "../../../components/shared/mui/tabs/tabs.component.js"
 import { Typography } from "@mui/material"
 import { COLOR_CODES } from "../../../utils/constants/shared.constants.js"
 
@@ -91,8 +91,8 @@ const Fitness = () => {
   )
 
   // return (
-  //   <FitnessContainer>
-  //     <FitnessScheduleContainer>
+  //   <div className="fitness-container">
+  //     <div className="fitness-schedule-container">
   //       <ScheduleCalendar></ScheduleCalendar>
 
   //       <br/>
@@ -100,12 +100,7 @@ const Fitness = () => {
   //       <br/>
 
   //       <ScheduleDayInfo></ScheduleDayInfo>
-  //     </FitnessScheduleContainer>
-
-  //     {
-  //       upcomingExercisesView.length !== 0 ?
-  //       <UpcomingExercises></UpcomingExercises> : null
-  //     }
+  //     </div>
 
   //     <br/>
   //     <Divider/>
@@ -117,7 +112,7 @@ const Fitness = () => {
   //     <Divider/>
   //     <br/>
 
-  //     <FitnessSearchAddContainer>
+  //     <div className="fitness-search-add-container">
   //       {
   //         exercisesSearchResults.length !== 0 ?
   //         <Fragment>
@@ -125,8 +120,8 @@ const Fitness = () => {
   //           <AddExerciseForm></AddExerciseForm>
   //         </Fragment> : null
   //       }
-  //     </FitnessSearchAddContainer>
-  //   </FitnessContainer>
+  //     </div>
+  //   </div>
   // )
 }
 

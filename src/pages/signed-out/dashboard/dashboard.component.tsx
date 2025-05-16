@@ -46,9 +46,9 @@ const Dashboard = () => {
   useEffect(() => {
     if (selectedNutritionTrackedDay) {
       
-      dispatch(setScheduledNutritionTrackedDaysView(selectScheduledNutritionTrackedDayHelper(nutritionTrackedDays, selectedNutritionTrackedDay)))
+      dispatch(setScheduledNutritionTrackedDaysView(selectScheduledNutritionTrackedDayHelper(nutritionTrackedDays!, selectedNutritionTrackedDay)!))
     } else {
-      dispatch(setScheduledNutritionTrackedDaysView(null))
+      dispatch(setScheduledNutritionTrackedDaysView(undefined))
     }
   }, [nutritionTrackedDays, selectedNutritionTrackedDay, dispatch])
 
@@ -66,7 +66,7 @@ const Dashboard = () => {
     }
   ]
 
-  if (nutritionTrackedDays.length === 0 && exercises.length === 0 && trackedCaloriesBurned.length === 0) {
+  if (nutritionTrackedDays?.length === 0 && exercises.length === 0 && trackedCaloriesBurned.length === 0) {
     return (
       <DashboardContainer>
         <ItemTabs tabList={ tabList } panelList={ panelList }></ItemTabs>
@@ -74,7 +74,7 @@ const Dashboard = () => {
     )
   }
 
-  if (nutritionTrackedDays.length !== 0) {
+  if (nutritionTrackedDays?.length !== 0) {
     tabList.push({
       value: "nutrition-tracker",
       icon: <RestaurantIcon/>,
