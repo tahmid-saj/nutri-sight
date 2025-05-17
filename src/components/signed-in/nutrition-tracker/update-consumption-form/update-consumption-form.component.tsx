@@ -49,12 +49,13 @@ const UpdateConsumptionForm = () => {
 
     await addDayTracked({
       dateTracked: formFields.dateTracked,
-      calories: formFields.calories,
+      calories: Number(formFields.calories),
       macronutrients: {
-        carbohydrates: formFields.carbohydrates,
-        protein: formFields.protein,
-        fat: formFields.fat,
-      }
+        carbohydrates: Number(formFields.carbohydrates),
+        protein: Number(formFields.protein),
+        fat: Number(formFields.fat),
+      },
+      micronutrients: []
     });
 
     resetFormFields(); 
@@ -67,12 +68,13 @@ const UpdateConsumptionForm = () => {
 
     await updateDayTracked({
       dateTracked: formFields.dateTracked,
-      calories: formFields.calories,
+      calories: Number(formFields.calories),
       macronutrients: {
-        carbohydrates: formFields.carbohydrates,
-        protein: formFields.protein,
-        fat: formFields.fat,
-      }
+        carbohydrates: Number(formFields.carbohydrates),
+        protein: Number(formFields.protein),
+        fat: Number(formFields.fat),
+      },
+      micronutrients: []
     });
 
     resetFormFields(); 

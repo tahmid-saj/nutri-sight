@@ -24,7 +24,6 @@ import { onAuthStateChangedListener,
   createUserDocumentFromAuth
 } from "./utils/firebase/firebase.utils";
 import { selectCurrentUser } from "./store/shared/user/user.selector";
-import { ResponsiveStylingContext } from "./contexts/shared/responsive-styling/responsive-styling.context";
 import { COMMON_SPACING } from "./utils/constants/shared.constants";
 
 function App() {

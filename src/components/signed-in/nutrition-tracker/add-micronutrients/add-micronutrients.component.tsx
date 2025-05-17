@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { ChangeEvent, Fragment, useContext, useState } from "react";
 
 import { ReactComponent as AddMicronutrientsButton } from "../../../../assets/add-micronutrients.svg";
 import { ReactComponent as RemoveMicronutrientsButton } from "../../../../assets/close-button.svg";
@@ -31,34 +31,34 @@ const AddMicronutrients = () => {
     addFormInputMicronutrients();
   };
 
-  const handleChange = (event, micronutrientIndex) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>, micronutrientIndex: number) => {
 
     let micronutrient;
 
     if (event.target.name === "name") {
       micronutrient = { 
         name: event.target.value,
-        amount: formInputMicronutrients[micronutrientIndex].amount,
+        amount: Number(formInputMicronutrients[micronutrientIndex].amount),
         unit: formInputMicronutrients[micronutrientIndex].unit,
        };
     } else if (event.target.name === "amount") {
       micronutrient = { 
         name: formInputMicronutrients[micronutrientIndex].name,
-        amount: event.target.value,
+        amount: Number(event.target.value),
         unit: formInputMicronutrients[micronutrientIndex].unit,
        };
     } else if (event.target.name === "unit") {
       micronutrient = {
         name: formInputMicronutrients[micronutrientIndex].name,
-        amount: formInputMicronutrients[micronutrientIndex].amount,
+        amount: Number(formInputMicronutrients[micronutrientIndex].amount),
         unit: event.target.value,
       }
     }
 
-    updateFormInputMicronutrients(micronutrient, micronutrientIndex);
+    updateFormInputMicronutrients(micronutrient!, micronutrientIndex);
   };
 
-  const handleDelete = (micronutrientIndex) => {
+  const handleDelete = (micronutrientIndex: number) => {
 
     deleteFormInputMicronutrients(micronutrientIndex);
   };
@@ -76,7 +76,7 @@ const AddMicronutrients = () => {
         <div>
           {
             formInputMicronutrients.length !== 0 &&
-            formInputMicronutrients.map((micronutrient, micronutrientIndex) => {
+            formInputMicronutrients.map((micronutrient: any, micronutrientIndex: number) => {
               return (
                 <MicronutrientContainer key={ micronutrientIndex }>
                   <RemoveMicronutrientsButton onClick={ () => handleDelete(micronutrientIndex) }

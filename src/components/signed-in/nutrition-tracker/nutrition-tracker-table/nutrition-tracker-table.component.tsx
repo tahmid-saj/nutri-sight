@@ -34,16 +34,16 @@ const NutritionTrackerTable = () => {
   const gridRef = useRef<AgGridReactType<NutritionTrackedDayData>>(null)
   const { nutritionTrackedDaysView, removeDayTracked, clearDayTrackedFilter } = useContext(NutritionTrackerContext)
 
-  const rowData = nutritionTrackedDaysView.map((trackedDate: NutritionTrackedDay) => {
+  const rowData: NutritionTrackedDayData[] = nutritionTrackedDaysView.map((trackedDate: NutritionTrackedDay) => {
     return {
       DateTracked: trackedDate.dateTracked,
-      Calories: trackedDate.calories,
-      Carbohydrates: trackedDate.macronutrients.carbohydrates,
-      Protein: trackedDate.macronutrients.protein,
-      Fat: trackedDate.macronutrients.fat,
+      Calories: trackedDate.calories.toString(),
+      Carbohydrates: trackedDate.macronutrients.carbohydrates.toString(),
+      Protein: trackedDate.macronutrients.protein.toString(),
+      Fat: trackedDate.macronutrients.fat.toString(),
       Micronutrients: trackedDate.micronutrients.map((micronutrient) => {
         return `${micronutrient.name} (${micronutrient.amount} ${micronutrient.unit})\n`
-      })
+      }).join("")
     }
   })
 

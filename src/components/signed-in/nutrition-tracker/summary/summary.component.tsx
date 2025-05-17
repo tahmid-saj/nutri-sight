@@ -32,10 +32,10 @@ const Summary = () => {
         <Divider/>
         <br/>
 
-        <Typography variant="body1">{`Average daily calories : ${nutritionTrackedDaysSummary.averageDailyCaloriesConsumption.toFixed(2)}`}</Typography>
-        <Typography variant="body1">{`Average daily carbohydrates : ${nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption.toFixed(2)} g`}</Typography>
-        <Typography variant="body1">{`Average daily protein : ${nutritionTrackedDaysSummary.averageDailyProteinConsumption.toFixed(2)} g`}</Typography>
-        <Typography variant="body1">{`Average daily fat : ${nutritionTrackedDaysSummary.averageDailyFatConsumption.toFixed(2)} g`}</Typography>
+        <Typography variant="body1">{`Average daily calories : ${nutritionTrackedDaysSummary?.averageDailyCaloriesConsumption?.toFixed(2)}`}</Typography>
+        <Typography variant="body1">{`Average daily carbohydrates : ${nutritionTrackedDaysSummary?.averageDailyCarbohydratesConsumption?.toFixed(2)} g`}</Typography>
+        <Typography variant="body1">{`Average daily protein : ${nutritionTrackedDaysSummary?.averageDailyProteinConsumption?.toFixed(2)} g`}</Typography>
+        <Typography variant="body1">{`Average daily fat : ${nutritionTrackedDaysSummary?.averageDailyFatConsumption?.toFixed(2)} g`}</Typography>
       </SimplePaper>
     </NutritionTrackerSummary>
   );

@@ -30,7 +30,7 @@ const NutrientPrediction = () => {
   const dispatch = useDispatch()
   const nutritionTrackedDays = useSelector(selectNutritionTrackedDays)
   
-  const handleAddToTracker = (prediction) => {
+  const handleAddToTracker = (prediction: any) => {
     const currentDate = new Date()
     const predictionNutritionInfo = {
       dateTracked: currentDate.toISOString().split('T')[0],
@@ -75,7 +75,7 @@ const NutrientPrediction = () => {
 
     // signed out
     } else {
-      dispatch(addDayTrackedFromPrediction(nutritionTrackedDays, predictionNutritionInfo))
+      dispatch(addDayTrackedFromPrediction(nutritionTrackedDays!, predictionNutritionInfo))
       dispatch(setFormInputMicronutrients([]))
     }
   }
@@ -83,7 +83,7 @@ const NutrientPrediction = () => {
   return (
     <Fragment>
       <Typography>
-        { displayedRecipe.nutrientPredictions.map((prediction, index) => {
+        { displayedRecipe?.nutrientPredictions?.map((prediction, index) => {
           return (
           <NutrientsInfoContainer key={ index }>
             <OutlinedCard styles={ outlinedCardStyles }>
@@ -109,8 +109,8 @@ const NutrientPrediction = () => {
 
               <Typography sx={{ display: "flex", justifyContent: "center" }} variant="h6">Micronutrients</Typography>
               <Fragment key={ index }>
-                <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Sodium - ${prediction.micronutrients.sodiumMG} mg`}</Typography>
-                <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Potassium - ${prediction.micronutrients.potassiumMG} mg`}</Typography>
+                <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Sodium - ${prediction.micronutrients.sodiumG} mg`}</Typography>
+                <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Potassium - ${prediction.micronutrients.potassiumG} mg`}</Typography>
                 <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Cholesterol - ${prediction.micronutrients.cholesterolMg} mg`}</Typography>
                 <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Fiber - ${prediction.micronutrients.fiberG} g`}</Typography>
                 <Typography sx={{ display: "flex", justifyContent: "center" }} variant="body1">{`Sugar - ${prediction.micronutrients.sugarG} g`}</Typography>

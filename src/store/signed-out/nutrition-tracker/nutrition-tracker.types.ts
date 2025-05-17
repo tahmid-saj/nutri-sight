@@ -32,7 +32,7 @@ export type Micronutrient = {
 
 export type FormInputMicronutrient = {
   name: string;
-  amount: string;
+  amount: number;
   unit: string;
 }
 

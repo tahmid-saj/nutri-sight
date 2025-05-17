@@ -42,6 +42,10 @@ const addDayTrackedFromPredictionHelper = (nutritionTrackedDays: NutritionTracke
 const addMicronutrientsToTrackedDayInfoHelper = (formInputMicronutrients: FormInputMicronutrient[], 
   trackedDayInfo: NutritionTrackedDay): NutritionTrackedDay => {
   
+  if (!formInputMicronutrients) return {
+    ...trackedDayInfo
+  }
+
   let micronutrients: Micronutrient[] = []
   formInputMicronutrients.map((micronutrient) => {
     micronutrients.push({
@@ -124,6 +128,8 @@ const getDayTrackedHelper = (nutritionTrackedDays: NutritionTrackedDay[], tracke
 const addFormInputMicronutrientsHelper = (formInputMicronutrients: FormInputMicronutrient[]): FormInputMicronutrient[] => {
   // add default micronutrient to formInputMicronutrients
 
+  if (!formInputMicronutrients) return [ DEFAULT_MICRONUTRIENT ]
+
   return [ ...formInputMicronutrients, DEFAULT_MICRONUTRIENT ];
 };
 
@@ -135,7 +141,7 @@ const updateFormInputMicronutrientsHelper = (formInputMicronutrients: FormInputM
     if (index === micronutrientIndex) {
       return {
         name: String(micronutrient.name),
-        amount: String(micronutrient.amount),
+        amount: Number(micronutrient.amount),
         unit: String(micronutrient.unit),
       };
     }
@@ -149,6 +155,10 @@ const updateFormInputMicronutrientsHelper = (formInputMicronutrients: FormInputM
 const deleteFormInputMicronutrientsHelper = (formInputMicronutrients: FormInputMicronutrient[], 
   micronutrientIndex: number): FormInputMicronutrient[] => {
   // remove micronutrient from formInputMicronutrients on index with micronutrientIndex
+
+  if (!formInputMicronutrients) {
+    return []
+  }
 
   const deleteMicronutrients = [ ...formInputMicronutrients ];
   deleteMicronutrients.splice(micronutrientIndex, 1);

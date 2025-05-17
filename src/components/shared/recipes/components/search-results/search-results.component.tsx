@@ -30,9 +30,9 @@ const SearchResults = () => {
     <SearchResultsContainer>
       <SimplePaper styles={ paperStyles.searchResults }>
         {
-          displayedRecipesOnPage.map((recipe, index) => {
+          displayedRecipesOnPage.map((recipe: any, index: number) => {
             return (
-              <Paper styles={ paperStyles.searchResult }>
+              <Paper key={ index } style={ paperStyles.searchResult }>
                 <SearchResultContainer>
                     <SearchResult key={ recipe.id } recipe={ recipe }></SearchResult>
                 </SearchResultContainer>

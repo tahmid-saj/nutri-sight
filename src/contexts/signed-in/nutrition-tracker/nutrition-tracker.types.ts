@@ -29,6 +29,10 @@ export interface NutritionTrackerContextType {
   filterDayTracked: (filterConditions: FilterConditions) => void;
   removeDayTracked: (trackedDay: string | Date) => void;
   clearDayTrackedFilter: () => void;
+
+  setDefaultNutritionTrackedDaysValues: () => void,
+  setDefaultNutritionTrackedDaysSummaryValues: () => void,
+  updateNutritionTrackedDaysAndSummary: () => void,
 }
 
 export interface NutritionTrackerProviderProps {
@@ -56,7 +60,7 @@ export type Micronutrient = {
 
 export type FormInputMicronutrient = {
   name: string;
-  amount: string;
+  amount: number;
   unit: string;
 }
 
