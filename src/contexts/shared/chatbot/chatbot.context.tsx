@@ -9,7 +9,7 @@ const getChatbotResponseHelper = async (chatbotResponse: string, messageInput: s
   if (validateChatBotMessageInput(messageInput)) return chatbotResponse
 
   const res = await getChatBotResponse(messageInput)
-  return res
+  return res as string
 }
 
 // initial state

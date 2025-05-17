@@ -58,7 +58,7 @@ const SignInForm = () => {
 
       resetFormFields();
       navigate("/nutrient-predictor");
-    } catch (error) {
+    } catch (error: any) {
       errorOnSignIn(error);
     }
   };

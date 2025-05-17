@@ -17,12 +17,12 @@ const NutritionTrackerGraphPie = () => {
   const { nutritionTrackedDaysSummary } = useContext(NutritionTrackerContext);
 
   const trackedMacronutrients = new Map([
-    [GRAPH_FIELDS.carbohydrates, nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption : 0],
-    [GRAPH_FIELDS.protein, nutritionTrackedDaysSummary.averageDailyProteinConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyProteinConsumption : 0],
-    [GRAPH_FIELDS.fat, nutritionTrackedDaysSummary.averageDailyFatConsumption !== 0 ? nutritionTrackedDaysSummary.averageDailyFatConsumption : 0]
+    [GRAPH_FIELDS.carbohydrates, nutritionTrackedDaysSummary?.averageDailyCarbohydratesConsumption !== 0 ? nutritionTrackedDaysSummary?.averageDailyCarbohydratesConsumption : 0],
+    [GRAPH_FIELDS.protein, nutritionTrackedDaysSummary?.averageDailyProteinConsumption !== 0 ? nutritionTrackedDaysSummary?.averageDailyProteinConsumption : 0],
+    [GRAPH_FIELDS.fat, nutritionTrackedDaysSummary?.averageDailyFatConsumption !== 0 ? nutritionTrackedDaysSummary?.averageDailyFatConsumption : 0]
   ])
 
-  const series: ApexAxisChartSeries = [ ...trackedMacronutrients.values() ]
+  const series: number[] = Array.from(trackedMacronutrients.values()).map(value => value ?? 0);
 
   const options: ApexOptions = {
     chart: {

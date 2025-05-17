@@ -25,7 +25,7 @@ const ConsumptionInfo = () => {
     [GRAPH_FIELDS.fat, dayTrackedSearchResult.macronutrients.fat !== 0 ? dayTrackedSearchResult.macronutrients.fat : 0]
   ])
   
-  const series: ApexAxisChartSeries = [ ...trackedMacronutrients.values() ]
+  const series: number[] = Array.from(trackedMacronutrients.values()).map(value => value ?? 0);
 
   const options: ApexOptions = {
     chart: {

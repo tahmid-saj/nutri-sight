@@ -2,7 +2,7 @@ import "./bookmark-icon.styles.scss";
 
 const BookmarkIcon = () => {
   return (
-    <svg class="bookmark-icon">
+    <svg className="bookmark-icon">
       <use href="../../static/img/icons.svg#icon-bookmark"></use>
     </svg>
   )

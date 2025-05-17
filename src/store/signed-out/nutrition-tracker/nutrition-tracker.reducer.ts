@@ -7,7 +7,6 @@ import { addDayTracked, addDayTrackedFromPrediction, addFormInputMicronutrients,
   setFormInputMicronutrients, setNutritionTrackedDaysSummary, setNutritionTrackedDaysView, 
   setScheduledNutritionTrackedDaysView, updateDayTracked, updateFormInputMicronutrients } from "./nutrition-tracker.action";
 import { AnyAction } from "redux";
-import { ActionCreatorWithPayload } from "@reduxjs/toolkit"; // Import from Redux Toolkit for type safety
 
 export type NutritionTrackerState = {
   readonly nutritionTrackedDays: NutritionTrackedDay[] | null | undefined;
@@ -39,7 +38,7 @@ export const nutritionTrackerReducer = (
   state = NUTRITION_TRACKER_INITIAL_STATE, 
   action: AnyAction
 ): NutritionTrackerState => {
-  const isPayloadAction = (a: AnyAction): a is { payload: any } => 'payload' in a;
+  const isPayloadAction = (a: AnyAction): a is AnyAction & { payload: any } => 'payload' in a;
 
   if ((addDayTracked.match(action) || updateDayTracked.match(action) 
     || removeDayTracked.match(action) || addDayTrackedFromPrediction.match(action))

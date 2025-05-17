@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useContext, useState } from "react";
+import React, { ChangeEvent, Component, Fragment, useContext, useState } from "react";
 
 import { ReactComponent as AddMicronutrientsButton } from "../../../../assets/add-micronutrients.svg";
 import { ReactComponent as RemoveMicronutrientsButton } from "../../../../assets/close-button.svg";
@@ -29,40 +29,40 @@ const paperStyles = {
 const AddMicronutrients = () => {
   // const { formInputMicronutrients, addFormInputMicronutrients, updateFormInputMicronutrients, deleteFormInputMicronutrients } = useContext(NutritionTrackerContext);
   const dispatch = useDispatch()
-  const formInputMicronutrients = useSelector(selectFormInputMicronutrients)
+  const formInputMicronutrients = useSelector(selectFormInputMicronutrients)!
 
   const handleAdd = () => {
-    dispatch(addFormInputMicronutrients(formInputMicronutrients))
+    dispatch(addFormInputMicronutrients(formInputMicronutrients!))
   };
 
-  const handleChange = (event, micronutrientIndex) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>, micronutrientIndex: number) => {
 
     let micronutrient;
 
     if (event.target.name === "name") {
       micronutrient = { 
         name: event.target.value,
-        amount: formInputMicronutrients[micronutrientIndex].amount,
-        unit: formInputMicronutrients[micronutrientIndex].unit,
+        amount: Number(formInputMicronutrients[micronutrientIndex]?.amount),
+        unit: formInputMicronutrients[micronutrientIndex]?.unit,
        };
     } else if (event.target.name === "amount") {
       micronutrient = { 
         name: formInputMicronutrients[micronutrientIndex].name,
-        amount: event.target.value,
+        amount: Number(event.target.value),
         unit: formInputMicronutrients[micronutrientIndex].unit,
        };
     } else if (event.target.name === "unit") {
       micronutrient = {
         name: formInputMicronutrients[micronutrientIndex].name,
-        amount: formInputMicronutrients[micronutrientIndex].amount,
+        amount: Number(formInputMicronutrients[micronutrientIndex].amount),
         unit: event.target.value,
       }
     }
 
-    dispatch(updateFormInputMicronutrients(formInputMicronutrients, micronutrient, micronutrientIndex))
+    dispatch(updateFormInputMicronutrients(formInputMicronutrients, micronutrient!, micronutrientIndex))
   };
 
-  const handleDelete = (micronutrientIndex) => {
+  const handleDelete = (micronutrientIndex: number) => {
 
     dispatch(deleteFormInputMicronutrients(formInputMicronutrients, micronutrientIndex))
   };
@@ -89,7 +89,7 @@ const AddMicronutrients = () => {
                     <FormInput label="Micronutrient" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
                               name="name" value={ micronutrient.name }></FormInput>
                     <FormInput label="Amount" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
-                              name="amount" value={ micronutrient.amount }></FormInput>
+                              name="amount" value={ String(micronutrient.amount) }></FormInput>
                     <FormInput label="Unit" type="text" required onChange={ event => handleChange(event, micronutrientIndex) }
                               name="unit" value={ micronutrient.unit }></FormInput>
                   </SimplePaper>

@@ -31,15 +31,15 @@ const NutritionTrackerSummary = () => {
               <NutritionTrackerDashboardSummaryInfoContainer>
                 <Typography variant="h6">{`As of ${currentDate}`}</Typography>
 
-                <Typography variant="body1">{`Average daily calories : ${nutritionTrackedDaysSummary.averageDailyCaloriesConsumption}`}</Typography>
+                <Typography variant="body1">{`Average daily calories : ${nutritionTrackedDaysSummary?.averageDailyCaloriesConsumption}`}</Typography>
 
                 <br/>
                 <Divider/>
                 <br/>
 
-                <Typography variant="body1">{`Average daily carbohydrates : ${nutritionTrackedDaysSummary.averageDailyCarbohydratesConsumption} g`}</Typography>
-                <Typography variant="body1">{`Average daily protein : ${nutritionTrackedDaysSummary.averageDailyProteinConsumption} g`}</Typography>
-                <Typography variant="body1">{`Average daily fat : ${nutritionTrackedDaysSummary.averageDailyFatConsumption} g`}</Typography>
+                <Typography variant="body1">{`Average daily carbohydrates : ${nutritionTrackedDaysSummary?.averageDailyCarbohydratesConsumption} g`}</Typography>
+                <Typography variant="body1">{`Average daily protein : ${nutritionTrackedDaysSummary?.averageDailyProteinConsumption} g`}</Typography>
+                <Typography variant="body1">{`Average daily fat : ${nutritionTrackedDaysSummary?.averageDailyFatConsumption} g`}</Typography>
               </NutritionTrackerDashboardSummaryInfoContainer>
             </SimplePaper>
           </div>

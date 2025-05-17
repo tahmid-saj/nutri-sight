@@ -2,7 +2,7 @@
 
 export const DEFAULT_MICRONUTRIENT = {
   name: "",
-  amount: "",
+  amount: 0,
   unit: "",
 };
 

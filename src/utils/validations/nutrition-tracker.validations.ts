@@ -9,7 +9,7 @@ import { REGEX_PATTERNS } from "./regex.constants";
 export const validatePredictionInfo = (nutritionTrackedDays: NutritionTrackedDay[], 
   predictionNutritionInfo: PredictionNutritionInfo) => {
   // check that trackedDayInfo's day doesn't exist in nutritionTrackedDays
-  const trackedDayExists = nutritionTrackedDays.find((nutritionTrackedDay) => {
+  const trackedDayExists = nutritionTrackedDays?.find((nutritionTrackedDay) => {
     return nutritionTrackedDay.dateTracked === predictionNutritionInfo.dateTracked;
   });
 
@@ -20,14 +20,14 @@ export const validatePredictionInfo = (nutritionTrackedDays: NutritionTrackedDay
   }
 
   // check if macronutrients data types are valid
-  if (!(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo.calories))) || 
-      Number(predictionNutritionInfo.calories) < 0 || 
-      !(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo.macronutrients.carbohydrates))) || 
-      Number(predictionNutritionInfo.macronutrients.carbohydrates) < 0 ||
-      !(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo.macronutrients.protein))) || 
-      Number(predictionNutritionInfo.macronutrients.protein) < 0 ||
-      !(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo.macronutrients.fat))) || 
-      Number(predictionNutritionInfo.macronutrients.fat) < 0) {
+  if (!(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo?.calories))) || 
+      Number(predictionNutritionInfo?.calories) < 0 || 
+      !(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo?.macronutrients?.carbohydrates))) || 
+      Number(predictionNutritionInfo?.macronutrients.carbohydrates) < 0 ||
+      !(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo?.macronutrients?.protein))) || 
+      Number(predictionNutritionInfo?.macronutrients.protein) < 0 ||
+      !(REGEX_PATTERNS.floatNumbers.test(String(predictionNutritionInfo?.macronutrients?.fat))) || 
+      Number(predictionNutritionInfo?.macronutrients?.fat) < 0) {
 
     errorOnInvalidMacronutrientInputs();
 
@@ -36,7 +36,7 @@ export const validatePredictionInfo = (nutritionTrackedDays: NutritionTrackedDay
 
   // check if micronutrients are valid
   // check if micronutrients data types are valid
-  const invalidMicronutrients = predictionNutritionInfo.micronutrients.find((micronutrient: Micronutrient) => {
+  const invalidMicronutrients = predictionNutritionInfo.micronutrients?.find((micronutrient: Micronutrient) => {
     if (String(micronutrient.name).length > 50 || String(micronutrient.unit).length > 5 ) {
 
       errorOnInvalidMicronutrientInput();
@@ -58,7 +58,7 @@ export const validatePredictionInfo = (nutritionTrackedDays: NutritionTrackedDay
   if (invalidMicronutrients) return true;
 
   // check if micronutrients are not empty
-  const emptyMicronutrients = predictionNutritionInfo.micronutrients.find(micronutrient => {
+  const emptyMicronutrients = predictionNutritionInfo.micronutrients?.find(micronutrient => {
     if (String(micronutrient.name) === "" || String(micronutrient.amount) === "" ||
         String(micronutrient.unit) === "") {
 
@@ -78,7 +78,7 @@ export const validatePredictionInfo = (nutritionTrackedDays: NutritionTrackedDay
 export const validateAddDayTracked = (nutritionTrackedDays: NutritionTrackedDay[], 
   trackedDayInfo: NutritionTrackedDay) => {
   // check that trackedDayInfo's day doesn't exist in nutritionTrackedDays
-  const trackedDayExists = nutritionTrackedDays.find((nutritionTrackedDay) => {
+  const trackedDayExists = nutritionTrackedDays?.find((nutritionTrackedDay) => {
     return nutritionTrackedDay.dateTracked === trackedDayInfo.dateTracked;
   });
 
@@ -105,7 +105,7 @@ export const validateAddDayTracked = (nutritionTrackedDays: NutritionTrackedDay[
 
   // check if micronutrients are valid
   // check if micronutrients data types are valid
-  const invalidMicronutrients = trackedDayInfo.micronutrients.find(micronutrient => {
+  const invalidMicronutrients = trackedDayInfo.micronutrients?.find(micronutrient => {
     if (String(micronutrient.name).length > 50 || String(micronutrient.unit).length > 5 ) {
 
       errorOnInvalidMicronutrientInput();
@@ -127,7 +127,7 @@ export const validateAddDayTracked = (nutritionTrackedDays: NutritionTrackedDay[
   if (invalidMicronutrients) return true;
 
   // check if micronutrients are not empty
-  const emptyMicronutrients = trackedDayInfo.micronutrients.find(micronutrient => {
+  const emptyMicronutrients = trackedDayInfo.micronutrients?.find(micronutrient => {
     if (String(micronutrient.name) === "" || String(micronutrient.amount) === "" ||
         String(micronutrient.unit) === "") {
 
@@ -147,7 +147,7 @@ export const validateAddDayTracked = (nutritionTrackedDays: NutritionTrackedDay[
 export const validateUpdateDayTracked = (nutritionTrackedDays: NutritionTrackedDay[], 
   updatedTrackedDayInfo: NutritionTrackedDay) => {
   // check that updatedTrackedDayInfo exists in nutritionTrackedDays
-  const updatedTrackedDayExists = nutritionTrackedDays.find(nutritionTrackedDay => {
+  const updatedTrackedDayExists = nutritionTrackedDays?.find(nutritionTrackedDay => {
     return nutritionTrackedDay.dateTracked === updatedTrackedDayInfo.dateTracked;
   });
 
@@ -175,7 +175,7 @@ export const validateUpdateDayTracked = (nutritionTrackedDays: NutritionTrackedD
 
   // check if micronutrients are valid
   // check if micronutrients data types are valid
-  const invalidMicronutrients = updatedTrackedDayInfo.micronutrients.find(micronutrient => {
+  const invalidMicronutrients = updatedTrackedDayInfo.micronutrients?.find(micronutrient => {
     if (String(micronutrient.name).length > 50 || String(micronutrient.unit).length > 5 ) {
 
       errorOnInvalidMicronutrientInput();
@@ -197,7 +197,7 @@ export const validateUpdateDayTracked = (nutritionTrackedDays: NutritionTrackedD
   if (invalidMicronutrients) return true;
 
   // check if micronutrients are not empty
-  const emptyMicronutrients = updatedTrackedDayInfo.micronutrients.find(micronutrient => {
+  const emptyMicronutrients = updatedTrackedDayInfo.micronutrients?.find(micronutrient => {
     if (String(micronutrient.name) === "" || String(micronutrient.amount) === "" ||
         String(micronutrient.unit) === "") {
 
@@ -216,7 +216,7 @@ export const validateUpdateDayTracked = (nutritionTrackedDays: NutritionTrackedD
 
 export const validateFilterNutritionTrackedDays = (filterConditions: FilterConditions) => {
   // validating if startDate > endDate
-  if (filterConditions.filterStartDate && filterConditions.filterEndDate && filterConditions.filterStartDate > filterConditions.filterEndDate) {
+  if (filterConditions?.filterStartDate && filterConditions?.filterEndDate && filterConditions?.filterStartDate > filterConditions?.filterEndDate) {
     errorOnStartDateBeforeEndDate()
     return true
   }
