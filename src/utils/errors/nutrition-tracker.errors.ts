@@ -5,7 +5,7 @@ export const errorOnTrackedDayExists = () => {
 };
 
 export const errorOnInvalidMacronutrientInputs = () => {
-  alert("Invalid macronutrient inputs");
+  // alert("Invalid macronutrient inputs");
 };
 
 export const errorOnInvalidMicronutrientInput = () => {
@@ -17,7 +17,7 @@ export const errorOnEmptyMicronutrients = () => {
 };
 
 export const errorOnDayNotTracked = () => {
-  alert("Day is not being tracked");
+  // alert("Day is not being tracked");
 };
 
 export const errorOnStartDateBeforeEndDate = () => {
