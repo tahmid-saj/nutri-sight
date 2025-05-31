@@ -63,7 +63,7 @@ const deleteAllNotificationsHelper = async (notifications: NotificationAuthentic
 }
 
 // initial state
-export const NotificationAuthenticatedsContext = createContext<NotificationsContextType>({
+export const NotificationsContext = createContext<NotificationsContextType>({
   notifications: undefined,
   
   createNotification: (notification: NotificationAuthenticated) => {},
@@ -99,8 +99,8 @@ export const NotificationsProvider: FC<NotificationsProviderProps> = ({ children
   }
 
   return (
-    <NotificationAuthenticatedsContext.Provider value={{ notifications, createNotification, deleteNotification, deleteAllNotifications }}>
+    <NotificationsContext.Provider value={{ notifications, createNotification, deleteNotification, deleteAllNotifications }}>
       { children }
-    </NotificationAuthenticatedsContext.Provider>
+    </NotificationsContext.Provider>
   )
 }
