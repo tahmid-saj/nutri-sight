@@ -10,6 +10,7 @@ export const NAV_LINKS = {
   headers: {
     home: "Home",
     chatbot: "Chatbot",
+    notifications: "Notifications",
     dashboard: "Dashboard",
     nutrientPredictor: "Nutrient Predictor",
     nutritionTracker: "Nutrition Tracker",
@@ -26,6 +27,7 @@ export const NAV_LINKS = {
   paths: {
     signedOut: {
       home: "/",
+      notifications: "/notifications",
       chatbot: "/dashboard",
       dashboard: "/dashboard",
       nutrientPredictor: "/nutrient-predictor",
@@ -37,6 +39,7 @@ export const NAV_LINKS = {
     },
     signedIn: {
       home: "/",
+      notifications: "/notifications-signed-in",
       chatbot: "/dashboard-signed-in",
       dashboard: "/dashboard-signed-in",
       nutrientPredictor: "/nutrient-predictor",
@@ -52,6 +55,10 @@ export const NAV_LINKS = {
       {
         header: "Home",
         path: "/",
+      },
+      {
+        header: "Notifications",
+        path: "/notifications",
       },
       {
         header: "Chatbot",
@@ -112,6 +119,10 @@ export const NAV_LINKS = {
       {
         header: "Home",
         path: "/",
+      },
+      {
+        header: "Notifications",
+        path: "/notifications-signed-in",
       },
       {
         header: "Chatbot",
