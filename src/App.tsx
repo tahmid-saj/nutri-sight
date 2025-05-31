@@ -52,6 +52,7 @@ function App() {
         {
           currentUser ? (
             <Fragment>
+              <Route path="notifications-signed-in" element={ <NotificationsRouteSignedIn/> }/>
               <Route path="dashboard-signed-in" element={ <DashboardRouteSignedIn/> }/>
               <Route path="nutrition-tracker-signed-in" element={ <NutritionTrackerRouteSignedIn/> }/>
               <Route path="fitness-signed-in" element={ <FitnessRouteSignedIn/> }/>
@@ -59,6 +60,7 @@ function App() {
             </Fragment>
           ) : (
             <Fragment>
+              <Route path="notifications" element={ <NotificationsRoute/> }/>
               <Route path="dashboard" element={ <DashboardRoute/> }/>
               <Route path="nutrition-tracker" element={ <NutritionTrackerRoute/> }/>
               <Route path="fitness" element={ <FitnessRoute/> }/>
