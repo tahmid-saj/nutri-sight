@@ -98,8 +98,8 @@ export const sendSNSUnsubscriptionUnauth = async (email: string | null | undefin
   }
 }
 
-// saving alert setting
-export const saveAlertSetting = async (notification: NotificationAuthenticated, 
+// saving notification setting
+export const saveNotificationSetting = async (notification: NotificationAuthenticated, 
   userId: string | null | undefined, email: string | null | undefined): Promise<void> => {
   
   try {
@@ -121,7 +121,7 @@ export const saveAlertSetting = async (notification: NotificationAuthenticated,
   }
 }
 
-export const saveAlertSettingUnauth = async (notification: NotificationUnauthenticated): Promise<void> => {
+export const saveNotificationSettingUnauth = async (notification: NotificationUnauthenticated): Promise<void> => {
   try {
     const response = await fetch(`${process.env.REACT_APP_API_URL_ALERTS}${process.env.REACT_APP_API_URL_ALERTS_SAVE_ALERT_SETTING_UNAUTH}`, {
       method: "POST",
@@ -162,7 +162,7 @@ export const deleteNotificationSetting = async (notification: NotificationAuthen
   }
 }
 
-export const deleteAlertSettingUnauth = async (notification: NotificationUnauthenticated): Promise<void> => {
+export const deleteNotificationSettingUnauth = async (notification: NotificationUnauthenticated): Promise<void> => {
   
   try {
     const response = await fetch(`${process.env.REACT_APP_API_URL_ALERTS}${process.env.REACT_APP_API_URL_ALERTS_DELETE_ALERT_SETTING_UNAUTH}`, {
