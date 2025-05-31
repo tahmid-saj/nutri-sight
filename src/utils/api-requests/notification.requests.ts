@@ -1,5 +1,7 @@
 // notification api requests
 
+import { NotificationAuthenticated } from "../../contexts/signed-in/notifications/notifications.types"
+import { NotificationUnauthenticated } from "../../contexts/signed-out/notifications/notifications.types"
 import { errorOnDeleteNotificationSetting, errorOnSaveNotificationSetting, 
   errorOnSendSESEmailVerification, errorOnSendSNSSubscriptionVerification, errorOnSNSUnsubscription } from "../errors/notifications.errors"
 

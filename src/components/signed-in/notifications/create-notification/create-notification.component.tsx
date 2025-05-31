@@ -59,7 +59,7 @@ const CreateAlert = () => {
     <CreateNotificationContainer>
       <SimplePaper styles={paperStyles}>
         <Typography variant="h6" sx={{ paddingBottom: "6%" }}>
-          Create an alert
+          Create a notification
         </Typography>
 
         <form onSubmit={handleSubmit}>
