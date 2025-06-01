@@ -167,7 +167,7 @@ export default function HiddenDrawer() {
           {
             currentUser ?
             <Typography sx={{ marginLeft: "15px", color: COLOR_CODES.general["5"] }} variant="caption">
-              { `Hello ${currentUser.displayName.split(" ")[0]}` }
+              { `Hello ${currentUser?.displayName?.split(" ")[0]}` }
             </Typography> : null
           }
         </div>
