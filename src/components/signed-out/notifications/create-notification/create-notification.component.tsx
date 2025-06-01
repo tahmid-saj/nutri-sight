@@ -2,7 +2,6 @@ import { Typography } from "@mui/material"
 import { CreateNotificationContainer } from "./create-notification.styles.tsx"
 import React, { useContext, useState } from "react"
 
-import { DropButton } from "../../../shared/drop-button/drop-button.styles.tsx"
 import SimplePaper from "../../../shared/mui/paper/paper.component.tsx";
 import FormInput from "../../../shared/form-input/form-input.component.tsx";
 import Button from "../../../shared/button/button.component.tsx";
@@ -34,7 +33,7 @@ const CreateAlert = () => {
     setFormFields(defaultFormFields)
   }
 
-  const deleteAlerts = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const deleteNotifications = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     deleteAllNotifications()
   }
@@ -94,7 +93,7 @@ const CreateAlert = () => {
                   <Button type="button" onClick={resetFormFields}>
                     Clear
                   </Button>
-                  <Button type="button" onClick={deleteAlerts}>
+                  <Button type="button" onClick={deleteNotifications}>
                     Delete All
                   </Button>
                 </div>
