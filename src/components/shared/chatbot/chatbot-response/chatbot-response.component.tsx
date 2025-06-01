@@ -5,6 +5,7 @@ import { ChatBotContext } from "../../../../contexts/shared/chatbot/chatbot.cont
 import { Typography } from "@mui/material"
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants.ts"
 import OutlinedCard from "../../mui/card/card.component.tsx"
+import ReactMarkdown from "react-markdown"
 
 const cardStyles = {
   backgroundColor: COLOR_CODES.general["0"],
@@ -19,7 +20,9 @@ const ChatBotResponse = () => {
       <ChatBotResponseContainer>
         <Typography variant="h6">Chatbot:</Typography>
         <br></br>
-        <Typography paragraph>{ `${chatbotResponse}` }</Typography>
+        <div className="prose prose-invert max-w-none whitespace-pre-wrap">
+          <ReactMarkdown>{chatbotResponse}</ReactMarkdown>
+        </div>
       </ChatBotResponseContainer>
     </OutlinedCard>
   )
