@@ -40,6 +40,18 @@ const Home = () => {
       imageUrl: "https://samsungfood.com/wp-content/uploads/2023/08/analyize_nutrition-1024x923.jpg",
       path: currentUser ? NAV_LINKS.paths.signedIn.nutrientPredictor : NAV_LINKS.paths.signedOut.nutrientPredictor
     },
+    notifications: {
+      header: "Notifications",
+      description: "Upon signing up and tracking nutrition and fitness, receive notifications of any planned activities on your calendar",
+      imageUrl: "https://media.istockphoto.com/id/1395865981/vector/3d-reminder-in-calendar-on-purple-background-notifications-page-with-floating-elements-alert.jpg?s=612x612&w=0&k=20&c=JTK6NaSe9bYp9Pq2sfBoDYYCOhGEZlQNcQQJgy25FWI=",
+      path: currentUser ? NAV_LINKS.paths.signedIn.dashboard : NAV_LINKS.paths.signedOut.auth
+    },
+    recipes: {
+      header: "Recipes",
+      description: "Search over 1,000,000 recipes and get their nutrition information and detailed instructions on making them",
+      imageUrl: "https://hips.hearstapps.com/hmg-prod/images/led-tyson-recipe-1549405466.jpg?crop=0.888888888888889xw:1xh;center,top&resize=1200:*",
+      path: currentUser ? NAV_LINKS.paths.signedIn.recipes : NAV_LINKS.paths.signedOut.recipes
+    },
     nutritionTracker: {
       header: "Nutrition Tracker",
       description: "Track your everyday consumption and better manage a healthy diet",
@@ -57,18 +69,6 @@ const Home = () => {
       description: "Determine the calories burned through your exercises and activities, and add them to the tracker",
       imageUrl: "https://img.freepik.com/free-vector/people-running-activity_24908-55933.jpg",
       path: currentUser ? NAV_LINKS.paths.signedIn.caloriesBurned : NAV_LINKS.paths.signedOut.caloriesBurned
-    },
-    recipes: {
-      header: "Recipes",
-      description: "Search over 1,000,000 recipes and get their nutrition information and detailed instructions on making them",
-      imageUrl: "https://hips.hearstapps.com/hmg-prod/images/led-tyson-recipe-1549405466.jpg?crop=0.888888888888889xw:1xh;center,top&resize=1200:*",
-      path: currentUser ? NAV_LINKS.paths.signedIn.recipes : NAV_LINKS.paths.signedOut.recipes
-    },
-    notifications: {
-      header: "Notifications",
-      description: "Upon signing up and tracking nutrition and fitness, receive notifications of any planned activities on your calendar",
-      imageUrl: "https://media.istockphoto.com/id/1395865981/vector/3d-reminder-in-calendar-on-purple-background-notifications-page-with-floating-elements-alert.jpg?s=612x612&w=0&k=20&c=JTK6NaSe9bYp9Pq2sfBoDYYCOhGEZlQNcQQJgy25FWI=",
-      path: currentUser ? NAV_LINKS.paths.signedIn.dashboard : NAV_LINKS.paths.signedOut.auth
     },
     summary: {
       header: "All in one place",
@@ -98,6 +98,11 @@ const Home = () => {
           </div>
 
           <div className="col-sm-12 col-md-6 col-lg-4">
+            <MediaCard styles={ styles } header={ homeCardContent.notifications.header } imageUrl={ homeCardContent.notifications.imageUrl } 
+            imageTitle={ homeCardContent.notifications.header } path={ homeCardContent.notifications.path } content={ homeCardContent.notifications.description }></MediaCard>
+          </div>
+
+          <div className="col-sm-12 col-md-6 col-lg-4">
             <MediaCard styles={ styles } header={ homeCardContent.nutritionTracker.header } imageUrl={ homeCardContent.nutritionTracker.imageUrl } 
             imageTitle={ homeCardContent.nutritionTracker.header } path={ homeCardContent.nutritionTracker.path } content={ homeCardContent.nutritionTracker.description }></MediaCard>
           </div>
@@ -115,11 +120,6 @@ const Home = () => {
           <div className="col-sm-12 col-md-6 col-lg-4">
             <MediaCard styles={ styles } header={ homeCardContent.recipes.header } imageUrl={ homeCardContent.recipes.imageUrl } 
             imageTitle={ homeCardContent.recipes.header } path={ homeCardContent.recipes.path } content={ homeCardContent.recipes.description }></MediaCard>
-          </div>
-
-          <div className="col-sm-12 col-md-6 col-lg-4">
-            <MediaCard styles={ styles } header={ homeCardContent.notifications.header } imageUrl={ homeCardContent.notifications.imageUrl } 
-            imageTitle={ homeCardContent.notifications.header } path={ homeCardContent.notifications.path } content={ homeCardContent.notifications.description }></MediaCard>
           </div>
 
           <div className="col-sm-12 col-md-6 col-lg-4">
