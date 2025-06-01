@@ -1,11 +1,9 @@
+import { ReactNode } from "react";
 
 // chatbot types
 
-import { ReactNode } from "react";
-
 export interface ChatbotContextType {
   chatbotResponse: string;
-
   getChatbotResponse: (messageInput: string) => void;
 }
 
