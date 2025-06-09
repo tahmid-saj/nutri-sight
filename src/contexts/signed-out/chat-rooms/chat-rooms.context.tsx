@@ -27,16 +27,26 @@ const updateChatroomMessagesHelper = (chatroomMessages: ChatroomMessages[], chat
 };
 
 
-const createChatroomHelper = (chatrooms: Chatroom[], chatroomName: string, chatroomId: string) => {
+const createChatroomHelper = (chatrooms: Chatroom[], chatroomMessages: ChatroomMessages[],
+    chatroomName: string, chatroomId: string): [Chatroom[], ChatroomMessages[]] => {
   return [
-    ...chatrooms,
-    {
-      chatroomId,
-      chatroomName,
-      countMembers: 0,
-      members: []
-    }
-  ];
+    [
+      ...chatrooms,
+      {
+        chatroomId,
+        chatroomName,
+        countMembers: 0,
+        members: []
+      }
+    ], [
+      ...chatroomMessages,
+      {
+        chatroomId,
+        chatroomName,
+        messages: []
+      }
+    ]
+  ]
 };
 
 
@@ -125,8 +135,9 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
 
     console.log(chatrooms)
 
-    const newChatrooms = createChatroomHelper(chatrooms, chatroomName, chatroomId)
+    const [newChatrooms, newChatroomMessages] = createChatroomHelper(chatrooms, chatroomMessages, chatroomName, chatroomId)
     setChatrooms(newChatrooms)
+    setChatroomMessages(newChatroomMessages)
   }
 
   const joinChatroom = (userName: string, chatroomId: string, chatroomName: string) => {

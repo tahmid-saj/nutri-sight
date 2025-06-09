@@ -1,0 +1,39 @@
+.send-message-container {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background-color: #1A1C20;
+  z-index: 3;
+}
+
+.send-message-form {
+  position: relative;
+  margin: 0.3% 2% 1% 2%;
+}
+
+.send-message-input {
+  margin: 0px;
+  padding: 8px 50px 8px 8px;
+  width: 100%;
+  outline: none;
+  height: 80px;
+  border-radius: 5px;
+  background-color: #444444;
+  color: white;
+}
+
+.send-message-btn {
+  position: absolute;
+  top: 0;
+  border-radius: 5px;
+  right: 0px;
+  z-index: 2;
+  border: none;
+  top: 0px;
+  height: 80px;
+  width: 50px;
+  cursor: pointer;
+  color: white;
+  background-color: #C08B5C;
+  transform: translateX(2px);
+}
