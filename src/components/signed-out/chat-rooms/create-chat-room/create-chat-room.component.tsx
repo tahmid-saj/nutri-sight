@@ -22,8 +22,9 @@ const paperStyles = {
   backgroundColor: COLOR_CODES.general["6"]
 }
 
-const CreateAlert = () => {
+const CreateChatroom = () => {
   const [formFields, setFormFields] = useState(initialFormFields)
+  const [generatedChatroomId, setGeneratedChatroomId] = useState<string | undefined>(undefined)
   const { createChatroom } = useChatroomsContext()
   
   const resetFormFields = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,7 +40,8 @@ const CreateAlert = () => {
     }
 
     // create chatroom
-    createChatroom(formFields.userName, formFields.chatroomName)
+    const chatroomId = createChatroom(formFields.userName, formFields.chatroomName)
+    setGeneratedChatroomId(chatroomId)
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -53,6 +55,10 @@ const CreateAlert = () => {
       <SimplePaper styles={paperStyles}>
         <Typography variant="h6" sx={{ paddingBottom: "6%" }}>
           Create a chatroom
+        </Typography>
+
+        <Typography hidden={ generatedChatroomId === undefined }>
+          Chatroom ID: { generatedChatroomId }
         </Typography>
 
         <form onSubmit={handleSubmit}>
@@ -91,4 +97,4 @@ const CreateAlert = () => {
   );
 }
 
-export default CreateAlert
+export default CreateChatroom

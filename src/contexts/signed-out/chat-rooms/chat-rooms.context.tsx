@@ -7,6 +7,8 @@ import { CHATROOMS_WS_ACTIONS } from "../../../utils/constants/chat-rooms.consta
 const updateChatroomMessagesHelper = (chatroomMessages: ChatroomMessages[], chatroomMessage: any) => {
   const chatroomId = chatroomMessage.chatroomId;
 
+  console.log(chatroomMessages)
+
   return chatroomMessages.map((chatroom) => {
     if (chatroom.chatroomId === chatroomId) {
       return {
@@ -64,8 +66,13 @@ const joinChatroomHelper = (chatrooms: Chatroom[], userInfo: ChatroomUserInfo, c
 };
 
 
-const leaveChatroomHelper = (chatrooms: Chatroom[], chatroomId: string) => {
-  return chatrooms.filter((chatroom) => chatroom.chatroomId !== chatroomId)
+const leaveChatroomHelper = (chatrooms: Chatroom[], chatroomMessages: ChatroomMessages[], 
+    chatroomId: string): [Chatroom[], ChatroomMessages[]] => {
+  const resChatrooms = chatrooms.filter((chatroom) => chatroom.chatroomId !== chatroomId)
+
+  const resChatroomMessages = chatroomMessages.filter((chatroom) => chatroom.chatroomId !== chatroomId)
+
+  return [resChatrooms, resChatroomMessages]
 }
 
 const sendChatroomMessageHelper = (chatroomMessages: ChatroomMessages[], chatroomId: string, messageInfo: ChatroomMessage) => {
@@ -102,8 +109,13 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
         const data = JSON.parse(event.data)
 
         // update chatroomMessages
-        const newChatroomMessages = updateChatroomMessagesHelper(chatroomMessages, data)
-        setChatroomMessages(newChatroomMessages)
+        setChatroomMessages(prev => updateChatroomMessagesHelper(prev, {
+          userId: data.userId,
+          userName: data.name,
+          message: data.message,
+          chatroomId: data.chatRoomId,
+          time: Date.now().toString()
+        }))
       } catch (err) {
         console.log("Failed to receive location update: ", err)
       }
@@ -122,44 +134,97 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
     }
   }, [])
 
-  const createChatroom = (userName: string, chatroomName: string) => {
+  const createChatroom = (userName: string, chatroomName: string): string | undefined => {
     const chatroomId = uuid()
-    
+
     // create user info if it doesn't already exist
+    let currentUserInfo = userInfo
     if (!userInfo) {
-      setUserInfo({
+      currentUserInfo = {
         userId: uuid(),
         name: userName
-      })
+      }
     }
-
+    
+    setUserInfo(currentUserInfo)
     console.log(chatrooms)
 
     const [newChatrooms, newChatroomMessages] = createChatroomHelper(chatrooms, chatroomMessages, chatroomName, chatroomId)
     setChatrooms(newChatrooms)
     setChatroomMessages(newChatroomMessages)
-  }
 
-  const joinChatroom = (userName: string, chatroomId: string, chatroomName: string) => {
-    if (ws.current?.readyState === WebSocket.OPEN) {
-      // create user info if it doesn't already exist
-      if (!userInfo) {
-        setUserInfo({
-          userId: uuid(),
-          name: userName
-        })
-      }
-  
-      const updatedChatrooms = joinChatroomHelper(chatrooms, userInfo!, chatroomId)
+    console.log(newChatrooms)
+
+    // join chatroom
+    if (ws.current?.readyState === WebSocket.OPEN) {  
+      const updatedChatrooms = joinChatroomHelper(newChatrooms, currentUserInfo!, chatroomId)
       setChatrooms(updatedChatrooms)
 
       ws.current.send(JSON.stringify({
         action: CHATROOMS_WS_ACTIONS.subscribe,
-        userId: userInfo?.userId,
-        name: userInfo?.name,
+        userId: currentUserInfo?.userId,
+        name: currentUserInfo?.name,
         chatroomId,
         chatroomName
       }))
+
+      console.log(chatroomId, chatroomName)
+      return chatroomId
+    } else {
+      console.log("Websocket is not open");
+    }
+
+    return undefined
+  }
+
+  // const joinChatroom = (userInfo: ChatroomUserInfo, chatroomId: string, chatroomName: string, chatrooms: Chatroom[]) => {
+  //   if (ws.current?.readyState === WebSocket.OPEN) {  
+  //     const updatedChatrooms = joinChatroomHelper(chatrooms, userInfo!, chatroomId)
+  //     setChatrooms(updatedChatrooms)
+
+  //     ws.current.send(JSON.stringify({
+  //       action: CHATROOMS_WS_ACTIONS.subscribe,
+  //       userId: userInfo.userId,
+  //       name: userInfo.name,
+  //       chatroomId,
+  //       chatroomName
+  //     }))
+
+  //     console.log(chatroomId, chatroomName)
+  //   } else {
+  //     console.log("Websocket is not open");
+  //   }
+  // }
+
+  const joinExistingChatroom = (userName: string, chatroomId: string, chatroomName: string) => {
+    if (ws.current?.readyState === WebSocket.OPEN) {  
+      // create user info if it doesn't already exist
+      let currentUserInfo = userInfo
+      if (!userInfo) {
+        currentUserInfo = {
+          userId: uuid(),
+          name: userName
+        }
+      }
+      
+      setUserInfo(currentUserInfo)
+
+      const [newChatrooms, newChatroomMessages] = createChatroomHelper(chatrooms, chatroomMessages, chatroomName, chatroomId)
+      setChatrooms(newChatrooms)
+      setChatroomMessages(newChatroomMessages)
+
+      const updatedChatrooms = joinChatroomHelper(newChatrooms, currentUserInfo!, chatroomId)
+      setChatrooms(updatedChatrooms)
+
+      ws.current.send(JSON.stringify({
+        action: CHATROOMS_WS_ACTIONS.subscribe,
+        userId: currentUserInfo?.userId,
+        name: currentUserInfo?.name,
+        chatroomId,
+        chatroomName
+      }))
+
+      console.log(chatroomId, chatroomName)
     } else {
       console.log("Websocket is not open");
     }
@@ -167,8 +232,9 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
 
   const leaveChatroom = (chatroomId: string, chatroomName: string) => {
     if (ws.current?.readyState === WebSocket.OPEN) {
-      const updatedChatrooms = leaveChatroomHelper(chatrooms, chatroomId)
+      const [updatedChatrooms, updatedChatroomMessages] = leaveChatroomHelper(chatrooms, chatroomMessages, chatroomId)
       setChatrooms(updatedChatrooms)
+      setChatroomMessages(updatedChatroomMessages)
 
       ws.current.send(JSON.stringify({
         action: CHATROOMS_WS_ACTIONS.unsubscribe,
@@ -193,8 +259,8 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
         time: Date.now().toString()
       }
       
-      const updatedChatroomMessages = sendChatroomMessageHelper(chatroomMessages, chatroomId, messageInfo)
-      setChatroomMessages(updatedChatroomMessages)
+      // const updatedChatroomMessages = sendChatroomMessageHelper(chatroomMessages, chatroomId, messageInfo)
+      // setChatroomMessages(updatedChatroomMessages)
 
       ws.current.send(JSON.stringify({
         action: CHATROOMS_WS_ACTIONS.sendMessage,
@@ -211,7 +277,7 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
 
   return (
     <ChatroomsContext.Provider value={{ userInfo, chatrooms, chatroomMessages,
-      createChatroom, joinChatroom, leaveChatroom, sendChatroomMessage }}>
+      createChatroom, joinExistingChatroom, leaveChatroom, sendChatroomMessage }}>
       { children }
     </ChatroomsContext.Provider>
   )

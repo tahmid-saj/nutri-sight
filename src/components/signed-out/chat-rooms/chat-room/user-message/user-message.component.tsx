@@ -14,6 +14,7 @@ const UserMessage = ({ userMessage }: { userMessage: ChatroomMessage }) => {
   return (
     <Fragment>
       <SimplePaper styles={ paperStyles }>
+        <Typography sx={{ color: COLOR_CODES.general["6"] }}>{ userMessage.userName }</Typography>
         <Typography sx={{ color: COLOR_CODES.general["0"] }}>{ userMessage.message }</Typography>
       </SimplePaper>
     </Fragment>

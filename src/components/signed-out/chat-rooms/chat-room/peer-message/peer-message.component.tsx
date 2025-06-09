@@ -19,6 +19,7 @@ const SigmaMessage = ({ peerMessage }: { peerMessage: ChatroomMessage }) => {
         <FunctionsIcon sx={{ backgroundColor: COLOR_CODES.general["6"], borderRadius: "2rem",
           margin: "0.25% 1% 15px 0%" }}/>
         <MessageContainer>
+          <Typography sx={{ color: COLOR_CODES.general["6"] }}>{ peerMessage.userName }</Typography>
           <Typography sx={{ color: COLOR_CODES.general["4"] }}>{ peerMessage.message }</Typography>
         </MessageContainer>
       </SimplePaper>
