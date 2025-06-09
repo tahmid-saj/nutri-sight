@@ -5,43 +5,54 @@ import { CHATROOMS_WS_ACTIONS } from "../../../utils/constants/chat-rooms.consta
 
 // helpers
 const updateChatroomMessagesHelper = (chatroomMessages: ChatroomMessages[], chatroomMessage: any) => {
-  const chatroomId = chatroomMessage.chatroomId
+  const chatroomId = chatroomMessage.chatroomId;
 
   return chatroomMessages.map((chatroom) => {
     if (chatroom.chatroomId === chatroomId) {
-      chatroom.messages.push({
-        userId: chatroomMessage.userId,
-        userName: chatroomMessage.userName,
-        message: chatroomMessage.message,
-        time: Date.now().toString()
-      })
+      return {
+        ...chatroom,
+        messages: [
+          ...chatroom.messages,
+          {
+            userId: chatroomMessage.userId,
+            userName: chatroomMessage.userName,
+            message: chatroomMessage.message,
+            time: Date.now().toString()
+          }
+        ]
+      };
     }
+    return chatroom;
+  });
+};
 
-    return chatroom
-  })
-}
 
 const createChatroomHelper = (chatrooms: Chatroom[], chatroomName: string, chatroomId: string) => {
-  chatrooms.push({
-    chatroomId,
-    chatroomName,
-    countMembers: 0,
-    members: []
-  })
+  return [
+    ...chatrooms,
+    {
+      chatroomId,
+      chatroomName,
+      countMembers: 0,
+      members: []
+    }
+  ];
+};
 
-  return chatrooms
-}
 
 const joinChatroomHelper = (chatrooms: Chatroom[], userInfo: ChatroomUserInfo, chatroomId: string) => {
   return chatrooms.map((chatroom) => {
     if (chatroom.chatroomId === chatroomId) {
-      chatroom.countMembers += 1
-      chatroom.members.push(userInfo.name)
+      return {
+        ...chatroom,
+        countMembers: chatroom.countMembers + 1,
+        members: [...chatroom.members, userInfo.name]
+      };
     }
+    return chatroom;
+  });
+};
 
-    return chatroom
-  })
-}
 
 const leaveChatroomHelper = (chatrooms: Chatroom[], chatroomId: string) => {
   return chatrooms.filter((chatroom) => chatroom.chatroomId !== chatroomId)
@@ -50,12 +61,15 @@ const leaveChatroomHelper = (chatrooms: Chatroom[], chatroomId: string) => {
 const sendChatroomMessageHelper = (chatroomMessages: ChatroomMessages[], chatroomId: string, messageInfo: ChatroomMessage) => {
   return chatroomMessages.map((chatroom) => {
     if (chatroom.chatroomId === chatroomId) {
-      chatroom.messages.push(messageInfo)
+      return {
+        ...chatroom,
+        messages: [...chatroom.messages, messageInfo]
+      };
     }
+    return chatroom;
+  });
+};
 
-    return chatroom
-  })
-}
 
 export const ChatroomsContext = createContext<ChatroomsContextType | undefined>(undefined)
 
@@ -108,6 +122,8 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
         name: userName
       })
     }
+
+    console.log(chatrooms)
 
     const newChatrooms = createChatroomHelper(chatrooms, chatroomName, chatroomId)
     setChatrooms(newChatrooms)
