@@ -4,6 +4,7 @@ import HomeRoute from "./routes/shared/home/home.component";
 import Navigation from "./routes/shared/navigation/navigation.component";
 import AuthenticationRoute from "./routes/signed-out/authentication/authentication.component";
 
+import ChatroomsRoute from "./routes/signed-out/chat-rooms/nearby-runners.component"
 import NearbyRunnersRoute from "./routes/signed-out/nearby-runners/nearby-runners.component"
 import NotificationsRoute from "./routes/signed-out/notifications/notifications.component"
 import DashboardRoute from "./routes/signed-out/dashboard/dashboard.component";
@@ -65,6 +66,7 @@ function App() {
             </Fragment>
           ) : (
             <Fragment>
+              <Route path="chat-rooms" element={ <ChatroomsRoute/> }/>
               <Route path="nearby-runners" element={ <NearbyRunnersRoute/> }/>
               <Route path="notifications" element={ <NotificationsRoute/> }/>
               <Route path="dashboard" element={ <DashboardRoute/> }/>

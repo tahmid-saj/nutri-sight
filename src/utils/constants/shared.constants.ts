@@ -10,6 +10,7 @@ export const NAV_LINKS = {
   headers: {
     home: "Home",
     chatbot: "Chatbot",
+    chatrooms: "Chat Rooms",
     nearbyRunners: "Nearby Runners",
     notifications: "Notifications",
     dashboard: "Dashboard",
@@ -29,6 +30,7 @@ export const NAV_LINKS = {
     signedOut: {
       home: "/",
       notifications: "/notifications",
+      chatrooms: "/chatrooms",
       nearbyRunners: "/nearby-runners",
       chatbot: "/dashboard",
       dashboard: "/dashboard",
@@ -42,6 +44,7 @@ export const NAV_LINKS = {
     signedIn: {
       home: "/",
       notifications: "/notifications-signed-in",
+      chatrooms: "/chatrooms-signed-in",
       nearbyRunners: "/nearby-runners-signed-in",
       chatbot: "/dashboard-signed-in",
       dashboard: "/dashboard-signed-in",
@@ -58,6 +61,10 @@ export const NAV_LINKS = {
       {
         header: "Home",
         path: "/",
+      },
+      {
+        header: "Chat Rooms",
+        path: "/chat-rooms",
       },
       {
         header: "Notifications",
@@ -126,6 +133,10 @@ export const NAV_LINKS = {
       {
         header: "Home",
         path: "/",
+      },
+      {
+        header: "Chat Rooms",
+        path: "/chat-rooms-signed-in",
       },
       {
         header: "Notifications",
