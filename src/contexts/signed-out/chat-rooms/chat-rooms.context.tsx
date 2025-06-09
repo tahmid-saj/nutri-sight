@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
-import { Chatroom, ChatroomMessages, ChatroomsContextType, ChatroomsProviderProps, ChatroomUserInfo } from "./chat-rooms.types";
+import { Chatroom, ChatroomMessage, ChatroomMessages, ChatroomsContextType, ChatroomsProviderProps, ChatroomUserInfo } from "./chat-rooms.types";
+import { v4 as uuid } from "uuid";
+import { CHATROOMS_WS_ACTIONS } from "../../../utils/constants/chat-rooms.constants"
 
 // helpers
 const updateChatroomMessagesHelper = (chatroomMessages: ChatroomMessages[], chatroomMessage: any) => {
@@ -9,9 +11,46 @@ const updateChatroomMessagesHelper = (chatroomMessages: ChatroomMessages[], chat
     if (chatroom.chatroomId === chatroomId) {
       chatroom.messages.push({
         userId: chatroomMessage.userId,
+        userName: chatroomMessage.userName,
         message: chatroomMessage.message,
         time: Date.now().toString()
       })
+    }
+
+    return chatroom
+  })
+}
+
+const createChatroomHelper = (chatrooms: Chatroom[], chatroomName: string, chatroomId: string) => {
+  chatrooms.push({
+    chatroomId,
+    chatroomName,
+    countMembers: 0,
+    members: []
+  })
+
+  return chatrooms
+}
+
+const joinChatroomHelper = (chatrooms: Chatroom[], userInfo: ChatroomUserInfo, chatroomId: string) => {
+  return chatrooms.map((chatroom) => {
+    if (chatroom.chatroomId === chatroomId) {
+      chatroom.countMembers += 1
+      chatroom.members.push(userInfo.name)
+    }
+
+    return chatroom
+  })
+}
+
+const leaveChatroomHelper = (chatrooms: Chatroom[], chatroomId: string) => {
+  return chatrooms.filter((chatroom) => chatroom.chatroomId !== chatroomId)
+}
+
+const sendChatroomMessageHelper = (chatroomMessages: ChatroomMessages[], chatroomId: string, messageInfo: ChatroomMessage) => {
+  return chatroomMessages.map((chatroom) => {
+    if (chatroom.chatroomId === chatroomId) {
+      chatroom.messages.push(messageInfo)
     }
 
     return chatroom
@@ -59,20 +98,88 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
     }
   }, [])
 
-  const createChatroom = (name: string) => {
+  const createChatroom = (userName: string, chatroomName: string) => {
+    const chatroomId = uuid()
+    
+    // create user info if it doesn't already exist
+    if (!userInfo) {
+      setUserInfo({
+        userId: uuid(),
+        name: userName
+      })
+    }
 
+    const newChatrooms = createChatroomHelper(chatrooms, chatroomName, chatroomId)
+    setChatrooms(newChatrooms)
   }
 
-  const joinChatroom = (chatroomId: string) => {
+  const joinChatroom = (userName: string, chatroomId: string, chatroomName: string) => {
+    if (ws.current?.readyState === WebSocket.OPEN) {
+      // create user info if it doesn't already exist
+      if (!userInfo) {
+        setUserInfo({
+          userId: uuid(),
+          name: userName
+        })
+      }
+  
+      const updatedChatrooms = joinChatroomHelper(chatrooms, userInfo!, chatroomId)
+      setChatrooms(updatedChatrooms)
 
+      ws.current.send(JSON.stringify({
+        action: CHATROOMS_WS_ACTIONS.subscribe,
+        userId: userInfo?.userId,
+        name: userInfo?.name,
+        chatroomId,
+        chatroomName
+      }))
+    } else {
+      console.log("Websocket is not open");
+    }
   }
 
-  const leaveChatroom = (chatroomId: string) => {
+  const leaveChatroom = (chatroomId: string, chatroomName: string) => {
+    if (ws.current?.readyState === WebSocket.OPEN) {
+      const updatedChatrooms = leaveChatroomHelper(chatrooms, chatroomId)
+      setChatrooms(updatedChatrooms)
 
+      ws.current.send(JSON.stringify({
+        action: CHATROOMS_WS_ACTIONS.unsubscribe,
+        userId: userInfo?.userId,
+        name: userInfo?.name,
+        chatroomId,
+        chatroomName
+      }))
+
+      ws.current.close()
+    } else {
+      console.log("Websocket is not open");
+    }
   }
 
-  const sendChatroomMessage = (message: string) => {
+  const sendChatroomMessage = (chatroomId: string, message: string, chatroomName: string) => {
+    if (ws.current?.readyState === WebSocket.OPEN) {
+      const messageInfo: ChatroomMessage = {
+        userId: userInfo?.userId!,
+        userName: userInfo?.name!,
+        message: message,
+        time: Date.now().toString()
+      }
+      
+      const updatedChatroomMessages = sendChatroomMessageHelper(chatroomMessages, chatroomId, messageInfo)
+      setChatroomMessages(updatedChatroomMessages)
 
+      ws.current.send(JSON.stringify({
+        action: CHATROOMS_WS_ACTIONS.sendMessage,
+        userId: userInfo?.userId,
+        name: userInfo?.name,
+        chatroomId,
+        chatroomName,
+        message
+      }))
+    } else {
+      console.log("Websocket is not open");
+    }
   }
 
   return (

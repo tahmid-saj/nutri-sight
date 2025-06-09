@@ -5,11 +5,11 @@ export type ChatroomsContextType = {
   chatrooms: Chatroom[],
   chatroomMessages: ChatroomMessages[]
 
-  createChatroom: (name: string) => void,
-  joinChatroom: (chatroomId: string) => void,
-  leaveChatroom: (chatroomId: string) => void,
+  createChatroom: (userName: string, chatroomName: string) => void,
+  joinChatroom: (userName: string, chatroomId: string, chatroomName: string) => void,
+  leaveChatroom: (chatroomId: string, chatroomName: string) => void,
 
-  sendChatroomMessage: (message: string) => void
+  sendChatroomMessage: (chatroomId: string, message: string, chatroomName: string) => void
 }
 
 export interface ChatroomsProviderProps {
@@ -35,6 +35,7 @@ export type ChatroomMessages = {
 
 export type ChatroomMessage = {
   userId: string,
+  userName: string,
   message: string,
   time: string | Date
 }

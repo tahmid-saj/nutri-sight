@@ -17,6 +17,7 @@ import { Typography } from '@mui/material';
 
 import HomeIcon from '@mui/icons-material/Home'
 import SmartToyIcon from '@mui/icons-material/SmartToy';
+import ChatIcon from '@mui/icons-material/Chat';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
@@ -84,6 +85,7 @@ export default function HiddenDrawer() {
                 <ListItemIcon>
                     { header === NAV_LINKS.headers.home ? <HomeIcon/> : null }
                     { header === NAV_LINKS.headers.chatbot ? <SmartToyIcon/> : null }
+                    { header === NAV_LINKS.headers.chatrooms ? <ChatIcon/> : null }
                     { header === NAV_LINKS.headers.nearbyRunners ? <DirectionsRunIcon/> : null }
                     { header === NAV_LINKS.headers.notifications ? <NotificationsNoneIcon/> : null }
                     { header === NAV_LINKS.headers.dashboard ? <DashboardIcon/> : null }
