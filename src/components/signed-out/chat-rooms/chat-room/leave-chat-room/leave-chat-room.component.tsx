@@ -25,16 +25,19 @@ const LeaveChatroom = ({ chatroom }: { chatroom: ChatroomMessages }) => {
 
   return (
     <LeaveChatRoomContainer>
-      <SimplePaper styles={paperStyles}>
+      <SimplePaper styles={{ padding: "1rem", textAlign: "center", backgroundColor: paperStyles.backgroundColor }}>
+        <Typography
+          paragraph
+          style={{ fontSize: "0.9rem", fontWeight: "bold", color: "#ffffff" }}
+        >
+          ID: {chatroom.chatroomId}
+        </Typography>
+
         <form onSubmit={handleSubmit}>
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <div className="btn-group flex-wrap">
-                  <Button type="submit">Leave</Button>
-                </div>
-              </div>
-            </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button type="submit" color="error">
+              Leave
+            </Button>
           </div>
         </form>
       </SimplePaper>

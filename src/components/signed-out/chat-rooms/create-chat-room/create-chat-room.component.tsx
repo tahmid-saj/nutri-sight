@@ -24,7 +24,6 @@ const paperStyles = {
 
 const CreateChatroom = () => {
   const [formFields, setFormFields] = useState(initialFormFields)
-  const [generatedChatroomId, setGeneratedChatroomId] = useState<string | undefined>(undefined)
   const { createChatroom } = useChatroomsContext()
   
   const resetFormFields = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -41,7 +40,6 @@ const CreateChatroom = () => {
 
     // create chatroom
     const chatroomId = createChatroom(formFields.userName, formFields.chatroomName)
-    setGeneratedChatroomId(chatroomId)
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -55,10 +53,6 @@ const CreateChatroom = () => {
       <SimplePaper styles={paperStyles}>
         <Typography variant="h6" sx={{ paddingBottom: "6%" }}>
           Create a chatroom
-        </Typography>
-
-        <Typography hidden={ generatedChatroomId === undefined }>
-          Chatroom ID: { generatedChatroomId }
         </Typography>
 
         <form onSubmit={handleSubmit}>
