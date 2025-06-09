@@ -27,7 +27,7 @@ interface ItemTabsProps {
 }
 
 export default function ItemTabs({ outerBoxStyles, innerBoxStyles, tabList, panelList }: ItemTabsProps) {
-  const [value, setValue] = useState<string>(tabList[0].value);
+  const [value, setValue] = useState<string>(tabList.length > 0 ? tabList[0].value : '');
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -53,7 +53,7 @@ export default function ItemTabs({ outerBoxStyles, innerBoxStyles, tabList, pane
         {
           panelList.map((panel) => {
             return (
-              <TabPanel value={ panel.value }>
+              <TabPanel key={panel.value} value={ panel.value }>
                 { panel.children }
               </TabPanel>
             )

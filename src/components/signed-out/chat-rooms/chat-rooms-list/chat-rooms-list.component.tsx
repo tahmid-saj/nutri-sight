@@ -1,36 +1,68 @@
-import { useChatroomsContext } from "../../../../contexts/signed-out/chat-rooms/chat-rooms.context"
-import ChatIcon from '@mui/icons-material/Chat';
-import ItemTabs from "../../../shared/mui/tabs/tabs.component"
+import { useChatroomsContext } from "../../../../contexts/signed-out/chat-rooms/chat-rooms.context";
+import ChatIcon from "@mui/icons-material/Chat";
+import ItemTabs from "../../../shared/mui/chat-tabs/chat-tabs.component";
 import Chatroom from "./chat-room/chat-room.component";
 
 const ChatroomsList = () => {
-  const { chatrooms, chatroomMessages } = useChatroomsContext()
+  const { chatrooms, chatroomMessages } = useChatroomsContext();
 
-  let tabList: any[] = []
-  let panelList: any[] = []
+  if (!chatrooms || chatrooms.length === 0) return null;
 
-  if (chatrooms && chatrooms.length !== 0) {
-    tabList = chatrooms.map((chatroom) => {
-      return {
-        value: "chatroom",
-        icon: <ChatIcon/>,
-        label: chatroom.chatroomName
-      }
-    })
+  const tabList = chatrooms.map((chatroom) => ({
+    value: chatroom.chatroomId,
+    label: chatroom.chatroomName,
+    icon: <ChatIcon />,
+  }));
 
-    panelList = chatroomMessages.map((chatroom) => {
-      return {
-        value: "chatroom-messages",
-        children: <Chatroom/>
-      }
-    })
-  }
+  const panelList = chatrooms.map((chatroom) => ({
+    value: chatroom.chatroomId,
+    children: <Chatroom/>,
+  }));
 
-  if (tabList.length === 0 || panelList.length === 0) return null
+  return <ItemTabs tabList={tabList} panelList={panelList} />;
+};
 
-  return (
-    <ItemTabs tabList={ tabList } panelList={ panelList }></ItemTabs>
-  )
-}
+export default ChatroomsList;
 
-export default ChatroomsList
+
+
+
+// import { useChatroomsContext } from "../../../../contexts/signed-out/chat-rooms/chat-rooms.context"
+// import ChatIcon from '@mui/icons-material/Chat';
+// import ItemTabs from "../../../shared/mui/tabs/tabs.component"
+// import Chatroom from "./chat-room/chat-room.component";
+
+// const ChatroomsList = () => {
+//   const { chatrooms, chatroomMessages } = useChatroomsContext()
+
+//   let tabList: any[] = []
+//   let panelList: any[] = []
+
+//   if (chatrooms && chatrooms.length !== 0) {
+//     tabList = chatrooms.map((chatroom) => {
+//       return {
+//         value: chatroom.chatroomId,
+//         icon: <ChatIcon/>,
+//         label: chatroom.chatroomName
+//       }
+//     })
+//   }
+
+//   if (chatroomMessages && chatroomMessages.length !== 0) {
+//     panelList = chatroomMessages.map((chatroom) => {
+//       return {
+//         value: chatroom.chatroomId,
+//         children: <Chatroom/>
+//       }
+//     })
+//   }
+
+//   if (tabList.length === 0) return null
+
+//   return (
+//     <ItemTabs tabList={ tabList } panelList={ panelList }></ItemTabs>
+//   )
+// }
+
+// export default ChatroomsList
+
