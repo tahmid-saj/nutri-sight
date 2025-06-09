@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
-import { Chatroom, ChatroomMessage, ChatroomMessages, ChatroomsContextType, 
-  ChatroomsProviderProps, ChatroomUserInfo } from "./chat-rooms.types";
+import { Chatroom, ChatroomMessage, ChatroomMessages, 
+  ChatroomsContextType, ChatroomsProviderProps } from "./chat-rooms.types";
 import { v4 as uuid } from "uuid";
 import { CHATROOMS_WS_ACTIONS } from "../../../utils/constants/chat-rooms.constants"
 import { validateCreateChatroom, validateJoinChatroom } from "../../../utils/validations/chat-rooms.validations"
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../store/shared/user/user.selector";
 
 // helpers
 const updateChatroomMessagesHelper = (chatroomMessages: ChatroomMessages[], chatroomMessage: any) => {
@@ -54,13 +56,13 @@ const createChatroomHelper = (chatrooms: Chatroom[], chatroomMessages: ChatroomM
 };
 
 
-const joinChatroomHelper = (chatrooms: Chatroom[], userInfo: ChatroomUserInfo, chatroomId: string) => {
+const joinChatroomHelper = (chatrooms: Chatroom[], currentUser: any, chatroomId: string) => {
   return chatrooms.map((chatroom) => {
     if (chatroom.chatroomId === chatroomId) {
       return {
         ...chatroom,
         countMembers: chatroom.countMembers + 1,
-        members: [...chatroom.members, userInfo.name]
+        members: [...chatroom.members, currentUser.displayName]
       };
     }
     return chatroom;
@@ -94,9 +96,10 @@ export const ChatroomsContext = createContext<ChatroomsContextType | undefined>(
 
 export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }) => {
   const ws = useRef<WebSocket | null>(null)
-  const [userInfo, setUserInfo] = useState<ChatroomUserInfo | undefined>(undefined)
   const [chatrooms, setChatrooms] = useState<Chatroom[]>([])
   const [chatroomMessages, setChatroomMessages] = useState<ChatroomMessages[]>([])
+
+  const currentUser = useSelector(selectCurrentUser)
 
   useEffect(() => {
     ws.current = new WebSocket(process.env.REACT_APP_API_CHATROOMS_WS_URL!)
@@ -136,20 +139,10 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
     }
   }, [])
 
-  const createChatroom = (userName: string, chatroomName: string) => {
+  const createChatroom = (chatroomName: string) => {
     const chatroomId = uuid()
     if (validateCreateChatroom(chatrooms, chatroomId)) return
 
-    // create user info if it doesn't already exist
-    let currentUserInfo = userInfo
-    if (!userInfo) {
-      currentUserInfo = {
-        userId: uuid(),
-        name: userName
-      }
-    }
-    
-    setUserInfo(currentUserInfo)
     console.log(chatrooms)
 
     const [newChatrooms, newChatroomMessages] = createChatroomHelper(chatrooms, chatroomMessages, chatroomName, chatroomId)
@@ -160,13 +153,13 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
 
     // join chatroom
     if (ws.current?.readyState === WebSocket.OPEN) {  
-      const updatedChatrooms = joinChatroomHelper(newChatrooms, currentUserInfo!, chatroomId)
+      const updatedChatrooms = joinChatroomHelper(newChatrooms, currentUser, chatroomId)
       setChatrooms(updatedChatrooms)
 
       ws.current.send(JSON.stringify({
         action: CHATROOMS_WS_ACTIONS.subscribe,
-        userId: currentUserInfo?.userId,
-        name: currentUserInfo?.name,
+        userId: currentUser?.email,
+        name: currentUser?.displayName,
         chatroomId,
         chatroomName
       }))
@@ -196,32 +189,21 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
   //   }
   // }
 
-  const joinExistingChatroom = (userName: string, chatroomId: string, chatroomName: string) => {
+  const joinExistingChatroom = (chatroomId: string, chatroomName: string) => {
     if (validateJoinChatroom(chatrooms, chatroomId)) return
 
     if (ws.current?.readyState === WebSocket.OPEN) {  
-      // create user info if it doesn't already exist
-      let currentUserInfo = userInfo
-      if (!userInfo) {
-        currentUserInfo = {
-          userId: uuid(),
-          name: userName
-        }
-      }
-      
-      setUserInfo(currentUserInfo)
-
       const [newChatrooms, newChatroomMessages] = createChatroomHelper(chatrooms, chatroomMessages, chatroomName, chatroomId)
       setChatrooms(newChatrooms)
       setChatroomMessages(newChatroomMessages)
 
-      const updatedChatrooms = joinChatroomHelper(newChatrooms, currentUserInfo!, chatroomId)
+      const updatedChatrooms = joinChatroomHelper(newChatrooms, currentUser, chatroomId)
       setChatrooms(updatedChatrooms)
 
       ws.current.send(JSON.stringify({
         action: CHATROOMS_WS_ACTIONS.subscribe,
-        userId: currentUserInfo?.userId,
-        name: currentUserInfo?.name,
+        userId: currentUser?.email,
+        name: currentUser?.displayName,
         chatroomId,
         chatroomName
       }))
@@ -240,8 +222,8 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
 
       ws.current.send(JSON.stringify({
         action: CHATROOMS_WS_ACTIONS.unsubscribe,
-        userId: userInfo?.userId,
-        name: userInfo?.name,
+        userId: currentUser?.email,
+        name: currentUser?.displayName,
         chatroomId,
         chatroomName
       }))
@@ -256,8 +238,8 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
     if (ws.current?.readyState === WebSocket.OPEN) {
       ws.current.send(JSON.stringify({
         action: CHATROOMS_WS_ACTIONS.sendMessage,
-        userId: userInfo?.userId,
-        name: userInfo?.name,
+        userId: currentUser?.email,
+        name: currentUser?.displayName,
         chatroomId,
         chatroomName,
         message
@@ -268,7 +250,7 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
   }
 
   return (
-    <ChatroomsContext.Provider value={{ userInfo, chatrooms, chatroomMessages,
+    <ChatroomsContext.Provider value={{ chatrooms, chatroomMessages,
       createChatroom, joinExistingChatroom, leaveChatroom, sendChatroomMessage }}>
       { children }
     </ChatroomsContext.Provider>

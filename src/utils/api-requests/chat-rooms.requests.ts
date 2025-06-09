@@ -50,7 +50,7 @@ export async function addRemoveChatroomUser(operation: string, chatroomId: strin
     })
     const resJSON = await response.json()
 
-    return resJSON.chatrooms
+    return resJSON
   } catch (error) {
     errorOnAddRemoveChatroomUser()
   }
@@ -68,7 +68,7 @@ export async function sendChatroomMessage(chatroomId: string, messageInfo: Chatr
     })
     const resJSON = await response.json()
 
-    return resJSON.chatrooms
+    return resJSON
   } catch (error) {
     errorOnSendChatroomMessage()
   }

@@ -18,6 +18,7 @@ import { NutritionTrackerProvider } from './contexts/signed-out/nutrition-tracke
 import { CaloriesBurnedProvider } from './contexts/signed-out/calories-burned/calories-burned.context';
 import { RecipesProvider } from './contexts/shared/recipes/recipes.context';
 
+import { ChatroomsProvider as ChatroomsProviderSignedIn } from "./contexts/signed-in/chat-rooms/chat-rooms.context"
 import { NutritionTrackerProvider as NutritionTrackerProviderSignedIn } from './contexts/signed-in/nutrition-tracker/nutrition-tracker.context';
 import { FitnessProvider as FitnessProviderSignedIn } from './contexts/signed-in/fitness/fitness.context';
 import { CaloriesBurnedProvider as CaloriesBurnedProviderSignedIn } from './contexts/signed-in/calories-burned/calories-burned.context';
@@ -42,33 +43,35 @@ root.render(
           {/* <PersistGate loading={ null } persistor={ persistor }> */}
             <BrowserRouter>
               <ChatroomsProvider>
-                <NearbyRunnersProvider>
-                  <NotificationsProvider>
-                    <ChatBotProvider>
-                      <NutrientPredictorProvider>
-                        <FitnessProvider>
-                          {/* <NutritionTrackerProviderSignedOut> */}
-                            <CaloriesBurnedProvider>
-                              <RecipesProvider>
-                                {/* <UserProvider> */}
-                                  <NutritionTrackerProviderSignedIn>
-                                    <FitnessProviderSignedIn>
-                                      <CaloriesBurnedProviderSignedIn>
-                                        <NotificationsProviderSignedIn>
-                                          <App />
-                                        </NotificationsProviderSignedIn>
-                                      </CaloriesBurnedProviderSignedIn>
-                                    </FitnessProviderSignedIn>
-                                  </NutritionTrackerProviderSignedIn>
-                                {/* </UserProvider> */}
-                              </RecipesProvider>
-                            </CaloriesBurnedProvider>
-                          {/* </NutritionTrackerProviderSignedOut> */}
-                        </FitnessProvider>
-                      </NutrientPredictorProvider>
-                    </ChatBotProvider>
-                  </NotificationsProvider>
-                </NearbyRunnersProvider>
+                <ChatroomsProviderSignedIn>
+                  <NearbyRunnersProvider>
+                    <NotificationsProvider>
+                      <ChatBotProvider>
+                        <NutrientPredictorProvider>
+                          <FitnessProvider>
+                            {/* <NutritionTrackerProviderSignedOut> */}
+                              <CaloriesBurnedProvider>
+                                <RecipesProvider>
+                                  {/* <UserProvider> */}
+                                    <NutritionTrackerProviderSignedIn>
+                                      <FitnessProviderSignedIn>
+                                        <CaloriesBurnedProviderSignedIn>
+                                          <NotificationsProviderSignedIn>
+                                            <App />
+                                          </NotificationsProviderSignedIn>
+                                        </CaloriesBurnedProviderSignedIn>
+                                      </FitnessProviderSignedIn>
+                                    </NutritionTrackerProviderSignedIn>
+                                  {/* </UserProvider> */}
+                                </RecipesProvider>
+                              </CaloriesBurnedProvider>
+                            {/* </NutritionTrackerProviderSignedOut> */}
+                          </FitnessProvider>
+                        </NutrientPredictorProvider>
+                      </ChatBotProvider>
+                    </NotificationsProvider>
+                  </NearbyRunnersProvider>
+                </ChatroomsProviderSignedIn>
               </ChatroomsProvider>
             </BrowserRouter>
           {/* </PersistGate> */}

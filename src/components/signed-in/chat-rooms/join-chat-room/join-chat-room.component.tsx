@@ -1,20 +1,20 @@
 import { Typography } from "@mui/material"
-import { CreateChatRoomContainer } from "./create-chat-room.styles.tsx"
-import React, { useState } from "react"
+import { JoinChatroomContainer } from "./join-chat-room.styles.tsx"
+import React, { useContext, useState } from "react"
 
 import SimplePaper from "../../../shared/mui/paper/paper.component.tsx";
 import FormInput from "../../../shared/form-input/form-input.component.tsx";
 import Button from "../../../shared/button/button.component.tsx";
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants.ts"
-import { useChatroomsContext } from "../../../../contexts/signed-out/chat-rooms/chat-rooms.context.tsx"
+import { useChatroomsContext } from "../../../../contexts/signed-in/chat-rooms/chat-rooms.context.tsx"
 
 const initialFormFields = {
-  userName: "John",
-  chatroomName: "Running"
+  chatroomId: "",
+  chatroomName: ""
 }
 
 const defaultFormFields = {
-  userName: "",
+  chatroomId: "",
   chatroomName: ""
 }
 
@@ -22,9 +22,9 @@ const paperStyles = {
   backgroundColor: COLOR_CODES.general["6"]
 }
 
-const CreateChatroom = () => {
+const JoinChatroom = () => {
   const [formFields, setFormFields] = useState(initialFormFields)
-  const { createChatroom } = useChatroomsContext()
+  const { joinExistingChatroom } = useChatroomsContext()
   
   const resetFormFields = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -34,12 +34,12 @@ const CreateChatroom = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    if (formFields.userName === "" || formFields.chatroomName === "") {
+    if (formFields.chatroomId === "" || formFields.chatroomName === "") {
       return
     }
 
-    // create chatroom
-    createChatroom(formFields.userName, formFields.chatroomName)
+    // join chatroom
+    joinExistingChatroom(formFields.chatroomId, formFields.chatroomName)
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -49,20 +49,20 @@ const CreateChatroom = () => {
   }
 
   return (
-    <CreateChatRoomContainer>
+    <JoinChatroomContainer>
       <SimplePaper styles={paperStyles}>
         <Typography variant="h6" sx={{ paddingBottom: "6%" }}>
-          Create a chatroom
+          Join a chatroom
         </Typography>
 
         <form onSubmit={handleSubmit}>
           <FormInput
-            label="Username"
+            label="Chatroom ID"
             type="text"
             required
             onChange={handleChange}
-            name="userName"
-            value={formFields.userName}
+            name="chatroomId"
+            value={formFields.chatroomId}
           />
           
           <FormInput
@@ -77,7 +77,7 @@ const CreateChatroom = () => {
             <div className="row">
               <div className="col-12">
                 <div className="btn-group flex-wrap">
-                  <Button type="submit">Create</Button>
+                  <Button type="submit">Join</Button>
                   <Button type="button" onClick={resetFormFields}>
                     Clear
                   </Button>
@@ -87,8 +87,8 @@ const CreateChatroom = () => {
           </div>
         </form>
       </SimplePaper>
-    </CreateChatRoomContainer>
+    </JoinChatroomContainer>
   );
 }
 
-export default CreateChatroom
+export default JoinChatroom

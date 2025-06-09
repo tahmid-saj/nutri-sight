@@ -6,15 +6,13 @@ import SimplePaper from "../../../shared/mui/paper/paper.component.tsx";
 import FormInput from "../../../shared/form-input/form-input.component.tsx";
 import Button from "../../../shared/button/button.component.tsx";
 import { COLOR_CODES } from "../../../../utils/constants/shared.constants.ts"
-import { useChatroomsContext } from "../../../../contexts/signed-out/chat-rooms/chat-rooms.context.tsx"
+import { useChatroomsContext } from "../../../../contexts/signed-in/chat-rooms/chat-rooms.context.tsx"
 
 const initialFormFields = {
-  userName: "John",
   chatroomName: "Running"
 }
 
 const defaultFormFields = {
-  userName: "",
   chatroomName: ""
 }
 
@@ -34,12 +32,12 @@ const CreateChatroom = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    if (formFields.userName === "" || formFields.chatroomName === "") {
+    if (formFields.chatroomName === "") {
       return
     }
 
     // create chatroom
-    createChatroom(formFields.userName, formFields.chatroomName)
+    createChatroom(formFields.chatroomName)
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -55,16 +53,7 @@ const CreateChatroom = () => {
           Create a chatroom
         </Typography>
 
-        <form onSubmit={handleSubmit}>
-          <FormInput
-            label="Username"
-            type="text"
-            required
-            onChange={handleChange}
-            name="userName"
-            value={formFields.userName}
-          />
-          
+        <form onSubmit={handleSubmit}>          
           <FormInput
             label="Chatroom Name"
             type="text"
