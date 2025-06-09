@@ -4,8 +4,7 @@ import { LOCATION_UPDATE_INTERVAL, NEARBY_RUNNERS_WS_ACTIONS } from "../../../ut
 import geohash from "ngeohash"
 import { v4 as uuidv4 } from 'uuid';
 
-// helpers
-const updateMapLocationsHelper = (mapLocations: MapLocationUpdate[], mapLocation: any) => {
+const updateMapLocations = (mapLocations: MapLocationUpdate[], mapLocation: any) => {
   let mapLocationInMap = false
   let newMapLocations = mapLocations.map((locationUpdate) => {
     if (locationUpdate.userId === mapLocation.userId) {
@@ -50,7 +49,7 @@ export const NearbyRunnersProvider: React.FC<NearbyRunnersProviderProps> = ({ ch
         const data = JSON.parse(event.data)
 
         // loop through mapLocations and update the map locations
-        const newMapLocations = updateMapLocationsHelper(mapLocations, data)
+        const newMapLocations = updateMapLocations(mapLocations, data)
         setMapLocations(newMapLocations)
       } catch (err) {
         console.log("Failed to receive location update: ", err)
