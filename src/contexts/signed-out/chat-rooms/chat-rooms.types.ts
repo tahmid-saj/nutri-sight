@@ -30,6 +30,7 @@ export type Chatroom = {
 
 export type ChatroomMessages = {
   chatroomId: string,
+  chatroomName: string,
   messages: ChatroomMessage[]
 }
 

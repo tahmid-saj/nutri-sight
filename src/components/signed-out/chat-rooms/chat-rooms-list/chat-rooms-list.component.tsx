@@ -1,7 +1,7 @@
 import { useChatroomsContext } from "../../../../contexts/signed-out/chat-rooms/chat-rooms.context";
 import ChatIcon from "@mui/icons-material/Chat";
 import ItemTabs from "../../../shared/mui/chat-tabs/chat-tabs.component";
-import Chatroom from "./chat-room/chat-room.component";
+import ChatMessages from "../chat-room/chat-messages.component";
 
 const ChatroomsList = () => {
   const { chatrooms, chatroomMessages } = useChatroomsContext();
@@ -14,9 +14,9 @@ const ChatroomsList = () => {
     icon: <ChatIcon />,
   }));
 
-  const panelList = chatrooms.map((chatroom) => ({
+  const panelList = chatroomMessages.map((chatroom) => ({
     value: chatroom.chatroomId,
-    children: <Chatroom/>,
+    children: <ChatMessages chatroom={ chatroom }/>,
   }));
 
   return <ItemTabs tabList={tabList} panelList={panelList} />;
