@@ -44,7 +44,7 @@ const Home = () => {
       header: "Notifications",
       description: "Upon signing up and tracking nutrition and fitness, receive notifications of any planned activities on your calendar",
       imageUrl: "https://media.istockphoto.com/id/1395865981/vector/3d-reminder-in-calendar-on-purple-background-notifications-page-with-floating-elements-alert.jpg?s=612x612&w=0&k=20&c=JTK6NaSe9bYp9Pq2sfBoDYYCOhGEZlQNcQQJgy25FWI=",
-      path: currentUser ? NAV_LINKS.paths.signedIn.dashboard : NAV_LINKS.paths.signedOut.auth
+      path: currentUser ? NAV_LINKS.paths.signedIn.notifications : NAV_LINKS.paths.signedOut.notifications
     },
     recipes: {
       header: "Recipes",

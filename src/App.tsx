@@ -4,6 +4,7 @@ import HomeRoute from "./routes/shared/home/home.component";
 import Navigation from "./routes/shared/navigation/navigation.component";
 import AuthenticationRoute from "./routes/signed-out/authentication/authentication.component";
 
+import NearbyRunnersRoute from "./routes/signed-out/nearby-runners/nearby-runners.component"
 import NotificationsRoute from "./routes/signed-out/notifications/notifications.component"
 import DashboardRoute from "./routes/signed-out/dashboard/dashboard.component";
 import NutrientPredictorRoute from "./routes/shared/nutrient-predictor/nutrient-predictor.component";
@@ -12,6 +13,7 @@ import FitnessRoute from "./routes/signed-out/fitness/fitness.component";
 import CaloriesBurnedRoute from "./routes/signed-out/calories-burned/calories-burned.component"
 import RecipesRoute from "./routes/shared/recipes/recipes.component";
 
+import NearbyRunnersRouteSignedIn from "./routes/signed-in/nearby-runners/nearby-runners.component"
 import NotificationsRouteSignedIn from "./routes/signed-in/notifications/notifications.component"
 import DashboardRouteSignedIn from "./routes/signed-in/dashboard/dashboard.component";
 import NutritionTrackerRouteSignedIn from "./routes/signed-in/nutrition-tracker/nutrition-tracker.component";
@@ -54,6 +56,7 @@ function App() {
         {
           currentUser ? (
             <Fragment>
+              <Route path="nearby-runners-signed-in" element={ <NearbyRunnersRouteSignedIn/> }/>
               <Route path="notifications-signed-in" element={ <NotificationsRouteSignedIn/> }/>
               <Route path="dashboard-signed-in" element={ <DashboardRouteSignedIn/> }/>
               <Route path="nutrition-tracker-signed-in" element={ <NutritionTrackerRouteSignedIn/> }/>
@@ -62,6 +65,7 @@ function App() {
             </Fragment>
           ) : (
             <Fragment>
+              <Route path="nearby-runners" element={ <NearbyRunnersRoute/> }/>
               <Route path="notifications" element={ <NotificationsRoute/> }/>
               <Route path="dashboard" element={ <DashboardRoute/> }/>
               <Route path="nutrition-tracker" element={ <NutritionTrackerRoute/> }/>

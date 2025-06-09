@@ -8,6 +8,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { UserProvider } from './contexts/shared/user/user.context';
+import { NearbyRunnersProvider } from "./contexts/signed-out/nearby-runners/nearby-runners.context"
 import { NotificationsProvider } from "./contexts/signed-out/notifications/notifications.context"
 import { ChatBotProvider } from './contexts/shared/chatbot/chatbot.context';
 import { NutrientPredictorProvider } from './contexts/shared/nutrient-predictor/nutrient-predictor.context';
@@ -39,31 +40,33 @@ root.render(
         <Provider store={ store }>
           {/* <PersistGate loading={ null } persistor={ persistor }> */}
             <BrowserRouter>
-              <NotificationsProvider>
-                <ChatBotProvider>
-                  <NutrientPredictorProvider>
-                    <FitnessProvider>
-                      {/* <NutritionTrackerProviderSignedOut> */}
-                        <CaloriesBurnedProvider>
-                          <RecipesProvider>
-                            {/* <UserProvider> */}
-                              <NutritionTrackerProviderSignedIn>
-                                <FitnessProviderSignedIn>
-                                  <CaloriesBurnedProviderSignedIn>
-                                    <NotificationsProviderSignedIn>
-                                      <App />
-                                    </NotificationsProviderSignedIn>
-                                  </CaloriesBurnedProviderSignedIn>
-                                </FitnessProviderSignedIn>
-                              </NutritionTrackerProviderSignedIn>
-                            {/* </UserProvider> */}
-                          </RecipesProvider>
-                        </CaloriesBurnedProvider>
-                      {/* </NutritionTrackerProviderSignedOut> */}
-                    </FitnessProvider>
-                  </NutrientPredictorProvider>
-                </ChatBotProvider>
-              </NotificationsProvider>
+              <NearbyRunnersProvider>
+                <NotificationsProvider>
+                  <ChatBotProvider>
+                    <NutrientPredictorProvider>
+                      <FitnessProvider>
+                        {/* <NutritionTrackerProviderSignedOut> */}
+                          <CaloriesBurnedProvider>
+                            <RecipesProvider>
+                              {/* <UserProvider> */}
+                                <NutritionTrackerProviderSignedIn>
+                                  <FitnessProviderSignedIn>
+                                    <CaloriesBurnedProviderSignedIn>
+                                      <NotificationsProviderSignedIn>
+                                        <App />
+                                      </NotificationsProviderSignedIn>
+                                    </CaloriesBurnedProviderSignedIn>
+                                  </FitnessProviderSignedIn>
+                                </NutritionTrackerProviderSignedIn>
+                              {/* </UserProvider> */}
+                            </RecipesProvider>
+                          </CaloriesBurnedProvider>
+                        {/* </NutritionTrackerProviderSignedOut> */}
+                      </FitnessProvider>
+                    </NutrientPredictorProvider>
+                  </ChatBotProvider>
+                </NotificationsProvider>
+              </NearbyRunnersProvider>
             </BrowserRouter>
           {/* </PersistGate> */}
         </Provider>
