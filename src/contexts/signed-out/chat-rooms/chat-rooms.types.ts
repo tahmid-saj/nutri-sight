@@ -5,8 +5,9 @@ export type ChatroomsContextType = {
   chatrooms: Chatroom[],
   chatroomMessages: ChatroomMessages[]
 
-  createChatroom: (userName: string, chatroomName: string) => void,
-  joinChatroom: (userName: string, chatroomId: string, chatroomName: string) => void,
+  createChatroom: (userName: string, chatroomName: string) => string | undefined,
+  // joinChatroom: (userInfo: ChatroomUserInfo, chatroomId: string, chatroomName: string, chatrooms: Chatroom[]) => void,
+  joinExistingChatroom: (userName: string, chatroomId: string, chatroomName: string) => void,
   leaveChatroom: (chatroomId: string, chatroomName: string) => void,
 
   sendChatroomMessage: (chatroomId: string, message: string, chatroomName: string) => void

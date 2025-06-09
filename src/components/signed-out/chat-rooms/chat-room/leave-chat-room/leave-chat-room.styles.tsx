@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const CreateChatRoomContainer = styled.div`
+export const LeaveChatRoomContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

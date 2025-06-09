@@ -36,7 +36,7 @@ const SendMessage = ({ chatroom }: { chatroom: ChatroomMessages }) => {
     <div className="send-message-container">
       <div className="send-message-form">
         <textarea placeholder="Enter your message" className="send-message-input" 
-        name="messageInput" rows={ 5 } onChange={ handleChange }></textarea>
+        name="messageInput" rows={ 5 } onChange={ handleChange } value={ formFields.messageInput }></textarea>
         <button className="send-message-btn" type="button" onClick={ handleSubmit } title="Send">
           <KeyboardDoubleArrowUpIcon fontSize="large" sx={{ color: "black" }}/>
         </button>

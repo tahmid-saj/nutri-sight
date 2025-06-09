@@ -24,9 +24,9 @@ const paperStyles = {
   backgroundColor: COLOR_CODES.general["6"]
 }
 
-const CreateAlert = () => {
+const JoinChatroom = () => {
   const [formFields, setFormFields] = useState(initialFormFields)
-  const { joinChatroom } = useChatroomsContext()
+  const { joinExistingChatroom } = useChatroomsContext()
   
   const resetFormFields = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -41,7 +41,7 @@ const CreateAlert = () => {
     }
 
     // join chatroom
-    joinChatroom(formFields.userName, formFields.chatroomId, formFields.chatroomName)
+    joinExistingChatroom(formFields.userName, formFields.chatroomId, formFields.chatroomName)
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -88,7 +88,7 @@ const CreateAlert = () => {
             <div className="row">
               <div className="col-12">
                 <div className="btn-group flex-wrap">
-                  <Button type="submit">Create</Button>
+                  <Button type="submit">Join</Button>
                   <Button type="button" onClick={resetFormFields}>
                     Clear
                   </Button>
@@ -102,4 +102,4 @@ const CreateAlert = () => {
   );
 }
 
-export default CreateAlert
+export default JoinChatroom
