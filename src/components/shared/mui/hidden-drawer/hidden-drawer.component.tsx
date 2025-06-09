@@ -84,6 +84,7 @@ export default function HiddenDrawer() {
                 <ListItemIcon>
                     { header === NAV_LINKS.headers.home ? <HomeIcon/> : null }
                     { header === NAV_LINKS.headers.chatbot ? <SmartToyIcon/> : null }
+                    { header === NAV_LINKS.headers.nearbyRunners ? <DirectionsRunIcon/> : null }
                     { header === NAV_LINKS.headers.notifications ? <NotificationsNoneIcon/> : null }
                     { header === NAV_LINKS.headers.dashboard ? <DashboardIcon/> : null }
                     { header === NAV_LINKS.headers.nutrientPredictor ? <CameraAltIcon/> : null }

@@ -31,6 +31,7 @@
     "fractional": "^1.0.0",
     "graphql": "^16.9.0",
     "image-type": "^5.2.0",
+    "ngeohash": "^0.6.3",
     "parcel": "^2.10.0",
     "react": "^17.0.0 || ^18.0.0",
     "react-apexcharts": "^1.4.1",
@@ -52,6 +53,7 @@
     "styled-components": "^6.1.11",
     "typed-redux-saga": "^1.5.0",
     "typescript": "^5.6.2",
+    "uuid": "^11.1.0",
     "vercel": "^41.7.8",
     "web-vitals": "^2.1.4"
   },
@@ -78,5 +80,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/ngeohash": "^0.6.8"
   }
 }

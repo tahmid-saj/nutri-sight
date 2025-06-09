@@ -10,6 +10,7 @@ export const NAV_LINKS = {
   headers: {
     home: "Home",
     chatbot: "Chatbot",
+    nearbyRunners: "Nearby Runners",
     notifications: "Notifications",
     dashboard: "Dashboard",
     nutrientPredictor: "Nutrient Predictor",
@@ -28,6 +29,7 @@ export const NAV_LINKS = {
     signedOut: {
       home: "/",
       notifications: "/notifications",
+      nearbyRunners: "/nearby-runners",
       chatbot: "/dashboard",
       dashboard: "/dashboard",
       nutrientPredictor: "/nutrient-predictor",
@@ -40,6 +42,7 @@ export const NAV_LINKS = {
     signedIn: {
       home: "/",
       notifications: "/notifications-signed-in",
+      nearbyRunners: "/nearby-runners-signed-in",
       chatbot: "/dashboard-signed-in",
       dashboard: "/dashboard-signed-in",
       nutrientPredictor: "/nutrient-predictor",
@@ -59,6 +62,10 @@ export const NAV_LINKS = {
       {
         header: "Notifications",
         path: "/notifications",
+      },
+      {
+        header: "Nearby Runners",
+        path: "/nearby-runners",
       },
       {
         header: "Chatbot",
@@ -123,6 +130,10 @@ export const NAV_LINKS = {
       {
         header: "Notifications",
         path: "/notifications-signed-in",
+      },
+      {
+        header: "Nearby Runners",
+        path: "/nearby-runners-signed-in",
       },
       {
         header: "Chatbot",
