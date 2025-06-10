@@ -4,19 +4,27 @@ import { errorOnAddRemoveChatroomUser, errorOnCreateChatroom, errorOnGetChatroom
 // chatrooms api requests
 
 // get chatrooms
-export async function getChatrooms() {
+export async function getChatroomsMessages(userId: string) {
   try {
-    const response = await fetch(`${process.env.REACT_APP_API_CHATROOMS}${process.env.REACT_APP_API_CHATROOMS_GET_CHATROOMS}`)
+    const response = await fetch(`${process.env.REACT_APP_API_CHATROOMS}${process.env.REACT_APP_API_CHATROOMS_GET_CHATROOMS}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userId: userId
+      })
+    })
     const resJSON = await response.json()
 
-    return resJSON.chatrooms
+    return resJSON
   } catch (error) {
     errorOnGetChatrooms()
   }
 }
 
 // create chatroom
-export async function createChatroom(chatroomId: string, chatroomName: string) {
+export async function storeChatroom(chatroomId: string, chatroomName: string) {
   try {
     const response = await fetch(`${process.env.REACT_APP_API_CHATROOMS}${process.env.REACT_APP_API_CHATROOMS_CREATE_CHATROOM}`, {
       method: "POST",
@@ -57,14 +65,16 @@ export async function addRemoveChatroomUser(operation: string, chatroomId: strin
 }
 
 // user sends message to chatroom
-export async function sendChatroomMessage(chatroomId: string, messageInfo: ChatroomMessage) {
+export async function storeChatroomMessage(chatroomId: string, messageInfo: ChatroomMessage) {
   try {
     const response = await fetch(`${process.env.REACT_APP_API_CHATROOMS}${process.env.REACT_APP_API_CHATROOMS_USER_SEND_CHATROOM_MSG}/${chatroomId}/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(messageInfo)
+      body: JSON.stringify({
+        messageInfo: messageInfo
+      })
     })
     const resJSON = await response.json()
 

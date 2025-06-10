@@ -245,8 +245,6 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
         chatroomId,
         chatroomName
       }))
-
-      ws.current.close()
     } else {
       console.log("Websocket is not open");
     }

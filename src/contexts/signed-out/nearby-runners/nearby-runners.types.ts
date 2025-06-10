@@ -22,6 +22,7 @@ export type LocationUpdate = {
 
 export type MapLocationUpdate = {
   userId: string,
+  userName: string,
   location: string,
   channel: string
 }

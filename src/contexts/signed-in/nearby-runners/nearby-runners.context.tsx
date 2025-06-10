@@ -1,14 +1,19 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
-import { LocationUpdate, LocationUpdateUserInfo, MapLocationUpdate, NearbyRunnersContextType, NearbyRunnersProviderProps } from "./nearby-runners.types";
+import { LocationUpdate, MapLocationUpdate, NearbyRunnersContextType, 
+  NearbyRunnersProviderProps } from "./nearby-runners.types";
 import { LOCATION_UPDATE_INTERVAL, NEARBY_RUNNERS_WS_ACTIONS } from "../../../utils/constants/nearby-runners.constants";
 import geohash from "ngeohash"
-import { v4 as uuidv4 } from 'uuid';
 
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../store/shared/user/user.selector";
+
+// helpers
 const updateMapLocations = (mapLocations: MapLocationUpdate[], mapLocation: any) => {
   let mapLocationInMap = false
   let newMapLocations = mapLocations.map((locationUpdate) => {
     if (locationUpdate.userId === mapLocation.userId) {
       mapLocationInMap = true
+      locationUpdate.userName = mapLocation.name
       locationUpdate.location = mapLocation.locationUpdate
       locationUpdate.channel = mapLocation.channel
     }
@@ -16,7 +21,12 @@ const updateMapLocations = (mapLocations: MapLocationUpdate[], mapLocation: any)
     return locationUpdate
   })
 
-  if (!mapLocationInMap) newMapLocations.push(mapLocation)
+  if (!mapLocationInMap) newMapLocations.push({
+    userId: mapLocation.userId,
+    userName: mapLocation.name,
+    location: mapLocation.locationUpdate,
+    channel: mapLocation.channel
+  })
   
   return newMapLocations
 }
@@ -25,7 +35,6 @@ export const NearbyRunnersContext = createContext<NearbyRunnersContextType | und
 
 export const NearbyRunnersProvider: React.FC<NearbyRunnersProviderProps> = ({ children }) => {
   const ws = useRef<WebSocket | null>(null)
-  const [userInfo, setUserInfo] = useState<LocationUpdateUserInfo | undefined>(undefined)
   const locationUpdateIntervalRef = useRef<number | null>(null);
   const [locationUpdate, setLocationUpdate] = useState<LocationUpdate | undefined>(undefined)
   const [mapLocations, setMapLocations] = useState<MapLocationUpdate[]>([])
@@ -35,6 +44,9 @@ export const NearbyRunnersProvider: React.FC<NearbyRunnersProviderProps> = ({ ch
   //   name,
   //   location
   // }
+
+  const currentUser = useSelector(selectCurrentUser)
+
 
   useEffect(() => {
     ws.current = new WebSocket(process.env.REACT_APP_API_NEARBY_RUNNERS_WS_URL!)
@@ -86,12 +98,7 @@ export const NearbyRunnersProvider: React.FC<NearbyRunnersProviderProps> = ({ ch
     }
   }
 
-  const startLocationUpdates = (name: string) => {
-    const userId = uuidv4();
-    setUserInfo({
-      userId: userId,
-      name: name
-    })
+  const startLocationUpdates = () => {
     const lat = 37.78
     const long = -122.42
     const positionGeohashString = geohash.encode(lat, long, 8)
@@ -100,16 +107,16 @@ export const NearbyRunnersProvider: React.FC<NearbyRunnersProviderProps> = ({ ch
     if (ws.current?.readyState === WebSocket.OPEN) {
       ws.current.send(JSON.stringify({
         action: NEARBY_RUNNERS_WS_ACTIONS.subscribe,
-        userId,
-        name,
+        userId: currentUser?.email,
+        name: currentUser?.displayName,
         location: positionGeohashString
       }))
   
       // assign timerID of setInterval - note that we have to be clear that we're using the window object
       locationUpdateIntervalRef.current = window.setInterval(async () => {
         sendLocationUpdate({
-          userId,
-          name,
+          userId: currentUser?.email!,
+          name: currentUser?.displayName!,
           location: positionGeohashString
         })
       }, LOCATION_UPDATE_INTERVAL)
@@ -127,8 +134,8 @@ export const NearbyRunnersProvider: React.FC<NearbyRunnersProviderProps> = ({ ch
     if (ws.current?.readyState === WebSocket.OPEN) {
       ws.current.send(JSON.stringify({
         action: NEARBY_RUNNERS_WS_ACTIONS.unsubscribe,
-        userId: userInfo?.userId,
-        name: userInfo?.name,
+        userId: currentUser?.email,
+        name: currentUser?.displayName,
         location: positionGeohashString
       }))
 
@@ -145,7 +152,7 @@ export const NearbyRunnersProvider: React.FC<NearbyRunnersProviderProps> = ({ ch
   }
 
   return (
-    <NearbyRunnersContext.Provider value={{ userInfo, locationUpdate, mapLocations,
+    <NearbyRunnersContext.Provider value={{ locationUpdate, mapLocations,
       sendLocationUpdate, startLocationUpdates, exitLocationUpdates }}>
       { children }
     </NearbyRunnersContext.Provider>
