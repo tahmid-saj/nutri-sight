@@ -2,10 +2,13 @@ import React, { createContext, useContext, useEffect, useRef, useState } from "r
 import { Chatroom, ChatroomMessage, ChatroomMessages, 
   ChatroomsContextType, ChatroomsProviderProps } from "./chat-rooms.types";
 import { v4 as uuid } from "uuid";
-import { CHATROOMS_WS_ACTIONS } from "../../../utils/constants/chat-rooms.constants"
+import { CHATROOM_ADD_REMOVE_USER, CHATROOMS_WS_ACTIONS } from "../../../utils/constants/chat-rooms.constants"
 import { validateCreateChatroom, validateJoinChatroom } from "../../../utils/validations/chat-rooms.validations"
+
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../store/shared/user/user.selector";
+import { addRemoveChatroomUser, getChatroomsMessages, storeChatroom, 
+  storeChatroomMessage } from "../../../utils/api-requests/chat-rooms.requests"
 
 // helpers
 const updateChatroomMessagesHelper = (chatroomMessages: ChatroomMessages[], chatroomMessage: any) => {
@@ -101,6 +104,24 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
 
   const currentUser = useSelector(selectCurrentUser)
 
+  // hydrate chatrooms and chatroomsMessages
+  useEffect(() => {
+    const getChatrooms = async () => {
+      const { chatrooms: resChatrooms, chatroomsMessages: resChatroomsMessages } = await getChatroomsMessages(currentUser?.email!)
+
+      console.log(resChatrooms, resChatroomsMessages)
+
+      if (resChatrooms) {
+        setChatrooms(resChatrooms)
+      }
+      if (resChatroomsMessages) {
+        setChatroomMessages(resChatroomsMessages)
+      }
+    }
+
+    getChatrooms()
+  }, [currentUser])
+
   useEffect(() => {
     ws.current = new WebSocket(process.env.REACT_APP_API_CHATROOMS_WS_URL!)
 
@@ -139,7 +160,7 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
     }
   }, [])
 
-  const createChatroom = (chatroomName: string) => {
+  const createChatroom = async (chatroomName: string) => {
     const chatroomId = uuid()
     if (validateCreateChatroom(chatrooms, chatroomId)) return
 
@@ -165,6 +186,9 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
       }))
 
       console.log(chatroomId, chatroomName)
+
+      await storeChatroom(chatroomId, chatroomName)
+      await addRemoveChatroomUser(CHATROOM_ADD_REMOVE_USER.add, chatroomId, currentUser?.email!)
     } else {
       console.log("Websocket is not open");
     }
@@ -189,7 +213,7 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
   //   }
   // }
 
-  const joinExistingChatroom = (chatroomId: string, chatroomName: string) => {
+  const joinExistingChatroom = async (chatroomId: string, chatroomName: string) => {
     if (validateJoinChatroom(chatrooms, chatroomId)) return
 
     if (ws.current?.readyState === WebSocket.OPEN) {  
@@ -209,12 +233,14 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
       }))
 
       console.log(chatroomId, chatroomName)
+      await storeChatroom(chatroomId, chatroomName)
+      await addRemoveChatroomUser(CHATROOM_ADD_REMOVE_USER.add, chatroomId, currentUser?.email!)
     } else {
       console.log("Websocket is not open");
     }
   }
 
-  const leaveChatroom = (chatroomId: string, chatroomName: string) => {
+  const leaveChatroom = async (chatroomId: string, chatroomName: string) => {
     if (ws.current?.readyState === WebSocket.OPEN) {
       const [updatedChatrooms, updatedChatroomMessages] = leaveChatroomHelper(chatrooms, chatroomMessages, chatroomId)
       setChatrooms(updatedChatrooms)
@@ -228,13 +254,13 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
         chatroomName
       }))
 
-      ws.current.close()
+      await addRemoveChatroomUser(CHATROOM_ADD_REMOVE_USER.remove, chatroomId, currentUser?.email!)
     } else {
       console.log("Websocket is not open");
     }
   }
 
-  const sendChatroomMessage = (chatroomId: string, message: string, chatroomName: string) => {
+  const sendChatroomMessage = async (chatroomId: string, message: string, chatroomName: string) => {
     if (ws.current?.readyState === WebSocket.OPEN) {
       ws.current.send(JSON.stringify({
         action: CHATROOMS_WS_ACTIONS.sendMessage,
@@ -244,6 +270,15 @@ export const ChatroomsProvider: React.FC<ChatroomsProviderProps> = ({ children }
         chatroomName,
         message
       }))
+
+      const messageInfo: ChatroomMessage = {
+        userId: currentUser?.email!,
+        userName: currentUser?.displayName!,
+        message,
+        time: Date.now().toString()
+      }
+
+      await storeChatroomMessage(chatroomId, messageInfo)
     } else {
       console.log("Websocket is not open");
     }

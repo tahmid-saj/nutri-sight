@@ -10,6 +10,7 @@ const updateMapLocationsHelper = (mapLocations: MapLocationUpdate[], mapLocation
   let newMapLocations = mapLocations.map((locationUpdate) => {
     if (locationUpdate.userId === mapLocation.userId) {
       mapLocationInMap = true
+      locationUpdate.userName = mapLocation.name
       locationUpdate.location = mapLocation.locationUpdate
       locationUpdate.channel = mapLocation.channel
     }
@@ -17,7 +18,12 @@ const updateMapLocationsHelper = (mapLocations: MapLocationUpdate[], mapLocation
     return locationUpdate
   })
 
-  if (!mapLocationInMap) newMapLocations.push(mapLocation)
+  if (!mapLocationInMap) newMapLocations.push({
+    userId: mapLocation.userId,
+    userName: mapLocation.name,
+    location: mapLocation.locationUpdate,
+    channel: mapLocation.channel
+  })
   
   return newMapLocations
 }

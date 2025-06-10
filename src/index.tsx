@@ -19,6 +19,7 @@ import { CaloriesBurnedProvider } from './contexts/signed-out/calories-burned/ca
 import { RecipesProvider } from './contexts/shared/recipes/recipes.context';
 
 import { ChatroomsProvider as ChatroomsProviderSignedIn } from "./contexts/signed-in/chat-rooms/chat-rooms.context"
+import { NearbyRunnersProvider as NearbyRunnersProviderSignedIn } from "./contexts/signed-in/nearby-runners/nearby-runners.context"
 import { NutritionTrackerProvider as NutritionTrackerProviderSignedIn } from './contexts/signed-in/nutrition-tracker/nutrition-tracker.context';
 import { FitnessProvider as FitnessProviderSignedIn } from './contexts/signed-in/fitness/fitness.context';
 import { CaloriesBurnedProvider as CaloriesBurnedProviderSignedIn } from './contexts/signed-in/calories-burned/calories-burned.context';
@@ -45,31 +46,33 @@ root.render(
               <ChatroomsProvider>
                 <ChatroomsProviderSignedIn>
                   <NearbyRunnersProvider>
-                    <NotificationsProvider>
-                      <ChatBotProvider>
-                        <NutrientPredictorProvider>
-                          <FitnessProvider>
-                            {/* <NutritionTrackerProviderSignedOut> */}
-                              <CaloriesBurnedProvider>
-                                <RecipesProvider>
-                                  {/* <UserProvider> */}
-                                    <NutritionTrackerProviderSignedIn>
-                                      <FitnessProviderSignedIn>
-                                        <CaloriesBurnedProviderSignedIn>
-                                          <NotificationsProviderSignedIn>
-                                            <App />
-                                          </NotificationsProviderSignedIn>
-                                        </CaloriesBurnedProviderSignedIn>
-                                      </FitnessProviderSignedIn>
-                                    </NutritionTrackerProviderSignedIn>
-                                  {/* </UserProvider> */}
-                                </RecipesProvider>
-                              </CaloriesBurnedProvider>
-                            {/* </NutritionTrackerProviderSignedOut> */}
-                          </FitnessProvider>
-                        </NutrientPredictorProvider>
-                      </ChatBotProvider>
-                    </NotificationsProvider>
+                    <NearbyRunnersProviderSignedIn>
+                      <NotificationsProvider>
+                        <ChatBotProvider>
+                          <NutrientPredictorProvider>
+                            <FitnessProvider>
+                              {/* <NutritionTrackerProviderSignedOut> */}
+                                <CaloriesBurnedProvider>
+                                  <RecipesProvider>
+                                    {/* <UserProvider> */}
+                                      <NutritionTrackerProviderSignedIn>
+                                        <FitnessProviderSignedIn>
+                                          <CaloriesBurnedProviderSignedIn>
+                                            <NotificationsProviderSignedIn>
+                                              <App />
+                                            </NotificationsProviderSignedIn>
+                                          </CaloriesBurnedProviderSignedIn>
+                                        </FitnessProviderSignedIn>
+                                      </NutritionTrackerProviderSignedIn>
+                                    {/* </UserProvider> */}
+                                  </RecipesProvider>
+                                </CaloriesBurnedProvider>
+                              {/* </NutritionTrackerProviderSignedOut> */}
+                            </FitnessProvider>
+                          </NutrientPredictorProvider>
+                        </ChatBotProvider>
+                      </NotificationsProvider>
+                    </NearbyRunnersProviderSignedIn>
                   </NearbyRunnersProvider>
                 </ChatroomsProviderSignedIn>
               </ChatroomsProvider>
