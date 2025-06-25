@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, FC } from "react";
 
 import { validateImgPath } from "../../../utils/validations/nutrient-predictor.validations";
-import { getFoodObjectDetection, getMealPredictions, getNutrientPredictions } from "../../../utils/api-requests/nutrient-predictor.requests";
+import { getFoodObjectDetection, getMealPredictions, getNutrientPredictions, uploadPredictionImage } from "../../../utils/api-requests/nutrient-predictor.requests";
 
 import { NUTRIENT_PREDICTOR_ENUMS } from "../../../utils/constants/nutrient-predictor.constants"
 
@@ -34,6 +34,7 @@ const updateImageAndPredictionHelper = async (imageAndPrediction: ImageWithPredi
   // TODO: need to implement separate prediction function call
   let predictionResponse
   if (imageInputType === NUTRIENT_PREDICTOR_ENUMS.image) {
+    await uploadPredictionImage(uploadedImage!)
     predictionResponse = await getFoodObjectDetection(uploadedImage!)
   } else if (imageInputType === NUTRIENT_PREDICTOR_ENUMS.url) {
     predictionResponse = await getMealPredictions(imgPath);

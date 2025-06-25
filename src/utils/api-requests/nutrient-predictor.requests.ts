@@ -57,7 +57,7 @@ export const uploadPredictionImage = async (uploadedImage: string): Promise<any>
       })
     })
 
-    const presignedUrl = resPresignedURL.json().toString()
+    const presignedUrl = await resPresignedURL.json()
 
     // upload image using pre-signed URL
     if (resPresignedURL) {
