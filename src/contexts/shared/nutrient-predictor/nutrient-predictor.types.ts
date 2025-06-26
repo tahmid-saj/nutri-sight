@@ -10,7 +10,7 @@ export interface NutrientPredictorContextType {
   detectNutrients: (mealDescription: string, inputType: string) => Promise<void> | undefined,
 
   updateImage: (mealDescription: string, inputType: string) => void;
-  updateImageAndPrediction: (imgPath: string, imageInputType: string, uploadedImage?: string) => void;
+  updateImageAndPrediction: (imgPath: string, imageInputType: string, uploadedImage?: File) => void;
 }
 
 export interface NutrientPredictorProviderProps {

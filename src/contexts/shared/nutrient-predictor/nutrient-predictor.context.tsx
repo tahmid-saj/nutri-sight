@@ -24,7 +24,7 @@ const updateImageHelper = (imageAndPrediction: ImageWithPrediction | undefined, 
 };
 
 const updateImageAndPredictionHelper = async (imageAndPrediction: ImageWithPrediction | undefined, imgPath: string, 
-  imageInputType: string, uploadedImage?: string): Promise<ImageWithPrediction | undefined> => {
+  imageInputType: string, uploadedImage?: File): Promise<ImageWithPrediction | undefined> => {
 
   // TODO: need validation to check if imgPath and img are valid and an image
   if (validateImgPath(imgPath) === true) {
@@ -103,12 +103,16 @@ export const NutrientPredictorProvider: FC<NutrientPredictorProviderProps> = ({ 
     setImageAndPrediction(updateImageHelper(imageAndPrediction, imgPath));
   };
 
-  const updateImageAndPrediction = async (imgPath: string, imageInputType: string, uploadedImage?: string): Promise<void> => {
+  const updateImageAndPrediction = async (imgPath: string, imageInputType: string, 
+      uploadedImage?: File): Promise<void> => {
+    
     if (imageInputType === NUTRIENT_PREDICTOR_ENUMS.image) {
       setPredictionInputType(NUTRIENT_PREDICTOR_ENUMS.image)
       const updateImageAndPredictionResponse = await updateImageAndPredictionHelper(imageAndPrediction, imgPath, imageInputType, uploadedImage)
 
       setImageAndPrediction(updateImageAndPredictionResponse);
+
+      console.log(updateImageAndPredictionResponse)
 
       await detectNutrients(updateImageAndPredictionResponse?.predictionDescription!, NUTRIENT_PREDICTOR_ENUMS.image)
     } else if (imageInputType === NUTRIENT_PREDICTOR_ENUMS.url) {

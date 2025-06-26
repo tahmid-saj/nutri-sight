@@ -44,7 +44,7 @@ export const getNutrientPredictions = async (mealDescription: string): Promise<a
 }
 
 // upload prediction image onto s3
-export const uploadPredictionImage = async (uploadedImage: string): Promise<any> => {
+export const uploadPredictionImage = async (uploadedImage: File): Promise<any> => {
   try {
     // retrieve pre-signed URL from nutri-prediction-api
     const resPresignedURL = await fetch(`${process.env.REACT_APP_API_URL_NUTRI_PRED}${process.env.REACT_APP_API_PRE_SIGNED_URL}`, {
@@ -63,9 +63,6 @@ export const uploadPredictionImage = async (uploadedImage: string): Promise<any>
     if (resPresignedURL) {
       const resUploadImage = await fetch(presignedUrl, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/octet-stream"
-        },
         body: uploadedImage
       })
 
@@ -80,20 +77,20 @@ export const uploadPredictionImage = async (uploadedImage: string): Promise<any>
   }
 }
 
-export const getFoodObjectDetection = async (uploadedImage: string): Promise<any> => {
+export const getFoodObjectDetection = async (uploadedImage: File): Promise<any> => {
   try {
     let formData = new FormData();
     formData.append('image', uploadedImage);
 
+    // note that when sending images, the browser automatically sets the correct Content-Type 
+    // with the proper boundary
     const resFoodObjectDetection = await fetch(`${process.env.REACT_APP_API_URL_OBJECT_DETECTOR}${process.env.REACT_APP_API_URL_FOOD_OBJECT_DETECTION}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-      },
       body: formData
     })
-    const { foodObject } = await resFoodObjectDetection.json()
-    return foodObject
+
+    const res = await resFoodObjectDetection.json()
+    return res
   } catch (error) {
     
     errorOnGetNutrientPredictions()
