@@ -71,7 +71,7 @@ const UploadImage: React.FC = () => {
         await updateImageAndPrediction(
           formFields.uploadedImagePath,
           NUTRIENT_PREDICTOR_ENUMS.image,
-          (formFields.uploadedImage as unknown) as string
+          formFields.uploadedImage
         );
       }
     }
