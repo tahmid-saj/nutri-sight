@@ -24,7 +24,9 @@ export const validateImgPath = (imgPath: string) => {
     imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.jpg ||
     imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.PNG || 
     imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.JPEG ||
-    imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.JPG)) {
+    imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.JPG ||
+    imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.WEBP ||
+    imgPath.split(".")[paths.length - 1] === IMAGE_EXTENSIONS.webp)) {
       
     errorOnInvalidImageType();
 

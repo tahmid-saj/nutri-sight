@@ -7,6 +7,8 @@ export const IMAGE_EXTENSIONS = {
   PNG: "PNG",
   JPEG: "JPEG",
   JPG: "JPG",
+  webp: "webp",
+  WEBP: "WEBP"
 };
 
 export const NUTRIENT_PREDICTOR_ENUMS = {
