@@ -78,7 +78,7 @@ export const putNutritionTrackedDay = async (userId: string, email: string,
     }
 
     
-    const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAYS}/${userId}/${email}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL_NUTRITION_TRACKED_DAY}/${userId}/${email}`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json"
