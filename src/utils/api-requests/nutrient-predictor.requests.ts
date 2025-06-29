@@ -53,7 +53,8 @@ export const uploadPredictionImage = async (uploadedImage: File): Promise<any> =
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        objectKey: uuid()
+        objectKey: uuid(),
+        contentType: uploadedImage.type
       })
     })
 
@@ -63,6 +64,9 @@ export const uploadPredictionImage = async (uploadedImage: File): Promise<any> =
     if (resPresignedURL) {
       const resUploadImage = await fetch(presignedUrl, {
         method: "PUT",
+        headers: {
+          "Content-Type": uploadedImage.type
+        },
         body: uploadedImage
       })
 
@@ -79,18 +83,21 @@ export const uploadPredictionImage = async (uploadedImage: File): Promise<any> =
 
 export const getFoodObjectDetection = async (uploadedImage: File): Promise<any> => {
   try {
-    let formData = new FormData();
-    formData.append('image', uploadedImage);
+    // let formData = new FormData();
+    // formData.append('image', uploadedImage);
 
     // note that when sending images, the browser automatically sets the correct Content-Type 
     // with the proper boundary
     const resFoodObjectDetection = await fetch(`${process.env.REACT_APP_API_URL_OBJECT_DETECTOR}${process.env.REACT_APP_API_URL_FOOD_OBJECT_DETECTION}`, {
       method: "POST",
-      body: formData
+      headers: {
+        "Content-Type": uploadedImage.type
+      },
+      body: uploadedImage
     })
 
-    const res = await resFoodObjectDetection.json()
-    return res
+    const { description } = await resFoodObjectDetection.json()
+    return description
   } catch (error) {
     
     errorOnGetNutrientPredictions()
