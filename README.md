@@ -6,11 +6,11 @@ Nutrition tracker developed to provide predicted nutrition info via image / food
 <br>
 
 <figure>
-  <img width="836" alt="image" src="https://github.com/user-attachments/assets/553132be-cd92-4cdd-8d4e-6c2393317212">
+<img width="556" height="622" alt="image" src="https://github.com/user-attachments/assets/34dfdcbf-05f1-4245-a037-2cd7c6814dfa" />
+
 </figure>
 <br>
-
-[Figure 1: High level view](https://whimsical.com/nutri-sight-8GkB9enG8Hwg6jfc8LF7pv)
+https://whimsical.com/roadmaps761/nutritiontracker-io-KRV7s2Rdjfb1kdaA8AbGCN
 <br>
 <br>
 
